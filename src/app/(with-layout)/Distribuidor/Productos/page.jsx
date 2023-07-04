@@ -70,7 +70,7 @@ function Home() {
 
     return (
 
-        <div class="relative overflow-x-auto shadow-md ">
+        <div class="relative overflow-x-auto shadow-md">
             <table class="w-[1800px] text-[12px] text-left text-gray-500">
                 <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
