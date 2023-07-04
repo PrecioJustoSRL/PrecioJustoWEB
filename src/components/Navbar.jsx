@@ -23,7 +23,9 @@ export default function BottomNavigation({ rol }) {
         signOut()
       }
 
-
+ const redirectHandlerWindow = (ref) => {
+        window.open(ref, '_blank')
+    }
     console.log(rol)
     switch (rol) {
         case 'Cliente':
@@ -49,7 +51,7 @@ export default function BottomNavigation({ rol }) {
                 </Link>
             </li>
             <li>
-                <Link href="#" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                <Link href="https://api.whatsapp.com/send?phone=+591699418749&text=hola%20mundo" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span className="w-6 h-6 mb-1 text-gray-600 bg-white rounded-full group-hover:text-blue-600 p-1">
                     <svg width="15" height="15" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.853564 19.7608C0.852627 23.1216 1.73763 26.4031 3.42044 29.2955L0.692627 39.178L10.8851 36.5262C13.7042 38.0491 16.8628 38.847 20.0726 38.8472H20.0811C30.6772 38.8472 39.3026 30.2917 39.3072 19.7759C39.3092 14.6802 37.3111 9.88857 33.6808 6.28361C30.0511 2.67896 25.2237 0.692755 20.0803 0.69043C9.48294 0.69043 0.858096 9.24547 0.853721 19.7608" fill="#4b5563" />
@@ -61,7 +63,7 @@ export default function BottomNavigation({ rol }) {
                 </Link>
             </li>
             <li onClick={signOutHandler}>
-                <Link href="#" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                <Link href="/" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
                     <span class="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
                 </Link>
@@ -91,7 +93,7 @@ export default function BottomNavigation({ rol }) {
                     </Link>
                 </li>
                 <li>
-                    <Link href="#" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <Link href="https://api.whatsapp.com/send?phone=+591699418749&text=hola%20mundo" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <span className="w-6 h-6 mb-1 text-gray-600 bg-white rounded-full group-hover:text-blue-600 p-1">
                         <svg width="15" height="15" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.853564 19.7608C0.852627 23.1216 1.73763 26.4031 3.42044 29.2955L0.692627 39.178L10.8851 36.5262C13.7042 38.0491 16.8628 38.847 20.0726 38.8472H20.0811C30.6772 38.8472 39.3026 30.2917 39.3072 19.7759C39.3092 14.6802 37.3111 9.88857 33.6808 6.28361C30.0511 2.67896 25.2237 0.692755 20.0803 0.69043C9.48294 0.69043 0.858096 9.24547 0.853721 19.7608" fill="#4b5563" />
@@ -103,7 +105,7 @@ export default function BottomNavigation({ rol }) {
                     </Link>
                 </li>
                 <li onClick={signOutHandler}>
-                    <Link href="#" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <Link href="/" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
                         <span class="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
                     </Link>
@@ -182,7 +184,7 @@ export default function BottomNavigation({ rol }) {
                 </Link>
             </li>
             <li>
-                <Link href="#" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                <Link href="https://api.whatsapp.com/send?phone=+591699418749&text=hola%20mundo" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span className="w-6 h-6 mb-1 text-gray-600 bg-white rounded-full group-hover:text-blue-600 p-1">
                     <svg width="15" height="15" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.853564 19.7608C0.852627 23.1216 1.73763 26.4031 3.42044 29.2955L0.692627 39.178L10.8851 36.5262C13.7042 38.0491 16.8628 38.847 20.0726 38.8472H20.0811C30.6772 38.8472 39.3026 30.2917 39.3072 19.7759C39.3092 14.6802 37.3111 9.88857 33.6808 6.28361C30.0511 2.67896 25.2237 0.692755 20.0803 0.69043C9.48294 0.69043 0.858096 9.24547 0.853721 19.7608" fill="#4b5563" />
@@ -194,7 +196,7 @@ export default function BottomNavigation({ rol }) {
                 </Link>
             </li>
             <li onClick={signOutHandler}>
-                <Link href="#" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                <Link href="/" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                     <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
                     <span class="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
                 </Link>
