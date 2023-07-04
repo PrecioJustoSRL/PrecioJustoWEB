@@ -21,7 +21,7 @@ export function UserProvider({ children }) {
 	const [filter, setFilter] = useState('');
 	const [filterQR, setFilterQR] = useState('');
 	const [recetaDBP, setRecetaDBP] = useState(undefined);
-
+	const [nav, setNav] = useState(false)
 
 
 
@@ -68,6 +68,7 @@ export function UserProvider({ children }) {
 			filter, 
 			filterQR, 
 			recetaDBP, 
+			nav, setNav,
 			setRecetaDBP,
 			setFilterQR,
 			setFilter,
