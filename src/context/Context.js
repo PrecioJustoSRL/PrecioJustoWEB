@@ -84,7 +84,7 @@ export function UserProvider({ children }) {
 			setUserSuccess,
 			setUserItem
 		})
-	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, 	QRurl, recetaDB, filter, filterQR, recetaDBP, ])
+	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, 	QRurl, recetaDB, filter, filterQR, recetaDBP, nav, ])
 
 	return (
 		<UserContext.Provider value={value} >
