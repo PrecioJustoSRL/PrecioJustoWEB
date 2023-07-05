@@ -69,7 +69,7 @@ function Home() {
             <input id="qr" type="file" className='hidden' onChange={HandlerOnChange} />
 
             <div className="w-screen lg:w-auto relative ">
-                <div className="relative bg-gray-50  px-5 py-16 lg:py-5 lg:bg-transparent rounded-b-[50px] lg:fixed lg:top-[50px] lg:w-[200px]  lg:z-30 lg:right-[50px]">
+                <div className="relative bg-gray-50  px-5 py-16 pb-24 lg:py-5 lg:bg-transparent rounded-b-[50px] lg:fixed lg:top-[50px] lg:w-[200px]  lg:z-30 lg:right-[50px]">
                         <div className=''>
                             <Subtitle styled='text-center' htmlFor="">Disponibilidad</Subtitle>
                             <div className="flex flex-wrap  justify-between">
