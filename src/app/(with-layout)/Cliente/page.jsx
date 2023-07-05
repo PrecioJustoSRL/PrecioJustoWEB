@@ -45,7 +45,7 @@ function Home() {
     return (
 
         <main className="mg-blue-400">
-                {/* <a href="/api">descargar</a> */}
+                <a href="/api" download>descargar</a>
 
             <label htmlFor="qr" className='block w-[90vw] sticky top-[75px] left-0 right-0 m-auto relative  max-w-[600px] lg:min-w-[600px] justify-between items-center text-white text-[16px] h-[50px] bg-[#0064FA] rounded-full py-[5px] px-[20px] z-50'>
                 <svg width="32" height="32" viewBox="0 0 323 323" fill="none" xmlns="http://www.w3.org/2000/svg">

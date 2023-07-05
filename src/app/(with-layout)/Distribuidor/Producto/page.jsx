@@ -20,7 +20,7 @@ function Home() {
 
 
     return (
-        <main className=" w-full  flex flex-col justlfy-center  items-center">
+        <main className=" w-full  flex flex-col justlfy-center  items-center ">
             <Subtitle htmlFor="">Categorias</Subtitle>
             <div className="flex flex-wrap justify-between">
                 <Tag styled='tagPrimary'>Los mas recientes</Tag>
