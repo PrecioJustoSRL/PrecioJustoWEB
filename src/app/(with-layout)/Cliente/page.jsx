@@ -17,12 +17,13 @@ import { WithAuth } from '@/HOCs/WithAuth'
 import { useEffect } from 'react'
 import QrcodeDecoder from 'qrcode-decoder';
 import { QRreaderUtils } from '@/utils/QRreader'
+import { useState } from 'react'
 
 function Home() {
     const { user, cart, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setFilterQR, recetaDBP, setRecetaDBP } = useUser()
 
     const router = useRouter()
-
+    const [filterNav, setFilterNav] = useState(false)
 
     function HandlerCheckOut() {
         router.push('/Cliente/Comprar')
@@ -34,7 +35,7 @@ function Home() {
         QRreaderUtils(e, setFilterQR)
     }
 
-
+    
     console.log(filterQR)
 
     useEffect(() => {
@@ -44,10 +45,9 @@ function Home() {
 
     return (
 
-        <main className="mg-blue-400">
-                <a href="/api" download>descargar</a>
+        <main className="">
 
-            <label htmlFor="qr" className='block w-[90vw] sticky top-[75px] left-0 right-0 m-auto relative  max-w-[600px] lg:min-w-[600px] justify-between items-center text-white text-[16px] h-[50px] bg-[#0064FA] rounded-full py-[5px] px-[20px] z-50'>
+            <label htmlFor="qr" className='block w-[90vw] sticky top-[75px] left-0 right-0 m-auto relative  max-w-[600px] lg:min-w-[600px] flex justify-between items-center text-white text-[16px] h-[50px] bg-[#0064FA] rounded-full py-[5px] px-[20px] z-50'>
                 <svg width="32" height="32" viewBox="0 0 323 323" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M138.71 0.669922H12.4399C9.25734 0.669922 6.20509 1.93419 3.95465 4.18463C1.70421 6.43507 0.439941 9.48732 0.439941 12.6699V138.93C0.439941 142.112 1.70421 145.165 3.95465 147.415C6.20509 149.666 9.25734 150.93 12.4399 150.93H138.71C141.893 150.93 144.945 149.666 147.195 147.415C149.446 145.165 150.71 142.112 150.71 138.93V12.6699C150.71 9.48732 149.446 6.43507 147.195 4.18463C144.945 1.93419 141.893 0.669922 138.71 0.669922ZM129.24 43.5999V129.47H21.9099V22.1299H129.24V43.5999Z" fill="white" />
                     <path d="M95.7799 43.6001H55.3799C52.1973 43.6001 49.145 44.8644 46.8946 47.1148C44.6442 49.3652 43.3799 52.4175 43.3799 55.6001V96.0001C43.3799 99.1827 44.6442 102.235 46.8946 104.485C49.145 106.736 52.1973 108 55.3799 108H95.7799C98.9625 108 102.015 106.736 104.265 104.485C106.516 102.235 107.78 99.1827 107.78 96.0001V55.6001C107.78 52.4175 106.516 49.3652 104.265 47.1148C102.015 44.8644 98.9625 43.6001 95.7799 43.6001Z" fill="white" />
@@ -68,10 +68,11 @@ function Home() {
             </label>
             <input id="qr" type="file" className='hidden' onChange={HandlerOnChange} />
 
-            <div className="w-screen lg:w-auto relative ">
-                <div className="relative bg-gray-50  px-5 py-16 pb-24 lg:py-5 lg:bg-transparent rounded-b-[50px] lg:fixed lg:top-[50px] lg:w-[200px]  lg:z-30 lg:right-[50px]">
+            <div className="w-screen lg:w-auto relative">
+                <h3 onClick={()=>setFilterNav(!filterNav)} className='w-[90vw] relative left-0 right-0 mt-5 mx-auto relative  max-w-[600px] border border-gray-200 lg:min-w-[600px] flex justify-center items-center text-[16px] h-[45px] rounded-full py-[5px] px-[20px] z-50'>Filtrar Productos <span className={filterNav ? ' ml-5 rotate-[270deg]' :' ml-5 rotate-90'}>{'>'}</span></h3> 
+                <div className={`relative px-5 p-0 lg:py-5 bg-white lg:bg-transparent rounded-b-[50px] lg:fixed lg:top-[50px] lg:w-[200px]  lg:z-30 lg:right-[50px] transition-all ${filterNav ? 'block h-[250px]': 'h-0 overflow-hidden'}`}>
                         <div className=''>
-                            <Subtitle styled='text-center' htmlFor="">Disponibilidad</Subtitle>
+                            <Subtitle styled='' htmlFor="">Disponibilidad</Subtitle>
                             <div className="flex flex-wrap  justify-between">
                                 <Tag theme='Primary'>Disponible</Tag>
                                 <Tag theme='Secondary'>Inmediato</Tag>
@@ -79,7 +80,7 @@ function Home() {
                             </div>
                         </div>
                         <div className=''>
-                            <Subtitle styled='text-center' htmlFor="">Categorias</Subtitle>
+                            <Subtitle styled='' htmlFor="">Categorias</Subtitle>
                             <div className="flex flex-wrap  justify-between">
                                 <Tag theme='Primary'>Titanio</Tag>
                                 <Tag theme='Secondary'>Acero</Tag>
@@ -87,7 +88,7 @@ function Home() {
                             </div>
                         </div>
                 </div>
-                <div className="relative bg-transparent lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-16">
+                <div className="relative bg-gray-50 lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-16">
                     {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
                         recetaDBP.map((i, index) =>
                             user.rol === 'Medico'
