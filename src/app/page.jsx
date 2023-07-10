@@ -1,20 +1,24 @@
 'use client'
 import { useUser } from '@/context/Context'
 import { onAuth, signInWithEmailAndPassword } from '@/supabase/utils'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import style from './page.module.css'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import Error from '@/components/Error'
+import { Player } from 'video-react';
+import ReactPlayer from 'react-player'
 
 import { useRouter } from 'next/navigation';
+
 
 export default function Home() {
   const { user, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG } = useUser()
 
   const router = useRouter()
+  const vidRef = useRef(null);
 
   const signInHandler = (e) => {
     e.preventDefault()
@@ -29,9 +33,20 @@ export default function Home() {
 
   }
 
+
+
+
+
+  async function intro() {
+    const data = await fetch('/api')
+    const db = await data.arrayBuffer()
+    upload('Producto', new Uint8Array(db), '123456789',)
+  }
+
   useEffect(() => {
     user === undefined && onAuth(setUserProfile)
     if (user !== undefined && user !== null) router.replace('/Cliente')
+    vidRef.current && vidRef.current.play()
   }, [user]);
 
   return (
@@ -42,6 +57,28 @@ export default function Home() {
         backgroundPosition: '50% 100%',
         backgroundAttachment: 'fixed'
       }}>
+                {/* <button onClick={intro}>descargar</button> */}
+
+
+      {/* <div  className='absolute top-[0px] flex justify-center items-start p-0 w-screen h-screen bg-blue-600'>
+
+<video id='videoBox' src="/intro.mp4"></video>
+
+  
+      </div> */}
+{/* 
+        <Player  autoPlay={true}>
+          <source  src="/intro.mp4" />
+        </Player> */}
+
+        {/* <ReactPlayer url='https://www.youtube.com/watch?v=-sQJ7w0bXxM' playing={true} /> */}
+
+
+
+
+
+
+
       <form className=" space-y-6 lg:space-y-3 w-[100%] max-w-[350px]" onSubmit={signInHandler} >
         <div className='w-full text-center flex justify-center'>
           <Image src="/logo-main.svg" width="150" height="150" alt="User" />
@@ -75,3 +112,19 @@ export default function Home() {
 
 {/* {success == false && <Error>ERROR: verifique e intente nuevamente</Error>}
         {success == 'complete' && <Error>Llene todo el formulario</Error>} */}
+
+
+
+{/* 
+        <video
+          src="/intro.mp4"
+          ref={vidRef}
+        /> */}
+
+
+{/* <video width="320" height="240"  ref={ vidRef }
+>
+<source src="intro.mp4" type="video/mp4" />
+</video> */}
+
+{/* <iframe width="100%" height="100%" src="/intro.p" frameborder="0" allow="autoplay"  allowfullscreen></iframe> */ }

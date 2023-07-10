@@ -76,13 +76,19 @@ const readUserAllData = async (rute, context, updateContext) => {
 
 }
 
-const updateUserData = async (rute, object, uuid) => {
+const updateUserData = async (rute, object, uuid, eq) => {
     const result = await supabase
         .from(rute)
         .update(object)
-        .eq('uuid', uuid)
+        .eq(eq ? eq : 'uuid', uuid)
+        // if (result.data !== null && result.data.length !== 0) {
+        //     console.log('act')
+        //     key ? updateContext({ ...context, [key]: result.data[0] }) : updateContext(arr == true ? result.data : result.data[0])
+        // } 
 
-    console.log(object)
+
+
+    console.log(result)
 }
 
 

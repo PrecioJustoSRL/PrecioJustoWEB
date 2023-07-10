@@ -5,7 +5,7 @@ import { useUser } from '@/context/Context.js'
 import Subtitle from '@/components/Subtitle'
 import { WithAuth } from '@/HOCs/WithAuth'
 import { writeUserData, readUserData, updateUserData } from '@/supabase/utils'
-import { uploadStorage } from '@/supabase/storage'
+import { uploadPDF } from '@/supabase/storage'
 import Page from '@/components/Page'
 import Label from '@/components/Label'
 import MiniCard from '@/components/MiniCard'
@@ -41,7 +41,7 @@ function Comprar({ theme, styled, click, children }) {
 
 
 
-  function handlerPay(e) {
+  async function handlerPay(e) {
     e.preventDefault()
     const dataURL = recetaDB.paciente.replaceAll(' ', '') + user.uuid
     handlerQRUrl(dataURL)
@@ -51,9 +51,16 @@ function Comprar({ theme, styled, click, children }) {
       delete data['id']
       writeUserData('Receta', { ...data, ...recetaDB, medico: user.uuid, qr: dataURL }, i.uuid, userDB, setUserData, setUserSuccess, 'existos', null)
     })
+
+    const data = await fetch('/api')
+    const db = await data.arrayBuffer()
+    uploadPDF('Receta', new Uint8Array(db), dataURL, updateUserData)
   }
-  function generarPDF(e) {
+  async function generarPDF(e) {
     e.preventDefault()
+    const data = await fetch('/api')
+    const db = await data.arrayBuffer()
+
 
   }
   console.log(recetaDB)
@@ -94,13 +101,13 @@ function Comprar({ theme, styled, click, children }) {
         level={'H'}
         includeMargin={false}
         renderAs={'canvas'}
-        viewBox={`0 0 256 256`}ssss
+        viewBox={`0 0 256 256`}
       />}
 
     </div>
     <br />
-    {qr !== '' && <InvoicePDF dbUrl={QRurl} />}
-    <a href="/api">descargar</a>
+    {/* {qr !== '' && <InvoicePDF dbUrl={QRurl} />} */}
+    <a href={`https://hhxlyesjmtbhnqwsoplw.supabase.co/storage/v1/object/public/Receta/${qr}`} download={true}>descargar</a>
 
   </div>)
 }

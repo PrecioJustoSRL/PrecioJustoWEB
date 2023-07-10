@@ -2,6 +2,28 @@ import { supabase } from './config'
 import imageCompression from 'browser-image-compression';
 
 
+const uploadPDF = async (rute, file, fileName, updateUserData) => {
+
+    await supabase
+        .storage
+        .from(rute)
+        .upload(fileName, file, {
+            cacheControl: '0',
+            contentType: 'application/pdf',
+            upsert: false
+        })
+
+    const { data } = await supabase
+        .storage
+        .from(rute)
+        .getPublicUrl(fileName)
+
+    console.log(data)
+
+    return updateUserData(rute, { pdfURL: data.publicUrl }, fileName, 'qr')
+}
+
+
 const uploadStorage = async (rute, file, fileName, updateUserData, update) => {
     const options = {
         maxWidthOrHeight: 500,
@@ -32,7 +54,7 @@ const uploadStorage = async (rute, file, fileName, updateUserData, update) => {
                 upsert: false
             })
 
-    const { data } = supabase
+    const { data } = await supabase
         .storage
         .from(rute)
         .getPublicUrl(imagesRef)
@@ -42,4 +64,4 @@ const uploadStorage = async (rute, file, fileName, updateUserData, update) => {
     return updateUserData(rute, { url: data.publicUrl }, fileName)
 }
 
-export { uploadStorage }
+export { uploadStorage, uploadPDF }
