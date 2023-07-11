@@ -88,7 +88,7 @@ function Home() {
                             </div>
                         </div>
                 </div>
-                <div className="relative bg-gray-50 lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-16">
+                <div className="relative bg-gray-50 lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-16 pb-16">
                     {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
                         recetaDBP.map((i, index) =>
                             user.rol === 'Medico'
@@ -110,7 +110,7 @@ function Home() {
                         )}
                 </div>
             </div>
-            {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[65px] lg:w-[200px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5">
+            {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[65px] lg:w-[200px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-50">
                 {user.rol === 'Medico'
                     ? <Button theme="Success" click={HandlerRecetar}>Detallar Receta</Button>
                     : <Button theme="Success" click={HandlerCheckOut}>Ejecutar compra</Button>}
