@@ -39,11 +39,16 @@ function Home({ children }) {
 
   return (
     // <div className="pt-[65px] pb-[65px] min-h-screen bg-gray-white"  style={{ backgroundImage: `url(bg.png)`, backgroundAttachment: 'fixed', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom' }}>
-    <div className="pt-[65px] pb-[65px] min-h-screen bg-gray-white">
+    <div className="min-h-screen bg-gray-white">
 
       <nav className="w-screen fixed top-0 border-b border-gray-200 z-50 " >
         <div className=" flex flex-wrap items-center justify-between bg-white  mx-auto p-4 h-[70px] z-50">
+        <> <button type="button" className="inline-flex items-center p-2 text-[14px] text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 hidden lg:block focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600" onClick={() => setNav(!nav)}>
+              <span className="sr-only">Open menu</span>
+              <svg className="w-9 h-9 text-gray-600" aria-hidden="true" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"  ></path></svg>
+            </button>
           <h1 className='text-[18px] hidden lg:block text-blue-400'>PRECIO JUSTO SRL</h1>
+          </> 
           {pathname == '/Cliente' ?
             <button type="button" className="inline-flex items-center p-2 text-[14px] text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 lg:hidden focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600" onClick={() => setNav(!nav)}>
               <span className="sr-only">Open menu</span>
@@ -56,7 +61,7 @@ function Home({ children }) {
                 <path d="M17 32L2 17L17 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>}
-
+            
           <div className="relative">
             <div className="absolute inset-y-0 right-0 flex items-center pl-3 pointer-events-none">
               <svg className="w-8 h-8 text-white " aria-hidden="true" fill="text-gray-100" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
@@ -65,21 +70,21 @@ function Home({ children }) {
             <input type="text" id="search-navbar" onChange={handlerFilter} className="block w-full p-2 pl-10 text-[14px] text-gray-950 border-b border-gray-300  bg-transparent focus:ring-white focus:border-white focus:outline-transparent" placeholder="Busca tu producto..." />
           </div>
 
-          <Cart />
+          {user && user !== undefined && user.rol !== 'Distribuidor' && <Cart />}
         </div>
       </nav>
 
-      <div className={`fixed top-[60px] w-[220px] border-l-8 border-r-4 border-white h-screen bg-gray-50 h-screen transition-all	z-50 ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-200px] '}`} >
+      <div className={`fixed top-[60px] w-[220px] border-l-8 border-r-4 border-white h-screen bg-gray-50 h-screen transition-all	z-50 lg:bg-white ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-220px] '}`} >
         {/* <h5 id="drawer-navigation-label" class="text-base font-semibold text-white uppercase dark:text-gray-400">Menu</h5> */}
 
         <div class="py-4 overflow-y-auto ">
 
           {
-          user &&  user !== undefined && <Navbar rol={user.rol} />
+            user && user !== undefined && <Navbar rol={user.rol} />
           }
 
         </div>
-        <button type="button" onClick={() => setNav(!nav)} data-drawer-hide="drawer-navigation" class="absolute top-[-0px] bottom-0 right-[0px] m-auto bg-transparent hover:bg-gray-200 hover:text-white rounded-lg px-[2px]" >
+        {/* <button type="button" onClick={() => setNav(!nav)} data-drawer-hide="drawer-navigation" class="absolute top-[-0px] bottom-0 right-[0px] m-auto bg-transparent hover:bg-gray-200 hover:text-white rounded-lg px-[2px]" >
           <svg width="12" height="122" viewBox="0 0 24 122" fill="none" xmlns="http://www.w3.org/2000/svg">
             {nav
               ? <path d="M5 61L17.75 8.17245L17.75 113.828L5 61Z" fill="white" />
@@ -87,11 +92,11 @@ function Home({ children }) {
             }
           </svg>
           <span class="sr-only" >Close menu</span>
-        </button>
+        </button> */}
       </div>
 
-      <main className={`relative min-w-screen lg:min-w-auto my-[0px] transition-all ${nav ? 'w-screen pl-[220px] md:pl-[270px] md:pt-[40px] md:pr-[50px] lg:pr-[70px]' : ' md:pt-[40px] md:px-[50px] lg:pl-[70px]'}`}>
-        <img src="/bg.png" className='fixed bottom-[60px] lg:bottom-0 right-[20px] w-[60vw] lg:w-[40vw]' alt="" />
+      <main className={`relative min-w-screen pt-[65px] pb-[65px] lg:pb-0  lg:min-w-auto my-[0px] transition-all lg:bg-blue-50 lg:min-h-screen md:pt-[85px] ${nav ? 'w-screen pl-[220px] md:pl-[270px]  md:pr-[50px] lg:pr-[70px]' : '  md:px-[50px]'}`}>
+        {/* <img src="/bg.png" className='fixed bottom-[60px] lg:bottom-0 right-[20px] w-[60vw] lg:w-[40vw]' alt="" /> */}
 
         {children}
 

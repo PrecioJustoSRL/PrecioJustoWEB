@@ -4,7 +4,7 @@ import Button from '@/components/Button'
 import { useUser } from '@/context/Context.js'
 import { useRouter } from 'next/navigation';
 
-export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, descripcion, i , recetado}) {
+export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, descripcion, i, recetado }) {
 
     const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, cart, setUserCart } = useUser()
     const router = useRouter()
@@ -66,15 +66,19 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                 </div>
                 {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='text-[16px] text-right px-5'> {cart[i.uuid].cantidad} </span>}
             </div>
-            <div className='flex py-4 pr-4'>
+            {user.rol !== 'Distribuidor' && <div className='flex py-4 pr-4'>
                 {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0
                     ? <div className='flex w-full'>
                         <Button theme='MiniSecondary' click={(e) => addPlussCart(e, i)}>+</Button>
                         <Button theme='MiniPrimary' click={(e) => addLessCart(e, i)}>-</Button>
                     </div>
-                    : <Button theme='MiniPrimaryComprar' click={(e) => addCart(e, i)}>Comprar</Button>
-                }
+                    : <Button theme='MiniPrimaryComprar' click={(e) => addCart(e, i)}>Comprar</Button>}
             </div>
+            }
+            {user.rol == 'Distribuidor' && <div className='flex py-4 pr-4'>
+                    <Button theme='MiniPrimaryComprar' onClick={(e) => seeMore(e, i)}>Info</Button>
+            </div>
+            }
         </div>
     )
 }
