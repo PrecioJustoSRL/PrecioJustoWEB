@@ -20,6 +20,8 @@
     "fs-extra": "^11.1.1",
     "html-pdf-chrome": "^0.8.4",
     "html-pdf-node": "^1.0.8",
+    "htmltojsx": "^0.3.0",
+    "jsx-to-html": "^1.1.0",
     "next": "13.4.3",
     "next-pwa": "^5.6.0",
     "postcss": "8.4.23",

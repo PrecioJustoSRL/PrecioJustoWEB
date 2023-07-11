@@ -34,7 +34,8 @@ function Home({ children }) {
     router.back()
   }
 
-  console.log(filter)
+  console.log(user)
+  console.log(userDB)
 
   return (
     // <div className="pt-[65px] pb-[65px] min-h-screen bg-gray-white"  style={{ backgroundImage: `url(bg.png)`, backgroundAttachment: 'fixed', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom' }}>
@@ -74,15 +75,8 @@ function Home({ children }) {
         <div class="py-4 overflow-y-auto ">
 
           {
-            user !== undefined && <Navbar rol={user.rol} />
+          user &&  user !== undefined && <Navbar rol={user.rol} />
           }
-
-
-
-
-
-
-
 
         </div>
         <button type="button" onClick={() => setNav(!nav)} data-drawer-hide="drawer-navigation" class="absolute top-[-0px] bottom-0 right-[0px] m-auto bg-transparent hover:bg-gray-200 hover:text-white rounded-lg px-[2px]" >
@@ -102,7 +96,7 @@ function Home({ children }) {
         {children}
 
       </main>
-      {user !== undefined && <div className="fixed bottom-0 left-0 z-50 w-full h-[65px] bg-gray-50 border-t-8 border-white rounded-t-[40px] lg:hidden">
+      {user && user !== undefined && <div className="fixed bottom-0 left-0 z-50 w-full h-[65px] bg-gray-50 border-t-8 border-white rounded-t-[40px] lg:hidden">
         <BottomNavigation rol={user.rol} />
       </div>}
 

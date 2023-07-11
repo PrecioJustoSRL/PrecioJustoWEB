@@ -36,7 +36,7 @@ function Home() {
     }
 
     
-    console.log(filterQR)
+    console.log(productDB)
 
     useEffect(() => {
         readUserAllData('Producto', productDB, setUserProduct)
@@ -69,7 +69,7 @@ function Home() {
             <input id="qr" type="file" className='hidden' onChange={HandlerOnChange} />
 
             <div className="w-screen lg:w-auto relative">
-                <h3 onClick={()=>setFilterNav(!filterNav)} className='w-[90vw] relative left-0 right-0 mt-5 mx-auto relative  max-w-[600px] border border-gray-200 lg:min-w-[600px] flex justify-center items-center text-[16px] h-[45px] rounded-full py-[5px] px-[20px] z-50'>Filtrar Productos <span className={filterNav ? ' ml-5 rotate-[270deg]' :' ml-5 rotate-90'}>{'>'}</span></h3> 
+                <h3 onClick={()=>setFilterNav(!filterNav)} className='w-[90vw] relative left-0 right-0 mt-5 mx-auto relative  max-w-[600px] border border-gray-200 lg:min-w-[600px] flex justify-center items-center text-[16px] h-[45px] rounded-full py-[5px] px-[20px] z-0'>Filtrar Productos <span className={filterNav ? ' ml-5 rotate-[270deg]' :' ml-5 rotate-90'}>{'>'}</span></h3> 
                 <div className={`relative px-5 p-0 lg:py-5 bg-white lg:bg-transparent rounded-b-[50px] lg:fixed lg:top-[50px] lg:w-[200px]  lg:z-30 lg:right-[50px] transition-all ${filterNav ? 'block h-[250px]': 'h-0 overflow-hidden'}`}>
                         <div className=''>
                             <Subtitle styled='' htmlFor="">Disponibilidad</Subtitle>
