@@ -76,7 +76,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
             </div>
             }
             {user.rol == 'Distribuidor' && <div className='flex py-4 pr-4'>
-                    <Button theme='MiniPrimaryComprar' onClick={(e) => seeMore(e, i)}>Info</Button>
+                    <Button theme='MiniPrimaryInfo' onClick={(e) => seeMore(e, i)}>Info</Button>
             </div>
             }
         </div>

@@ -14,9 +14,10 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '@/context/Context.js'
 
 import { useMask } from '@react-input/mask';
+import { WithAuth } from '@/HOCs/WithAuth'
 
 
-export default function Home() {
+ function Home() {
 
     const { cart, productDB, setUserProduct, setUserCart, setUserItem, item } = useUser()
 
@@ -55,10 +56,10 @@ export default function Home() {
 
     console.log(item)
     return (
-        item !== undefined ? <main className="p-5 max-w-screen flex flex-col items-center lg:flex-row lg:justify-between lg:items-center pt-[20px] pb-[60px]">
-            <div className='flex flex-wrap justify-center lg:justify-start md:max-w-[400px]'>
-                <img src={item.url} className='w-[90vw] max-w-[400px]' alt="" />
-                <div className='w-full flex justify-end  items-center p-4 '>
+        item !== undefined ? <main className="relative left-0 right-0 mx-auto p-5 mt-12 max-w-[900px] flex flex-col items-center lg:flex-row lg:justify-between lg:items-center pt-[20px] pb-[20px] bg-white rounded-[5px]">
+            <div className='flex flex-wrap justify-center lg:justify-start md:max-w-[400px] '>
+                <img src={item.url} className='lg:w-[90vw] lg:max-w-[400px] max-h-[200px] lg:max-h-[10000px] lg:px-10' alt="" />
+                <div className='w-full flex justify-end  items-center p-5 lg:px-10'>
                     <div class="flex items-baseline text-gray-900">
                         <span class="text-[16px] text-gray-600 font-semibold">BOB</span>
                         <span class="text-[30px]  text-gray-600 font-extrabold tracking-tight">{item.costo}</span>
@@ -66,7 +67,7 @@ export default function Home() {
                 </div>
             </div>
             <br />
-            <div className='lg:pl-12'>
+            <div className='lg:pl-12 lg:border-l bg-gray-50 p-5 lg:bg-white lg:p-0'>
                 <div class=" font-bold text-[16px] mb-2 text-gray-950">
                     {item['nombre de producto 1']}
                 </div>
@@ -105,3 +106,4 @@ export default function Home() {
         </main> : <div ></div>
     )
 }
+export default WithAuth(Home)

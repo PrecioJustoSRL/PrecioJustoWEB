@@ -45,7 +45,9 @@ function Home() {
         setState({ ...state, ['disponibilidad']: value })
     }
 
-
+    const onClickHandlerSystem = (name, value, uuid) => {
+        setState({ ...state, ['sistema']: value })
+    }
 
 
     function manageInputIMG(e) {
@@ -72,11 +74,11 @@ function Home() {
         uploadStorage('Producto', postImage, uid, updateUserData)
         // router.push('/Clinica/Perfil')
     }
-
+   
     console.log(userDB)
 
     return (
-        <form className='px-5 py-[70px]' >
+        <form className='p-10 min-w-screen lg:min-w-auto lg:my-[50px] lg:my-[70px] bg-white' >
             <h3 className='text-center text-[16px] pb-3'>Agregar Procucto</h3>
             {/* <div className="w-full flex justify-center">
                 <label htmlFor="file" className="block flex justify-center items-center w-[250px] h-[300px] bg-white border border-gray-300 text-gray-900 text-[14px] focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
@@ -149,6 +151,10 @@ function Home() {
                 <div>
                     <Label htmlFor="">Categoria</Label>
                     <Select arr={['Titanio', 'Acero Inox', 'Otros']} name='categoria' click={onClickHandlerCategory} />
+                </div>
+                <div>
+                    <Label htmlFor="">Sistema</Label>
+                    <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5' ]} name='sistema' click={onClickHandlerSystem} />
                 </div>
                 <div>
                     <Label htmlFor="">Disponibilidad</Label>

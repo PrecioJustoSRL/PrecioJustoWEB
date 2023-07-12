@@ -43,7 +43,9 @@ function Home() {
     const onClickHandlerAvailability = (name, value, uuid) => {
         setState({ ...state, [uuid]: { ...state[uuid], uuid, ['disponibilidad']: value } })
     }
-
+    const onClickHandlerSystem = (name, value, uuid) => {
+        setState({ ...state, [uuid]: { ...state[uuid], uuid, ['sistema']: value } })
+    }
     function onChangeHandler(e, i) {
         setState({ ...state, [i.uuid]: { ...state[i.uuid], uuid: i.uuid, [e.target.name]: e.target.value } })
     }
@@ -63,6 +65,10 @@ function Home() {
         // delete obj[i.uuid]
         // setState(obj)
     }  
+
+    function redirect () {
+        router.push('/Distribuidor/Agregar')
+    }
 
     useEffect(() => {
         readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
@@ -94,6 +100,9 @@ function Home() {
                         </th>
                         <th scope="col" class="px-3 py-3">
                             Usos frecuentes
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Sistema
                         </th>
                         <th scope="col" class="px-3 py-3">
                             Costo
@@ -145,7 +154,9 @@ function Home() {
                                 <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='uso frecuente' defaultValue={i['uso frecuente']} class="block p-1.5  w-full h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea>
                                 {/* {i['uso frecuente']} */}
                             </td>
-
+                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                                <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5' ]} name='sistema' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerSystem} />
+                            </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea>
                                 {/* {i['costo']} */}
@@ -179,6 +190,11 @@ function Home() {
                     }
                 </tbody>
             </table>
+
+
+            <div className='fixed bottom-[50px] right-[50px] flex justify-end hidden lg:block'>
+               <div className='flex justify-center items-center bg-white h-[50px] rounded-[10px] px-10 cursor-pointer' onClick={redirect}>Agregar Producto</div> <div className='flex justify-center items-center bg-[#0064FA] h-[50px] w-[50px]  rounded-full text-white cursor-pointer' onClick={redirect}> <span className='text-white text-[30px]'>+</span> </div>
+            </div>
         </div>
 
     )

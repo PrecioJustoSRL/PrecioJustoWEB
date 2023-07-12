@@ -117,7 +117,7 @@ function Home() {
             {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[65px] lg:w-[200px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-50">
                 {user.rol === 'Medico'
                     ? <Button theme="Success" click={HandlerRecetar}>Detallar Receta</Button>
-                    : <Button theme="Success" click={HandlerCheckOut}>Ejecutar compra</Button>}
+                    : <Button theme="SuccessBuy" click={HandlerCheckOut}>Ejecutar compra</Button>}
 
 
             </div>}
