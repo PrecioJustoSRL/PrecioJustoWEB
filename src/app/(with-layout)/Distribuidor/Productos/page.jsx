@@ -155,7 +155,7 @@ function Home() {
                                 {/* {i['uso frecuente']} */}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5' ]} name='sistema' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerSystem} />
+                                <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5' ]} name='sistema' defaultValue={i.sistema} uuid={i.uuid} click={onClickHandlerSystem} />
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea>
@@ -192,7 +192,7 @@ function Home() {
             </table>
 
 
-            <div className='fixed bottom-[50px] right-[50px] flex justify-end hidden lg:block'>
+            <div className='w-[100%] fixed bottom-[50px] right-[50px] justify-end hidden lg:flex'>
                <div className='flex justify-center items-center bg-white h-[50px] rounded-[10px] px-10 cursor-pointer' onClick={redirect}>Agregar Producto</div> <div className='flex justify-center items-center bg-[#0064FA] h-[50px] w-[50px]  rounded-full text-white cursor-pointer' onClick={redirect}> <span className='text-white text-[30px]'>+</span> </div>
             </div>
         </div>
