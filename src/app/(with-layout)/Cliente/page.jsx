@@ -72,27 +72,33 @@ function Home() {
                 </label>
                 <input id="qr" type="file" className='hidden' onChange={HandlerOnChange} />
             </div>}
+
+
             <div className="w-screen lg:w-auto relative">
-                <h3 onClick={() => setFilterNav(!filterNav)} className='w-[90vw] bg-white relative left-0 right-0 mt-5 mx-auto relative  max-w-[600px] border border-gray-200 lg:min-w-[600px] flex justify-center items-center text-[16px] h-[45px] rounded-full py-[5px] px-[20px] '>Filtrar Productos <span className={filterNav ? ' ml-5 rotate-[270deg]' : ' ml-5 rotate-90'}>{'>'}</span></h3>
-                <div className={`relative px-5 p-0  bg-white rounded-b-[50px]  mx-auto  left-0 right-0  max-w-[600px] lg:flex lg:justify-around lg:z-0 lg:top-[-17px] border-x border-gray-200 transition-all ${filterNav ? 'block h-[250px] lg:h-[150px]' : 'h-0 overflow-hidden'} ]`}>
-                    <div className='lg:w-[180px]'>
+
+
+            <div className={`relative px-5 p-0  bg-white rounded-[20px]  mx-auto  left-0 right-0 w-[90vw] max-w-[600px] min-w- lg:flex lg:flex-wrap lg:justify-around lg:z-0 border border-gray-200 transition-all ${filterNav ? ' h-[300px] lg:h-[250px]' : 'h-[45px] overflow-hidden'} ]`}>
+                    <h3 onClick={() => setFilterNav(!filterNav)} className='w-[100%] bg-white relative left-0 right-0 mx-auto relative  max-w-[600px] lg:min-w-[600px] flex justify-center items-center text-[16px] h-[45px] rounded-full py-[5px] px-[0px] cursor-pointer'>Filtrar Productos <span className={filterNav ? ' ml-5 rotate-[270deg]' : ' ml-5 rotate-90'}>{'>'}</span></h3>
+
+                    <div className='lg:w-[250px]'>
                         <Subtitle styled='' htmlFor="">Disponibilidad</Subtitle>
-                        <div className="flex flex-wrap  justify-between">
+                        <div className="grid grid-cols-2 gap-4 justify-between">
                             <Tag theme='Primary'>Disponible</Tag>
                             <Tag theme='Secondary'>Inmediato</Tag>
                             <Tag theme='Secondary'>No disponible</Tag>
                         </div>
                     </div>
-                    <div className='lg:w-[180px]'>
+                    <div className='lg:w-[250px]'>
                         <Subtitle styled='' htmlFor="">Categorias</Subtitle>
-                        <div className="flex flex-wrap  justify-between">
+                        <div className="grid grid-cols-2  gap-x-4  justify-between">
                             <Tag theme='Primary'>Titanio</Tag>
                             <Tag theme='Secondary'>Acero</Tag>
                             <Tag theme='Secondary'>Otros</Tag>
                         </div>
                     </div>
                 </div>
-                <div className="relative bg-gray-50 lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-16 pb-16">
+
+                <div className="relative bg-gray-50 lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-8 pb-16">
                     {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
                         recetaDBP.map((i, index) =>
                             user.rol === 'Medico'

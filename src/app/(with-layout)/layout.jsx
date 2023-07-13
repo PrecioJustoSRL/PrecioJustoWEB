@@ -95,7 +95,7 @@ function Home({ children }) {
         </button> */}
       </div>
 
-      <main className={`relative min-w-screen pt-[65px] pb-[65px] lg:pb-0  lg:min-w-auto my-[0px] transition-all lg:bg-blue-50 lg:min-h-screen md:pt-[85px] ${nav ? 'w-screen pl-[220px] md:pl-[270px]  md:pr-[50px] lg:pr-[70px]' : '  md:px-[50px]'}`}>
+      <main className={`relative min-w-screen pt-[85px] pb-[65px] lg:pb-0  lg:min-w-auto my-[0px] transition-all lg:bg-blue-50 lg:min-h-screen md:pt-[85px] ${nav ? 'w-screen pl-[220px] lg:pl-[270px]  lg:pr-[50px] lg:pr-[70px]' : '  lg:px-[50px]'}`}>
         {/* <img src="/bg.png" className='fixed bottom-[60px] lg:bottom-0 right-[20px] w-[60vw] lg:w-[40vw]' alt="" /> */}
 
         {children}

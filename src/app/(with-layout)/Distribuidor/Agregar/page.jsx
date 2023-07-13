@@ -154,7 +154,7 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Sistema</Label>
-                    <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5' ]} name='sistema' click={onClickHandlerSystem} />
+                    <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5','Clavos', 'Protesis', 'Costillas', 'Columna y neurocirugia', 'Fijadores externos', 'Otros' ]} name='sistema' click={onClickHandlerSystem} />
                 </div>
                 <div>
                     <Label htmlFor="">Disponibilidad</Label>

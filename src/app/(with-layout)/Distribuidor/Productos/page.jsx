@@ -1,6 +1,8 @@
 'use client'
 
 import Button from '@/components/Button'
+import Subtitle from '@/components/Subtitle'
+
 import Select from '@/components/Select'
 import { useUser } from '@/context/Context.js'
 
@@ -9,7 +11,7 @@ import { useRouter } from 'next/navigation';
 
 import { WithAuth } from '@/HOCs/WithAuth'
 import { useEffect, useState } from 'react'
-import { writeUserData, readUserData, updateUserData , deleteUserData} from '@/supabase/utils'
+import { writeUserData, readUserData, updateUserData, deleteUserData } from '@/supabase/utils'
 import { uploadStorage } from '@/supabase/storage'
 
 
@@ -58,15 +60,15 @@ function Home() {
         setState(obj)
     }
 
-    function delet (i) {
+    function delet(i) {
         deleteUserData('Producto', i.uuid)
         // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
         // const obj = { ...state }
         // delete obj[i.uuid]
         // setState(obj)
-    }  
+    }
 
-    function redirect () {
+    function redirect() {
         router.push('/Distribuidor/Agregar')
     }
 
@@ -76,8 +78,49 @@ function Home() {
 
     return (
 
-        <div class="relative overflow-x-auto shadow-md p-5 bg-white">
-            <table class="w-[1800px] text-[12px] text-left text-gray-500">
+        <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
+            <h3 className='font-medium text-[16px]'>Lista De Productos</h3>
+            <div className='grid grid-cols-3 w-[900px]'>
+                <input type="text" className='border-b border-gray-300 gap-4 text-center focus:outline-none  w-[300px]' placeholder='Ingresa el ID'/>
+                <Button theme='Primary'>Importar Datos Mediante ID</Button>
+                <Button theme='Primary'>Importar Datos De Precio Justo</Button>
+            </div>
+
+            <div className='min-w-[1900px] flex justify-start items-center my-5 '>
+                <h3 className="flex pr-12 text-[14px]" htmlFor="">Disponibilidad</h3>
+                <div className="grid grid-cols-3 gap-4 w-[500px] ">
+                    <Tag theme='Primary'>Disponible</Tag>
+                    <Tag theme='Secondary'>Inmediato</Tag>
+                    <Tag theme='Secondary'>No disponible</Tag>
+                </div>
+            </div>
+            <div className='min-w-[1900px] flex justify-start items-center my-5  '>
+                <h3 className="flex pr-12 text-[14px]">Categorias</h3>
+                <div className="grid grid-cols-3 gap-4 w-[500px] " >
+                    <Tag theme='Primary'>Titanio</Tag>
+                    <Tag theme='Secondary'>Acero</Tag>
+                    <Tag theme='Secondary'>Otros</Tag>
+                </div>
+            </div>
+            <div className='min-w-[1900px] flex justify-start items-center my-5 '>
+                <h3 className="flex pr-12 text-[14px]" htmlFor="">Sistema</h3>
+                <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 100px) 100px 100px 100px 200px 200px 100px' }}>
+                    <Tag theme='Primary'>1.5</Tag>
+                    <Tag theme='Secondary'>2.0</Tag>
+                    <Tag theme='Secondary'>2.4</Tag>
+                    <Tag theme='Secondary'>2.5</Tag>
+                    <Tag theme='Secondary'>2.7</Tag>
+                    <Tag theme='Secondary'>3.5</Tag>
+                    <Tag theme='Secondary'>4.5</Tag>
+                    <Tag theme='Secondary'>Clavos</Tag>
+                    <Tag theme='Secondary'>Protesis</Tag>
+                    <Tag theme='Secondary'>Costillas</Tag>
+                    <Tag theme='Secondary'>Columna y neurocirugía</Tag>
+                    <Tag theme='Secondary'>Fijadores externos</Tag>
+                    <Tag theme='Secondary'>Otros</Tag>
+                </div>
+            </div>
+            <table class="w-[1900px]  text-[12px] text-left text-gray-500 border-t-4 border-gray-400">
                 <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-3 py-3">
@@ -101,7 +144,7 @@ function Home() {
                         <th scope="col" class="px-3 py-3">
                             Usos frecuentes
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-8 py-3">
                             Sistema
                         </th>
                         <th scope="col" class="px-3 py-3">
@@ -155,7 +198,7 @@ function Home() {
                                 {/* {i['uso frecuente']} */}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5' ]} name='sistema' defaultValue={i.sistema} uuid={i.uuid} click={onClickHandlerSystem} />
+                                <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5', 'Clavos', 'Protesis', 'Costillas', 'Columna y neurocirugia', 'Fijadores externos', 'Otros']} name='sistema' defaultValue={i.sistema} uuid={i.uuid} click={onClickHandlerSystem} />
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea>
@@ -180,10 +223,10 @@ function Home() {
                                 </label>
                             </td>
                             <td class="px-3 py-4">
-                                {state[i.uuid] 
-                                ? <Button theme={"Primary"} click={() => save(i)}>Guardar</Button>
-                                : <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
-                            }
+                                {state[i.uuid]
+                                    ? <Button theme={"Primary"} click={() => save(i)}>Guardar</Button>
+                                    : <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
+                                }
                             </td>
                         </tr>
                     })
@@ -192,8 +235,8 @@ function Home() {
             </table>
 
 
-            <div className='w-[100%] fixed bottom-[50px] right-[50px] justify-end hidden lg:flex'>
-               <div className='flex justify-center items-center bg-white h-[50px] rounded-[10px] px-10 cursor-pointer' onClick={redirect}>Agregar Producto</div> <div className='flex justify-center items-center bg-[#0064FA] h-[50px] w-[50px]  rounded-full text-white cursor-pointer' onClick={redirect}> <span className='text-white text-[30px]'>+</span> </div>
+            <div className='w-[100%] fixed bottom-[50px] right-[50px]  justify-end hidden lg:flex'>
+                <div className='flex justify-center items-center bg-white h-[50px] border border-gray-200 rounded-[10px] px-10 cursor-pointer' onClick={redirect}>Agregar Producto</div> <div className='flex justify-center items-center bg-[#0064FA] h-[50px] w-[50px]  rounded-full text-white cursor-pointer' onClick={redirect}> <span className='text-white text-[30px]'>+</span> </div>
             </div>
         </div>
 
