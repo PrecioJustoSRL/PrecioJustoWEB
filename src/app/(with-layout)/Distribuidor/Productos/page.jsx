@@ -23,9 +23,9 @@ function Home() {
     const [state, setState] = useState({})
     const [postImage, setPostImage] = useState({})
     const [urlPostImage, setUrlPostImage] = useState({})
-    const [disponibilidad, setDisponibilidad] = useState('')
-    const [categoria, setCategoria] = useState('')
-    const [sistema, setSistema] = useState('')
+    const [disponibilidad, setDisponibilidad] = useState('Todas')
+    const [categoria, setCategoria] = useState('Todas')
+    const [sistema, setSistema] = useState('Todas')
 
     function seeMore() {
         router.push('/Producto')
@@ -96,35 +96,35 @@ function Home() {
             <div className='min-w-[1900px] flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Disponibilidad</h3>
                 <div className="grid grid-cols-3 gap-4 w-[500px] ">
-                    <Tag theme={disponibilidad == 'Disponible' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad('Disponible')}>Disponible</Tag>
-                    <Tag theme={disponibilidad == 'Inmediato' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad('Inmediato')}>Inmediato</Tag>
-                    <Tag theme={disponibilidad == 'No disponible' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad('No disponible')}>No disponible</Tag>
+                    <Tag theme={disponibilidad == 'Disponible' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad(disponibilidad == 'Disponible' ? 'Todas' : 'Disponible')}>Disponible</Tag>
+                    <Tag theme={disponibilidad == 'Inmediato' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad(disponibilidad == 'Inmediato' ? 'Todas' : 'Inmediato')}>Inmediato</Tag>
+                    <Tag theme={disponibilidad == 'No disponible' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad(disponibilidad == 'No disponible' ? 'Todas' : 'No disponible')}>No disponible</Tag>
                 </div>
             </div>
             <div className='min-w-[1900px] flex justify-start items-center my-5  '>
                 <h3 className="flex pr-12 text-[14px]">Categorias</h3>
                 <div className="grid grid-cols-3 gap-4 w-[500px] " >
-                    <Tag theme={categoria == 'Titanio' ? 'Primary' : 'Secondary'} click={()=>setCategoria('Titanio')}>Titanio</Tag>
-                    <Tag theme={categoria == 'Acero' ? 'Primary' : 'Secondary'} click={()=>setCategoria('Acero')}>Acero</Tag>
-                    <Tag theme={categoria == 'Otros' ? 'Primary' : 'Secondary'} click={()=>setCategoria('Otros')}>Otros</Tag>
+                    <Tag theme={categoria == 'Titanio' ? 'Primary' : 'Secondary'} click={()=>setCategoria(categoria == 'Titanio' ? 'Todas' : 'Titanio')}>Titanio</Tag>
+                    <Tag theme={categoria == 'Acero' ? 'Primary' : 'Secondary'} click={()=>setCategoria(categoria == 'Acero' ? 'Todas' : 'Acero')}>Acero</Tag>
+                    <Tag theme={categoria == 'Otros' ? 'Primary' : 'Secondary'} click={()=>setCategoria(categoria == 'Otros' ? 'Todas' : 'Otros')}>Otros</Tag>
                 </div>
             </div>
             <div className='min-w-[1900px] flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Sistema</h3>
                 <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 100px) 100px 100px 100px 200px 200px 100px' }}>
-                    <Tag theme={sistema == '1.5' ? 'Primary' : 'Secondary'} click={()=>setSistema('1.5')}>1.5</Tag>
-                    <Tag theme={sistema == '2.0' ? 'Primary' : 'Secondary'} click={()=>setSistema('2.0')}>2.0</Tag>
-                    <Tag theme={sistema == '2.4' ? 'Primary' : 'Secondary'} click={()=>setSistema('2.4')}>2.4</Tag>
-                    <Tag theme={sistema == '2.5' ? 'Primary' : 'Secondary'} click={()=>setSistema('2.5')}>2.5</Tag>
-                    <Tag theme={sistema == '2.7' ? 'Primary' : 'Secondary'} click={()=>setSistema('2.7')}>2.7</Tag>
-                    <Tag theme={sistema == '3.5' ? 'Primary' : 'Secondary'} click={()=>setSistema('3.5')}>3.5</Tag>
-                    <Tag theme={sistema == '4.5' ? 'Primary' : 'Secondary'} click={()=>setSistema('4.5')}>4.5</Tag>
-                    <Tag theme={sistema == 'Clavos' ? 'Primary' : 'Secondary'} click={()=>setSistema('Clavos')}>Clavos</Tag>
-                    <Tag theme={sistema == 'Protesis' ? 'Primary' : 'Secondary'} click={()=>setSistema('Protesis')}>Protesis</Tag>
-                    <Tag theme={sistema == 'Costillas' ? 'Primary' : 'Secondary'} click={()=>setSistema('Costillas')}>Costillas</Tag>
-                    <Tag theme={sistema == 'Columna y neurocirugía' ? 'Primary' : 'Secondary'} click={()=>setSistema('Columna y neurocirugía')}>Columna y neurocirugía</Tag>
-                    <Tag theme={sistema == 'Fijadores externos' ? 'Primary' : 'Secondary'} click={()=>setSistema('Fijadores externos')}>Fijadores externos</Tag>
-                    <Tag theme={sistema == 'Otros' ? 'Primary' : 'Secondary'} click={()=>setSistema('Otros')}>Otros</Tag>
+                    <Tag theme={sistema == '1.5' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == '1.5' ? 'Todas' : '1.5')}>1.5</Tag>
+                    <Tag theme={sistema == '2.0' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == '2.0' ? 'Todas' : '2.0')}>2.0</Tag>
+                    <Tag theme={sistema == '2.4' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == '2.4' ? 'Todas' : '2.4')}>2.4</Tag>
+                    <Tag theme={sistema == '2.5' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == '2.5' ? 'Todas' : '2.5')}>2.5</Tag>
+                    <Tag theme={sistema == '2.7' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == '2.7' ? 'Todas' : '2.7')}>2.7</Tag>
+                    <Tag theme={sistema == '3.5' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == '3.5' ? 'Todas' : '3.5')}>3.5</Tag>
+                    <Tag theme={sistema == '4.5' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == '4.5' ? 'Todas' : '4.5')}>4.5</Tag>
+                    <Tag theme={sistema == 'Clavos' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == 'Clavos' ? 'Todas' : 'Clavos')}>Clavos</Tag>
+                    <Tag theme={sistema == 'Protesis' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == 'Protesis' ? 'Todas' : 'Protesis')}>Protesis</Tag>
+                    <Tag theme={sistema == 'Costillas' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == 'Costillas' ? 'Todas' : 'Costillas')}>Costillas</Tag>
+                    <Tag theme={sistema == 'Columna y neurocirugía' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == 'Columna y neurocirugía' ? 'Todas' : 'Columna y neurocirugía')}>Columna y neurocirugía</Tag>
+                    <Tag theme={sistema == 'Fijadores externos' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == 'Fijadores externos' ? 'Todas' : 'Fijadores externos')}>Fijadores externos</Tag>
+                    <Tag theme={sistema == 'Otros' ? 'Primary' : 'Secondary'} click={()=>setSistema(sistema == 'Otros' ? 'Todas' : 'Otros')}>Otros</Tag>
                 </div>
             </div>
             <table class="w-[1900px]  text-[12px] text-left text-gray-500 border-t-4 border-gray-400">
