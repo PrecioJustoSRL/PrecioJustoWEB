@@ -20,7 +20,7 @@ function Home() {
     const router = useRouter()
 
     const { user, userDB, setUserData, setUserSuccess, success } = useUser()
-    const [state, setState] = useState({})
+    const [state, setState] = useState({sistema: '1.5', ciudad: 'La paz', categoria: 'Titanio', disponibilidad: 'Disponible'})
 
     const [postImage, setPostImage] = useState(null)
     const [urlPostImage, setUrlPostImage] = useState(null)
@@ -75,10 +75,10 @@ function Home() {
         // router.push('/Clinica/Perfil')
     }
    
-    console.log(userDB)
+    console.log(state)
 
     return (
-        <form className='p-10 min-w-screen lg:min-w-auto lg:my-[50px] lg:my-[70px] bg-white' >
+        <form className='p-10 min-w-screen lg:min-w-auto lg:my-[50px] lg:my-[70px] bg-white' onSubmit={save}>
             <h3 className='text-center text-[16px] pb-3'>Agregar Procucto</h3>
             {/* <div className="w-full flex justify-center">
                 <label htmlFor="file" className="block flex justify-center items-center w-[250px] h-[300px] bg-white border border-gray-300 text-gray-900 text-[14px] focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
@@ -98,7 +98,7 @@ function Home() {
                         <div className="mt-4 flex text-sm leading-6 text-gray-600">
                             <label htmlFor="fileUpload" className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>Upload a file</span>
-                                <input id="fileUpload" name="frontPage" onChange={manageInputIMG} type="file" className="sr-only" />
+                                <input id="fileUpload" name="frontPage" onChange={manageInputIMG} type="file" className="sr-only" required />
                             </label>
                             <p className="pl-1">or drag and drop</p>
                         </div>
@@ -175,7 +175,7 @@ function Home() {
             </div>
             <div className='flex w-full justify-around'>
                 <Button theme='Success' >Ver Vista Cliente</Button>
-                <Button theme='Primary' click={save}>Guardar</Button>
+                <Button theme='Primary' >Guardar</Button>
             </div>
 
             {success == 'Se ha guardado correctamente' && <Success>Se ha guardado correctamente</Success>}

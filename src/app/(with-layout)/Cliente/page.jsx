@@ -117,7 +117,10 @@ function Home() {
                         productDB.map((i, index) =>
                             user.rol === 'Medico'
                                 ? i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) && <CardM i={i} />
-                                : i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) && <Card i={i} />
+                                : (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
+                                i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
+                                i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) && 
+                                <Card i={i} />
                         )}
                 </div>
             </div>

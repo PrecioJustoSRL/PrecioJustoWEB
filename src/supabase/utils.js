@@ -95,11 +95,12 @@ const updateUserData = async (rute, object, uuid, eq) => {
 }
 
 
-const deleteUserData = async (rute, uuid) => {
+const deleteUserData = async (rute, uuid, ) => {
     const { error } = await supabase
         .from(rute)
         .delete()
         .eq('uuid', uuid)
+
 }
 
 

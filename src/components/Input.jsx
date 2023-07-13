@@ -26,6 +26,7 @@ export default function Button({click, type, name, onChange,reference, placehold
             // style={{...styled}}
             ref={reference}
             placeholder={placeholder}
+            required
           />
     )
 }
