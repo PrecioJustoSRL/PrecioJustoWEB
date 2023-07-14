@@ -1,5 +1,5 @@
 'use client'
-   
+
 
 import React, { useState, useMemo, useContext } from 'react'
 
@@ -22,6 +22,9 @@ export function UserProvider({ children }) {
 	const [filterQR, setFilterQR] = useState('');
 	const [recetaDBP, setRecetaDBP] = useState(undefined);
 	const [nav, setNav] = useState(false)
+	const [temporal, setTemporal] = useState(undefined)
+	const [userUuid, setUserUuid] = useState(undefined)
+
 
 
 
@@ -62,13 +65,18 @@ export function UserProvider({ children }) {
 			item,
 			cart,
 			success,
-			qr, 
-			QRurl, 
-			recetaDB, 
-			filter, 
-			filterQR, 
-			recetaDBP, 
-			nav, setNav,
+			qr,
+			QRurl,
+			recetaDB,
+			filter,
+			filterQR,
+			recetaDBP,
+			nav,
+			userUuid, 
+			setUserUuid,
+			temporal,
+			setTemporal,
+			setNav,
 			setRecetaDBP,
 			setFilterQR,
 			setFilter,
@@ -84,7 +92,7 @@ export function UserProvider({ children }) {
 			setUserSuccess,
 			setUserItem
 		})
-	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, 	QRurl, recetaDB, filter, filterQR, recetaDBP, nav, ])
+	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, QRurl, recetaDB, filter, filterQR, recetaDBP, nav, temporal, userUuid,])
 
 	return (
 		<UserContext.Provider value={value} >

@@ -16,7 +16,7 @@ import { uploadStorage } from '@/supabase/storage'
 
 
 function Home() {
-    const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
+    const { user, userDB, userUuid, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
 
     const router = useRouter()
 
@@ -52,36 +52,34 @@ function Home() {
         setState({ ...state, [uuid]: { ...state[uuid], uuid, ['sistema']: value } })
     }
     function onChangeHandler(e, i) {
-        setState({ ...state, [i.uuid]: { ...state[i.uuid], uuid: i.uuid, [e.target.name]: e.target.value } })
+        setState({ ...state, [userUuid]: { ...state[userUuid], uuid: userUuid, [e.target.name]: e.target.value } })
     }
 
   async  function save(i) {
-      await  updateUserData('Producto', state[i.uuid], i.uuid)
-        postImage[i.uuid] && await uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
+      await  updateUserData('Producto', state[userUuid], userUuid)
+        postImage[userUuid] && await uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
         const obj = { ...state }
-        delete obj[i.uuid]
+        delete obj[userUuid]
         setState(obj)
-        readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
-
+        readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
     }
 
    async function delet(i) {
-      await  deleteUserData('Producto', i.uuid)
-       readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+      await  deleteUserData('Producto', userUuid)
+       readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
 
-        // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
+        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
         // const obj = { ...state }
-        // delete obj[i.uuid]
+        // delete obj[userUuid]
         // setState(obj)
     }
 
     function redirect() {
         router.push('/Distribuidor/Agregar')
     }
-
     useEffect(() => {
         
-        readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
     }, [])
 
     return (
@@ -89,11 +87,11 @@ function Home() {
         <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
             <h3 className='font-medium text-[16px]'>Lista De Productos</h3>
             <br />
-            <div className='grid grid-cols-3 w-[900px]'>
+            {/* <div className='grid grid-cols-3 w-[900px]'>
                 <input type="text" className='border-b border-gray-300 gap-4 text-center focus:outline-none  w-[300px]' placeholder='Ingresa el ID'/>
                 <Button theme='Primary'>Importar Datos Mediante ID</Button>
                 <Button theme='Primary'>Importar Datos De Precio Justo</Button>
-            </div>
+            </div> */}
 
             <div className='min-w-[1900px] flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Disponibilidad</h3>
@@ -208,30 +206,30 @@ function Home() {
                                 {/* {i['uso frecuente']} */}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5', 'Clavos', 'Protesis', 'Costillas', 'Columna y neurocirugia', 'Fijadores externos', 'Otros']} name='sistema' defaultValue={i.sistema} uuid={i.uuid} click={onClickHandlerSystem} />
+                                <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5', 'Clavos', 'Protesis', 'Costillas', 'Columna y neurocirugia', 'Fijadores externos', 'Otros']} name='sistema' defaultValue={i.sistema} uuid={userUuid} click={onClickHandlerSystem} />
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea>
                                 {/* {i['costo']} */}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['La Paz', 'Cochabamba', 'Santa Cruz']} name='ciudad' defaultValue={i.ciudad} uuid={i.uuid} click={onClickHandlerCity} />
+                                <Select arr={['La Paz', 'Cochabamba', 'Santa Cruz']} name='ciudad' defaultValue={i.ciudad} uuid={userUuid} click={onClickHandlerCity} />
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['Titanio', 'Acero Inox', 'Otros']} name='categoria' defaultValue={i.categoria} uuid={i.uuid} click={onClickHandlerCategory} />
+                                <Select arr={['Titanio', 'Acero Inox', 'Otros']} name='categoria' defaultValue={i.categoria} uuid={userUuid} click={onClickHandlerCategory} />
                                 {/* {i['costo']} */}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['Disponible', 'Disponibilidad inmediata', 'No disponible']} name='disponibilidad' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerAvailability} />
+                                <Select arr={['Disponible', 'Disponibilidad inmediata', 'No disponible']} name='disponibilidad' defaultValue={i.disponibilidad} uuid={userUuid} click={onClickHandlerAvailability} />
                             </td>
                             <td class="w-32 p-4">
                                 <label htmlFor={`img${index}`}>
-                                    <img src={urlPostImage[i.uuid] ? urlPostImage[i.uuid] : i.url} alt="Apple Watch" />
-                                    <input id={`img${index}`} type="file" onChange={(e) => manageInputIMG(e, i.uuid)} className='hidden' />
+                                    <img src={urlPostImage[userUuid] ? urlPostImage[userUuid] : i.url} alt="Apple Watch" />
+                                    <input id={`img${index}`} type="file" onChange={(e) => manageInputIMG(e, userUuid)} className='hidden' />
                                 </label>
                             </td>
                             <td class="px-3 py-4">
-                                {state[i.uuid]
+                                {state[userUuid]
                                     ? <Button theme={"Primary"} click={() => save(i)}>Guardar</Button>
                                     : <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
                                 }
@@ -242,10 +240,6 @@ function Home() {
                 </tbody>
             </table>
 
-
-            <div className='w-[100%] fixed bottom-[50px] right-[50px]  justify-end hidden lg:flex'>
-                <div className='flex justify-center items-center bg-white h-[50px] border border-gray-200 rounded-[10px] px-10 cursor-pointer' onClick={redirect}>Agregar Producto</div> <div className='flex justify-center items-center bg-[#0064FA] h-[50px] w-[50px]  rounded-full text-white cursor-pointer' onClick={redirect}> <span className='text-white text-[30px]'>+</span> </div>
-            </div>
         </div>
 
     )
@@ -255,27 +249,3 @@ function Home() {
 
 
 export default WithAuth(Home)
-
-
-
-
-
-
-
-
-{/* <td class="px-3 py-4">
-                                    <div class="flex items-center space-x-3">
-                                        <button class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                                            <span class="sr-only">Quantity button</span>
-                                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                                        </button>
-                                        <div>
-                                            <input type="number" id="first_product" class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" required />
-                                        </div>
-                                        <button class="inline-flex items-center p-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
-                                            <span class="sr-only">Quantity button</span>
-                                            <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                        </button>
-                                    </div>
-                                </td> */}
-
