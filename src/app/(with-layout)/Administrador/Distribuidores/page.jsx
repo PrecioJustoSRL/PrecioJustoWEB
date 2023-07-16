@@ -2,6 +2,7 @@
 
 import Button from '@/components/Button'
 import Subtitle from '@/components/Subtitle'
+import Modal from '@/components/Modal'
 
 import Select from '@/components/Select'
 import { useUser } from '@/context/Context.js'
@@ -16,7 +17,7 @@ import { uploadStorage } from '@/supabase/storage'
 
 
 function Home() {
-    const { user, setUserUuid, userDB, temporal, setTemporal, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
+    const { user, setUserUuid, userDB, msg, setMsg,  modal, setModal, temporal, setTemporal, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
 
     const router = useRouter()
 
@@ -64,22 +65,25 @@ function Home() {
         readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
 
     }
+    async function deletConfirm() {
+        await deleteUserData('Producto', userUuid)
+        readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
 
-    async function delet(i) {
-        await deleteUserData('Distribuidor', i.uuid)
-        readUserAllData('Distribuidor', null, setTemporal)
-
-        // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
+        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
         // const obj = { ...state }
-        // delete obj[i.uuid]
+        // delete obj[userUuid]
         // setState(obj)
+    }
+    function delet(i) {
+        setUserItem(i)
+        setModal('Delete')
     }
 
     function redirect(id) {
         setUserUuid(id)
-       return router.push('Administrador/Distribuidores/Productos')
+        return router.push('Administrador/Distribuidores/Productos')
     }
-console.log(filter)
+    console.log(filter)
     useEffect(() => {
         readUserAllData('Distribuidor', null, setTemporal)
     }, [])
@@ -87,6 +91,13 @@ console.log(filter)
     return (
 
         <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
+            {modal === 'Delete' && <Modal click={deletConfirm} funcion={()=>delet(i)}>Estas seguro de eliminar al siguiente usuario {msg}</Modal>}
+
+
+
+
+
+
             <h3 className='font-medium text-[16px]'>Distribuidores</h3>
             <br />
             <div className='flex justify-center w-full'>
@@ -139,6 +150,9 @@ console.log(filter)
                             Whatsapp
                         </th>
                         <th scope="col" class="px-3 py-3">
+                            Bloquear
+                        </th>
+                        <th scope="col" class="px-3 py-3">
                             Eliminar
                         </th>
                     </tr>
@@ -146,11 +160,11 @@ console.log(filter)
                 <tbody>
                     {temporal && temporal !== undefined && temporal.map((i, index) => {
 
-                        return i.ciudad.includes(ciudad) &&  i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
+                        return i.ciudad.includes(ciudad) && i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
                                 <span className='h-full flex py-2'>{index + 1}</span>
                             </td>
-                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white" onClick={(e)=>redirect(i.uuid)}>
+                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white" onClick={(e) => redirect(i.uuid)}>
                                 {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} cols="6" name='nombre de producto 1' defaultValue={i['nombre de producto 1']} class="block p-1.5  w-full h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
                                 {i['nombre']}
                             </td>
@@ -183,11 +197,15 @@ console.log(filter)
                                 {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
                                 {i['whatsapp']}
                             </td>
-
                             <td class="px-3 py-4">
-                               
-                                 <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
-                            
+
+                                <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
+
+                            </td>
+                            <td class="px-3 py-4">
+
+                                <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
+
                             </td>
                         </tr>
                     })
@@ -196,7 +214,7 @@ console.log(filter)
             </table>
 
 
-         
+
         </div>
 
     )

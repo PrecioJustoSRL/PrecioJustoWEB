@@ -124,7 +124,7 @@ export default function BottomNavigation({ rol }) {
                 <span className="text-[12px] text-gray-600  group-hover:text-blue-600 ">Soporte</span>
             </Button>
             </div>
-            case 'Distribuidor':
+            case 'Administrador':
                 return <div className={`grid h-full max-w-lg ${rol === 'Distribuidor' ? 'grid-cols-5' : 'grid-cols-4'} mx-auto font-medium z-50`}>
                     <Button click={() => redirectHandler(`/Cliente`)}>
                         <svg className="w-11 h-11 mb-1 text-gray-600 bg-white rounded-full group-hover:text-blue-600 p-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
