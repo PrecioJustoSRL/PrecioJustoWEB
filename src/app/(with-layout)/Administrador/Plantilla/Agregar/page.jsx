@@ -87,8 +87,7 @@ function Home() {
                 </label>
                 <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" />
             </div> */}
-
-
+{success == 'Se ha guardado correctamente' && <Success>Guardado correctamente</Success>}
             <div className="w-full flex justify-center">
                 <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 md:w-[250px] md:h-[200px]" style={{ backgroundImage: `url(${urlPostImage})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
                     <div className="text-center">
