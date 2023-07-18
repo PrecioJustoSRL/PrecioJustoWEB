@@ -60,7 +60,7 @@ function Comprar({ theme, styled, click, children }) {
 
 
 function handlerQRShare() {
- window.open(`https://api.whatsapp.com/send?phone=+59169941749&text=${encodeURIComponent(QRurl)}`, '_blank') 
+ window.open(`whatsapp://send?text=+encodeURIComponent(${QRurl})`, '_blank') 
 }
 
   useEffect(() => {
