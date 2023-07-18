@@ -18,8 +18,8 @@ export default function BottomNavigation({ rol }) {
     }
 
     const signOutHandler = () => {
-        router.push('/')
         setUserProfile(null)
+        router.push('/')
         signOut()
     }
 
