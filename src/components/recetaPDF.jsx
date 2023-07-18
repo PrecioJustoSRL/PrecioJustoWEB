@@ -67,7 +67,7 @@ const PDFView = ({ dbUrl, style }) => {
     });
 
     return (
-        <div>
+        <div className="w-screen">
             {isCliente && <PDFDownloadLink document={
                 <Document>
                     <Page size='A4' style={styles.body} >
