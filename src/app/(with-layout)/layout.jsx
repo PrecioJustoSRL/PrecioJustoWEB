@@ -46,12 +46,12 @@ function openNav (e) {
     <div className="min-h-screen bg-gray-white">
 
       <nav className="w-screen fixed top-0 left-0 border-b border-gray-200 shadow-sm flex items-center justify-between bg-white  p-4 h-[70px] z-50" onClick={()=>setNav(false)}>
-          <div className='flex'> 
+         {pathname !== '/Cliente' && <div className='flex'> 
             <button type="button" className="inline-flex items-center p-2 text-[14px] text-white rounded-lg hover:bg-gray-100 focus:outline-none  hidden lg:block focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600" onClick={openNav}>
               <svg className="w-9 h-9 text-gray-600" aria-hidden="true" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"  ></path></svg>
             </button>
             <h1 className='text-[18px] hidden lg:flex lg:justify-center lg:items-center text-blue-400 font-medium'> <img src="/logo.png" className='h-[50px] w-[50px]' alt="" /> <span className='font-medium'>PRECIO JUSTO SRL</span></h1>
-          </div>
+          </div>}
           {pathname === '/Cliente' ?
             <div className='flex '> 
             <button type="button" className="inline-flex items-center p-2 text-[14px] text-white rounded-lg hover:bg-gray-100   dark:hover:bg-gray-700 " onClick={openNav}>
