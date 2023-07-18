@@ -199,7 +199,7 @@ function Home() {
                             </td>
                             <td class="px-3 py-4">
 
-                                <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
+                                <Button theme={"Danger"} click={() => delet(i)}>Bloquear</Button>
 
                             </td>
                             <td class="px-3 py-4">

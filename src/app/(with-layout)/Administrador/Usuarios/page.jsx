@@ -8,6 +8,7 @@ import { useUser } from '@/context/Context.js'
 
 import Tag from '@/components/Tag'
 import { useRouter } from 'next/navigation';
+import Modal from '@/components/Modal'
 
 import { WithAuth } from '@/HOCs/WithAuth'
 import { useEffect, useState } from 'react'
@@ -16,7 +17,7 @@ import { uploadStorage } from '@/supabase/storage'
 
 
 function Home() {
-    const { user, userDB, temporal, setTemporal, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
+    const { user, userDB, modal, setModal, msg, setMsg, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, temporal, setTemporal } = useUser()
 
     const router = useRouter()
 
@@ -25,7 +26,9 @@ function Home() {
     const [urlPostImage, setUrlPostImage] = useState({})
     const [disponibilidad, setDisponibilidad] = useState('')
     const [categoria, setCategoria] = useState('')
+    const [rol, setRol] = useState('')
     const [ciudad, setCiudad] = useState('')
+
     const [filter, setFilter] = useState('')
 
 
@@ -67,9 +70,29 @@ function Home() {
 
     }
 
-    async function delet(i) {
-        await deleteUserData('Users', i.uuid)
+    function delet(i, data) {
+        setUserItem(i)
+        setModal(data)
+    }
+    async function blockConfirm() {
+        console.log(item) 
+        await updateUserData('Users', {bloqueado: !item.bloqueado}, item.uuid, null)
+        await readUserAllData('Users', null, setTemporal)
+        setModal('')
+
+        // console.log({ bloqueado: !item.bloqueado })
+        // await updateUserData('Producto', { bloqueado: !item.bloqueado }, item.uuid, eq)
+        // readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        // updateUserData = async (rute, object, uuid, eq) 
+        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
+        // const obj = { ...state }
+        // delete obj[userUuid]
+        // setState(obj) updateUserData = async (rute, object, uuid, eq)
+    }
+    async function deletConfirm() {
+        await deleteUserData('Users', item.uuid)
         readUserAllData('Users', null, setTemporal)
+        setModal('')
 
         // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
         // const obj = { ...state }
@@ -80,24 +103,36 @@ function Home() {
     function redirect() {
         router.push('/Distribuidor/Agregar')
     }
-console.log(filter)
+    console.log(filter)
     useEffect(() => {
         readUserAllData('Users', null, setTemporal)
     }, [])
 
     return (
 
-        <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
+        <div class="relative overflow-x-auto shadow-md p-5   bg-white min-h-[80vh]">
+            {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de ELIMINAR al siguiente usuario: {item.nombre}</Modal>}
+            {modal === 'Block' && <Modal funcion={blockConfirm}>Estas seguro de BLOQUEAR al siguiente usuario {msg}</Modal>}
+
             <h3 className='font-medium text-[16px]'>Clinicas</h3>
             <br />
             <div className='flex justify-center w-full'>
                 <input type="text" className='border-b border-gray-300 gap-4 text-center focus:outline-none  w-[300px]' onChange={onChangeHandler} placeholder='Filtrar por nombre' />
             </div>
 
-
-            <div className='min-w-[1000px] flex justify-start items-center my-5 '>
+            <div className=' flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Ciudad</h3>
-                <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 100px) 100px 100px 100px 200px 200px 100px' }}>
+                <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 120px)' }}>
+                    <Tag theme={rol == 'Cliente' ? 'Primary' : 'Secondary'} click={() => setRol(rol == 'Cliente' ? '' : 'Cliente')}>Cliente</Tag>
+                    <Tag theme={rol == 'Medico' ? 'Primary' : 'Secondary'} click={() => setRol(rol == 'Medico' ? '' : 'Medico')}>Medico</Tag>
+                    <Tag theme={rol == 'Clinica' ? 'Primary' : 'Secondary'} click={() => setRol(rol == 'Clinica' ? '' : 'Clinica')}>Clinica</Tag>
+                    <Tag theme={rol == 'Distribuidor' ? 'Primary' : 'Secondary'} click={() => setRol(rol == 'Distribuidor' ? '' : 'Distribuidor')}>Distribuidor</Tag>
+                    <Tag theme={rol == 'Administrador' ? 'Primary' : 'Secondary'} click={() => setRol(rol == 'Administrador' ? '' : 'Administrador')}>Administrador</Tag>
+                </div>
+            </div>
+            <div className=' flex justify-start items-center my-5 '>
+                <h3 className="flex pr-12 text-[14px]" htmlFor="">Ciudad</h3>
+                <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 100px) 100px 100px' }}>
                     <Tag theme={ciudad == 'Sucre' ? 'Primary' : 'Secondary'} click={() => setCiudad(ciudad == 'Sucre' ? '' : 'Sucre')}>Sucre</Tag>
                     <Tag theme={ciudad == 'La paz' ? 'Primary' : 'Secondary'} click={() => setCiudad(ciudad == 'La paz' ? '' : 'La paz')}>La paz</Tag>
                     <Tag theme={ciudad == 'Cochabamba' ? 'Primary' : 'Secondary'} click={() => setCiudad(ciudad == 'Cochabamba' ? '' : 'Cochabamba')}>Cochabamba</Tag>
@@ -109,7 +144,7 @@ console.log(filter)
                     <Tag theme={ciudad == 'Potosi' ? 'Primary' : 'Secondary'} click={() => setCiudad(ciudad == 'Potosi' ? '' : 'Potosi')}>Potosi</Tag>
                 </div>
             </div>
-            <table class="w-[1000px]  text-[12px] text-left text-gray-500 border-t-4 border-gray-400">
+            <table class="w-full text-[12px] text-left text-gray-500 border-t-4 border-gray-400">
                 <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-3 py-3">
@@ -128,6 +163,12 @@ console.log(filter)
                             Whatsapp
                         </th>
                         <th scope="col" class="px-3 py-3">
+                            Rol
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Blockear
+                        </th>
+                        <th scope="col" class="px-3 py-3">
                             Eliminar
                         </th>
                     </tr>
@@ -135,7 +176,7 @@ console.log(filter)
                 <tbody>
                     {temporal && temporal !== undefined && temporal.map((i, index) => {
 
-                        return i.ciudad.includes(ciudad) &&  i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
+                        return i.rol.includes(rol) &&i.ciudad.includes(ciudad) && i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
                                 <span className='h-full flex py-2'>{index + 1}</span>
                             </td>
@@ -155,11 +196,22 @@ console.log(filter)
                                 {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
                                 {/* {i['whatsapp']} */}
                             </td>
-
+                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                                {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} cols="6" name='nombre de producto 3' defaultValue={i['nombre de producto 3']} class="block p-1.5  w-full h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
+                                {i['rol']}
+                            </td>
                             <td class="px-3 py-4">
-                               
-                                 <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
-                            
+
+{             i.bloqueado == true 
+?                   <Button theme={"Success"} click={() => delet(i, 'Block')}>Desbloquear</Button>
+:           <Button theme={"Secondary"} click={() => delet(i, 'Block')}>Bloquear</Button>
+
+}
+                            </td>
+                            <td class="px-3 py-4">
+
+                                <Button theme={"Danger"} click={() => delet(i, 'Delete')}>Eliminar</Button>
+
                             </td>
                         </tr>
                     })
@@ -168,7 +220,7 @@ console.log(filter)
             </table>
 
 
-          
+
         </div>
 
     )
