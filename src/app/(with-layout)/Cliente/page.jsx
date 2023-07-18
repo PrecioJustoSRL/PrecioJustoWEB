@@ -102,27 +102,27 @@ function Home() {
                 <div className="relative bg-gray-50 lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-8 pb-16 lg:pt-0">
                     {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
                         recetaDBP.map((i, index) =>
-                            user.rol === 'Medico'
+                            user.rol === 'Medico' 
                                 ? i.qr.includes(filterQR) && <CardM i={i} />
                                 : i.qr.includes(filterQR) && <Card i={i} recetado={true} />
                         )}
                     {filter.length == 0 && filterQR.length == 0 &&
-                        productDB !== null && productDB !== undefined &&
-                        productDB.map((i, index) =>
-                            user.rol === 'Medico'
+                        productDB !== null && productDB !== undefined && 
+                        productDB.map((i, index) =>{
+                         if (i.distribuidor !== 'Precio-Justo-SRL-Data') return user.rol === 'Medico' 
                                 ? <CardM i={i} />
-                                : <Card i={i} />
+                                : <Card i={i} />}
                         )}
                     {filter.length > 0 && productDB !== null && productDB !== undefined &&
-                        productDB.map((i, index) =>
-                            user.rol === 'Medico'
+                        productDB.map((i, index) =>{
+                            if (i.distribuidor !== 'Precio-Justo-SRL-Data') return user.rol === 'Medico' && i.distribuidor !== 'Precio-Justo-SRL-Data'
                                 ? (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                 i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
                                 i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) && <CardM i={i} />
                                 : (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                 i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
                                 i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) && 
-                                <Card i={i} />
+                                <Card i={i} />}
                         )}
                 </div>
             </div>
