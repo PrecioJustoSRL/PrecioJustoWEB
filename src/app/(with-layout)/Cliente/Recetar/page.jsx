@@ -106,7 +106,7 @@ function handlerQRShare() {
     <br />
 
     {qr !== '' && <a          
-           className="text-white bg-emerald-400 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-4 text-center z-50"
+           className="text-white bg-emerald-400 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-10 py-4 text-center z-50"
     href={QRurl} download>Guardar ImagenQR</a> }
 
     {qr !== '' && <InvoicePDF dbUrl={QRurl} />}
