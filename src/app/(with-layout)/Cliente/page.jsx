@@ -71,7 +71,7 @@ function Home() {
                     </svg>
                     <span className='block w-full h-[28px] absolute left-0 top-0 bottom-0 my-auto text-center pl-[50px]'>Ya tengo una receta QR...</span>
                 </label>
-                <input id="qr" type="file" className='hidden' onChange={HandlerOnChange} />
+                <input id="qr" type="image" className='hidden' onChange={HandlerOnChange} />
             </div>}
 
 
