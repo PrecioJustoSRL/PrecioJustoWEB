@@ -60,7 +60,7 @@ function Comprar({ theme, styled, click, children }) {
 
 
 function handlerQRShare() {
- window.open(`whatsapp://send?text=${encodeURIComponent(QRurl)}`, '_blank') 
+ window.open(`whatsapp://send?text=${encodeURIComponent('https://hhxlyesjmtbhnqwsoplw.supabase.co/storage/v1/object/public/Clinica/9714a0de-aa97-43e0-952b-710ee646710b.webp')}`, '_blank') 
 }
 
   useEffect(() => {
@@ -99,7 +99,7 @@ function handlerQRShare() {
         level={'H'}
         includeMargin={false}
         renderAs={'canvas'}
-        viewBox={`0 0 256 256`}ssss
+        viewBox={`0 0 256 256`}
       />}
 
     </div>
