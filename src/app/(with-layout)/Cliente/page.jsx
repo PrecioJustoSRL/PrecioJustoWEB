@@ -116,7 +116,9 @@ function Home() {
                     {filter.length > 0 && productDB !== null && productDB !== undefined &&
                         productDB.map((i, index) =>
                             user.rol === 'Medico'
-                                ? i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) && <CardM i={i} />
+                                ? (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
+                                i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
+                                i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) && <CardM i={i} />
                                 : (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                 i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
                                 i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) && 
