@@ -3,6 +3,7 @@
 import Button from '@/components/Button'
 import Select from '@/components/Select'
 import { useUser } from '@/context/Context.js'
+import Modal from '@/components/Modal'
 
 import Tag from '@/components/Tag'
 import { useRouter } from 'next/navigation';
@@ -14,7 +15,7 @@ import { uploadStorage } from '@/supabase/storage'
 
 
 function Home() {
-    const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
+    const { user, userDB, modal, setModal, msg, setMsg, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, } = useUser()
 
     const router = useRouter()
 
@@ -36,10 +37,15 @@ function Home() {
         delete obj[i.uuid]
         setState(obj)
     }
-
-    function delet (e, i) {
+    function delet(i, data) {
+        setUserItem(i)
+        setModal(data)
+    }
+    async function deletConfirm (e) {
         e.preventDefault()
-        deleteUserData('Receta', i.uuid)
+       await deleteUserData('Receta', item.uuid)
+       readUserData('Receta', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'medico', true)
+
         // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
         // const obj = { ...state }
         // delete obj[i.uuid]
@@ -53,6 +59,8 @@ function Home() {
     return (
 
         <div class="relative overflow-x-auto shadow-md ">
+                        {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de ELIMINAR al siguiente usuario {msg}</Modal>}
+
             <table class="w-full min-w-[700px] text-[12px] text-left text-gray-500">
                 <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -94,7 +102,7 @@ function Home() {
                             <td class="px-3 py-4">
                                 {state[i.uuid] 
                                 ? <Button theme={"Primary"} click={(e) => save(e, i)}>Guardar</Button>
-                                : <Button theme={"Danger"} click={(e) => delet(e, i)}>Eliminar</Button>
+                                : <Button theme={"Danger"} click={() => delet(i, 'Delete')}>Eliminar</Button>
                             }
                             </td>
                         </tr>

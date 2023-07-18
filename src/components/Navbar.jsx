@@ -9,7 +9,7 @@ import { signOut } from '@/supabase/utils'
 
 
 export default function BottomNavigation({ rol }) {
-    const { user, userDB, setUserProfile, filter, setFilter, nav, setNav } = useUser()
+    const { user, userDB, setUserProfile, setUserData, setUserProduct, setRecetaDB, setUserCart, setUserDistributorPDB, filter, setFilter, nav, setNav } = useUser()
 
     const router = useRouter()
 
@@ -19,6 +19,12 @@ export default function BottomNavigation({ rol }) {
 
     const signOutHandler = () => {
         setUserProfile(null)
+        setUserCart({})
+        setUserProduct(undefined),
+         setRecetaDB(undefined),
+
+        setUserDistributorPDB(undefined)
+        setUserData(null)
         router.push('/')
         signOut()
     }
