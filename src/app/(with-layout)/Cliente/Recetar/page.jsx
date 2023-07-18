@@ -56,7 +56,12 @@ function Comprar({ theme, styled, click, children }) {
     e.preventDefault()
 
   }
-  console.log(recetaDB)
+  console.log(QRurl)
+
+
+function handlerQRShare() {
+ window.open(`https://api.whatsapp.com/send?phone=+59169941749&text=${encodeURIComponent(QRurl)}`, '_blank') 
+}
 
   useEffect(() => {
     document.getElementById('qr') && setQRurl(document.getElementById('qr').toDataURL())
@@ -99,6 +104,9 @@ function Comprar({ theme, styled, click, children }) {
 
     </div>
     <br />
+
+    {qr !== '' && <Button theme="Success" click={handlerQRShare}> Guardar</Button> }
+
     {qr !== '' && <InvoicePDF dbUrl={QRurl} />}
 
   </div>)
