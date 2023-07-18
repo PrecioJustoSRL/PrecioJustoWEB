@@ -75,8 +75,8 @@ function Home() {
         setModal(data)
     }
     async function blockConfirm() {
-        console.log(item) 
-        await updateUserData('Users', {bloqueado: !item.bloqueado}, item.uuid, null)
+        console.log(item)
+        await updateUserData('Users', { bloqueado: !item.bloqueado }, item.uuid, null)
         await readUserAllData('Users', null, setTemporal)
         setModal('')
 
@@ -112,7 +112,7 @@ function Home() {
 
         <div class="relative overflow-x-auto shadow-md p-5   bg-white min-h-[80vh]">
             {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de ELIMINAR al siguiente usuario: {item.nombre}</Modal>}
-            {modal === 'Block' && <Modal funcion={blockConfirm}>Estas seguro de BLOQUEAR al siguiente usuario {msg}</Modal>}
+            {modal === 'Block' && <Modal funcion={blockConfirm}>Estas seguro de BLOQUEAR al siguiente usuario {item.nombre}</Modal>}
 
             <h3 className='font-medium text-[16px]'>Clinicas</h3>
             <br />
@@ -144,7 +144,7 @@ function Home() {
                     <Tag theme={ciudad == 'Potosi' ? 'Primary' : 'Secondary'} click={() => setCiudad(ciudad == 'Potosi' ? '' : 'Potosi')}>Potosi</Tag>
                 </div>
             </div>
-            <table class="w-full text-[12px] text-left text-gray-500 border-t-4 border-gray-400">
+            <table class="w-full text-[12px] min-w-[1100px] text-left text-gray-500 border-t-4 border-gray-400">
                 <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-3 py-3">
@@ -176,7 +176,7 @@ function Home() {
                 <tbody>
                     {temporal && temporal !== undefined && temporal.map((i, index) => {
 
-                        return i.rol.includes(rol) &&i.ciudad.includes(ciudad) && i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
+                        return i.rol && i.rol.includes(rol) && i.ciudad.includes(ciudad) && i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
                                 <span className='h-full flex py-2'>{index + 1}</span>
                             </td>
@@ -201,17 +201,13 @@ function Home() {
                                 {i['rol']}
                             </td>
                             <td class="px-3 py-4">
-
-{             i.bloqueado == true 
-?                   <Button theme={"Success"} click={() => delet(i, 'Block')}>Desbloquear</Button>
-:           <Button theme={"Secondary"} click={() => delet(i, 'Block')}>Bloquear</Button>
-
-}
+                                {i.bloqueado == true
+                                    ? <Button theme={"Success"} click={() => delet(i, 'Block')}>Desbloquear</Button>
+                                    : <Button theme={"Secondary"} click={() => delet(i, 'Block')}>Bloquear</Button>
+                                }
                             </td>
                             <td class="px-3 py-4">
-
                                 <Button theme={"Danger"} click={() => delet(i, 'Delete')}>Eliminar</Button>
-
                             </td>
                         </tr>
                     })

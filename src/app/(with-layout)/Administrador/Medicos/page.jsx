@@ -8,6 +8,7 @@ import { useUser } from '@/context/Context.js'
 
 import Tag from '@/components/Tag'
 import { useRouter } from 'next/navigation';
+import Modal from '@/components/Modal'
 
 import { WithAuth } from '@/HOCs/WithAuth'
 import { useEffect, useState } from 'react'
@@ -16,7 +17,7 @@ import { uploadStorage } from '@/supabase/storage'
 
 
 function Home() {
-    const { user, userDB, temporal, setTemporal, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
+    const { user, userDB, modal, setModal, temporal, setTemporal, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, } = useUser()
 
     const router = useRouter()
 
@@ -66,11 +67,28 @@ function Home() {
         readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
 
     }
+    function delet(i, data) {
+        setUserItem(i)
+        setModal(data)
+    }
+    async function blockConfirm() {
+        console.log(item) 
+        await updateUserData('Medico', {bloqueado: !item.bloqueado}, item.uuid, null)
+        await readUserAllData('Medico', null, setTemporal)
+        setModal('')
 
-    async function delet(i) {
+        // console.log({ bloqueado: !item.bloqueado })
+        // await updateUserData('Producto', { bloqueado: !item.bloqueado }, item.uuid, eq)
+        // readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        // updateUserData = async (rute, object, uuid, eq) 
+        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
+        // const obj = { ...state }
+        // delete obj[userUuid]
+        // setState(obj) updateUserData = async (rute, object, uuid, eq)
+    }
+    async function deletConfirm(i) {
         await deleteUserData('Medico', i.uuid)
         readUserAllData('Medico', null, setTemporal)
-
         // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
         // const obj = { ...state }
         // delete obj[i.uuid]
@@ -88,6 +106,9 @@ console.log(filter)
     return (
 
         <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
+               {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de ELIMINAR al siguiente usuario: {item.nombre}</Modal>}
+            {modal === 'Block' && <Modal funcion={blockConfirm}>Estas seguro de BLOQUEAR al siguiente usuario {item.nombre}</Modal>}
+
             <h3 className='font-medium text-[16px]'>Medicos</h3>
             <br />
             <div className='flex justify-center w-full'>
@@ -140,6 +161,9 @@ console.log(filter)
                             Whatsapp
                         </th>
                         <th scope="col" class="px-3 py-3">
+                            Bloqueado
+                        </th>
+                        <th scope="col" class="px-3 py-3">
                             Eliminar
                         </th>
                     </tr>
@@ -186,9 +210,13 @@ console.log(filter)
                             </td>
 
                             <td class="px-3 py-4">
-                               
-                                 <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
-                            
+                                {i.bloqueado == true
+                                    ? <Button theme={"Success"} click={() => delet(i, 'Block')}>Desbloquear</Button>
+                                    : <Button theme={"Secondary"} click={() => delet(i, 'Block')}>Bloquear</Button>
+                                }
+                            </td>
+                            <td class="px-3 py-4">
+                                <Button theme={"Danger"} click={() => delet(i, 'Delete')}>Eliminar</Button>
                             </td>
                         </tr>
                     })
