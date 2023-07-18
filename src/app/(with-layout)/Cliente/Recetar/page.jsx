@@ -60,7 +60,7 @@ function Comprar({ theme, styled, click, children }) {
 
 
 function handlerQRShare() {
- window.open(`whatsapp://send?text=+encodeURIComponent(${QRurl})`, '_blank') 
+ window.open(`whatsapp://send?text=${encodeURIComponent(QRurl)}`, '_blank') 
 }
 
   useEffect(() => {
