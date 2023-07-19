@@ -149,7 +149,7 @@ function Home() {
                     <tr>
                         <th scope="col" class="px-3 py-3">
                             #
-                        </th>              
+                        </th>                                 
                         <th scope="col" class="px-3 py-3">
                             Nombre
                         </th>
