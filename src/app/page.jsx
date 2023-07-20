@@ -50,7 +50,7 @@ export default function Home() {
   }, [user]);
 
   return (
-    <div className="h-full bg-[#0064FA] flex flex-col justify-center items-center p-5"
+    <div className="h-full bg-[#2A52BE] flex flex-col justify-center items-center p-5"
       style={{
         backgroundImage: 'url(/background.png)',
         backgroundRepeat: 'no-repeat',
