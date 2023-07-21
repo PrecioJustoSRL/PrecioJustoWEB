@@ -47,7 +47,7 @@ function Home({ children }) {
 
 
 
-      <div className={`fixed top-0 w-[220px] border-x-8  border-white h-screen bg-gray-50 h-screen transition-all rounded-r-[40px]	z-40 lg:bg-white ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-220px] '} z-50`} >
+      <div className={`fixed top-0 w-[220px] lg:border-x-8   border-white h-screen bg-[#2A52BE] lg:bg-gray-50 h-screen transition-all rounded-r-[40px]	z-40 lg:bg-white ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-220px] '} z-50`} >
         {/* <h5 id="drawer-navigation-label" class="text-base font-semibold text-white uppercase dark:text-gray-400">Menu</h5> */}
 
         <div class="py-4 overflow-y-auto ">
@@ -103,9 +103,12 @@ function Home({ children }) {
           {user && user !== undefined && user.rol !== 'Distribuidor' && <Cart />}
         </nav>
         {children}
-        {user && user !== undefined && <div className="fixed bottom-0  z-30 w-full h-[65px] bg-gray-50 border-t-8 border-white rounded-t-[40px] lg:hidden">
+         {user && user !== undefined && <div className="fixed bottom-0  z-30 w-full h-[65px] bg-[#2A52BE] border-t-8 border-white rounded-t-[40px] lg:hidden">
           <BottomNavigation rol={user.rol} />
         </div>}
+        {/* {user && user !== undefined && <div className="fixed bottom-0  z-30 w-full h-[65px] bg-gray-50 border-t-8 border-white rounded-t-[40px] lg:hidden">
+          <BottomNavigation rol={user.rol} />
+        </div>} */}
       </main>
 
 
