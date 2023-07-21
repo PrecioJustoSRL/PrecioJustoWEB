@@ -21,9 +21,9 @@ export default function BottomNavigation({ rol }) {
         setUserProfile(null)
         setUserCart({})
         setUserProduct(undefined),
-         setRecetaDB(undefined),
+            setRecetaDB(undefined),
 
-        setUserDistributorPDB(undefined)
+            setUserDistributorPDB(undefined)
         setUserData(null)
         router.push('/')
         signOut()
@@ -36,6 +36,13 @@ export default function BottomNavigation({ rol }) {
     switch (rol) {
         case 'Cliente':
             return <ul class="space-y-3 text-[16px]  text-gray-600 font-medium">
+                <li>
+                    <button type="button" className="inline-flex items-center lg:hidden p-2 text-[14px] text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2  focus:ring-gray-200 " onClick={() => back(!nav)}>
+                        <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 32L2 17L17 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </li>
                 <li>
                     <Link href="/Distribuidor/Perfil" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6  transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
@@ -210,6 +217,10 @@ export default function BottomNavigation({ rol }) {
             </ul>
         case 'Administrador':
             return <ul class="space-y-2 text-[16px]  text-gray-600 font-medium">
+                <li className="flex flex-col justify-center items-center px-[5px] py-5 border-b border-gray-[1px]  w-full">
+                    <img src="/logo-circle.png" className='h-[70px] w-[70px]' alt="" />
+                    <h1 className='16  px font-medium'>Precio Justo</h1>
+                </li>
                 <li>
                     <Link href="/Administrador/Pedido" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6  transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
