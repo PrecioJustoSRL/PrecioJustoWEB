@@ -99,7 +99,7 @@ function Home() {
                     </div>
                 </div>
 
-                <div className="relative bg-gray-50 lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-8 pb-16 lg:pt-0">
+                <div className="relative bg-white lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-8 pb-16 lg:pt-0">
                     {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
                         recetaDBP.map((i, index) =>
                             user.rol === 'Medico' 

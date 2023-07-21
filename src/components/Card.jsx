@@ -38,7 +38,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     }
     console.log(item)
     return (
-        <div class="relative w-full bg-white min-h-[180px] max-w-[500px] rounded-[15px] border border-gray-200 rounded-[20px] shadow mt-5" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px' }}>
+        <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] border border-gray-200 rounded-[20px] shadow mt-5" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px' }}>
             <div class=" p-4  flex flex-col justify-between leading-normal">
                 <div class="">
                     <div class=" font-bold text-[16px] mb-2 text-gray-950">
@@ -61,8 +61,11 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
             </div>
             <div className='w-full flex justify-between  items-center p-4'>
                 <div class="flex items-baseline text-gray-900">
-                    <span class="text-[12px] text-gray-600 font-semibold">BOB</span>
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight">{i.costo}</span>
+                    <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight"> BS</span>
+
+                    {/* <span class="text-[12px] text-gray-600 font-semibold">Bs</span> */}
+
                 </div>
                 {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='text-[16px] text-right px-5'> {cart[i.uuid].cantidad} </span>}
             </div>
