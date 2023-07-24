@@ -37,10 +37,11 @@ export default function Home() {
 
     <div className="min-h-full bg-[#2A52BE] flex flex-col justify-center items-center p-5"
       style={{
-        backgroundImage: 'url(/background.png)',
+        backgroundImage: 'url(/bg-2.jpg)',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: '50% 100%',
-        backgroundAttachment: 'fixed'
+        backgroundPosition: '50% 50%',
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover'
       }}>
       <form className="space-y-6 lg:space-y-3 w-[100%] max-w-[350px]" onSubmit={signUpHandler} >
         <div className='w-full text-center flex justify-center'>

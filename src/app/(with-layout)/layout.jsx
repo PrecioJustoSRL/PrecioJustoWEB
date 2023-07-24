@@ -47,7 +47,7 @@ function Home({ children }) {
 
 
 
-      <div className={`fixed top-0 w-[220px] lg:border-x-8   border-white h-screen bg-[#2A52BE] lg:bg-gray-50 h-screen transition-all rounded-r-[40px]	z-40 lg:bg-white ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-220px] '} z-50`} >
+      <div className={`fixed top-0 w-[220px] lg:w-[240px] lg:border-r-8   border-gray-50 h-screen bg-[#2A52BE] h-screen transition-all rounded-r-[40px]	z-40  ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-240px] '} z-50`} >
         {/* <h5 id="drawer-navigation-label" class="text-base font-semibold text-white uppercase dark:text-gray-400">Menu</h5> */}
 
         <div class="py-4 overflow-y-auto ">
@@ -67,22 +67,28 @@ function Home({ children }) {
           <span class="sr-only" >Close menu</span>
         </button> */}
       </div>
-      {nav && <div className='fixed top-0 left-0 w-screen h-screen bg-[#000000C2] z-40' onClick={() => setNav(false)}></div>
-      }      <main className={`relative min-w-screen pt-[85px] pb-[65px] lg:pb-0  lg:min-w-auto my-[0px]  lg:bg-blue-50 lg:min-h-screen md:pt-[85px] ${nav ? 'w-screen pl-[220px] lg:pl-[270px]  lg:pr-[50px] lg:pr-[70px]' : '  lg:px-[50px]'}`} onClick={() => setNav(false)} style={{transition: 'all 0.5'}}>
+      {nav && <div className='fixed top-0 left-0 w-screen h-screen bg-[#000000C2] z-40' onClick={() => setNav(false)}></div>}
+     
+      <main className={`relative min-w-screen pt-[85px] pb-[65px] lg:pb-0  lg:min-w-auto my-[0px]  lg:bg-blue-50 lg:min-h-screen md:pt-[85px] ${nav ? 'w-screen pl-[220px] lg:pl-[240px] ' : '  lg:px-[0px]'}`} onClick={() => setNav(false)} style={{ transition: 'all 0.5' }}>
         {/* <img src="/bg.png" className='fixed bottom-[60px] lg:bottom-0 right-[20px] w-[60vw] lg:w-[40vw]' alt="" /> */}
         <nav className="w-screen fixed top-0 border-b border-gray-200 shadow-sm flex items-center justify-between bg-[#2A52BE]  p-4 h-[70px] z-30" onClick={() => setNav(false)}>
           {pathname !== '/Cliente' && <div className='flex  hidden lg:block'>
+          <div className='flex '>
+
             <button type="button" className="inline-flex items-center p-2 text-[14px] text-white rounded-lg hover:bg-gray-100 focus:outline-none  hidden lg:block focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600" onClick={openNav}>
               <svg className="w-9 h-9 text-gray-50" aria-hidden="true" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"  ></path></svg>
             </button>
-            <h1 className='text-[18px] hidden lg:flex lg:justify-center lg:items-center text-blue-400 font-medium'> <img src="/logo.png" className='h-[50px] w-[50px]' alt="" /> <span className='font-medium'>PRECIO JUSTO SRL</span></h1>
-          </div>}
+            <h1 className='text-[18px] hidden lg:flex lg:justify-between ml-5 lg:w-[240px] lg:items-center text-white font-medium'> <img src="/logo-circle.png" className='h-[50px] w-[50px]' alt="" /> <span className='font-medium'>PRECIO JUSTO SRL</span></h1>
+          </div>
+          </div>
+
+          }
           {pathname === '/Cliente' ?
             <div className='flex '>
               <button type="button" className="inline-flex items-center p-2 text-[14px] text-white rounded-lg  " onClick={openNav}>
                 <svg className="w-9 h-9 text-gray-50" aria-hidden="true" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"  ></path></svg>
               </button>
-              <h1 className=' hidden text-[18px] hidden lg:flex lg:justify-center lg:items-center font-medium'> <img src="/logo.png" className='h-[50px] w-[50px]' alt="" /> <span className='font-medium'>PRECIO JUSTO SRL</span></h1>
+              <h1 className='text-[18px] hidden lg:flex lg:justify-between ml-5 lg:w-[240px] lg:items-center text-white font-medium'> <img src="/logo-circle.png" className='h-[50px] w-[50px]' alt="" /> <span className='font-medium'>PRECIO JUSTO SRL</span></h1>
             </div>
             :
             <button type="button" className="inline-flex items-center lg:hidden p-2 text-[14px] text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2  focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600" onClick={() => back(!nav)}>
@@ -101,8 +107,14 @@ function Home({ children }) {
 
           {user && user !== undefined && user.rol !== 'Distribuidor' && <Cart />}
         </nav>
-        {children}
-         {user && user !== undefined && <div className="fixed bottom-0  z-30 w-full h-[70px] bg-[#2A52BE] border-t-8 border-white rounded-t-[40px] lg:hidden">
+
+
+<div className="px-[50px]">
+
+          {children}
+
+</div>
+        {user && user !== undefined && <div className="fixed bottom-0  z-30 w-full h-[70px] bg-[#2A52BE] border-t-8 border-white rounded-t-[40px] lg:hidden">
           <BottomNavigation rol={user.rol} />
         </div>}
         {/* {user && user !== undefined && <div className="fixed bottom-0  z-30 w-full h-[65px] bg-gray-50 border-t-8 border-white rounded-t-[40px] lg:hidden">

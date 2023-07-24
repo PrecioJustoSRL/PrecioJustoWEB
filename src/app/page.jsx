@@ -52,9 +52,9 @@ export default function Home() {
   return (
     <div className="h-full bg-[#2A52BE] flex flex-col justify-center items-center p-5"
       style={{
-        backgroundImage: 'url(/background.png)',
+        backgroundImage: 'url(/bg.jpg)',
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: '50% 100%',
+        backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}>
                 {/* <button onClick={intro}>descargar</button> */}
