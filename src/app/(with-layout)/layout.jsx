@@ -57,15 +57,7 @@ function Home({ children }) {
           }
 
         </div>
-        {/* <button type="button" onClick={() => setNav(!nav)} data-drawer-hide="drawer-navigation" class="absolute top-[-0px] bottom-0 right-[0px] m-auto bg-transparent hover:bg-gray-200 hover:text-white rounded-lg px-[2px]" >
-          <svg width="12" height="122" viewBox="0 0 24 122" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {nav
-              ? <path d="M5 61L17.75 8.17245L17.75 113.828L5 61Z" fill="white" />
-              : <path d="M19 61L6.25 113.828L6.25 8.17245L19 61Z" fill="white" />
-            }
-          </svg>
-          <span class="sr-only" >Close menu</span>
-        </button> */}
+       
       </div>
       {nav && <div className='fixed top-0 left-0 w-screen h-screen bg-[#000000C2] z-40' onClick={() => setNav(false)}></div>}
      
@@ -74,9 +66,8 @@ function Home({ children }) {
         <nav className="w-screen fixed top-0 border-b border-gray-200 shadow-sm flex items-center justify-between bg-[#2A52BE]  p-4 h-[70px] z-30" onClick={() => setNav(false)}>
           {pathname !== '/Cliente' && <div className='flex  hidden lg:block'>
           <div className='flex '>
-
-            <button type="button" className="inline-flex items-center p-2 text-[14px] text-white rounded-lg hover:bg-gray-100 focus:outline-none  hidden lg:block focus:ring-gray-200  dark:hover:bg-gray-700 dark:focus:ring-gray-600" onClick={openNav}>
-              <svg className="w-9 h-9 text-gray-50" aria-hidden="true" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"  ></path></svg>
+            <button type="button" className="inline-flex items-center p-2 text-[14px] text-white rounded-lg hover:bg-blue-800 focus:outline-none  hidden lg:block focus:ring-gray-200" onClick={openNav}>
+              <svg className="w-9 h-9 text-white" aria-hidden="true" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"  ></path></svg>
             </button>
             <h1 className='text-[18px] hidden lg:flex lg:justify-between ml-5 lg:w-[240px] lg:items-center text-white font-medium'> <img src="/logo-circle.png" className='h-[50px] w-[50px]' alt="" /> <span className='font-medium'>PRECIO JUSTO SRL</span></h1>
           </div>
@@ -86,7 +77,7 @@ function Home({ children }) {
           {pathname === '/Cliente' ?
             <div className='flex '>
               <button type="button" className="inline-flex items-center p-2 text-[14px] text-white rounded-lg  " onClick={openNav}>
-                <svg className="w-9 h-9 text-gray-50" aria-hidden="true" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"  ></path></svg>
+                <svg className="w-9 h-9 text-gray-900" aria-hidden="true" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"  ></path></svg>
               </button>
               <h1 className='text-[18px] hidden lg:flex lg:justify-between ml-5 lg:w-[240px] lg:items-center text-white font-medium'> <img src="/logo-circle.png" className='h-[50px] w-[50px]' alt="" /> <span className='font-medium'>PRECIO JUSTO SRL</span></h1>
             </div>
@@ -133,6 +124,21 @@ function Home({ children }) {
 
 
 export default Home
+
+
+{/* <button type="button" onClick={() => setNav(!nav)} data-drawer-hide="drawer-navigation" class="absolute top-[-0px] bottom-0 right-[0px] m-auto bg-transparent hover:bg-gray-200 hover:text-white rounded-lg px-[2px]" >
+<svg width="12" height="122" viewBox="0 0 24 122" fill="none" xmlns="http://www.w3.org/2000/svg">
+  {nav
+    ? <path d="M5 61L17.75 8.17245L17.75 113.828L5 61Z" fill="white" />
+    : <path d="M19 61L6.25 113.828L6.25 8.17245L19 61Z" fill="white" />
+  }
+</svg>
+<span class="sr-only" >Close menu</span>
+</button> */}  
+
+
+
+
 
 
 {/* <ul class="space-y-2 text-[16px]  text-gray-600 font-medium">
