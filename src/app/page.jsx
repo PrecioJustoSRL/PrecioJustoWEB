@@ -139,7 +139,7 @@ export default function Home() {
 
 
 
-      <div className={`video-player fixed flex items-center h-screen my-auto ${introVideo == false ? 'h-0 overflow-hidden' : 'h-auto'}`} >
+      <div className={`video-player absolute w-screen flex items-center h-screen my-auto ${introVideo == false ? 'left-[-200vw]' : 'left-0'}`} >
 
         <video ref={videoRef} autoPlay muted onClick={handlerSound}>
           <source src="/intro.mp4" type="video/mp4" />
