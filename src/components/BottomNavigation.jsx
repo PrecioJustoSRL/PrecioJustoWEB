@@ -1,8 +1,12 @@
 'use client';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@/context/Context'
+import { usePathname } from 'next/navigation'
 
 function Button({ click, children }) {
-    return <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50  group" onClick={click}>
+    const pathname = usePathname()
+console.log(pathname.includes(children))
+    return <button type="button" className={`inline-flex flex-col items-center justify-center px-5 ${pathname.includes(children) && 'bg-gray-50'}   group`} onClick={click}>
         {children}
     </button>
 }
@@ -10,10 +14,12 @@ function Button({ click, children }) {
 
 
 export default function BottomNavigation({ rol }) {
+    const { user, userDB, setUserProfile, filter, setFilter, nav, setNav } = useUser()
 
     const router = useRouter()
 
     const redirectHandler = (ref) => {
+     
         router.push(ref)
     }
 

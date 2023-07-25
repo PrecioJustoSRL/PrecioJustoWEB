@@ -158,7 +158,7 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Disponibilidad</Label>
-                    <Select arr={['Disponible', 'Disponibilidad inmediata', 'No disponible']} name='disponibilidad' click={onClickHandlerAvailability} />
+                    <Select arr={['En un día', 'Inmediatamente', 'No disponible']} name='disponibilidad' click={onClickHandlerAvailability} />
                 </div>
                 <div>
                     <Label htmlFor="">Costo</Label>

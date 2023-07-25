@@ -100,7 +100,7 @@ function Home({ children }) {
         </nav>
 
 
-<div className="px-[50px]">
+<div className="lg:px-[50px]">
 
           {children}
 

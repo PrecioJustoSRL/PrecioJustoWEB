@@ -122,10 +122,7 @@ function Home() {
                     <Label htmlFor="">Nombre de Producto 3</Label>
                     <Input type="text" name="nombre de producto 3" onChange={onChangeHandler} />
                 </div>
-                <div>
-                    <Label htmlFor="">Nombre de la empresa y/o sucursal</Label>
-                    <Input type="text" name="empresa" onChange={onChangeHandler} />
-                </div>
+                
 
                 <div>
                     <Label htmlFor="">Descripción básica</Label>
@@ -139,14 +136,7 @@ function Home() {
                     <Label htmlFor="">Usu frecuente</Label>
                     <Input type="text" name="uso frecuente" onChange={onChangeHandler} />
                 </div>
-                <div>
-                    <Label htmlFor="password" className="block mb-2 text-sm text-left  font-medium ">Ciudad</Label>
-                    <Select arr={['La Paz', 'Cochabamba', 'Santa Cruz']} name='ciudad' click={onClickHandlerCity} />
-                </div>
-                <div>
-                    <Label htmlFor="password" className="block mb-2 text-sm text-left  font-medium ">Dirección</Label>
-                    <Input type="text" name="direccion" onChange={onChangeHandler} />
-                </div>
+               
                 <div>
                     <Label htmlFor="">Categoria</Label>
                     <Select arr={['Titanio', 'Acero Inox', 'Otros']} name='categoria' click={onClickHandlerCategory} />
@@ -163,14 +153,7 @@ function Home() {
                     <Label htmlFor="">Costo</Label>
                     <Input type="text" name="costo" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
                 </div>
-                <div>
-                    <Label htmlFor="">Telefono</Label>
-                    <Input type="text" name="telefono" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
-                </div>
-                <div>
-                    <Label htmlFor="">Whatsapp</Label>
-                    <Input type="text" name="whatsapp" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
-                </div>
+               
             </div>
             <div className='flex w-full justify-around'>
                 <Button theme='Success' >Ver Vista Cliente</Button>
