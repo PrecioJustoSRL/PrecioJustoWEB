@@ -21,6 +21,8 @@ export default function Home() {
   const videoRef = useRef();
 
   const [play, setPlay] = useState(true)
+  const [sound, setSound] = useState(false)
+
   const [introVideo, setIntroVideo] = useState(true)
   const isMuted = useRef(true)
   const signInHandler = (e) => {
@@ -61,6 +63,7 @@ export default function Home() {
       videoRef.current.play()
       setIntroVideo(!introVideo)
       setPlay(true)
+      setSound(true)
     }
     videoRef.current.muted = false
   };
@@ -68,6 +71,7 @@ export default function Home() {
   const handlerSound = () => {
     videoRef.current.play()
     setPlay(true)
+    setSound(true)
     videoRef.current.muted = false
   };
 
@@ -115,11 +119,11 @@ export default function Home() {
 
       <div className='z-50 absolute top-0 p-5 h-[50px] w-full'>
         {introVideo && <div className='flex'>
-          <span className='flex items-center justify-center z-50 bg-[#ffffff70] w-[50px] text-[white]  text-center text-[16px] py-3 rounded-full' onClick={handlerSound}>
+          <span className='flex  items-center justify-center z-50 bg-[#ffffff70] w-[50px] text-[white]  text-center text-[16px] py-3 rounded-full' onClick={handlerSound}>
             <svg width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15.2734 10C15.2734 8.61328 14.4258 7.42578 13.2227 6.92578L12.582 8.46484C13.1836 8.71484 13.6055 9.30859 13.6055 10.0039C13.6055 10.6953 13.1836 11.2891 12.582 11.543L13.2227 13.082C14.4258 12.5742 15.2734 11.3867 15.2734 10ZM14.5039 3.84766L13.8633 5.38672C15.6719 6.14062 16.9414 7.92187 16.9414 10C16.9414 12.082 15.6719 13.8594 13.8633 14.6133L14.5039 16.1523C16.9141 15.1484 18.6055 12.7734 18.6055 10C18.6055 7.22656 16.9141 4.85156 14.5039 3.84766ZM1.94141 5.83203V14.1641H5.27344L11.1055 20V0L5.27344 5.83203H1.94141Z" fill="white" />
             </svg>
-            <span className='w-[10px] h-[50px]'></span>
+           {sound == false && <span className='absolute bg-gray-400 transform rotate-45 w-[4px] h-[50px]'></span>}
           </span>
           {/* {play
             ? <span className='flex items-center justify-center z-50 bg-[#ffffff70] w-[50px] h-[50px] text-[white]  text-center text-[16px] py-3 rounded-full' onClick={handlePause}>
