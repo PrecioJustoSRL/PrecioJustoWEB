@@ -6,7 +6,7 @@ export default function Button({ theme, styled, click, children }) {
         case 'Transparent':
             return <button
                 type="submit"
-                className="text-white bg-transparent border border-gray-100 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-3 text-center z-50"
+                className="text-white bg-transparent border border-gray-100 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[14px] w-full px-2 py-3 text-center z-50"
                 // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
                 // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={click}
@@ -17,7 +17,7 @@ export default function Button({ theme, styled, click, children }) {
         case 'Primary':
             return <button
                 type="submit"
-                className="text-white bg-blue-600 border border-gray-100 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-3 text-center z-50"
+                className="text-white bg-blue-600 border border-gray-100 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[14px] w-full px-2 py-3 text-center z-50"
                 // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
                 // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={click}
@@ -28,7 +28,7 @@ export default function Button({ theme, styled, click, children }) {
         case 'Secondary':
             return <button
                 type="submit"
-                className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-3 text-center z-50"
+                className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[14px] w-full px-2 py-3 text-center z-50"
                 // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
                 // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={click}
@@ -39,7 +39,7 @@ export default function Button({ theme, styled, click, children }) {
         case 'Success':
             return <button
                 type="submit"
-                className="text-white bg-emerald-400 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-4 text-center z-50"
+                className="text-white bg-emerald-400 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[14px] w-full px-2 py-4 text-center z-50"
                 // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
                 // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={click}
@@ -49,20 +49,21 @@ export default function Button({ theme, styled, click, children }) {
         case 'SuccessBuy':
             return <button
                 type="submit"
-                className="text-white bg-emerald-400 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-4 text-center z-50"
+                className="text-gray-900 font-bold flex justify-center items-center bg-emerald-400 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-[18px] w-full px-2 py-2 text-center z-50"
                 // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
                 // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={click}
             >
-                <svg className='inline mr-3 h-[18px] w-[18px]' viewBox="0 0 41 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M512 64C264.6 64 64 264.6 64 512C64 759.4 264.6 960 512 960C759.4 960 960 759.4 960 512C960 264.6 759.4 64 512 64ZM512 884C306.6 884 140 717.4 140 512C140 306.6 306.6 140 512 140C717.4 140 884 306.6 884 512C884 717.4 717.4 884 512 884ZM559.7 488.8L534.3 482.9V348.6C572.3 353.8 595.8 377.6 599.8 406.8C600.3 410.8 603.7 413.7 607.7 413.7H652.6C657.3 413.7 661 409.6 660.6 404.9C654.5 342.6 603.2 302.6 534.7 295.7V263C534.7 258.6 531.1 255 526.7 255H498.6C494.2 255 490.6 258.6 490.6 263V296C419.8 302.9 364.4 342 364.4 415C364.4 482.6 414.2 515.2 466.5 527.7L491.2 534V676.7C447 670.8 422.2 647.2 417.1 615.4C416.5 611.6 413.1 608.8 409.2 608.8H363C358.3 608.8 354.6 612.8 355 617.5C359.5 672.5 401.2 723.1 490.2 729.6V761C490.2 765.4 493.8 769 498.2 769H526.6C531 769 534.6 765.4 534.6 760.9L534.4 729.2C612.7 722.3 668.7 680.4 668.7 605.2C668.6 535.8 624.5 504.8 559.7 488.8ZM491.1 472.6C485.5 471 480.8 469.5 476.1 467.6C442.3 455.4 426.6 435.7 426.6 410.3C426.6 374 454.1 353.3 491.1 348.6V472.6ZM534.3 677V543.3C537.4 544.2 540.2 544.9 543.1 545.5C590.4 559.9 606.3 579.9 606.3 610.6C606.3 649.7 576.9 673.2 534.3 677Z" fill="white" />
-                </svg>
+          {/* <svg className='inline mr-3 h-[30px] w-[30px]' viewBox="0 0 41 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M35.875 29.1125V26.5H11.7875L13.325 23.8875L36.9 21.75L41 7.5H9.48125L7.6875 0.375H0V2.75H5.6375L11.0188 22.7L7.6875 28.875V32.4375C7.6875 34.3375 9.48125 36 11.5312 36C13.5813 36 15.375 34.3375 15.375 32.4375C15.375 30.5375 13.5813 28.875 11.5312 28.875H30.75V32.4375C30.75 34.3375 32.5437 36 34.5938 36C36.6438 36 38.4375 34.3375 38.4375 32.4375C38.4375 30.775 37.4125 29.5875 35.875 29.1125Z" fill="white" />
+                </svg> */}
+                <span className='inline-block mr-3 h-[35px] w-[35px]  border-4 border-double rounded-full text-[20px] text-gray-900 font-bold border-gray-900'>$</span>
                 {children}
             </button>
         case 'Danger':
             return <button
                 type="submit"
-                className="text-white bg-red-500 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-4 text-center z-50"
+                className="text-white bg-red-500 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[14px] w-full px-2 py-4 text-center z-50"
                 // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
                 // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={click}
@@ -72,7 +73,7 @@ export default function Button({ theme, styled, click, children }) {
         case 'Disable':
             return <button
                 type="submit"
-                className="text-white bg-gray-400  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-4 text-center z-50"
+                className="text-white bg-gray-400  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[14px] w-full px-2 py-4 text-center z-50"
                 // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
                 // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={click}
@@ -107,7 +108,7 @@ export default function Button({ theme, styled, click, children }) {
         case 'MiniPrimaryInfo':
             return <button
                 type="submit"
-                className="relative text-white bg-[#0064FA] border border-gray-100 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-2  text-center z-30"
+                className="relative text-white bg-[#0064FA] border border-gray-100 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[14px] w-full px-2 py-2  text-center z-30"
                 // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
                 // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={click}
@@ -142,7 +143,7 @@ export default function Button({ theme, styled, click, children }) {
         case 'MiniSuccessRecetar':
             return <button
                 type="submit"
-                className="text-white bg-emerald-400 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-[14px] w-full px-2 py-2 text-center z-50"
+                className="text-white bg-emerald-400 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[14px] w-full px-2 py-2 text-center z-50"
                 // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
                 // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={click}

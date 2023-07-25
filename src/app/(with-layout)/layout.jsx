@@ -84,7 +84,7 @@ function Home({ children }) {
             :
             <button type="button" className="inline-flex items-center lg:hidden p-2 text-[14px] text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2  focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600" onClick={() => back(!nav)}>
               <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17 32L2 17L17 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M17 32L2 17L17 2" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>}
 
