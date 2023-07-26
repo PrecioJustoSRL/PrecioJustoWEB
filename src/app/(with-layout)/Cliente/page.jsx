@@ -75,7 +75,7 @@ function Home() {
             </div>}
 
 
-            <div className="w-screen lg:w-auto relative">
+            <div className="w-screen lg:w-auto relative z-10">
 
 
                 <div className={`relative px-5 p-0  bg-white rounded-[20px]  mx-auto  left-0 right-0 w-[90vw] max-w-[600px] min-w- lg:flex lg:flex-wrap lg:justify-around lg:z-0 border border-gray-200 transition-all ${filterNav ? ' h-[300px] lg:h-[250px]' : 'h-[45px] overflow-hidden'} ]`}>
@@ -99,36 +99,43 @@ function Home() {
                     </div>
                 </div>
 
-                <div className="relative bg-white lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-8 pb-16 lg:pt-0">
+                <div className="relative bg-transparent lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-8 pb-16 lg:pt-0">
                     {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
                         recetaDBP.map((i, index) =>
-                            user.rol === 'Medico' 
+                            user.rol === 'Medico'
                                 ? i.qr.includes(filterQR) && <CardM i={i} />
                                 : i.qr.includes(filterQR) && <Card i={i} recetado={true} />
                         )}
                     {filter.length == 0 && filterQR.length == 0 &&
-                        productDB !== null && productDB !== undefined && 
-                        productDB.map((i, index) =>{
-                         if (i.distribuidor !== 'Precio-Justo-SRL-Data') return user.rol === 'Medico' 
+                        productDB !== null && productDB !== undefined &&
+                        productDB.map((i, index) => {
+                            if (i.distribuidor !== 'Precio-Justo-SRL-Data') return user.rol === 'Medico'
                                 ? <CardM i={i} />
-                                : <Card i={i} />}
+                                : <Card i={i} />
+                        }
                         )}
                     {filter.length > 0 && productDB !== null && productDB !== undefined &&
-                        productDB.map((i, index) =>{
+                        productDB.map((i, index) => {
                             if (i.distribuidor !== 'Precio-Justo-SRL-Data') return user.rol === 'Medico' && i.distribuidor !== 'Precio-Justo-SRL-Data'
                                 ? (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
-                                i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
-                                i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) && <CardM i={i} />
+                                    i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
+                                    i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) && <CardM i={i} />
                                 : (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
-                                i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
-                                i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) && 
-                                <Card i={i} />}
+                                    i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
+                                    i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) &&
+                                <Card i={i} />
+                        }
                         )}
                 </div>
+
             </div>
-            {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[65px] lg:w-[200px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-50">
+
+            <img src="/bg.png" className='fixed bottom-[70px]' alt="" />
+
+
+            {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[70px] lg:w-[200px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
                 {user.rol === 'Medico'
-                    ? <Button theme="Success" click={HandlerRecetar}>Completar Receta</Button>
+                    ? <Button theme="SuccessReceta" click={HandlerRecetar}>Completar Receta</Button>
                     : <Button theme="SuccessBuy" click={HandlerCheckOut}>Ejecutar compra</Button>}
 
 
