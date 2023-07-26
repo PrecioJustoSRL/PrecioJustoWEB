@@ -43,7 +43,7 @@ export default function Home() {
         backgroundAttachment: 'fixed',
         backgroundSize: 'cover'
       }}>
-      <form className="space-y-6 lg:space-y-3 w-[100%] max-w-[350px]" onSubmit={signUpHandler} >
+      <form className="space-y-6 lg:space-y-3 w-[100%] bg-[#00000090] p-5 max-w-[350px]" onSubmit={signUpHandler} >
         <div className='w-full text-center flex justify-center'>
           <Image src="/logo-main.svg" width="150" height="150" alt="User" />
         </div>

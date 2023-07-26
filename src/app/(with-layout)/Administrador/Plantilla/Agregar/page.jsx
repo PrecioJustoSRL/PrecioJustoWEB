@@ -7,26 +7,25 @@ import Input from '@/components/Input'
 import Select from '@/components/Select'
 import Label from '@/components/Label'
 import Success from '@/components/Success'
-
-
+import Checkbox from '@/components/Checkbox'
 import Button from '@/components/Button'
 import { useMask } from '@react-input/mask';
 import { useRouter } from 'next/navigation';
 import { WithAuth } from '@/HOCs/WithAuth'
-import {generateUUID} from '@/utils/UIDgenerator'
+import { generateUUID } from '@/utils/UIDgenerator'
 
 
 function Home() {
     const router = useRouter()
 
     const { user, userDB, setUserData, setUserSuccess, success } = useUser()
-    const [state, setState] = useState({sistema: '1.5', ciudad: 'La paz', categoria: 'Titanio', disponibilidad: 'Disponible'})
+    const [state, setState] = useState({ sistema: '1.5', disponibilidad: 'Disponible' })
 
     const [postImage, setPostImage] = useState(null)
     const [urlPostImage, setUrlPostImage] = useState(null)
 
     const [check, setCheck] = useState(false)
-
+    const [categorias, setCategorias] = useState({})
     const inputRefCard = useMask({ mask: '____ ____ ____ ____', replacement: { _: /\d/ } });
     const inputRefDate = useMask({ mask: '__/__', replacement: { _: /\d/ } });
     const inputRefCVC = useMask({ mask: '___', replacement: { _: /\d/ } });
@@ -49,6 +48,9 @@ function Home() {
         setState({ ...state, ['sistema']: value })
     }
 
+    function onChangeHandlerCheck(e) {
+        setCategorias({ ...categorias, [e.target.name]: e.target.checked })
+    }
 
     function manageInputIMG(e) {
         // const fileName = `${e.target.name}`
@@ -70,12 +72,17 @@ function Home() {
         e.preventDefault()
         const uid = generateUUID()
 
-        writeUserData('Producto', { ...state, uuid: uid, distribuidor: 'Precio-Justo-SRL-Data'}, 'Precio-Justo-SRL-Data', userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
-        uploadStorage('Producto', postImage, uid, updateUserData)
+        Object.entries(categorias).map((i) => {
+            if (i[1] == true) {
+                writeUserData('Producto', { ...state, categoria: i[0], uuid: uid, distribuidor: 'Precio-Justo-SRL-Data' }, 'Precio-Justo-SRL-Data', userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
+                uploadStorage('Producto', postImage, uid, updateUserData)
+            }
+        })
         // router.push('/Clinica/Perfil')
     }
-   
+
     console.log(state)
+    console.log(categorias)
 
     return (
         <form className='p-10 min-w-screen lg:min-w-auto lg:my-[50px] lg:my-[70px] bg-white' onSubmit={save}>
@@ -87,7 +94,7 @@ function Home() {
                 </label>
                 <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" />
             </div> */}
-{success == 'Se ha guardado correctamente' && <Success>Guardado correctamente</Success>}
+            {success == 'Se ha guardado correctamente' && <Success>Guardado correctamente</Success>}
             <div className="w-full flex justify-center">
                 <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 md:w-[250px] md:h-[200px]" style={{ backgroundImage: `url(${urlPostImage})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
                     <div className="text-center">
@@ -105,9 +112,6 @@ function Home() {
                     </div>
                 </div>
             </div>
-
-
-
             <br />
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
@@ -122,8 +126,6 @@ function Home() {
                     <Label htmlFor="">Nombre de Producto 3</Label>
                     <Input type="text" name="nombre de producto 3" onChange={onChangeHandler} />
                 </div>
-                
-
                 <div>
                     <Label htmlFor="">Descripción básica</Label>
                     <Input type="text" name="descripcion basica" onChange={onChangeHandler} />
@@ -132,18 +134,24 @@ function Home() {
                     <Label htmlFor="">Descripción técnica</Label>
                     <Input type="text" name="descripcion tecnica" onChange={onChangeHandler} />
                 </div>
-                  <div>
+                <div>
                     <Label htmlFor="">Usu frecuente</Label>
                     <Input type="text" name="uso frecuente" onChange={onChangeHandler} />
                 </div>
-               
                 <div>
-                    <Label htmlFor="">Categoria</Label>
-                    <Select arr={['Titanio', 'Acero Inox', 'Otros']} name='categoria' click={onClickHandlerCategory} />
+                    <Label htmlFor="">Dias de atención</Label>
+                    <div className="flex justify-between">
+                        <Checkbox name="Titanio" change={onChangeHandlerCheck} />
+                        <Label htmlFor="Titanio">Titanio</Label>
+                        <Checkbox name="Acero Inox" change={onChangeHandlerCheck} />
+                        <Label htmlFor="Acero Inox">Acero Inox</Label>
+                        <Checkbox name="Otros" change={onChangeHandlerCheck} />
+                        <Label htmlFor="Otros">Otros</Label>
+                    </div>
                 </div>
                 <div>
                     <Label htmlFor="">Sistema</Label>
-                    <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5','Clavos', 'Protesis', 'Costillas', 'Columna y neurocirugia', 'Fijadores externos', 'Otros' ]} name='sistema' click={onClickHandlerSystem} />
+                    <Select arr={['1.5', ' 2.0', ' 2.4', '2.5', '2.7', '3.5', '4.5', 'Clavos', 'Protesis', 'Costillas', 'Columna y neurocirugia', 'Fijadores externos', 'Otros']} name='sistema' click={onClickHandlerSystem} />
                 </div>
                 <div>
                     <Label htmlFor="">Disponibilidad</Label>
@@ -153,7 +161,7 @@ function Home() {
                     <Label htmlFor="">Costo</Label>
                     <Input type="text" name="costo" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
                 </div>
-               
+
             </div>
             <div className='flex w-full justify-around'>
                 <Button theme='Success' >Ver Vista Cliente</Button>

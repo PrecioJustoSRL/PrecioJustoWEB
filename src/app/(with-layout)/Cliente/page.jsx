@@ -81,7 +81,7 @@ function Home() {
             <div className="w-screen lg:w-auto relative z-10">
 
 
-                <div className={`relative  p-0  bg-white rounded-[20px]  mx-auto  left-0 right-0 w-[90vw] max-w-[600px]  lg:flex lg:flex-wrap lg:justify-around lg:z-0 border border-gray-200 transition-all ${filterNav ? ' h-[300px] lg:h-[250px]' : 'h-[45px] overflow-hidden'} ]`}>
+                <div className={`relative  px-5  bg-white rounded-[20px]  mx-auto  left-0 right-0 w-[90vw] max-w-[600px]  lg:flex lg:flex-wrap lg:justify-around lg:z-0 border border-gray-200 transition-all ${filterNav ? ' h-[280px] lg:h-[250px]' : 'h-[45px] overflow-hidden'} ]`}>
                     <h3 onClick={() => setFilterNav(!filterNav)} className='w-[100%] bg-white relative left-0 right-0 mx-auto relative  max-w-[600px] lg:min-w-[600px] flex justify-center items-center text-[16px] h-[45px] rounded-full py-[5px] px-[0px] cursor-pointer'>Filtrar Productos <span className={filterNav ? ' ml-5 rotate-[270deg]' : ' ml-5 rotate-90'}>{'>'}</span></h3>
 
                     <div className='lg:w-[250px]'>
@@ -94,7 +94,7 @@ function Home() {
                     </div>
                     <div className='lg:w-[250px]'>
                         <Subtitle styled='' htmlFor="">Categorias</Subtitle>
-                        <div className="grid grid-cols-2  gap-x-4  justify-between">
+                        <div className="grid grid-cols-3  gap-x-4  justify-between">
                             <Tag theme={categoria == 'Titanio' ? 'Primary' : 'Secondary'} click={() => setCategoria(categoria == 'Titanio' ? 'Todas' : 'Titanio')}>Titanio</Tag>
                             <Tag theme={categoria == 'Acero' ? 'Primary' : 'Secondary'} click={() => setCategoria(categoria == 'Acero' ? 'Todas' : 'Acero')}>Acero</Tag>
                             <Tag theme={categoria == 'Otros' ? 'Primary' : 'Secondary'} click={() => setCategoria(categoria == 'Otros' ? 'Todas' : 'Otros')}>Otros</Tag>
@@ -134,7 +134,7 @@ function Home() {
 
             </div>
 
-            <img src="/bg.png" className='fixed bottom-[70px]' alt="" />
+            <img src="/bg.png" className='fixed lg:w-[600px] bottom-[70px] lg:bottom-0 lg:right-0 ' alt="" />
 
 
             {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[70px] lg:w-[200px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
