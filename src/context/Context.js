@@ -26,6 +26,7 @@ export function UserProvider({ children }) {
 	const [userUuid, setUserUuid] = useState(undefined)
     const [modal, setModal] = useState('')
     const [msg, setMsg] = useState('')
+    const [tienda, setTienda] = useState('Comprar')
 
 
 
@@ -76,6 +77,8 @@ export function UserProvider({ children }) {
 			userUuid, 
 			modal, 
 			msg, 
+			tienda, 
+			setTienda,
 			setMsg,
 			setModal,
 			setUserUuid,
@@ -97,7 +100,7 @@ export function UserProvider({ children }) {
 			setUserSuccess,
 			setUserItem
 		})
-	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, QRurl, recetaDB, filter, filterQR, recetaDBP, nav, temporal, userUuid, modal, msg,])
+	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, QRurl, recetaDB, filter, filterQR, recetaDBP, nav, temporal, userUuid, modal, msg, tienda])
 
 	return (
 		<UserContext.Provider value={value} >

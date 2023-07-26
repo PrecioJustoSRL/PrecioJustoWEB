@@ -20,7 +20,7 @@ import { QRreaderUtils } from '@/utils/QRreader'
 import { useState } from 'react'
 
 function Home() {
-    const { user, cart, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setFilterQR, recetaDBP, setRecetaDBP } = useUser()
+    const { user, cart, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda } = useUser()
     const [disponibilidad, setDisponibilidad] = useState('Todas')
     const [categoria, setCategoria] = useState('Todas')
     const router = useRouter()
@@ -49,7 +49,10 @@ function Home() {
         <main className="">
 
 
-
+            {(user.rol == 'Medico' || user.rol == 'Administrador') && <div className='flex px-5 mb-5'>
+                <Button theme="MiniSuccessRecetar" click={()=>setTienda('Recetar')}>Recetar</Button>
+                <Button theme="MiniPrimaryComprar" click={()=>setTienda('Comprar')}>Comprar</Button>
+            </div>}
 
             {user.rol !== 'Distribuidor' && <div>
                 <label htmlFor="qr" className='block w-[90vw] relative mb-3 left-0 right-0 m-auto  max-w-[600px] lg:min-w-[600px] border-[5px] border-blue-500 flex justify-between items-center text-white text-[16px] h-[50px] bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 rounded-full py-[5px] px-[20px] z-20' >
@@ -102,24 +105,25 @@ function Home() {
                 <div className="relative bg-transparent lg:bg-transparent mt-6  rounded-t-[50px]  w-full flex flex-col items-center justify-center px-5 pt-8 pb-16 lg:pt-0">
                     {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
                         recetaDBP.map((i, index) =>
-                            user.rol === 'Medico'
+                            tienda === 'Recetar'
                                 ? i.qr.includes(filterQR) && <CardM i={i} />
                                 : i.qr.includes(filterQR) && <Card i={i} recetado={true} />
                         )}
                     {filter.length == 0 && filterQR.length == 0 &&
                         productDB !== null && productDB !== undefined &&
                         productDB.map((i, index) => {
-                            if (i.distribuidor !== 'Precio-Justo-SRL-Data') return user.rol === 'Medico'
+                            if (i.distribuidor !== 'Precio-Justo-SRL-Data') return tienda === 'Recetar'
                                 ? <CardM i={i} />
                                 : <Card i={i} />
                         }
                         )}
                     {filter.length > 0 && productDB !== null && productDB !== undefined &&
                         productDB.map((i, index) => {
-                            if (i.distribuidor !== 'Precio-Justo-SRL-Data') return user.rol === 'Medico' && i.distribuidor !== 'Precio-Justo-SRL-Data'
+                            if (i.distribuidor !== 'Precio-Justo-SRL-Data') return tienda === 'Recetar' && i.distribuidor !== 'Precio-Justo-SRL-Data'
                                 ? (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
-                                    i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) && <CardM i={i} />
+                                    i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) &&
+                                <CardM i={i} />
                                 : (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) &&
@@ -134,7 +138,7 @@ function Home() {
 
 
             {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[70px] lg:w-[200px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
-                {user.rol === 'Medico'
+                { tienda === 'Recetar'
                     ? <Button theme="SuccessReceta" click={HandlerRecetar}>Completar Receta</Button>
                     : <Button theme="SuccessBuy" click={HandlerCheckOut}>Ejecutar compra</Button>}
 
