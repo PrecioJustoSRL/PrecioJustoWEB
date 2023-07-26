@@ -1,7 +1,7 @@
 'use client'
 
 
-import React, { useState, useMemo, useContext } from 'react'
+import React, { useState, useMemo, useRef, useContext } from 'react'
 
 const UserContext = React.createContext()
 
@@ -28,6 +28,10 @@ export function UserProvider({ children }) {
     const [msg, setMsg] = useState('')
     const [tienda, setTienda] = useState('Comprar')
 
+	const videoRef = useRef();
+	const [play, setPlay] = useState(true)
+	const [sound, setSound] = useState(false)
+	const [introVideo, setIntroVideo] = useState(true)
 
 
 
@@ -78,6 +82,13 @@ export function UserProvider({ children }) {
 			modal, 
 			msg, 
 			tienda, 
+			introVideo,
+			play,
+			sound,
+			videoRef, 
+			setSound, 
+			setPlay, 
+			setIntroVideo,
 			setTienda,
 			setMsg,
 			setModal,
@@ -100,7 +111,7 @@ export function UserProvider({ children }) {
 			setUserSuccess,
 			setUserItem
 		})
-	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, QRurl, recetaDB, filter, filterQR, recetaDBP, nav, temporal, userUuid, modal, msg, tienda])
+	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, QRurl, recetaDB, filter, filterQR, recetaDBP, nav, temporal, userUuid, modal, msg, tienda, introVideo, play, sound,])
 
 	return (
 		<UserContext.Provider value={value} >

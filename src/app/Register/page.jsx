@@ -9,13 +9,14 @@ import Button from '../../components/Button'
 import Input from '@/components/Input'
 import Select from '@/components/Select'
 import { WithAuth } from '@/HOCs/WithAuth'
+import Video from '@/components/Video'
 
 
 import { useRouter } from 'next/navigation';
 
 function Home() {
 
-    const { user, userDB, setUserProfile, setUserSuccess, success, setUserData } = useUser()
+    const { user, introVideo, userDB, setUserProfile, setUserSuccess, success, setUserData } = useUser()
     const router = useRouter()
 
     const [rol, setRol] = useState('Cliente')
@@ -42,14 +43,18 @@ function Home() {
     }, [user]);
 
     return (
-        <div className="min-h-full bg-[#2A52BE] flex flex-col justify-center items-center p-5"
-            style={{
-                backgroundImage: 'url(/background.png)',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: '50% 100%',
-                backgroundAttachment: 'fixed'
-            }}>
-            <form className=" space-y-3 w-[100%] max-w-[350px]" onSubmit={registerHandler} >
+        <div className="min-h-full "
+        style={{
+            backgroundImage: 'url(/bg-2.jpg)',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: '50% 50%',
+            backgroundAttachment: 'fixed',
+            backgroundSize: 'cover'
+          }}>
+                   <Video />
+      <div className='w-screen h-screen bg-[#00000090] flex flex-col justify-center items-center'>
+      
+            <form className={`space-y-6 lg:space-y-3 w-[100%] max-w-[350px] p-5 ${introVideo == true ? 'h-0 overflow-hidden' : 'h-auto'}`}  onSubmit={registerHandler} >
                 <div className='w-full text-center flex justify-center'>
                     <Image src="/logo-main.svg" width="150" height="150" alt="User" />
                 </div>
@@ -72,7 +77,7 @@ function Home() {
                         <div className="flex items-center h-5">
                             <input id="remember" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
                         </div>
-                        <label htmlFor="remember" className="ml-2 text-[14px] font-medium text-gray-100 ">Políticas de Servicio</label>
+                        <Link href="/Politicas" className="ml-2 text-[14px] font-medium text-gray-100 ">Políticas de Servicio</Link>
                     </div>
                 </div>
                 <Button type="submit" theme="Transparent">Continuar</Button>
@@ -80,6 +85,7 @@ function Home() {
                 <div className="text-[14px] text-center font-medium text-white dark:text-gray-300">Ya tienes una cuenta? <Link href="/" className="text-gray-100 hover:underline">Inicia Sessión</Link >
                 </div>
             </form>
+            </div>
         </div>
     )
 }
