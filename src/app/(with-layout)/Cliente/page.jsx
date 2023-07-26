@@ -49,7 +49,7 @@ function Home() {
         <main className="">
 
 
-            {(user.rol == 'Medico' || user.rol == 'Administrador') && <div className='flex px-5 mb-5'>
+            {(user.rol == 'Medico' || user.rol == 'Administrador') && <div className='relative flex justify-between left-0 right-0 m-auto  w-[90vw] max-w-[600px] mb-5'>
                 <Button theme="MiniSuccessRecetar" click={()=>setTienda('Recetar')}>Recetar</Button>
                 <Button theme="MiniPrimaryComprar" click={()=>setTienda('Comprar')}>Comprar</Button>
             </div>}
@@ -81,7 +81,7 @@ function Home() {
             <div className="w-screen lg:w-auto relative z-10">
 
 
-                <div className={`relative px-5 p-0  bg-white rounded-[20px]  mx-auto  left-0 right-0 w-[90vw] max-w-[600px] min-w- lg:flex lg:flex-wrap lg:justify-around lg:z-0 border border-gray-200 transition-all ${filterNav ? ' h-[300px] lg:h-[250px]' : 'h-[45px] overflow-hidden'} ]`}>
+                <div className={`relative  p-0  bg-white rounded-[20px]  mx-auto  left-0 right-0 w-[90vw] max-w-[600px]  lg:flex lg:flex-wrap lg:justify-around lg:z-0 border border-gray-200 transition-all ${filterNav ? ' h-[300px] lg:h-[250px]' : 'h-[45px] overflow-hidden'} ]`}>
                     <h3 onClick={() => setFilterNav(!filterNav)} className='w-[100%] bg-white relative left-0 right-0 mx-auto relative  max-w-[600px] lg:min-w-[600px] flex justify-center items-center text-[16px] h-[45px] rounded-full py-[5px] px-[0px] cursor-pointer'>Filtrar Productos <span className={filterNav ? ' ml-5 rotate-[270deg]' : ' ml-5 rotate-90'}>{'>'}</span></h3>
 
                     <div className='lg:w-[250px]'>
