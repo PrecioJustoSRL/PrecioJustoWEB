@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, descripcion, i, recetado }) {
 
-    const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, cart, setUserCart } = useUser()
+    const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, cart, setUserCart, modal, setModal } = useUser()
     const router = useRouter()
 
     function seeMore(e) {
@@ -17,7 +17,10 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     const addCart = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        setUserCart({ ...cart, [i.uuid]: { ...i, cantidad: 1 } })
+        userDB == null || userDB == undefined 
+        ? setModal('Verifica') 
+        : setUserCart({ ...cart, [i.uuid]: { ...i, cantidad: 1 } })
+        
     }
 
     const addPlussCart = (e) => {

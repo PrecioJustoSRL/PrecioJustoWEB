@@ -2,16 +2,19 @@ import { supabase } from './config'
 
 //--------------------------Authentications----------------------------------
 
-const onAuth = (setUserProfile) => {
-    supabase.auth.onAuthStateChange((event, session) => {
+const onAuth =  (setUserProfile) => {
+    supabase.auth.onAuthStateChange(async (event, session) => {
         console.log(session)
-        session 
-        ? readUserData('Users', session.user.id, {}, setUserProfile, null, { uuid: session.user.id, rol: undefined })
-        : setUserProfile(null)
-        // (rute, uuid, context, updateContext, key, data)
-        // const uuid = session.user.id
-        // readUserData('Users', uuid, user, setUserProfile)
-        // setUserProfile()
+        if(session ) {
+            const {data} = await supabase
+            .from('Users')
+            .select()
+            .eq('uuid', session.user.id)
+        // console.log(data[0])
+        data !== null && data.length 
+        ? setUserProfile(data[0])
+        : setUserProfile(session.user)
+        } else {setUserProfile(null)}
     })
 }
 
@@ -24,12 +27,11 @@ const signUpWithEmailAndPassword = async (email, password, setUserProfile) => {
 }
 
 const signInWithEmailAndPassword = async (email, password, setUserSuccess) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const result = await supabase.auth.signInWithPassword({
         email,
         password,
     })
-    console.log(data)
-    data.user == null && setUserSuccess('AccountNonExist')
+    result.data.user == null && setUserSuccess('AccountNonExist')
 }
 
 const signOut = async (email, password) => {
@@ -45,26 +47,21 @@ const writeUserData = async (rute, object, uuid, context, updateContext, setUser
         .from(rute)
         .insert(object)
     setUserSuccess ? setUserSuccess(msg) : ''
-    result.status == 201 ? readUserData(rute, uuid, context, updateContext, key) : (setUserSuccess ? setUserSuccess(msg) : '')
+    result.status == 201 ? readUserData(rute, uuid, updateContext) : (setUserSuccess ? setUserSuccess(msg) : '')
     console.log(result)
 
 }
 // ('Users', session.user.id, {}, setUserProfile, null, { uuid: session.user.id, rol: undefined })
 
-const readUserData = async (rute, uuid, context, updateContext, key, data, eq, arr) => {
-
+const readUserData = async (rute, uuid, updateContext, eq, ) => {
     const result = await supabase
         .from(rute)
         .select()
         .eq(eq ? eq : 'uuid', uuid)
     console.log(result)
-    console.log(result.data)
-    if (result.data !== null && result.data.length !== 0) {
-        console.log('act')
-        key ? updateContext({ ...context, [key]: result.data[0] }) : updateContext(arr == true ? result.data : result.data[0])
-    } else {
-        updateContext(data)
-    }
+    result.data !== null && result.data.length !== 0 
+    ? updateContext(result.data[0])
+    : updateContext(null)  
 }
 
 
@@ -88,9 +85,6 @@ const updateUserData = async (rute, object, uuid, eq) => {
         //     console.log('act')
         //     key ? updateContext({ ...context, [key]: result.data[0] }) : updateContext(arr == true ? result.data : result.data[0])
         // } 
-
-
-
     console.log(result)
 }
 

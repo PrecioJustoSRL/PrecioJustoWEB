@@ -23,29 +23,29 @@ function Home() {
 
     console.log(userDB)
     useEffect(() => {
-        if (user && user.rol !== undefined) readUserData(user.rol, user.uuid, userDB, setUserData, 'Perfil', null )
+        if (user && user.rol !== undefined) readUserData(user.rol, user.uuid, setUserData,)
     }, []);
     return (
-        userDB !== undefined && userDB !== null && userDB.Perfil !== undefined  ? <div className="min-h-[92vh] bg-white p-5">
+        userDB !== undefined && userDB !== null ? <div className="min-h-[92vh] bg-white p-5">
             <br />
             <div className="flex justify-center">
-                <img className='h-[100px] w-[100px] rounded-full' src={userDB.Perfil.url} alt="" />
+                <img className='h-[100px] w-[100px] rounded-full' src={userDB.url} alt="" />
             </div>
             <br />
-            <h3 className='w-full font-base  font-normal text-center '>{userDB.Perfil['nombre']}</h3>
+            <h3 className='w-full font-base  font-normal text-center '>{userDB['nombre']}</h3>
             <h3 className='text-sm text-center text-emerald-400'>Abierto</h3>
             <br />
 
             <Subtitle>Contactos</Subtitle>
             <div className=''>
-                <Paragraph> <img className="inline pr-5" src="/telefono.svg" alt="" />{userDB.Perfil['telefono']}</Paragraph>
-                <Paragraph> <img className="inline pr-5" src="/ubicacion.svg" alt="" />{userDB.Perfil['direccion']}</Paragraph>
+                <Paragraph> <img className="inline pr-5" src="/telefono.svg" alt="" />{userDB['telefono']}</Paragraph>
+                <Paragraph> <img className="inline pr-5" src="/ubicacion.svg" alt="" />{userDB['direccion']}</Paragraph>
             </div>
             <br />
-            <Button theme="Success" click={()=>redirectHandler('Distribuidor/Producto')}>Ver Productos</Button>
+            <Button theme="Success" click={() => redirectHandler('Distribuidor/Producto')}>Edita tu Perfil</Button>
             <img className="fixed bottom-5 right-5" src="/whatsapp.svg" alt="" />
         </div> :
-            <div className="flex flex-col items-center justify-center h-[80vh]">
+            <div className="flex flex-col items-center justify-center p-5 h-[80vh]">
                 <img src="/business.svg" alt="" />
                 <br />
                 <Button theme="Success" click={() => redirectHandler(`/${user.rol}`)}>Completa tu Perfil</Button>

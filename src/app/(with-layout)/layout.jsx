@@ -11,10 +11,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import BottomNavigation from '@/components/BottomNavigation'
 import Navbar from '@/components/Navbar'
+import Modal from '@/components/Modal'
 
 function Home({ children }) {
   const router = useRouter()
-  const { user, userDB, setUserProfile, filter, setFilter, nav, setNav } = useUser()
+  const { user, userDB, setUserProfile, setUserCart, setUserProduct, setRecetaDB, setUserDistributorPDB, setUserData, filter, setFilter, nav, setNav, modal, setModal, cart } = useUser()
   const pathname = usePathname()
 
 
@@ -38,27 +39,36 @@ function Home({ children }) {
     e.stopPropagation()
     setNav(!nav)
   }
+
+  const signOutConfirm = () => {
+    setUserProfile(null)
+    setUserCart({})
+    setUserProduct(undefined),
+    setRecetaDB(undefined),
+    setUserDistributorPDB(undefined)
+    setUserData(null)
+    router.push('/')
+    setModal('')
+    signOut()
+}
   console.log(user)
   console.log(userDB)
 
   return (
     // <div className="pt-[65px] pb-[65px] min-h-screen bg-gray-white"  style={{ backgroundImage: `url(bg.png)`, backgroundAttachment: 'fixed', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom' }}>
     <div className="min-h-screen bg-gray-white">
-
-
-
-      <div className={`fixed top-0 w-[220px] lg:w-[240px] lg:border-r-8   border-gray-50 h-screen bg-[#2A52BE] h-screen transition-all rounded-r-[40px]	z-40  ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-240px] '} z-50`} >
-        {/* <h5 id="drawer-navigation-label" class="text-base font-semibold text-white uppercase dark:text-gray-400">Menu</h5> */}
-
+      {modal == 'SignOut' && <Modal funcion={signOutConfirm}>
+        Estas seguro de salir...? <br /> {Object.keys(cart).length > 0 && 'Tus compras no han sido efectuadas' }
+      </Modal>}
+      {modal == 'Verifica' && <Modal funcion={()=>{router.push(`/${user.rol}`); setModal('')}}>
+        Completa tu perfil para hacer tu primera compra
+      </Modal>}
+      <div className={`fixed top-0 w-[220px] lg:w-[240px] lg:border-r-8   h-screen bg-[#2A52BE] h-screen transition-all	z-40  ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-240px] '} z-50`} >
         <div class="py-4 overflow-y-auto ">
-
-          {
-            user && user !== undefined && <Navbar rol={user.rol} />
-          }
-
+          {user && user !== undefined && <Navbar rol={user.rol} />}
         </div>
-
       </div>
+
       {nav && <div className='fixed top-0 left-0 w-screen h-screen bg-[#000000C2] z-40' onClick={() => setNav(false)}></div>}
 
       <main className={`relative min-w-screen pt-[85px] pb-[65px] lg:pb-0  lg:min-w-auto my-[0px]  lg:bg-blue-50 lg:min-h-screen md:pt-[85px] ${nav ? 'w-screen pl-[220px] lg:pl-[240px] ' : '  lg:px-[0px]'}`} onClick={() => setNav(false)} style={{ transition: 'all 0.5' }}>
@@ -105,7 +115,7 @@ function Home({ children }) {
           {children}
 
         </div>
-        {user && user !== undefined && <div className="fixed bottom-0  z-30 w-full h-[70px] bg-[#2A52BE] border-t-8 border-white rounded-t-[40px] lg:hidden">
+        {user && user !== undefined && <div className="fixed bottom-0  z-30 w-full h-[65px] bg-[#2A52BE] rounded-t-[40px] lg:hidden">
           <BottomNavigation rol={user.rol} />
         </div>}
         {/* {user && user !== undefined && <div className="fixed bottom-0  z-30 w-full h-[65px] bg-gray-50 border-t-8 border-white rounded-t-[40px] lg:hidden">

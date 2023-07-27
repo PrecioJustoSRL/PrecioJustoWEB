@@ -93,8 +93,6 @@ function Home() {
                     <Label htmlFor="">Dirección</Label>
                     <Input type="text" name="direccion" onChange={onChangeHandler} />
                 </div>
-                
-                
                 <div>
                     <Label htmlFor="">Teléfono</Label>
                     <Input type="text" name="telefono" reference={inputRefPhone} onChange={onChangeHandler} />

@@ -20,7 +20,7 @@ import { QRreaderUtils } from '@/utils/QRreader'
 import { useState } from 'react'
 
 function Home() {
-    const { user, cart, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda } = useUser()
+    const { user, userDB, cart, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda } = useUser()
     const [disponibilidad, setDisponibilidad] = useState('Todas')
     const [categoria, setCategoria] = useState('Todas')
     const router = useRouter()
@@ -37,7 +37,11 @@ function Home() {
     }
 
 
-    console.log(productDB)
+
+
+
+
+    console.log(userDB)
 
     useEffect(() => {
         readUserAllData('Producto', productDB, setUserProduct)
@@ -106,15 +110,15 @@ function Home() {
                     {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
                         recetaDBP.map((i, index) =>
                             tienda === 'Recetar'
-                                ? i.qr.includes(filterQR) && <CardM i={i} />
-                                : i.qr.includes(filterQR) && <Card i={i} recetado={true} />
+                                ? i.qr.includes(filterQR) && <CardM i={i} key={index}/>
+                                : i.qr.includes(filterQR) && <Card i={i} recetado={true} key={index}/>
                         )}
                     {filter.length == 0 && filterQR.length == 0 &&
                         productDB !== null && productDB !== undefined &&
                         productDB.map((i, index) => {
                             if (i.distribuidor !== 'Precio-Justo-SRL-Data') return tienda === 'Recetar'
-                                ? <CardM i={i} />
-                                : <Card i={i} />
+                                ? <CardM i={i} key={index}/>
+                                : <Card i={i} key={index}/>
                         }
                         )}
                     {filter.length > 0 && productDB !== null && productDB !== undefined &&
@@ -123,11 +127,11 @@ function Home() {
                                 ? (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) &&
-                                <CardM i={i} />
+                                <CardM i={i} key={index}/>
                                 : (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) &&
-                                <Card i={i} />
+                                <Card i={i} key={index}/>
                         }
                         )}
                 </div>

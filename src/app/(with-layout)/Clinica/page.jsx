@@ -64,14 +64,19 @@ function Home() {
         router.push('/Clinica/Perfil')
     }
     return (
-        <form >
+        <form className='p-5'>
             <h3 className='text-center pb-3'>Agregar Perfil</h3>
+<div className='flex w-full'>
+<span className={`w-1/2`}>Cuenta dependiente</span><span className={`w-1/2`}>Cuenta independiente</span>
+</div>
+
+
             <div className="w-full flex justify-center">
                 <label htmlFor="file" className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" >
                     {urlPostImage ? <img className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" style={{ objectPosition: 'center' }} src={urlPostImage} alt="" />
                         : 'Subir Imagen'}
                 </label>
-                <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" />
+                <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" required/>
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
@@ -113,7 +118,6 @@ function Home() {
                 </div>
             </div>
             <div className='flex w-full justify-around'>
-                <Button theme='Success' >Ver Vista Cliente</Button>
                 <Button theme='Primary' click={save}>Guardar</Button>
             </div>
         </form>

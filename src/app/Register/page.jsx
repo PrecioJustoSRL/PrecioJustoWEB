@@ -32,13 +32,16 @@ function Home() {
     const registerHandler = (e) => {
         e.preventDefault()
         let nombre = e.target[0].value
-        writeUserData('Users', { uuid: user.uuid, nombre, rol, ciudad }, user.uuid, user, setUserProfile, setUserSuccess)
+        writeUserData('Users', { uuid: user.id, nombre, rol, ciudad }, user.id, user, setUserProfile, setUserSuccess)
     }
 
 
     useEffect(() => {
         console.log(user)
-        if (user) readUserData('Users', user.uuid, userDB, setUserData)
+        if (user && user.rol) router.push('/Cliente')
+        if (user == null || user  == undefined || user.role !== 'authenticated') router.push('/SignUp')
+
+        if (user && user.rol) readUserData('Users', user.uuid, setUserData)
         if (user && user.rol) router.push('/Cliente')
     }, [user]);
 
@@ -52,9 +55,9 @@ function Home() {
             backgroundSize: 'cover'
           }}>
                    <Video />
-      <div className='w-screen h-screen bg-[#00000090] flex flex-col justify-center items-center'>
+      <div className='w-screen h-screen  flex flex-col justify-center items-center'>
       
-            <form className={`space-y-6 lg:space-y-3 w-[100%] max-w-[350px] p-5 ${introVideo == true ? 'h-0 overflow-hidden' : 'h-auto'}`}  onSubmit={registerHandler} >
+            <form className={`space-y-6 lg:space-y-3 bg-[#00000090] rounded-[30px] w-[100%] max-w-[350px] p-5 ${introVideo == true ? 'h-0 overflow-hidden' : 'h-auto px-5 py-10 lg:p-10'}`}  onSubmit={registerHandler} >
                 <div className='w-full text-center flex justify-center'>
                     <Image src="/logo-main.svg" width="150" height="150" alt="User" />
                 </div>
@@ -91,4 +94,4 @@ function Home() {
 }
 
 
-export default WithAuth(Home)
+export default Home
