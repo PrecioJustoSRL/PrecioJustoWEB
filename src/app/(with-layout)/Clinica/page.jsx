@@ -26,6 +26,9 @@ function Home() {
     const [postImage, setPostImage] = useState(null)
     const [urlPostImage, setUrlPostImage] = useState(null)
 
+    const [account, setAccount] = useState('dependiente')
+
+
 
 
 
@@ -66,17 +69,26 @@ function Home() {
     return (
         <form className='p-5'>
             <h3 className='text-center pb-3'>Agregar Perfil</h3>
-<div className='flex w-full'>
-<span className={`w-1/2`}>Cuenta dependiente</span><span className={`w-1/2`}>Cuenta independiente</span>
-</div>
+            <br />
+            <div className='flex w-full justify-around mb-12'>
+                <div className='w-1/2 flex justify-center'>
+                    <span className={`text-center p-5 ${account == 'dependiente' ? 'border-b-[2px] border-b-gray-500' : ''}`} onClick={() => setAccount('dependiente')}>Cuenta dependiente</span>
 
+                </div>
+                <div className='w-1/2 flex justify-center border-r-[2px] border-gray-500'>
+                    <span className={`p-5 text-center ${account == 'independiente' ? 'border-b-[2px] border-b-gray-500' : ''}`} onClick={() => setAccount('independiente')}>Cuenta independiente</span>
+
+                </div>
+            </div>
+
+            <br />
 
             <div className="w-full flex justify-center">
                 <label htmlFor="file" className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" >
                     {urlPostImage ? <img className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" style={{ objectPosition: 'center' }} src={urlPostImage} alt="" />
                         : 'Subir Imagen'}
                 </label>
-                <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" required/>
+                <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" required />
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
@@ -110,7 +122,7 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Teléfono</Label>
-                    <Input type="text" name="telefono" reference={inputRefPhone}  onChange={onChangeHandler} />
+                    <Input type="text" name="telefono" reference={inputRefPhone} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Whatsapp</Label>
@@ -124,4 +136,4 @@ function Home() {
     )
 }
 
-export default  WithAuth(Home)
+export default WithAuth(Home)

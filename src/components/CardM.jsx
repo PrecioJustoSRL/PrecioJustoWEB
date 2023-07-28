@@ -53,14 +53,14 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                 </div>
                 <p class="text-gray-700 text-base py-[10px]">{i.empresa}</p>
                 <div class="">
-                    <p class="text-gray-700 text-[12px]">{i['descripcion basica']}</p>
+                    <p class="text-gray-700 text-[14px]">{i['descripcion basica']}</p>
                 </div>
             </div>
             <div class="relative h-[150px] w-[150px] rounded-t text-center" style={{ backgroundImage: `url(${i.url})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
             </div>
             <div className='w-full flex justify-between  items-center p-4'>
                 <div class="flex items-baseline text-gray-900">
-                    <span class="text-[12px] text-gray-600 font-semibold">BOB</span>
+                    <span class="text-[14px] text-gray-600 font-semibold">BOB</span>
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight">{i.costo}</span>
                 </div>
                 {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='text-[16px] text-right px-5'> {cart[i.uuid].cantidad} </span>}

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react'
 
 
-export default function Button({ click, type, name, onChange, reference, placeholder, styled }) {
+export default function Button({ click, type, name, onChange, reference, placeholder, require }) {
 
     const router = useRouter()
     const [showPassword, setShowPassword] = useState(true)
@@ -28,7 +28,7 @@ export default function Button({ click, type, name, onChange, reference, placeho
                 // style={{...styled}}
                 ref={reference}
                 placeholder={placeholder}
-                required
+                required={require ? true : false}
             />
             {name == 'password'  && <span className="flex items-center absolute cursor-pointer top-0 right-0 bottom-0 right-[5px] my-auto" onClick={()=> setShowPassword(!showPassword)}>
                 <svg width="22" height="22" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -63,9 +63,8 @@ function Home() {
         // delete obj[i.uuid]
         // setState(obj)
     }  
-console.log(state)
     useEffect(() => {
-        readUserData('Pedido', user.uuid, pedidos, setUserPedidos, null, null, 'distribuidor', true)
+        readUserData('Pedido', user.uuid, setUserPedidos)
     }, [])
 
     return (
@@ -94,6 +93,9 @@ console.log(state)
                         </th>
                         <th scope="col" class="px-3 py-3">
                             Fecha
+                        </th>
+                        <th scope="col" class="px-3 py-3">
+                            Verificar
                         </th>
                         <th scope="col" class="px-3 py-3">
                             Eliminar
@@ -126,6 +128,10 @@ console.log(state)
                                 {getDayMonthYear(i['created_at'])}
                             </td>
 
+                            <td class="px-3 py-4">
+                                ? <Button theme={"Primary"} click={() => save(i)}>Verificar</Button>
+                            
+                            </td>
                             <td class="px-3 py-4">
                                 {state[i.uuid] 
                                 ? <Button theme={"Primary"} click={() => save(i)}>Guardar</Button>

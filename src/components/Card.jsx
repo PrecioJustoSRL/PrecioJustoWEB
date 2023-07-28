@@ -56,7 +56,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                 </div>
                 <p class="text-gray-700 text-base py-[10px]">{i.empresa}</p>
                 <div class="">
-                    <p class="text-gray-700 text-[12px]">{i['descripcion basica']}</p>
+                    <p class="text-gray-700 text-[14px]">{i['descripcion basica']}</p>
                 </div>
             </div>
             <div class="relative h-[150px] w-[150px] rounded-t text-center" style={{ backgroundImage: `url(${i.url})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
@@ -67,7 +67,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight">{i.costo}</span>
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight"> BS</span>
 
-                    {/* <span class="text-[12px] text-gray-600 font-semibold">Bs</span> */}
+                    {/* <span class="text-[14px] text-gray-600 font-semibold">Bs</span> */}
 
                 </div>
                 {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='text-[16px] text-right px-5'> {cart[i.uuid].cantidad} </span>}
@@ -114,7 +114,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
 //                     <p class="text-gray-700 text-base">{descripcion}</p>
 //                 </div>
 // <div class="flex items-baseline text-gray-900 dark:text-white">
-//     <span class="text-[12px] text-red-600 font-semibold">BOB</span>
+//     <span class="text-[14px] text-red-600 font-semibold">BOB</span>
 //     <span class="text-[18px]  text-red-600 font-extrabold tracking-tight">{costo}</span>
 // </div>
 //             </div>
@@ -131,7 +131,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
 {/* <div className="flex items-center justify-between p-5">
                 <span className="text-[20px] font-bold text-gray-900 dark:text-white">{nombre}</span>
                 <div class="flex items-baseline text-red-500">
-                    <span class="text-[12px] font-semibold">BOB</span>
+                    <span class="text-[14px] font-semibold">BOB</span>
                     <span class="text-[20px] font-extrabold tracking-tight">{costo}</span>
                 </div>
             </div>

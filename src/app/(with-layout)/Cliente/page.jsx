@@ -141,7 +141,7 @@ function Home() {
             <img src="/bg.png" className='fixed lg:w-[600px] bottom-[70px] lg:bottom-0 lg:right-0 ' alt="" />
 
 
-            {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[70px] lg:w-[200px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
+            {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
                 { tienda === 'Recetar'
                     ? <Button theme="SuccessReceta" click={HandlerRecetar}>Completar Receta</Button>
                     : <Button theme="SuccessBuy" click={HandlerCheckOut}>Ejecutar compra</Button>}
