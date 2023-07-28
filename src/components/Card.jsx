@@ -17,7 +17,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     const addCart = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        userDB == null || userDB == undefined 
+       user && user.rol !== 'Cliente' && (userDB == null || userDB == undefined) 
         ? setModal('Verifica') 
         : setUserCart({ ...cart, [i.uuid]: { ...i, cantidad: 1 } })
         

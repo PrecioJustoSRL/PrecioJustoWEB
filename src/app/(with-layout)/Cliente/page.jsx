@@ -10,6 +10,7 @@ import CardM from '@/components/CardM'
 import QRreader from '@/components/QRreader'
 import Tag from '../../../components/Tag'
 import Cart from '../../../components/Cart'
+import Modal from '@/components/Modal'
 
 import { useRouter } from 'next/navigation';
 
@@ -20,7 +21,7 @@ import { QRreaderUtils } from '@/utils/QRreader'
 import { useState } from 'react'
 
 function Home() {
-    const { user, userDB, cart, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda } = useUser()
+    const { user, userDB, cart, modal, setModal, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda } = useUser()
     const [disponibilidad, setDisponibilidad] = useState('Todas')
     const [categoria, setCategoria] = useState('Todas')
     const router = useRouter()
@@ -36,12 +37,17 @@ function Home() {
         QRreaderUtils(e, setFilterQR)
     }
 
+    function storeHandler(db) {
+      tienda !== db &&  setModal(db)
+    }
+    function storeConfirm() {
+        setTienda(modal)
+        setModal('')
+    }
 
 
 
-
-
-    console.log(userDB)
+    console.log(modal)
 
     useEffect(() => {
         readUserAllData('Producto', productDB, setUserProduct)
@@ -51,11 +57,11 @@ function Home() {
     return (
 
         <main className="">
-
+            {(modal == 'Recetar' || modal == 'Comprar') && <Modal funcion={storeConfirm}>Estas seguro de cambiar a {modal}. <br /> {Object.keys(cart).length > 0 && 'Tus datos se borraran' }</Modal>}
 
             {(user.rol == 'Medico' || user.rol == 'Administrador') && <div className='relative flex justify-between left-0 right-0 m-auto  w-[90vw] max-w-[600px] mb-5'>
-                <Button theme="MiniSuccessRecetar" click={()=>setTienda('Recetar')}>Recetar</Button>
-                <Button theme="MiniPrimaryComprar" click={()=>setTienda('Comprar')}>Comprar</Button>
+                <Button theme="MiniSuccessRecetar" click={() => storeHandler('Recetar')}>Recetar</Button>
+                <Button theme="MiniPrimaryComprar" click={() => storeHandler('Comprar')}>Comprar</Button>
             </div>}
 
             {user.rol !== 'Distribuidor' && <div>
@@ -110,15 +116,15 @@ function Home() {
                     {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
                         recetaDBP.map((i, index) =>
                             tienda === 'Recetar'
-                                ? i.qr.includes(filterQR) && <CardM i={i} key={index}/>
-                                : i.qr.includes(filterQR) && <Card i={i} recetado={true} key={index}/>
+                                ? i.qr.includes(filterQR) && <CardM i={i} key={index} />
+                                : i.qr.includes(filterQR) && <Card i={i} recetado={true} key={index} />
                         )}
                     {filter.length == 0 && filterQR.length == 0 &&
                         productDB !== null && productDB !== undefined &&
                         productDB.map((i, index) => {
                             if (i.distribuidor !== 'Precio-Justo-SRL-Data') return tienda === 'Recetar'
-                                ? <CardM i={i} key={index}/>
-                                : <Card i={i} key={index}/>
+                                ? <CardM i={i} key={index} />
+                                : <Card i={i} key={index} />
                         }
                         )}
                     {filter.length > 0 && productDB !== null && productDB !== undefined &&
@@ -127,11 +133,11 @@ function Home() {
                                 ? (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) &&
-                                <CardM i={i} key={index}/>
+                                <CardM i={i} key={index} />
                                 : (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase()) ||
                                     i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) &&
-                                <Card i={i} key={index}/>
+                                <Card i={i} key={index} />
                         }
                         )}
                 </div>
@@ -142,7 +148,7 @@ function Home() {
 
 
             {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
-                { tienda === 'Recetar'
+                {tienda === 'Recetar'
                     ? <Button theme="SuccessReceta" click={HandlerRecetar}>Completar Receta</Button>
                     : <Button theme="SuccessBuy" click={HandlerCheckOut}>Ejecutar compra</Button>}
 
