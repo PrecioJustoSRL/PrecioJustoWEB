@@ -36,7 +36,7 @@ function Comprar({ theme, styled, click, children }) {
     router.push('/Cliente/Comprar/Detalle')
   }
   console.log(check)
-  return (<div className='w-full p-5'>
+  return (<div className='w-full relative p-5'>
     <div className='fixed top-0 right-[15px] w-1/2 max-w-[250px] py-4 z-[50] '>
       <Button theme='Primary'>Imprimir Proforma</Button>
     </div>
@@ -82,38 +82,17 @@ function Comprar({ theme, styled, click, children }) {
     </form>
     <h3 className='text-center text-[16px] pb-3'>MIS COMPRAS</h3>
 
-
-
-
-
-    <div className='relative items-center justify-between w-full max-w-[500px] bg-transparent md:flex md:w-auto  transition-all	z-0' >
-      <ul className="flex flex-col bg-gray-100 p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
-        <li>{Object.values(cart).length > 0 ? Object.values(cart).map((i, index) => <MiniCard i={i} />) : <span className='block text-[16px] text-center'>No tienes productos <br /> selecciona alguno <br /> </span>}</li>
-        {/* <li className='flex justify-between text-gray-700 text-[16px] '>
-          <span className='font-bold '>TOTAL: </span>
-          <span className='font-bold '>
-            {Object.values(cart).reduce((acc, i, index) => {
-              const sum = i['costo'] * i['cantidad']
-              return sum + acc
-            }, 0)}  Bs
-          </span>
-        </li> */}
-      </ul>
+    <div className='relative overflow-x-auto items-center justify-between w-full max-w-[500px] bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >
+        {Object.values(cart).length > 0 ? Object.values(cart).map((i, index) => <MiniCard i={i} />) : <span className='block text-[16px] text-center'>No tienes productos <br /> selecciona alguno <br /> </span>}
     </div>
     <br />
 
-
-
-
-
-    {user.rol == 'Clinica' && userDB && userDB.access == 'verificador'
-      ? Object.values(cart).length > 0 && <div className='max-w-[500px] left-0 right-0 mx-auto'>
+    {user.rol == 'Clinica' && userDB && userDB.access == 'verificador'  
+      ? Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
         <Button theme="SuccessReceta" click={handlerPay}> Mandar a Revisión la solicitud de compra</Button>
       </div>
-      : Object.values(cart).length > 0 && <div className='flex flex-col lg:flex-row '>
-        <Button theme="Success" click={handlerPay}> Pagar por QR</Button>
-
-        <Button theme="Success" click={handlerPay}> Pagar con tarjeta</Button>
+      : Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0  bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
+        <Button theme="SuccessBuy" click={handlerPay}> Pagar por QR</Button>
       </div>
     }
   </div>)
@@ -144,7 +123,15 @@ export default WithAuth(Comprar)
 // }
 
 // export default Home
-
+ {/* <li className='flex justify-between text-gray-700 text-[16px] '>
+          <span className='font-bold '>TOTAL: </span>
+          <span className='font-bold '>
+            {Object.values(cart).reduce((acc, i, index) => {
+              const sum = i['costo'] * i['cantidad']
+              return sum + acc
+            }, 0)}  Bs
+          </span>
+        </li> */}
 
 
 

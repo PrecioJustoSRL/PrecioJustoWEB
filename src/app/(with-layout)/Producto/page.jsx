@@ -17,9 +17,9 @@ import { useMask } from '@react-input/mask';
 import { WithAuth } from '@/HOCs/WithAuth'
 
 
- function Home() {
+function Home() {
 
-    const { cart, productDB, setUserProduct, setUserCart, setUserItem, item } = useUser()
+    const { cart, productDB, setUserProduct, setUserCart, setUserItem, item, tienda, setTienda } = useUser()
 
     const inputRefCard = useMask({ mask: '____ ____ ____ ____', replacement: { _: /\d/ } });
     const inputRefDate = useMask({ mask: '__/__', replacement: { _: /\d/ } });
@@ -76,7 +76,7 @@ import { WithAuth } from '@/HOCs/WithAuth'
                 </div>
                 <div class=" font-bold text-[16px] mb-2 text-gray-950">
                     {item['nombre de producto 3']}
-                </div>                
+                </div>
                 <Subtitle>Descripción basica</Subtitle>
                 <p className={style.paragraph}>{item['descripcion basica']}</p>
                 <br />
@@ -99,10 +99,13 @@ import { WithAuth } from '@/HOCs/WithAuth'
                     }
                 </div>
                 <br />
-                {Object.entries(cart).length !== 0 && <div className="fixed w-screen lg:w-full lg:relative px-5 right-0 bottom-[65px] lg:right-auto lg:bottom-auto">
-                    <Button theme="Success" click={HandlerCheckOut}>Ejecutar compra</Button>
-                </div>}
+              
             </div>
+            {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
+                    {tienda === 'Recetar'
+                        ? <Button theme="SuccessReceta" click={HandlerRecetar}>Completar Receta</Button>
+                        : <Button theme="SuccessBuy" click={HandlerCheckOut}>Ejecutar compra</Button>}
+                </div>}
         </main> : <div ></div>
     )
 }

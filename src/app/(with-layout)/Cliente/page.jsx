@@ -151,8 +151,6 @@ function Home() {
                 {tienda === 'Recetar'
                     ? <Button theme="SuccessReceta" click={HandlerRecetar}>Completar Receta</Button>
                     : <Button theme="SuccessBuy" click={HandlerCheckOut}>Ejecutar compra</Button>}
-
-
             </div>}
         </main>
     )
