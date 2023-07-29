@@ -99,7 +99,7 @@ function Home() {
 
     useEffect(() => {
 
-        readUserData('Producto', 'Precio-Justo-SRL-Data', distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        readUserData('Producto', 'Precio-Justo-SRL-Data', setUserDistributorPDB)
     }, [])
 
     return (

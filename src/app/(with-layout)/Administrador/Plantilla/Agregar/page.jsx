@@ -1,7 +1,7 @@
 'use client'
 import { writeUserData, readUserData, updateUserData } from '@/supabase/utils'
 import { uploadStorage } from '@/supabase/storage'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useUser } from '@/context/Context.js'
 import Input from '@/components/Input'
 import Select from '@/components/Select'
@@ -31,6 +31,10 @@ function Home() {
     const inputRefCVC = useMask({ mask: '___', replacement: { _: /\d/ } });
     const inputRefPhone = useMask({ mask: '+ 591 _ ___ ___', replacement: { _: /\d/ } });
     const inputRefWhatsApp = useMask({ mask: '+ 591 __ ___ ___', replacement: { _: /\d/ } });
+
+    const inputRef = useRef(null)
+
+
 
     const onClickHandlerCity = (name, value) => {
         setState({ ...state, ['ciudad']: value })
@@ -68,16 +72,24 @@ function Home() {
     function checkHandler() {
         setCheck(!check)
     }
+
+
+    function handlerReset () {
+    inputRef.current.value = ''
+    }
     function save(e) {
         e.preventDefault()
         const uid = generateUUID()
 
-        Object.entries(categorias).map((i) => {
+        Object.entries(categorias).map(async (i) => {
             if (i[1] == true) {
-                writeUserData('Producto', { ...state, categoria: i[0], uuid: uid, distribuidor: 'Precio-Justo-SRL-Data' }, 'Precio-Justo-SRL-Data', userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
-                uploadStorage('Producto', postImage, uid, updateUserData)
+              await  writeUserData('Producto', { ...state, categoria: i[0], uuid: uid, distribuidor: 'Precio-Justo-SRL-Data' }, 'Precio-Justo-SRL-Data', userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
+              await  uploadStorage('Producto', postImage, uid, updateUserData)
+            // return setState({ sistema: '1.5', disponibilidad: 'Disponible' })
+            return handlerReset()
             }
         })
+
         // router.push('/Clinica/Perfil')
     }
 
@@ -116,27 +128,27 @@ function Home() {
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <Label htmlFor="">Nombre de Producto 1</Label>
-                    <Input type="text" name="nombre de producto 1" onChange={onChangeHandler} />
+                    <Input type="text" name="nombre de producto 1" reference={inputRef}  onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Nombre de Producto 2</Label>
-                    <Input type="text" name="nombre de producto 2" onChange={onChangeHandler} />
+                    <Input type="text" name="nombre de producto 2" reference={inputRef} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Nombre de Producto 3</Label>
-                    <Input type="text" name="nombre de producto 3" onChange={onChangeHandler} />
+                    <Input type="text" name="nombre de producto 3" reference={inputRef} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Descripción básica</Label>
-                    <Input type="text" name="descripcion basica" onChange={onChangeHandler} />
+                    <Input type="text" name="descripcion basica" reference={inputRef} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Descripción técnica</Label>
-                    <Input type="text" name="descripcion tecnica" onChange={onChangeHandler} />
+                    <Input type="text" name="descripcion tecnica" reference={inputRef} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Usu frecuente</Label>
-                    <Input type="text" name="uso frecuente" onChange={onChangeHandler} />
+                    <Input type="text" name="uso frecuente" reference={inputRef} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Dias de atención</Label>
@@ -159,12 +171,12 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Costo</Label>
-                    <Input type="text" name="costo" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
+                    <Input type="text" name="costo" styled={{ textAlign: 'center' }} reference={inputRef} onChange={onChangeHandler} />
                 </div>
 
             </div>
             <div className='flex w-full justify-around'>
-                <Button theme='Success' >Ver Vista Cliente</Button>
+                {/* <Button theme='Success' >Ver Vista Cliente</Button> */}
                 <Button theme='Primary' >Guardar</Button>
             </div>
 
