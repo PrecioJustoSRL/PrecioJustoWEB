@@ -42,10 +42,11 @@ export default function Home() {
   return (
     <div className="h-full bg-[#2A52BE]"
       style={{
-        backgroundImage: 'url(/bg.jpg)',
+        backgroundImage: 'url(/bg-login.jpg)',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover'
       }}>
 
       <Video />

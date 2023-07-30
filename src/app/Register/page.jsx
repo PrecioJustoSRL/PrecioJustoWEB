@@ -48,7 +48,7 @@ function Home() {
     return (
         <div className="min-h-full "
         style={{
-            backgroundImage: 'url(/bg-2.jpg)',
+            backgroundImage: 'url(/bg-signup.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: '50% 50%',
             backgroundAttachment: 'fixed',

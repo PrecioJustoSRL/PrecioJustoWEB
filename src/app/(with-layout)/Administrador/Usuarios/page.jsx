@@ -103,6 +103,13 @@ function Home() {
     function redirect() {
         router.push('/Distribuidor/Agregar')
     }
+
+
+    function sortArray (x,y) {
+        if(x['nombre'].toLowerCase() < y['nombre'].toLowerCase()  ) {return -1}
+        if(x['nombre'].toLowerCase() > y['nombre'].toLowerCase()) {return 1}
+        return 0  
+    }
     console.log(filter)
     useEffect(() => {
         readUserAllData('Users', null, setTemporal)
@@ -174,7 +181,7 @@ function Home() {
                     </tr>
                 </thead>
                 <tbody>
-                    {temporal && temporal !== undefined && temporal.map((i, index) => {
+                    {temporal && temporal !== undefined && temporal.sort(sortArray).map((i, index) => {
 
                         return i.rol && i.rol.includes(rol) && i.ciudad.includes(ciudad) && i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">

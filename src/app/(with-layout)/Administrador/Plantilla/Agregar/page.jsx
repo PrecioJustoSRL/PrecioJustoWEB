@@ -6,6 +6,8 @@ import { useUser } from '@/context/Context.js'
 import Input from '@/components/Input'
 import Select from '@/components/Select'
 import Label from '@/components/Label'
+import LoaderBlack from '@/components/LoaderBlack'
+
 import Success from '@/components/Success'
 import Checkbox from '@/components/Checkbox'
 import Button from '@/components/Button'
@@ -99,10 +101,10 @@ function Home() {
 
         Object.entries(categorias).map(async (i) => {
             if (i[1] == true) {
+                handlerReset()
               await  writeUserData('Producto', { ...state, categoria: i[0], uuid: uid, distribuidor: 'Precio-Justo-SRL-Data' }, 'Precio-Justo-SRL-Data', userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
               await  uploadStorage('Producto', postImage, uid, updateUserData)
             // return setState({ sistema: '1.5', disponibilidad: 'Disponible' })
-            return handlerReset()
             }
         })
 
@@ -167,7 +169,7 @@ function Home() {
                     <Input type="text" name="uso frecuente" reference={inputRef6} onChange={onChangeHandler} />
                 </div>
                 <div>
-                    <Label htmlFor="">Dias de atención</Label>
+                    <Label htmlFor="">Categorias</Label>
                     <div className="flex justify-between">
                         <Checkbox name="Titanio" change={onChangeHandlerCheck} />
                         <Label htmlFor="Titanio">Titanio</Label>
@@ -189,13 +191,12 @@ function Home() {
                     <Label htmlFor="">Costo</Label>
                     <Input type="text" name="costo" styled={{ textAlign: 'center' }} reference={inputRef7} onChange={onChangeHandler} />
                 </div>
-
             </div>
             <div className='flex w-full justify-around'>
                 {/* <Button theme='Success' >Ver Vista Cliente</Button> */}
                 <Button theme='Primary' >Guardar</Button>
             </div>
-            {success == 'Se ha guardado correctamente' && <Success>Se ha guardado correctamente</Success>}
+            {success == 'Se ha guardado correctamente' && <LoaderBlack />}
         </form>
     )
 }
