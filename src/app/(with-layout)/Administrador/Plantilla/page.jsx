@@ -62,13 +62,13 @@ function Home() {
         const obj = { ...state }
         delete obj[i.uuid]
         setState(obj)
-        readUserData('Producto', 'Precio-Justo-SRL-Data', distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        readUserData('Producto', 'Precio-Justo-SRL-Data', setUserDistributorPDB, 'distribuidor')
 
     }
 
       async function deletConfirm() {
         await deleteUserData('Producto', item.uuid)
-        await readUserData('Producto', 'Precio-Justo-SRL-Data', distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        await readUserData('Producto', 'Precio-Justo-SRL-Data', setUserDistributorPDB, 'distribuidor')
         setModal(false)
 
         // await deleteUserData('Producto', userUuid)
@@ -96,10 +96,10 @@ function Home() {
     function redirect() {
         router.push('Administrador/Plantilla/Agregar')
     }
-
+console.log(distributorPDB)
     useEffect(() => {
 
-        readUserData('Producto', 'Precio-Justo-SRL-Data', setUserDistributorPDB)
+        readUserData('Producto', 'Precio-Justo-SRL-Data', setUserDistributorPDB, 'distribuidor')
     }, [])
 
     return (

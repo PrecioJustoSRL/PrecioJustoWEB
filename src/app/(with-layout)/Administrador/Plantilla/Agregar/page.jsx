@@ -32,7 +32,14 @@ function Home() {
     const inputRefPhone = useMask({ mask: '+ 591 _ ___ ___', replacement: { _: /\d/ } });
     const inputRefWhatsApp = useMask({ mask: '+ 591 __ ___ ___', replacement: { _: /\d/ } });
 
-    const inputRef = useRef(null)
+    const inputRef1 = useRef(null)
+    const inputRef2 = useRef(null)
+    const inputRef3 = useRef(null)
+    const inputRef4 = useRef(null)
+    const inputRef5 = useRef(null)
+    const inputRef6 = useRef(null)
+    const inputRef7 = useRef(null)
+
 
 
 
@@ -75,7 +82,16 @@ function Home() {
 
 
     function handlerReset () {
-    inputRef.current.value = ''
+
+    inputRef1.current.value = ''
+    inputRef2.current.value = ''
+    inputRef3.current.value = ''
+    inputRef4.current.value = ''
+    inputRef5.current.value = ''
+    inputRef6.current.value = ''
+    inputRef7.current.value = ''
+
+   
     }
     function save(e) {
         e.preventDefault()
@@ -97,7 +113,7 @@ function Home() {
     console.log(categorias)
 
     return (
-        <form className='p-10 min-w-screen lg:min-w-auto lg:my-[50px] lg:my-[70px] bg-white' onSubmit={save}>
+        <form className='p-10 min-w-screen lg:min-w-auto lg:mb-[70px] bg-white' onSubmit={save}>
             <h3 className='text-center text-[16px] pb-3'>Agregar Procucto</h3>
             {/* <div className="w-full flex justify-center">
                 <label htmlFor="file" className="block flex justify-center items-center w-[250px] h-[300px] bg-white border border-gray-300 text-gray-900 text-[14px] focus:ring-blue-500 focus:border-blue-500 rounded-[10px]" >
@@ -128,27 +144,27 @@ function Home() {
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <Label htmlFor="">Nombre de Producto 1</Label>
-                    <Input type="text" name="nombre de producto 1" reference={inputRef}  onChange={onChangeHandler} />
+                    <Input type="text" name="nombre de producto 1" reference={inputRef1}  onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Nombre de Producto 2</Label>
-                    <Input type="text" name="nombre de producto 2" reference={inputRef} onChange={onChangeHandler} />
+                    <Input type="text" name="nombre de producto 2" reference={inputRef2} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Nombre de Producto 3</Label>
-                    <Input type="text" name="nombre de producto 3" reference={inputRef} onChange={onChangeHandler} />
+                    <Input type="text" name="nombre de producto 3" reference={inputRef3} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Descripción básica</Label>
-                    <Input type="text" name="descripcion basica" reference={inputRef} onChange={onChangeHandler} />
+                    <Input type="text" name="descripcion basica" reference={inputRef4}   onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Descripción técnica</Label>
-                    <Input type="text" name="descripcion tecnica" reference={inputRef} onChange={onChangeHandler} />
+                    <Input type="text" name="descripcion tecnica" reference={inputRef5} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Usu frecuente</Label>
-                    <Input type="text" name="uso frecuente" reference={inputRef} onChange={onChangeHandler} />
+                    <Input type="text" name="uso frecuente" reference={inputRef6} onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Dias de atención</Label>
@@ -171,7 +187,7 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Costo</Label>
-                    <Input type="text" name="costo" styled={{ textAlign: 'center' }} reference={inputRef} onChange={onChangeHandler} />
+                    <Input type="text" name="costo" styled={{ textAlign: 'center' }} reference={inputRef7} onChange={onChangeHandler} />
                 </div>
 
             </div>
@@ -179,9 +195,7 @@ function Home() {
                 {/* <Button theme='Success' >Ver Vista Cliente</Button> */}
                 <Button theme='Primary' >Guardar</Button>
             </div>
-
             {success == 'Se ha guardado correctamente' && <Success>Se ha guardado correctamente</Success>}
-
         </form>
     )
 }
