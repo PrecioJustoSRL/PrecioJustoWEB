@@ -179,7 +179,7 @@ function Home() {
                         <Checkbox name="Acero Inox" change={onChangeHandlerCheck} />
                         <Label htmlFor="Acero Inox">Acero Inox</Label>
                         <Checkbox name="Otros" change={onChangeHandlerCheck} />
-                        <Label htmlFor="Otros" check={categorias.Otros}>Otros</Label>
+                        <Label htmlFor="Otros" check={categorias && categorias.Otros}>Otros</Label>
                     </div>
                 </div>
                 <div>
