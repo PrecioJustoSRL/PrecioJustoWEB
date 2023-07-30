@@ -67,39 +67,38 @@ function Home() {
         readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
 
     }
+    
     function delet(i, data) {
         setUserItem(i)
         setModal(data)
     }
+    async function accessConfirm() {
+        console.log(item) 
+        await updateUserData('Clinica', {access: !item.access}, item.uuid, null)
+        await readUserAllData('Clinica', null, setTemporal)
+        setModal('')
+    }
     async function blockConfirm() {
         console.log(item) 
-        await updateUserData('Medico', {bloqueado: !item.bloqueado}, item.uuid, null)
-        await readUserAllData('Medico', null, setTemporal)
+        await updateUserData('Clinica', {bloqueado: !item.bloqueado}, item.uuid, null)
+        await readUserAllData('Clinica', null, setTemporal)
         setModal('')
-
-        // console.log({ bloqueado: !item.bloqueado })
-        // await updateUserData('Producto', { bloqueado: !item.bloqueado }, item.uuid, eq)
-        // readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
-        // updateUserData = async (rute, object, uuid, eq) 
-        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
-        // const obj = { ...state }
-        // delete obj[userUuid]
-        // setState(obj) updateUserData = async (rute, object, uuid, eq)
     }
-    async function deletConfirm(i) {
-        await deleteUserData('Clinica', i.uuid)
+    async function deletConfirm() {
+        await deleteUserData('Clinica', item.uuid)
         readUserAllData('Clinica', null, setTemporal)
-
-        // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
-        // const obj = { ...state }
-        // delete obj[i.uuid]
-        // setState(obj)
     }
 
     function redirect() {
         router.push('/Distribuidor/Agregar')
     }
-console.log(filter)
+
+    function sortArray (x,y) {
+        if(x['nombre'].toLowerCase() < y['nombre'].toLowerCase()  ) {return -1}
+        if(x['nombre'].toLowerCase() > y['nombre'].toLowerCase()) {return 1}
+        return 0  
+    }
+    console.log(item)
     useEffect(() => {
         readUserAllData('Clinica', null, setTemporal)
     }, [])
@@ -108,7 +107,8 @@ console.log(filter)
 
         <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
              {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de ELIMINAR al siguiente usuario: {item.nombre}</Modal>}
-            {modal === 'Block' && <Modal funcion={blockConfirm}>Estas seguro de BLOQUEAR al siguiente usuario {item.nombre}</Modal>}
+            {modal === 'Block' && <Modal funcion={blockConfirm}>Estas seguro de {item.bloqueado ? 'DESBLOQUEAR' :'BLOQUEAR'} al siguiente usuario {item.nombre}</Modal>}
+            {modal === 'Access' && <Modal funcion={accessConfirm}>Estas seguro de {item.access ? 'DESIGNAR como SOLICITADOR' :'DESIGNAR como VERIFICADOR'} al siguiente usuario {item.nombre}</Modal>}
 
             <h3 className='font-medium text-[16px]'>Clinicas</h3>
             <br />
@@ -162,7 +162,7 @@ console.log(filter)
                             Whatsapp
                         </th>
                         <th scope="col" class="px-3 py-3">
-                            Activado
+                            Acceso
                         </th>
                         <th scope="col" class="px-3 py-3">
                             Boqueado
@@ -173,7 +173,7 @@ console.log(filter)
                     </tr>
                 </thead>
                 <tbody>
-                    {temporal && temporal !== undefined && temporal.map((i, index) => {
+                    {temporal && temporal !== undefined && temporal.sort(sortArray).map((i, index) => {
 
                         return i.ciudad.includes(ciudad) &&  i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
@@ -214,7 +214,10 @@ console.log(filter)
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
-                                {i['whatsapp']}
+                                {i.access == true
+                                    ? <Button theme={"Success"} click={() => delet(i, 'Access')}>Verificador</Button>
+                                    : <Button theme={"Secondary"} click={() => delet(i, 'Access')}>Solicitador</Button>
+                                }
                             </td>
                             <td class="px-3 py-4">
                                 {i.bloqueado == true
@@ -240,3 +243,19 @@ console.log(filter)
 
 
 export default WithAuth(Home)
+
+
+    // console.log({ bloqueado: !item.bloqueado })
+        // await updateUserData('Producto', { bloqueado: !item.bloqueado }, item.uuid, eq)
+        // readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        // updateUserData = async (rute, object, uuid, eq) 
+        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
+        // const obj = { ...state }
+        // delete obj[userUuid]
+        // setState(obj) updateUserData = async (rute, object, uuid, eq)
+
+
+       // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
+        // const obj = { ...state }
+        // delete obj[i.uuid]
+        // setState(obj)

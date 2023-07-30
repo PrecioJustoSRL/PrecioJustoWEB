@@ -10,6 +10,8 @@ import LoaderBlack from '@/components/LoaderBlack'
 
 import Success from '@/components/Success'
 import Checkbox from '@/components/Checkbox'
+import Modal from '@/components/Modal'
+
 import Button from '@/components/Button'
 import { useMask } from '@react-input/mask';
 import { useRouter } from 'next/navigation';
@@ -20,11 +22,12 @@ import { generateUUID } from '@/utils/UIDgenerator'
 function Home() {
     const router = useRouter()
 
-    const { user, userDB, setUserData, setUserSuccess, success } = useUser()
+    const { user, userDB, setUserData, setUserSuccess, success, setModal, modal } = useUser()
     const [state, setState] = useState({ sistema: '1.5', disponibilidad: 'Disponible' })
 
     const [postImage, setPostImage] = useState(null)
     const [urlPostImage, setUrlPostImage] = useState(null)
+    const [disable, setDisable] = useState(false)
 
     const [check, setCheck] = useState(false)
     const [categorias, setCategorias] = useState({ Otros: true })
@@ -93,17 +96,24 @@ function Home() {
         inputRef6.current.value = ''
         inputRef7.current.value = ''
 
-
+        setPostImage(null)
+        setUrlPostImage(null)
         setState({ sistema: '1.5', disponibilidad: 'Disponible' })
         setCategorias({ Otros: true })
         setUserSuccess('')
+        setDisable(false)
+
     }
     function save(e) {
         e.preventDefault()
         const uid = generateUUID()
-
+        if (!categorias.Otros && !categorias.Titanio && !categorias["Acero Inox"]) {
+            setModal('Seleccione una categoria.')
+            return
+        }
         Object.entries(categorias).map(async (i) => {
             if (i[1] == true) {
+                setDisable(true)
                 await writeUserData('Producto', { ...state, categoria: i[0], uuid: uid, distribuidor: 'Precio-Justo-SRL-Data' }, 'Precio-Justo-SRL-Data', userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
                 await uploadStorage('Producto', postImage, uid, updateUserData)
                 // return setState({ sistema: '1.5', disponibilidad: 'Disponible' })
@@ -178,8 +188,8 @@ function Home() {
                         <Label htmlFor="Titanio">Titanio</Label>
                         <Checkbox name="Acero Inox" change={onChangeHandlerCheck} />
                         <Label htmlFor="Acero Inox">Acero Inox</Label>
-                        <Checkbox name="Otros" change={onChangeHandlerCheck} />
-                        <Label htmlFor="Otros" check={categorias && categorias.Otros}>Otros</Label>
+                        <Checkbox name="Otros" check={categorias && categorias.Otros} change={onChangeHandlerCheck} />
+                        <Label htmlFor="Otros" >Otros</Label>
                     </div>
                 </div>
                 <div>
@@ -200,6 +210,8 @@ function Home() {
                 <Button theme='Primary' >Guardar</Button>
             </div>
             {success == 'Se ha guardado correctamente' && <LoaderBlack />}
+            {modal == 'Seleccione una categoria.' && <Modal funcion={() => setUserSuccess('')} alert={true}>{modal}</Modal>}
+
         </form>
     )
 }

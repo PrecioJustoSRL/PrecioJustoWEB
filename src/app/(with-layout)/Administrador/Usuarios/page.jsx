@@ -80,24 +80,12 @@ function Home() {
         await readUserAllData('Users', null, setTemporal)
         setModal('')
 
-        // console.log({ bloqueado: !item.bloqueado })
-        // await updateUserData('Producto', { bloqueado: !item.bloqueado }, item.uuid, eq)
-        // readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
-        // updateUserData = async (rute, object, uuid, eq) 
-        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
-        // const obj = { ...state }
-        // delete obj[userUuid]
-        // setState(obj) updateUserData = async (rute, object, uuid, eq)
     }
     async function deletConfirm() {
         await deleteUserData('Users', item.uuid)
         readUserAllData('Users', null, setTemporal)
         setModal('')
 
-        // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
-        // const obj = { ...state }
-        // delete obj[i.uuid]
-        // setState(obj)
     }
 
     function redirect() {
@@ -110,7 +98,7 @@ function Home() {
         if(x['nombre'].toLowerCase() > y['nombre'].toLowerCase()) {return 1}
         return 0  
     }
-    console.log(filter)
+    console.log(item)
     useEffect(() => {
         readUserAllData('Users', null, setTemporal)
     }, [])
@@ -207,15 +195,22 @@ function Home() {
                                 {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} cols="6" name='nombre de producto 3' defaultValue={i['nombre de producto 3']} class="block p-1.5  w-full h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
                                 {i['rol']}
                             </td>
-                            <td class="px-3 py-4">
-                                {i.bloqueado == true
-                                    ? <Button theme={"Success"} click={() => delet(i, 'Block')}>Desbloquear</Button>
-                                    : <Button theme={"Secondary"} click={() => delet(i, 'Block')}>Bloquear</Button>
-                                }
+                           {i['rol'] === 'Administrador' ? <><td class="px-3 py-4">
+                                No permitido
                             </td>
                             <td class="px-3 py-4">
-                                <Button theme={"Danger"} click={() => delet(i, 'Delete')}>Eliminar</Button>
-                            </td>
+                            No permitido
+                            </td> </>
+                            :<><td class="px-3 py-4">
+                            {i.bloqueado == true
+                                ? <Button theme={"Success"} click={() => delet(i, 'Block')}>Desbloquear</Button>
+                                : <Button theme={"Secondary"} click={() => delet(i, 'Block')}>Bloquear</Button>
+                            }
+                        </td>
+                        <td class="px-3 py-4">
+                            <Button theme={"Danger"} click={() => delet(i, 'Delete')}>Eliminar</Button>
+                        </td> </>
+                            }
                         </tr>
                     })
                     }
@@ -235,5 +230,17 @@ export default WithAuth(Home)
 
 
 
+        // console.log({ bloqueado: !item.bloqueado })
+        // await updateUserData('Producto', { bloqueado: !item.bloqueado }, item.uuid, eq)
+        // readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        // updateUserData = async (rute, object, uuid, eq) 
+        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
+        // const obj = { ...state }
+        // delete obj[userUuid]
+        // setState(obj) updateUserData = async (rute, object, uuid, eq)
 
 
+        // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
+        // const obj = { ...state }
+        // delete obj[i.uuid]
+        // setState(obj)
