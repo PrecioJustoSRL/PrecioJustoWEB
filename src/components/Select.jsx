@@ -38,7 +38,7 @@ export default function Select({arr, name, click, defaultValue, uuid}) {
             // dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} 
             >
                 {
-                    arr.map((i)=> <li key={i} className='mb-2 cursor-pointer' onClick={() => handlerUserState(name, i)}>{i}</li>)
+                    arr.map((i)=> <li key={i} className={`mb-2 cursor-pointer ${i == 'No disponible' &&  'bg-red-400'} ${i == 'Inmediatamente' &&  'bg-green-400'} ${i == 'En un día' &&  'bg-yellow-300'}`} onClick={() => handlerUserState(name, i)}>{i}</li>)
                 }
             </ul>
         </div>

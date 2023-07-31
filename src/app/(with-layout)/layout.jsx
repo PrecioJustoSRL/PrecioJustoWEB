@@ -63,7 +63,7 @@ function Home({ children }) {
       {modal == 'Verifica' && <Modal funcion={()=>{router.push(`/${user.rol}`); setModal('')}}>
         Completa tu perfil para hacer tu primera compra
       </Modal>}
-      <div className={`fixed top-0 w-[220px] lg:w-[240px] lg:border-r-8   h-screen bg-[#2A52BE] h-screen transition-all	z-40  ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-240px] '} z-50`} >
+      <div className={`fixed top-0 w-[220px] lg:w-[280px]   h-screen bg-[#2A52BE] h-screen transition-all	z-40  ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-280px] '} z-50`} >
         <div class="py-4 overflow-y-auto ">
           {user && user !== undefined && <Navbar rol={user.rol} />}
         </div>
@@ -71,7 +71,7 @@ function Home({ children }) {
 
       {nav && <div className='fixed top-0 left-0 w-screen h-screen bg-[#000000C2] z-40' onClick={() => setNav(false)}></div>}
 
-      <main className={`relative min-w-screen pt-[85px] pb-[65px] lg:pb-0  lg:min-w-auto my-[0px]  lg:bg-blue-50 lg:min-h-screen md:pt-[85px] ${nav ? 'w-screen pl-[220px] lg:pl-[240px] ' : '  lg:px-[0px]'}`} onClick={() => setNav(false)} style={{ transition: 'all 0.5' }}>
+      <main className={`relative min-w-screen pt-[85px] pb-[65px] lg:pb-0  lg:min-w-auto my-[0px]  lg:bg-blue-50 lg:min-h-screen md:pt-[85px] ${nav ? 'w-screen pl-[220px] lg:pl-[280px] ' : '  lg:px-[0px]'}`} onClick={() => setNav(false)} style={{ transition: 'all 0.5' }}>
         {/* <img src="/bg.png" className='fixed bottom-[60px] lg:bottom-0 right-[20px] w-[60vw] lg:w-[40vw]' alt="" /> */}
         <nav className="w-screen fixed top-0 border-b border-gray-200 shadow-sm flex items-center justify-between bg-[#2A52BE]  p-4 h-[70px] z-30" onClick={() => setNav(false)}>
           {pathname !== '/Cliente' && <div className='flex  hidden lg:block'>

@@ -57,7 +57,6 @@ function Home() {
     function onChangeHandler(e) {
         setFilter(e.target.value.toLowerCase())
     }
-
     async function save(i) {
         await updateUserData('Producto', state[i.uuid], i.uuid)
         postImage[i.uuid] && await uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
@@ -76,27 +75,18 @@ function Home() {
         await updateUserData('Medico', {bloqueado: !item.bloqueado}, item.uuid, null)
         await readUserAllData('Medico', null, setTemporal)
         setModal('')
-
-        // console.log({ bloqueado: !item.bloqueado })
-        // await updateUserData('Producto', { bloqueado: !item.bloqueado }, item.uuid, eq)
-        // readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
-        // updateUserData = async (rute, object, uuid, eq) 
-        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
-        // const obj = { ...state }
-        // delete obj[userUuid]
-        // setState(obj) updateUserData = async (rute, object, uuid, eq)
     }
     async function deletConfirm(i) {
         await deleteUserData('Medico', i.uuid)
         readUserAllData('Medico', null, setTemporal)
-        // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
-        // const obj = { ...state }
-        // delete obj[i.uuid]
-        // setState(obj)
     }
-
     function redirect() {
         router.push('/Distribuidor/Agregar')
+    }
+    function sortArray(x, y) {
+        if (x['nombre de producto 1'].toLowerCase() < y['nombre de producto 1'].toLowerCase()) { return -1 }
+        if (x['nombre de producto 1'].toLowerCase() > y['nombre de producto 1'].toLowerCase()) { return 1 }
+        return 0
     }
 console.log(filter)
     useEffect(() => {
@@ -116,9 +106,9 @@ console.log(filter)
             </div>
 
 
-            <div className='min-w-[1900px] flex justify-start items-center my-5 '>
+            <div className='min-w-[1500px] flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Ciudad</h3>
-                <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 100px) 100px 100px 100px 200px 200px 100px' }}>
+                <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(9, 110px)' }}>
                     <Tag theme={ciudad == 'Sucre' ? 'Primary' : 'Secondary'} click={() => setCiudad(ciudad == 'Sucre' ? '' : 'Sucre')}>Sucre</Tag>
                     <Tag theme={ciudad == 'La paz' ? 'Primary' : 'Secondary'} click={() => setCiudad(ciudad == 'La paz' ? '' : 'La paz')}>La paz</Tag>
                     <Tag theme={ciudad == 'Cochabamba' ? 'Primary' : 'Secondary'} click={() => setCiudad(ciudad == 'Cochabamba' ? '' : 'Cochabamba')}>Cochabamba</Tag>
@@ -130,7 +120,7 @@ console.log(filter)
                     <Tag theme={ciudad == 'Potosi' ? 'Primary' : 'Secondary'} click={() => setCiudad(ciudad == 'Potosi' ? '' : 'Potosi')}>Potosi</Tag>
                 </div>
             </div>
-            <table class="w-[1900px]  text-[12px] text-left text-gray-500 border-t-4 border-gray-400">
+            <table class="w-[1500px]  text-[12px] text-left text-gray-500 border-t-4 border-gray-400">
                 <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-3 py-3">
@@ -140,19 +130,13 @@ console.log(filter)
                             Nombre
                         </th>
                         <th scope="col" class="px-3 py-3">
-                            Descripción
+                            Especialidad
                         </th>
                         <th scope="col" class="px-3 py-3">
                             Ciudad
                         </th>
                         <th scope="col" class="px-3 py-3">
                             Dirección
-                        </th>
-                        <th scope="col" class="px-3 py-3">
-                            Dias de atención
-                        </th>
-                        <th scope="col" class="px-3 py-3">
-                            Horarios de atención
                         </th>
                         <th scope="col" class="px-8 py-3">
                             Telefono
@@ -169,7 +153,7 @@ console.log(filter)
                     </tr>
                 </thead>
                 <tbody>
-                    {temporal && temporal !== undefined && temporal.map((i, index) => {
+                    {temporal && temporal !== undefined && temporal.sort(sortArray).map((i, index) => {
 
                         return i.ciudad.includes(ciudad) &&  i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
@@ -181,7 +165,7 @@ console.log(filter)
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} cols="6" name='nombre de producto 2' defaultValue={i['nombre de producto 2']} class="block p-1.5  w-full h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
-                                {i['descripcion']}
+                                {i['especialidad']}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} cols="6" name='nombre de producto 3' defaultValue={i['nombre de producto 3']} class="block p-1.5  w-full h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
@@ -191,15 +175,6 @@ console.log(filter)
                                 {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='descripcion basica' defaultValue={i['descripcion basica']} class="block p-1.5  w-full h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
                                 {i['direccion']}
                             </td>
-                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='descripcion tecnica' defaultValue={i['descripcion tecnica']} class="block p-1.5  w-full h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
-                                {i['direccion']}
-                            </td>
-                            <td class="px-3 py-4 h-full font-semibold text-gray-900 dark:text-white">
-                                {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='uso frecuente' defaultValue={i['uso frecuente']} class="block p-1.5  w-full h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
-                                {i['horarios de apertura']} - {i['horarios de cierre']}
-                            </td>
-
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
                                 {i['telefono']}
@@ -233,3 +208,22 @@ console.log(filter)
 
 
 export default WithAuth(Home)
+
+
+
+
+        // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
+        // const obj = { ...state }
+        // delete obj[i.uuid]
+        // setState(obj)
+
+
+        // console.log({ bloqueado: !item.bloqueado })
+        // await updateUserData('Producto', { bloqueado: !item.bloqueado }, item.uuid, eq)
+        // readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        // updateUserData = async (rute, object, uuid, eq) 
+        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
+        // const obj = { ...state }
+        // delete obj[userUuid]
+        // setState(obj) updateUserData = async (rute, object, uuid, eq)
+

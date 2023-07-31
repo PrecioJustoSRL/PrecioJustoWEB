@@ -10,19 +10,71 @@ import Input from '../components/Input'
 import Error from '@/components/Error'
 import Video from '@/components/Video'
 
-import { Player } from 'video-react';
-import ReactPlayer from 'react-player'
+
+import LoaderWithLogo from '@/components/LoaderWithLogo'
 
 import { useRouter } from 'next/navigation';
 
 
 export default function Home() {
-  const { user, introVideo, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG } = useUser()
+  const { user, introVideo, setIntroVideo, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG } = useUser()
 
   const router = useRouter()
 
 
+  function createIndexedDB() {
+    setIntroVideo(true)
+    const indexedDB = window.indexedDB
+    if (indexedDB) {
+          let swoouDB
+          const request = indexedDB.open('preciojusto', 1)
+          request.onsuccess = (e) => {
+                swoouDB = e.target.result
+                addData()
+          }
+          request.onupgradeneeded = (e) => {
+                swoouDB = e.target.result
+                const objectStoreUserDB = swoouDB.createObjectStore('preciojusto', {
+                      keyPath: 'uid'
+                })
+          }
+          request.onerror = (err) => {
+                console.log(err)
+          }
+          const addData = () => {
+                const transaction = swoouDB.transaction(['preciojusto'], 'readwrite')
+                const objectStore = transaction.objectStore('preciojusto')
+                const request = objectStore.add({uid: 'video-mp4', play: true})
+          }
+    }
+}
+function readIndexedDB () {
+  
+  if (indexedDB) {
+    let swoouDB
+    const request = indexedDB.open('preciojusto', 1)
+    request.onsuccess = () => {
+          swoouDB = request.result
+          console.log(swoouDB)
+          readData()
+    }
+    request.onupgradeneeded = (e) => {
+      swoouDB = e.target.result
+      const objectStoreUserDB = swoouDB.createObjectStore('preciojusto', {
+            keyPath: 'uid'
+      })
+}
+    const readData = () => {
+          const transaction = swoouDB.transaction(['preciojusto'], 'readwrite')
+          const objectStore = transaction.objectStore('preciojusto')
+          const request = objectStore.get('video-mp4')
 
+          request.onsuccess = () => {
+                request && request.result && request.result.play == true ? setIntroVideo(false) : (createIndexedDB())
+          }
+    }
+}
+}
 
 
   const signInHandler = (e) => {
@@ -35,6 +87,8 @@ export default function Home() {
 
 
   useEffect(() => {
+    // createIndexedDB()
+    introVideo == undefined ? readIndexedDB() : ''
     user === undefined && onAuth(setUserProfile)
     if (user !== undefined && user !== null) router.replace('/Cliente')
   }, [user])
@@ -48,6 +102,8 @@ export default function Home() {
         backgroundAttachment: 'fixed',
         backgroundSize: 'cover'
       }}>
+
+      {introVideo == undefined && <LoaderWithLogo></LoaderWithLogo>}
 
       <Video />
       <div className='w-screen h-screen  flex flex-col justify-center items-center p-5'>
