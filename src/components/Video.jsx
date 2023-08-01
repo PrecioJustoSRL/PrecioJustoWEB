@@ -11,14 +11,14 @@ export default function Button({ theme, click, children }) {
 
   const handlerPlay = () => {
     if (play) {
-      videoRef.current.pause()
-      setIntroVideo(!introVideo)
-      setPlay(false)
-    } else {
       videoRef.current.play()
       setIntroVideo(!introVideo)
-      setPlay(true)
+      setPlay(false)
       setSound(true)
+    } else {
+      videoRef.current.pause()
+      setIntroVideo(!introVideo)
+      setPlay(true)
     }
     videoRef.current.muted = false
   };
@@ -39,7 +39,6 @@ export default function Button({ theme, click, children }) {
             </svg>
             {sound == false && <span className='absolute bg-gray-50 border-x-[1px] border-gray-800 transform rotate-45 w-[4px] h-full'></span>}
           </span>
-       
         </div>}
         <span className='z-50 absolute flex justify-center items-center top-[15px] right-[15px] bg-gray-800 border-[2px] border-gray-50 w-[150px] text-[white] text-center text-[16px] py-3 rounded-full' onClick={handlerPlay}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,14 +47,19 @@ export default function Button({ theme, click, children }) {
           <span className='pl-5 text-medium'>{introVideo ? 'Cerrar' : 'Ver video'}</span>
         </span>
       </div>
-      <div className={`video-player absolute w-screen lg:w-[300px]  flex items-center h-screen my-auto ${introVideo == false ? 'left-[-200vw]' : 'left-0 right-0 mx-auto'}`} >
-        <video ref={videoRef} autoPlay muted onClick={handlerSound}>
+      <div className={`video-player absolute w-screen lg:w-[300px] rounded-[20px]  flex items-center h-screen my-auto ${introVideo === true ? 'left-0 right-0 mx-auto' : 'left-[-200vw]'}`} >
+        <video ref={videoRef} className='rounded-[20px]' autoPlay muted onClick={handlerSound}>
           <source src="/intro.mp4" type="video/mp4" />
         </video>
       </div>
+
     </div>
   )
 }
+
+
+
+
 
   //  {play
   //   ? <span className='flex items-center justify-center z-50 bg-[#ffffff70] w-[50px] h-[50px] text-[white]  text-center text-[16px] py-3 rounded-full' onClick={handlePause}>

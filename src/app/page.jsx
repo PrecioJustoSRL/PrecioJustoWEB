@@ -22,60 +22,74 @@ export default function Home() {
   const router = useRouter()
 
 
-  function createIndexedDB() {
-    setIntroVideo(true)
-    const indexedDB = window.indexedDB
+  // function createIndexedDB() {
+  //   setIntroVideo(true)
+  //   const indexedDB = window.indexedDB
+  //   if (indexedDB) {
+  //     let swoouDB
+  //     const request = indexedDB.open('preciojusto', 1)
+  //     request.onsuccess = (e) => {
+  //       swoouDB = e.target.result
+  //       addData()
+  //     }
+  //     request.onupgradeneeded = (e) => {
+  //       swoouDB = e.target.result
+  //       const objectStoreUserDB = swoouDB.createObjectStore('preciojusto', {
+  //         keyPath: 'uid'
+  //       })
+  //     }
+  //     request.onerror = (err) => {
+  //       console.log(err)
+  //     }
+  //     const addData = () => {
+  //       const transaction = swoouDB.transaction(['preciojusto'], 'readwrite')
+  //       const objectStore = transaction.objectStore('preciojusto')
+  //       const request = objectStore.add({ uid: 'video-mp4', play: true })
+  //     }
+  //   }
+  // }
+  function readIndexedDB() {
     if (indexedDB) {
-          let swoouDB
-          const request = indexedDB.open('preciojusto', 1)
-          request.onsuccess = (e) => {
-                swoouDB = e.target.result
-                addData()
-          }
-          request.onupgradeneeded = (e) => {
-                swoouDB = e.target.result
-                const objectStoreUserDB = swoouDB.createObjectStore('preciojusto', {
-                      keyPath: 'uid'
-                })
-          }
-          request.onerror = (err) => {
-                console.log(err)
-          }
-          const addData = () => {
-                const transaction = swoouDB.transaction(['preciojusto'], 'readwrite')
-                const objectStore = transaction.objectStore('preciojusto')
-                const request = objectStore.add({uid: 'video-mp4', play: true})
-          }
-    }
-}
-function readIndexedDB () {
-  
-  if (indexedDB) {
-    let swoouDB
-    const request = indexedDB.open('preciojusto', 1)
-    request.onsuccess = () => {
-          swoouDB = request.result
-          console.log(swoouDB)
-          readData()
-    }
-    request.onupgradeneeded = (e) => {
-      swoouDB = e.target.result
-      const objectStoreUserDB = swoouDB.createObjectStore('preciojusto', {
-            keyPath: 'uid'
-      })
-}
-    const readData = () => {
+      let swoouDB
+      const request = indexedDB.open('preciojusto', 1)
+      request.onsuccess = () => {
+        swoouDB = request.result
+        readData()
+      }
+      request.onupgradeneeded = (e) => {
+        swoouDB = e.target.result
+        const objectStoreUserDB = swoouDB.createObjectStore('preciojusto', {
+          keyPath: 'uid'
+        })
+      }
+      const readData = () => {
+        const transaction = swoouDB.transaction(['preciojusto'], 'readwrite')
+        const objectStore = transaction.objectStore('preciojusto')
+        const request = objectStore.get('video-mp4')
+
+        request.onsuccess = () => {
+          console.log(request)
+          request && request.result && request.result.play == true 
+          ? setIntroVideo(false)
+          : addData()
+        }
+
+        const addData = () => {
           const transaction = swoouDB.transaction(['preciojusto'], 'readwrite')
           const objectStore = transaction.objectStore('preciojusto')
-          const request = objectStore.get('video-mp4')
-
-          request.onsuccess = () => {
-                request && request.result && request.result.play == true ? setIntroVideo(false) : (createIndexedDB())
-          }
+          const request = objectStore.add({ uid: 'video-mp4', play: true })
+          setIntroVideo(true)
+        }
+      }
     }
-}
-}
+  }
 
+
+
+
+
+
+  console.log(introVideo)
 
   const signInHandler = (e) => {
     e.preventDefault()
@@ -94,7 +108,7 @@ function readIndexedDB () {
   }, [user])
 
   return (
-    <div className="h-full bg-[#2A52BE]"
+    <div className="h-full"
       style={{
         backgroundImage: 'url(/bg-login.jpg)',
         backgroundRepeat: 'no-repeat',
@@ -103,11 +117,11 @@ function readIndexedDB () {
         backgroundSize: 'cover'
       }}>
 
-      {introVideo == undefined && <LoaderWithLogo></LoaderWithLogo>}
+      {/* {introVideo === null && <LoaderWithLogo></LoaderWithLogo>} */}
 
       <Video />
       <div className='w-screen h-screen  flex flex-col justify-center items-center p-5'>
-        <form className={`space-y-6 lg:space-y-3 w-[100%] bg-[#00000090] rounded-[30px] max-w-[350px]  ${introVideo == true ? 'h-0 overflow-hidden p-0 lg:p-0' : 'h-auto px-5 py-10 lg:p-10'}`} onSubmit={signInHandler} >
+        <form className={`space-y-6 lg:space-y-3 w-[100%] bg-[#00000090] rounded-[30px] max-w-[350px]  ${introVideo === true || introVideo === null ? 'h-0 overflow-hidden p-0 lg:p-0' : 'h-auto px-5 py-10 lg:p-10'}`} onSubmit={signInHandler} >
           <div className='w-full text-center flex justify-center'>
             <Image src="/logo-main.svg" width="150" height="150" alt="User" />
           </div>

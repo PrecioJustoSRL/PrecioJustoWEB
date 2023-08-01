@@ -29,9 +29,9 @@ export function UserProvider({ children }) {
     const [tienda, setTienda] = useState('Comprar')
 
 	const videoRef = useRef();
-	const [play, setPlay] = useState(undefined)
+	const [play, setPlay] = useState(true)
 	const [sound, setSound] = useState(false)
-	const [introVideo, setIntroVideo] = useState(true)
+	const [introVideo, setIntroVideo] = useState(null)
 
 
 
