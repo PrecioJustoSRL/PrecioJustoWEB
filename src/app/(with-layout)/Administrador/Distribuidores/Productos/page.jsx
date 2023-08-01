@@ -259,9 +259,7 @@ function Home() {
                     }
                 </tbody>
             </table>
-
         </div>
-
     )
 }
 

@@ -81,7 +81,7 @@ function Home() {
 
     useEffect(() => {
         
-        readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        readUserData('Producto', user.uuid, setUserDistributorPDB, 'distribuidor')
     }, [])
 
     return (
@@ -98,8 +98,8 @@ function Home() {
             <div className='min-w-[1900px] flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Disponibilidad</h3>
                 <div className="grid grid-cols-3 gap-4 w-[500px] ">
-                    <Tag theme={disponibilidad == 'Disponible' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad(disponibilidad == 'Disponible' ? '' : 'Disponible')}>En un día</Tag>
-                    <Tag theme={disponibilidad == 'Disponibilidad inmediata' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad(disponibilidad == 'Disponibilidad inmediata' ? '' : 'Disponibilidad inmediata')}>Inmediatamente</Tag>
+                    <Tag theme={disponibilidad == 'En un día' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad(disponibilidad == 'En un día' ? '' : 'En un día')}>En un día</Tag>
+                    <Tag theme={disponibilidad == 'Inmediatamente' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad(disponibilidad == 'Inmediatamente' ? '' : 'Inmediatamente')}>Inmediatamente</Tag>
                     <Tag theme={disponibilidad == 'No disponible' ? 'Primary' : 'Secondary'} click={()=>setDisponibilidad(disponibilidad == 'No disponible' ? '' : 'No disponible')}>No disponible</Tag>
                 </div>
             </div>
@@ -216,7 +216,7 @@ function Home() {
                                 {/* {i['costo']} */}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['Disponible', 'Disponibilidad inmediata', 'No disponible']} name='disponibilidad' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerAvailability} />
+                                <Select arr={['En un día', 'Inmediatamente', 'No disponible']} name='disponibilidad' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerAvailability} />
                             </td>
                             <td class="w-32 p-4">
                                 <label htmlFor={`img${index}`}>
