@@ -22,7 +22,7 @@ function Home({ children }) {
     console.log(user)
     return (
         <main >
-            {user === null ?  children : <LoaderWithLogo></LoaderWithLogo> }
+            {(user === null || (user && user.role && user.role === 'authenticated')) ?  children : <LoaderWithLogo></LoaderWithLogo> }
             
         </main>
     )

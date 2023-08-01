@@ -40,16 +40,16 @@ function Home({ children }) {
     setNav(!nav)
   }
 
-  const signOutConfirm = () => {
+  const signOutConfirm = async () => {
+    await signOut()
     setUserProfile(null)
     setUserCart({})
     setUserProduct(undefined),
     setRecetaDB(undefined),
     setUserDistributorPDB(undefined)
     setUserData(null)
-    router.push('/')
     setModal('')
-    signOut()
+   return  router.push('/')
 }
   console.log(user)
   console.log(userDB)

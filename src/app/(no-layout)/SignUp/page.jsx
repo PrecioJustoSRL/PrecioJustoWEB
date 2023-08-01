@@ -25,6 +25,7 @@ export default function Home() {
     let email = e.target[0].value
     let password = e.target[1].value
     signUpWithEmailAndPassword(email, password, setUserProfile)
+    
   }
 
   useEffect(() => {

@@ -93,7 +93,7 @@ function Home() {
         router.push('/Distribuidor/Agregar')
     }
     useEffect(() => {
-        readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+        readUserData('Producto', userUuid, setUserDistributorPDB, 'distribuidor')
     }, [])
 
     return (
