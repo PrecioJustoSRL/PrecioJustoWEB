@@ -86,6 +86,6 @@ function Home() {
         </main> 
     )
 }
-export default WithAuth(Home)
+export default Home
 
 
