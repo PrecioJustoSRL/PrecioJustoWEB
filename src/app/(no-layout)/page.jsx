@@ -4,15 +4,10 @@ import { onAuth, signInWithEmailAndPassword } from '@/supabase/utils'
 import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import style from './page.module.css'
-import Button from '../components/Button'
-import Input from '../components/Input'
+import Button from '@/components/Button'
+import Input from '@/components/Input'
 import Error from '@/components/Error'
 import Video from '@/components/Video'
-
-
-import LoaderWithLogo from '@/components/LoaderWithLogo'
-
 import { useRouter } from 'next/navigation';
 
 
@@ -117,7 +112,6 @@ export default function Home() {
         backgroundSize: 'cover'
       }}>
 
-      {/* {introVideo === null && <LoaderWithLogo></LoaderWithLogo>} */}
 
       <Video />
       <div className='w-screen h-screen  flex flex-col justify-center items-center p-5'>
