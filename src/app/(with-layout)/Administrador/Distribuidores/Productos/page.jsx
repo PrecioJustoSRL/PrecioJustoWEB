@@ -3,18 +3,14 @@
 import Button from '@/components/Button'
 import Subtitle from '@/components/Subtitle'
 import Modal from '@/components/Modal'
-
 import Select from '@/components/Select'
 import { useUser } from '@/context/Context.js'
-
 import Tag from '@/components/Tag'
 import { useRouter } from 'next/navigation';
-
 import { WithAuth } from '@/HOCs/WithAuth'
 import { useEffect, useState } from 'react'
 import { writeUserData, readUserData, updateUserData, deleteUserData } from '@/supabase/utils'
 import { uploadStorage } from '@/supabase/storage'
-
 
 function Home() {
     const { user, userDB, userUuid, modal, setModal, msg, setMsg, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, } = useUser()
@@ -92,6 +88,13 @@ function Home() {
     function redirect() {
         router.push('/Distribuidor/Agregar')
     }
+
+    function sortArray (x,y) {
+        if(x['nombre de producto 1'].toLowerCase() < y['nombre de producto 1'].toLowerCase()  ) {return -1}
+        if(x['nombre de producto 1'].toLowerCase() > y['nombre de producto 1'].toLowerCase()) {return 1}
+        return 0  
+    }
+
     useEffect(() => {
         readUserData('Producto', userUuid, setUserDistributorPDB, 'distribuidor')
     }, [])
@@ -196,7 +199,7 @@ function Home() {
                     </tr>
                 </thead>
                 <tbody>
-                    {distributorPDB && distributorPDB !== undefined && distributorPDB.map((i, index) => {
+                    {distributorPDB && distributorPDB !== undefined && distributorPDB.sort(sortArray).map((i, index) => {
 
                         return i.disponibilidad.includes(disponibilidad) && i.categoria.includes(categoria) && i.sistema.includes(sistema) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">

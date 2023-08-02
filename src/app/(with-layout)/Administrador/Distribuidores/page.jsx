@@ -3,24 +3,19 @@
 import Button from '@/components/Button'
 import Subtitle from '@/components/Subtitle'
 import Modal from '@/components/Modal'
-
 import Select from '@/components/Select'
 import { useUser } from '@/context/Context.js'
-
 import Tag from '@/components/Tag'
 import { useRouter } from 'next/navigation';
-
 import { WithAuth } from '@/HOCs/WithAuth'
 import { useEffect, useState } from 'react'
 import { writeUserData, readUserData, updateUserData, deleteUserData, readUserAllData } from '@/supabase/utils'
 import { uploadStorage } from '@/supabase/storage'
 
-
 function Home() {
-    const { user, setUserUuid, userDB, msg, setMsg,  modal, setModal, temporal, setTemporal, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
+    const { user, setUserUuid, userDB, msg, setMsg, modal, setModal, temporal, setTemporal, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
 
     const router = useRouter()
-
     const [state, setState] = useState({})
     const [postImage, setPostImage] = useState({})
     const [urlPostImage, setUrlPostImage] = useState({})
@@ -29,23 +24,18 @@ function Home() {
     const [ciudad, setCiudad] = useState('')
     const [filter, setFilter] = useState('')
 
-
-
     const onClickHandlerCategory = (name, value, uuid) => {
         setState({ ...state, [uuid]: { ...state[uuid], uuid, ['categoria']: value } })
     }
-
     const onClickHandlerCity = (name, value, uuid) => {
         setState({ ...state, [uuid]: { ...state[uuid], uuid, ['ciudad']: value } })
     }
-
     function manageInputIMG(e, uuid) {
         const file = e.target.files[0]
         setPostImage({ ...postImage, [uuid]: file })
         setUrlPostImage({ ...urlPostImage, [uuid]: URL.createObjectURL(file) })
         setState({ ...state, [uuid]: { ...state[uuid], uuid } })
     }
-
     const onClickHandlerAvailability = (name, value, uuid) => {
         setState({ ...state, [uuid]: { ...state[uuid], uuid, ['disponibilidad']: value } })
     }
@@ -55,35 +45,32 @@ function Home() {
     function onChangeHandler(e) {
         setFilter(e.target.value.toLowerCase())
     }
-
     async function save(i) {
         await updateUserData('Producto', state[i.uuid], i.uuid)
         postImage[i.uuid] && await uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
         const obj = { ...state }
         delete obj[i.uuid]
         setState(obj)
-        readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
-
+        readUserData('Producto', user.uuid, setUserDistributorPDB, 'distribuidor')
     }
     async function deletConfirm() {
         await deleteUserData('Producto', userUuid)
-        readUserData('Producto', userUuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
-
-        // postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
-        // const obj = { ...state }
-        // delete obj[userUuid]
-        // setState(obj)
+        readUserData('Producto', userUuid, setUserDistributorPDB, 'distribuidor')
     }
     function delet(i) {
         setUserItem(i)
         setModal('Delete')
     }
-
     function redirect(id) {
         setUserUuid(id)
         return router.push('Administrador/Distribuidores/Productos')
     }
-    console.log(filter)
+    function sortArray(x, y) {
+        if (x['nombre'].toLowerCase() < y['nombre'].toLowerCase()) { return -1 }
+        if (x['nombre'].toLowerCase() > y['nombre'].toLowerCase()) { return 1 }
+        return 0
+    }
+
     useEffect(() => {
         readUserAllData('Distribuidor', null, setTemporal)
     }, [])
@@ -91,20 +78,12 @@ function Home() {
     return (
 
         <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
-            {modal === 'Delete' && <Modal click={deletConfirm} funcion={()=>delet(i)}>Estas seguro de eliminar al siguiente usuario {msg}</Modal>}
-
-
-
-
-
-
+            {modal === 'Delete' && <Modal click={deletConfirm} funcion={() => delet(i)}>Estas seguro de eliminar al siguiente usuario {msg}</Modal>}
             <h3 className='font-medium text-[16px]'>Distribuidores</h3>
             <br />
             <div className='flex justify-center w-full'>
                 <input type="text" className='border-b border-gray-300 gap-4 text-center focus:outline-none  w-[300px]' onChange={onChangeHandler} placeholder='Filtrar por nombre' />
             </div>
-
-
             <div className='min-w-[1900px] flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Ciudad</h3>
                 <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 100px) 100px 100px 100px 200px 200px 100px' }}>
@@ -161,7 +140,7 @@ function Home() {
                     </tr>
                 </thead>
                 <tbody>
-                    {temporal && temporal !== undefined && temporal.map((i, index) => {
+                    {temporal && temporal !== undefined && temporal.sort(sortArray).map((i, index) => {
 
                         return i.ciudad.includes(ciudad) && i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
@@ -233,3 +212,30 @@ export default WithAuth(Home)
 
 
 
+
+
+
+
+
+// const onClickHandlerCategory = (name, value, uuid) => {
+//     setState({ ...state, [uuid]: { ...state[uuid], uuid, ['categoria']: value } })
+// }
+// const onClickHandlerCity = (name, value, uuid) => {
+//     setState({ ...state, [uuid]: { ...state[uuid], uuid, ['ciudad']: value } })
+// }
+// function manageInputIMG(e, uuid) {
+//     const file = e.target.files[0]
+//     setPostImage({ ...postImage, [uuid]: file })
+//     setUrlPostImage({ ...urlPostImage, [uuid]: URL.createObjectURL(file) })
+//     setState({ ...state, [uuid]: { ...state[uuid], uuid } })
+// }
+// const onClickHandlerAvailability = (name, value, uuid) => {
+//     setState({ ...state, [uuid]: { ...state[uuid], uuid, ['disponibilidad']: value } })
+// }
+// const onClickHandlerSystem = (name, value, uuid) => {
+//     setState({ ...state, [uuid]: { ...state[uuid], uuid, ['sistema']: value } })
+// }
+// postImage[userUuid] && uploadStorage('Producto', postImage[userUuid], userUuid, updateUserData, true)
+// const obj = { ...state }
+// delete obj[userUuid]
+// setState(obj)

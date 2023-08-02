@@ -62,6 +62,10 @@ const readUserData = async (rute, uuid, updateContext, eq, ) => {
     result.data !== null && result.data.length !== 0 
     ? ( result.data.lenght > 1 ? updateContext(result.data[0]):  updateContext(result.data) )
     : updateContext(null)  
+    return    result.data 
+    // result.data !== null && result.data.length !== 0 
+    // ? ( result.data.lenght > 1 ? result.data[0] :  result.data )
+    // : null
 }
 
 

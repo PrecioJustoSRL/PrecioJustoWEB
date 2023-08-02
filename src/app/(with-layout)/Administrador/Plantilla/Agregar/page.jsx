@@ -106,13 +106,13 @@ function Home() {
     }
     function save(e) {
         e.preventDefault()
-        const uid = generateUUID()
         if (!categorias.Otros && !categorias.Titanio && !categorias["Acero Inox"]) {
             setModal('Seleccione una categoria.')
             return
         }
         Object.entries(categorias).map(async (i) => {
             if (i[1] == true) {
+                const uid = generateUUID()
                 setDisable(true)
                 await writeUserData('Producto', { ...state, categoria: i[0], uuid: uid, distribuidor: 'Precio-Justo-SRL-Data' }, 'Precio-Justo-SRL-Data', userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
                 await uploadStorage('Producto', postImage, uid, updateUserData)

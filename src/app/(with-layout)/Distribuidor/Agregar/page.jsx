@@ -66,12 +66,12 @@ function Home() {
     function checkHandler() {
         setCheck(!check)
     }
-    function save(e) {
+    async function save(e) {
         e.preventDefault()
         const uid = generateUUID()
 
-        writeUserData('Producto', { ...state, uuid: uid, distribuidor: user.uuid}, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
-        uploadStorage('Producto', postImage, uid, updateUserData)
+        await writeUserData('Producto', { ...state, uuid: uid, distribuidor: user.uuid}, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
+        await uploadStorage('Producto', postImage, uid, updateUserData)
         // router.push('/Clinica/Perfil')
     }
    
