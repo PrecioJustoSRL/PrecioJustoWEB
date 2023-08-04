@@ -153,7 +153,7 @@ function Home() {
                 </div>
             </div>
             <div className='flex w-full justify-around'>
-                <Button theme='Success' >Ver Vista Cliente</Button>
+                {/* <Button theme='Success' >Ver Vista Cliente</Button> */}
                 <Button theme='Primary' >Guardar</Button>
             </div>
 
