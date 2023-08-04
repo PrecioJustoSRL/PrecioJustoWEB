@@ -188,7 +188,7 @@ export default function BottomNavigation({ rol }) {
                     <h3 className='text-white text-center'>{rol}</h3>
                 </li>
                 <li className="px-5">
-                    <Link href="/Distribuidor/Pedido" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
+                    <Link href="/Distribuidor/Perfil" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
                         <svg aria-hidden="true" class="flex-shrink-0 w-8 h-8  transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" fill="white" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                         <span class="flex-1 ml-3 whitespace-nowrap text-white  hover:font-medium">Perfil</span>
                     </Link>

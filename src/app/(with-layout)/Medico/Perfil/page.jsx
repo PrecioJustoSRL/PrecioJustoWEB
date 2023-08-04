@@ -20,7 +20,7 @@ function Home() {
 
 
     useEffect(() => {
-        if (user && user.rol !== undefined) readUserData(user.rol, user.uuid, userDB, setUserData, 'Perfil', null )
+        if (user && user.rol !== undefined) readUserData(user.rol, user.uuid, setUserData, 'Perfil', )
     }, []);
     return (
         userDB !== undefined && userDB !== null  && userDB.Perfil !== undefined ? <div className="min-h-[92vh] bg-white p-5">
