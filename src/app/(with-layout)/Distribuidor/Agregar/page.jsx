@@ -98,7 +98,7 @@ function Home() {
                         <div className="mt-4 flex text-sm leading-6 text-gray-600">
                             <label htmlFor="fileUpload" className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>Upload a file</span>
-                                <input id="fileUpload" name="frontPage" onChange={manageInputIMG} type="file" className="sr-only" required />
+                                <input id="fileUpload" name="frontPage" onChange={manageInputIMG} type="file" className="sr-only" accept='image/*' required />
                             </label>
                             <p className="pl-1">or drag and drop</p>
                         </div>
@@ -113,7 +113,7 @@ function Home() {
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
                     <Label htmlFor="">Nombre de Producto 1</Label>
-                    <Input type="text" name="nombre de producto 1" onChange={onChangeHandler} />
+                    <Input type="text" name="nombre de producto 1" onChange={onChangeHandler} require={true} />
                 </div>
                 <div>
                     <Label htmlFor="">Nombre de Producto 2</Label>
@@ -124,29 +124,16 @@ function Home() {
                     <Input type="text" name="nombre de producto 3" onChange={onChangeHandler} />
                 </div>
                 <div>
-                    <Label htmlFor="">Nombre de la empresa y/o sucursal</Label>
-                    <Input type="text" name="empresa" onChange={onChangeHandler} />
-                </div>
-
-                <div>
                     <Label htmlFor="">Descripción básica</Label>
-                    <Input type="text" name="descripcion basica" onChange={onChangeHandler} />
+                    <Input type="text" name="descripcion basica" onChange={onChangeHandler} require={true}/>
                 </div>
                 <div>
                     <Label htmlFor="">Descripción técnica</Label>
-                    <Input type="text" name="descripcion tecnica" onChange={onChangeHandler} />
+                    <Input type="text" name="descripcion tecnica" onChange={onChangeHandler} require={true}/>
                 </div>
                   <div>
                     <Label htmlFor="">Usu frecuente</Label>
                     <Input type="text" name="uso frecuente" onChange={onChangeHandler} />
-                </div>
-                <div>
-                    <Label htmlFor="password" className="block mb-2 text-sm text-left  font-medium ">Ciudad</Label>
-                    <Select arr={['La Paz', 'Cochabamba', 'Santa Cruz']} name='ciudad' click={onClickHandlerCity} />
-                </div>
-                <div>
-                    <Label htmlFor="password" className="block mb-2 text-sm text-left  font-medium ">Dirección</Label>
-                    <Input type="text" name="direccion" onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Categoria</Label>
@@ -162,15 +149,7 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Costo</Label>
-                    <Input type="text" name="costo" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
-                </div>
-                <div>
-                    <Label htmlFor="">Telefono</Label>
-                    <Input type="text" name="telefono" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
-                </div>
-                <div>
-                    <Label htmlFor="">Whatsapp</Label>
-                    <Input type="text" name="whatsapp" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
+                    <Input type="text" name="costo" styled={{ textAlign: 'center' }} onChange={onChangeHandler} require={true}/>
                 </div>
             </div>
             <div className='flex w-full justify-around'>
