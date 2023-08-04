@@ -136,8 +136,6 @@ function Home() {
                 </div>
             </div>
 
-
-
             <br />
             <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <div>

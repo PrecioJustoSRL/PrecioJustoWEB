@@ -169,9 +169,6 @@ function Home() {
                             Costo
                         </th>
                         <th scope="col" class="px-3 py-3">
-                            Ciudad
-                        </th>
-                        <th scope="col" class="px-3 py-3">
                             categoría
                         </th>
                         <th scope="col" class="px-3 py-3">
@@ -222,9 +219,6 @@ function Home() {
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Escribe aquí..."></textarea>
                                 {/* {i['costo']} */}
-                            </td>
-                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['La Paz', 'Cochabamba', 'Santa Cruz']} name='ciudad' defaultValue={i.ciudad} uuid={i.uuid} click={onClickHandlerCity} />
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 <Select arr={['Titanio', 'Acero Inox', 'Otros']} name='categoria' defaultValue={i.categoria} uuid={i.uuid} click={onClickHandlerCategory} />
