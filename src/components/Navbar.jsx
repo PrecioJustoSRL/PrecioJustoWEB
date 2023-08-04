@@ -32,7 +32,7 @@ export default function BottomNavigation({ rol }) {
             return <ul class="space-y-3 text-[16px]  text-gray-600 font-medium">
                 <li className="flex flex-col justify-center items-center px-[10px] py-5 border-b border-gray-[1px]  w-full">
                     <img src="/logo-circle.png" className='h-[70px] w-[70px]' alt="" />
-                    <h1 className='16px font-medium text-white pt-[10px]'>Precio Justo</h1>
+                    <h1 className='16px font-medium text-center text-white py-[10px]'>Precio Justo</h1>
                     <h3 className='text-white text-center'>Bienvenido </h3>
                     <h3 className='text-white text-center'>{user.nombre}</h3>
                 </li>
@@ -80,9 +80,9 @@ export default function BottomNavigation({ rol }) {
             return <ul class="space-y-2 text-[16px]  text-gray-600 font-medium">
                 <li className="flex flex-col justify-center items-center px-[10px] py-5 border-b border-gray-[1px]  w-full">
                     <img src="/logo-circle.png" className='h-[70px] w-[70px]' alt="" />
-                    <h1 className='16px font-medium text-white pt-[10px]'>Precio Justo</h1>
-                    <h3 className='text-white'>Bienvenido {user.nombre}</h3>
-                    <h3 className='text-white'>{rol}</h3>
+                    <h1 className='16px font-medium  text-center  text-white py-[10px]'>Precio Justo</h1>
+                    <h3 className='text-white text-center'>Bienvenido {user.nombre}</h3>
+                    <h3 className='text-white text-center'>{rol}</h3>
                 </li>
                 <li className="px-5">
                     <Link href="/Medico/Perfil" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
@@ -128,9 +128,9 @@ export default function BottomNavigation({ rol }) {
             return <ul class="space-y-3 text-[16px]  text-gray-600 font-medium">
                 <li className="flex flex-col justify-center items-center px-[10px] py-5 border-b border-gray-[1px]  w-full">
                     <img src="/logo-circle.png" className='h-[70px] w-[70px]' alt="" />
-                    <h1 className='16px font-medium text-white pt-[10px]'>Precio Justo</h1>
-                    <h3 className='text-white'>Bienvenido {user.nombre}</h3>
-                    <h3 className='text-white'>{rol}</h3>
+                    <h1 className='16px font-medium  text-center text-white py-[10px]'>Precio Justo</h1>
+                    <h3 className='text-white text-center'>Bienvenido {user.nombre}</h3>
+                    <h3 className='text-white text-center'>{rol}</h3>
                 </li>
 
                 <li className="px-5">
@@ -183,9 +183,9 @@ export default function BottomNavigation({ rol }) {
             return <ul class="space-y-2 text-[16px]  text-gray-600 font-medium">
                 <li className="flex flex-col justify-center items-center px-[5px] py-5 border-b border-gray-[1px]  w-full">
                     <img src="/logo-circle.png" className='h-[70px] w-[70px]' alt="" />
-                    <h1 className='16px font-medium text-white pt-[10px]'>Precio Justo</h1>
-                    <h3 className='text-white'>Bienvenido {user.nombre}</h3>
-                    <h3 className='text-white'>{rol}</h3>
+                    <h1 className='16px font-medium text-center text-white py-[10px]'>Precio Justo</h1>
+                    <h3 className='text-white text-center'>Bienvenido {user.nombre}</h3>
+                    <h3 className='text-white text-center'>{rol}</h3>
                 </li>
                 <li className="px-5">
                     <Link href="/Distribuidor/Pedido" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
@@ -236,9 +236,9 @@ export default function BottomNavigation({ rol }) {
             return <ul class="space-y-2 text-[16px]  text-gray-600 font-medium">
                 <li className="flex flex-col justify-center items-center px-[10px] py-5 border-b border-gray-[1px]  w-full">
                     <img src="/logo-circle.png" className='h-[70px] w-[70px]' alt="" />
-                    <h1 className='16px font-medium text-white pt-[10px]'>Precio Justo</h1>
-                    <h3 className='text-white'>Bienvenido {user.nombre}</h3>
-                    <h3 className='text-white'>{rol}</h3>
+                    <h1 className='16px font-medium  text-center text-white py-[10px]'>Precio Justo</h1>
+                    <h3 className='text-white text-center'>Bienvenido {user.nombre}</h3>
+                    <h3 className='text-white text-center'>{rol}</h3>
                 </li>
                 <li className="px-5">
                     <Link href="/Administrador/Pedido" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">

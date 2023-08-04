@@ -33,10 +33,7 @@ export default function Home() {
     user && router.push('/Register')
   }, [user, success]);
 
-
-  console.log(user)
   return (
-
     <div className="min-h-full"
       style={{
         backgroundImage: 'url(/bg-signup.jpg)',

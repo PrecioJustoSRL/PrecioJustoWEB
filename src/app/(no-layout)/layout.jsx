@@ -11,10 +11,9 @@ function Home({ children }) {
     const router = useRouter()
     useEffect(() => {
         if (user === undefined) onAuth(setUserProfile)
-        if (user === null) router.push('/')
+        if (user === null) {router.push('/')}
         if (user && user.role === 'authenticated') { router.push('/Register') }
-        if (user && user.rol) router.push('/Cliente')
-
+        if (user && user.rol) {router.push('/Cliente')}
         if (user !== undefined && user !== null && user.rol && userDB === undefined) {
             console.log('ejecu')
             readUserData(user.rol, user.uuid, setUserData,)
@@ -24,7 +23,6 @@ function Home({ children }) {
     return (
         <main >
             {(user === null || (user && user.role && user.role === 'authenticated')) ? children : <LoaderWithLogo></LoaderWithLogo>}
-
         </main>
     )
 }
