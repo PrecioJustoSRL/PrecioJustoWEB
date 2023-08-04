@@ -55,9 +55,9 @@ function Home() {
         setPostImage(null)
         setUrlPostImage(null)
         setState({ sistema: '1.5', disponibilidad: 'Disponible' })
-        setCategorias({ Otros: true })
-        setUserSuccess('')
-        setDisable(false)
+
+        return setUserSuccess('')
+
     }
 
     const onClickHandlerCity = (name, value) => {
