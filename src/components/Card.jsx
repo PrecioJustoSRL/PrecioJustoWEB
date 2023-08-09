@@ -70,13 +70,13 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                     {/* <span class="text-[14px] text-gray-600 font-semibold">Bs</span> */}
 
                 </div>
-                {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='text-[16px] text-right px-5'> {cart[i.uuid].cantidad} </span>}
             </div>
             {user.rol !== 'Distribuidor' && <div className='flex py-4 pr-4'>
                 {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0
                     ? <div className='flex w-full'>
-                        <Button theme='MiniSecondary' click={(e) => addPlussCart(e, i)}>+</Button>
-                        <Button theme='MiniPrimary' click={(e) => addLessCart(e, i)}>-</Button>
+                        <Button theme='MiniPrimary' click={(e) => addLessCart(e, i)}><span className='text-[16px]'>-</span></Button>
+                        {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='flex justify-center items-center text-[16px] text-right px-5 w-[40px] '> {cart[i.uuid].cantidad} </span>}
+                        <Button theme='MiniSecondary' click={(e) => addPlussCart(e, i)}><span className='text-[16px]'>+</span></Button>
                     </div>
                     : <Button theme='MiniPrimaryComprar' click={(e) => addCart(e, i)}>Comprar</Button>}
             </div>
