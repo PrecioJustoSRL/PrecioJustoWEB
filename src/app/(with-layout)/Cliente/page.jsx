@@ -97,9 +97,8 @@ function Home() {
                     <div className='lg:w-[250px]'>
                         <Subtitle styled='' htmlFor="">Disponibilidad</Subtitle>
                         <div className="grid grid-cols-2 gap-4 justify-between">
-                            <Tag theme={disponibilidad == 'Disponible' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'Disponible' ? 'Todas' : 'Disponible')}>En un día</Tag>
+                            <Tag theme={disponibilidad == 'Disponible' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'Disponible' ? 'Todas' : 'Disponible')}>En 24 hrs</Tag>
                             <Tag theme={disponibilidad == 'Inmediato' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'Inmediato' ? 'Todas' : 'Inmediato')}>Inmediatamente</Tag>
-                            <Tag theme={disponibilidad == 'No disponible' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'No disponible' ? 'Todas' : 'No disponible')}>No disponible</Tag>
                         </div>
                     </div>
                     <div className='lg:w-[250px]'>
