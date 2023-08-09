@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <link rel="icon" href="/logo-dark.svg" />
         <link rel='manifest' href='/manifest.json' />
