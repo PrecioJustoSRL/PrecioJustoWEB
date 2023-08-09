@@ -41,11 +41,11 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     }
     console.log(item)
     return (
-        <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] border border-gray-200 rounded-[20px] shadow mt-5" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px', gridAutoFlow: 'dense'}}>
+        <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] border border-gray-200 rounded-[20px] shadow mt-5" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px', gridAutoFlow: 'dense' }}>
             <div class=" font-bold text-[16px] mb-2 text-gray-950 col-span-2 p-5 pb-0">
                 {i['nombre de producto 1']}
             </div>
-            <div class=" p-4  flex flex-col justify-between leading-normal">
+            <div class=" p-4  flex flex-col justify-start leading-normal">
                 <div class="">
                     <div class=" font-bold text-[16px] mb-2 text-gray-700">
                         {i['nombre de producto 2']}
@@ -65,8 +65,10 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                     {recetado === true && <span className='absolute text-[16px] font-bold right-10 top-10 text-green-600 transform rotate-[-45deg]'>Recetado <br /> por tu doctor</span>}
                 </div>
                 <div className='flex py-4 pr-4'>
-                    Entrega <br />
-                    <span className={`block text-center w-full text-14 p-2 rounded-full text-[16px] ${i.disponibilidad == 'No disponible' && 'bg-red-400'} ${i.disponibilidad == 'Inmediatamente' && 'bg-green-400'} ${i.disponibilidad == 'En un día' && 'bg-yellow-300'}`}>{i.disponibilidad}</span>
+                    <span className={`block text-center w-full text-14 p-2 rounded-[5px] text-[16px] ${i.disponibilidad == 'No disponible' && 'bg-red-400'} ${i.disponibilidad == 'Inmediatamente' && 'bg-green-400'} ${i.disponibilidad == 'En un día' && 'bg-yellow-300'}`}>
+                        Entrega <br />
+                        {i.disponibilidad}
+                    </span>
                 </div>
             </div>
 
@@ -74,13 +76,9 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                 <div class="flex items-baseline text-gray-900">
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight">{i.costo}</span>
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight"> BS</span>
-
-                    {/* <span class="text-[14px] text-gray-600 font-semibold">Bs</span> */}
-
                 </div>
             </div>
             {user.rol !== 'Distribuidor' && <div className='flex py-4 pr-4'>
-
                 {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0
                     ? <div className='flex w-full'>
                         <Button theme='MiniPrimary' click={(e) => addLessCart(e, i)}>-</Button>
@@ -88,8 +86,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                         <Button theme='MiniSecondary' click={(e) => addPlussCart(e, i)}>+</Button>
                     </div>
                     : <Button theme='MiniPrimaryComprar' click={(e) => addCart(e, i)}>Comprar</Button>}
-            </div>
-            }
+            </div>}
             {user.rol == 'Distribuidor' && <div className='flex py-4 pr-4'>
                 <Button theme='MiniPrimaryInfo' onClick={(e) => seeMore(e, i)}>Info</Button>
             </div>
