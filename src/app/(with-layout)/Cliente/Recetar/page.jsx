@@ -86,7 +86,7 @@ function handlerQRShare() {
           <Label htmlFor="">Hospital o centro medico</Label>
           <Input type="text" name="hospital" onChange={onChangeHandler} />
         </div>
-        <Button theme="Success" click={handlerPay}> Guardar</Button>
+        <Button theme="Success" click={handlerPay}> Generar QR</Button>
       </div>
     </form>
 

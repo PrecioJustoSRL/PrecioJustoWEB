@@ -44,6 +44,49 @@ input:focus {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* Designing for scroll-bar */
+    ::-webkit-scrollbar {
+      width: 2px;
+      height: 2px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+      background: rgb(255, 255, 255);
+      border-radius: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+      background: rgb(158, 158, 158);
+      border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+      background: #ffffff;
+  }
+
 /* 
 
 :root {

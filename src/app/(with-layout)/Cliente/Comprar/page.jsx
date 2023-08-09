@@ -82,11 +82,10 @@ function Comprar({ theme, styled, click, children }) {
     </form>
     <h3 className='text-center text-[16px] pb-3'>MIS COMPRAS</h3>
 
-    <div className='relative overflow-x-auto items-center justify-between w-full max-w-[500px] bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >
+    <div className='relative overflow-x-auto items-center justify-between w-full max-w-screen bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >
         {Object.values(cart).length > 0 ? Object.values(cart).map((i, index) => <MiniCard i={i} />) : <span className='block text-[16px] text-center'>No tienes productos <br /> selecciona alguno <br /> </span>}
     </div>
     <br />
-
     {user.rol == 'Clinica' && userDB && userDB.access == 'verificador'  
       ? Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
         <Button theme="SuccessReceta" click={handlerPay}> Mandar a Revisión la solicitud de compra</Button>
