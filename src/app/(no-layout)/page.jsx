@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 
 
 export default function Home() {
-  const { user, introVideo, setIntroVideo, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG } = useUser()
+  const { user, introVideo, setSound, setIntroVideo, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG } = useUser()
 
   const router = useRouter()
 
@@ -74,6 +74,7 @@ export default function Home() {
           const objectStore = transaction.objectStore('preciojusto')
           const request = objectStore.add({ uid: 'video-mp4', play: true })
           setIntroVideo(true)
+          setSound(true)
         }
       }
     }
