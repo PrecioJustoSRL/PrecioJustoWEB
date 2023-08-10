@@ -56,7 +56,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
 
             <div class=" p-4 pt-4  flex flex-col justify-start leading-normal">
 
-                {i.categoria !== 'Otros' && <p class="text-gray-700 text-[14px] pb-[10px] font-bold">{i.categoria}</p>}
+                {i.categoria !== 'Otros' && <p class="text-gray-700 text-[16px] pb-[10px] font-bold">{i.categoria}</p>}
                 <div class="">
                     <p class="text-gray-700 text-[12px]">{i['descripcion basica']}</p>
                 </div>
