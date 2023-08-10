@@ -26,7 +26,7 @@ function Home() {
     const [state, setState] = useState({})
     const [postImage, setPostImage] = useState({})
     const [urlPostImage, setUrlPostImage] = useState({})
-    const [disponibilidad, setDisponibilidad] = useState('')
+    // const [disponibilidad, setDisponibilidad] = useState('')
     const [categoria, setCategoria] = useState('')
     const [sistema, setSistema] = useState('')
 

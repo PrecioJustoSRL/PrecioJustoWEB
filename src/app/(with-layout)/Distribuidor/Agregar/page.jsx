@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import { WithAuth } from '@/HOCs/WithAuth'
 import {generateUUID} from '@/utils/UIDgenerator'
 import LoaderBlack from '@/components/LoaderBlack'
+import { disponibilidad } from '@/constants'
 
 
 function Home() {
@@ -172,7 +173,7 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Disponibilidad</Label>
-                    <Select arr={['En un día', 'Inmediatamente', 'No disponible']} name='disponibilidad' click={onClickHandlerAvailability} />
+                    <Select arr={disponibilidad} name='disponibilidad' click={onClickHandlerAvailability} />
                 </div>
                 <div>
                     <Label htmlFor="">Costo</Label>

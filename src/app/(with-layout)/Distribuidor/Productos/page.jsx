@@ -214,7 +214,7 @@ function Home() {
                                 {/* {i['costo']} */}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['En un día', 'Inmediatamente', 'No disponible']} name='disponibilidad' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerAvailability} />
+                                <Select arr={disponibilidad} name='disponibilidad' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerAvailability} />
                             </td>
                             <td class="w-32 p-4">
                                 <label htmlFor={`img${index}`}>
