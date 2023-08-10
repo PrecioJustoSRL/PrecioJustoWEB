@@ -80,7 +80,7 @@ function Comprar({ theme, styled, click, children }) {
 
       </div>
     </form>
-    <h3 className='text-center text-[16px] px-5 py-2 bg-blue-300' >MIS COMPRAS</h3>
+    <h3 className='text-center text-[16px] px-5 py-2 bg-[#2A52BE] text-white' >MIS COMPRAS</h3>
 
     <div className='relative overflow-x-auto items-center justify-between w-full max-w-screen bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >
         
