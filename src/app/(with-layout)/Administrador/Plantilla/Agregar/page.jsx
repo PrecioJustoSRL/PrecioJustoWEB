@@ -17,13 +17,14 @@ import { useMask } from '@react-input/mask';
 import { useRouter } from 'next/navigation';
 import { WithAuth } from '@/HOCs/WithAuth'
 import { generateUUID } from '@/utils/UIDgenerator'
+import { disponibilidad } from '@/constants'
 
 
 function Home() {
     const router = useRouter()
 
     const { user, userDB, setUserData, setUserSuccess, success, setModal, modal } = useUser()
-    const [state, setState] = useState({ sistema: '1.5', disponibilidad: 'Disponible' })
+    const [state, setState] = useState({ sistema: '1.5', disponibilidad: 'No disponible' })
 
     const [postImage, setPostImage] = useState(null)
     const [urlPostImage, setUrlPostImage] = useState(null)
@@ -198,7 +199,7 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Disponibilidad</Label>
-                    <Select arr={['Disponible', 'Disponibilidad inmediata', 'No disponible']} name='disponibilidad' click={onClickHandlerAvailability} />
+                    <Select arr={disponibilidad} name='disponibilidad' click={onClickHandlerAvailability} />
                 </div>
                 <div>
                     <Label htmlFor="">Costo</Label>

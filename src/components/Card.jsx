@@ -41,20 +41,24 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     }
     console.log(item)
     return (
-        <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] border border-gray-200 rounded-[20px] shadow mt-5" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px', gridAutoFlow: 'dense' }}>
-            <div class=" font-bold text-[16px]  text-gray-950 col-span-2 p-5">
-                {i['nombre de producto 1']}
+        <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] border border-gray-200 rounded-[20px] shadow mt-5 overflow-hidden" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px', gridAutoFlow: 'dense' }}>
+            <div class=" font-bold text-[16px] bg-[#2A52BE] text-gray-950 col-span-2 p-5">
+                <div class=" font-bold text-[16px] mb-2 text-white">
+                    {i['nombre de producto 1']}
+                </div>
+                {i['nombre de producto 2'] && <div class=" font-regular text-[14px] mb-2 text-white">
+                    {i['nombre de producto 2']}
+                </div>}
+                {i['nombre de producto 2'] && <div class=" font-regular text-[14px] mb-2 text-white">
+                    {i['nombre de producto 3']}
+                </div>}
             </div>
-            <div class=" p-4 pt-0  flex flex-col justify-start leading-normal">
-                    {i['nombre de producto 2'] && <div class=" font-bold text-[16px] mb-2 text-gray-700">
-                        {i['nombre de producto 2']}
-                    </div>}
-                    {i['nombre de producto 2'] && <div class=" font-bold text-[16px] mb-2 text-gray-700">
-                        {i['nombre de producto 3']}
-                    </div>}
-                {i.categoria !== 'Otros' && <p class="text-gray-700 text-[16px] pb-[10px]">{i.categoria}</p>}
+
+            <div class=" p-4 pt-4  flex flex-col justify-start leading-normal">
+
+                {i.categoria !== 'Otros' && <p class="text-gray-700 text-[14px] pb-[10px] font-bold">{i.categoria}</p>}
                 <div class="">
-                    <p class="text-gray-700 text-[16px]">{i['descripcion basica']}</p>
+                    <p class="text-gray-700 text-[12px]">{i['descripcion basica']}</p>
                 </div>
             </div>
 
@@ -64,15 +68,15 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                     {recetado === true && <span className='absolute text-[16px] font-bold right-10 top-10 text-green-600 transform rotate-[-45deg]'>Recetado <br /> por tu doctor</span>}
                 </div>
                 <div className='flex py-4 pr-4'>
-                    <span className={`block text-center w-full text-14 p-2 rounded-[5px] text-[16px]`}>
-                        Entrega <br />
-                        {i.disponibilidad}
+                    <span className={`block text-center w-full text-14 p-2 rounded-[5px] text-[16px] leanding-[0px]`}>
+                        Entrega {i.disponibilidad}
                     </span>
                 </div>
             </div>
 
             <div className='w-full flex justify-between  items-center p-4'>
-                <div class="flex items-baseline text-gray-900">
+                <div class="flex items-baseline text-gray-900 bg-white rounded-full px-5 py-2">
+                <span className='inline-block mr-3 h-[35px] w-[35px]  border-4 border-double rounded-full text-[20px] text-[#32CD32] font-bold text-center border-[#32CD32]'>$</span>
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight">{i.costo}</span>
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight"> BS</span>
                 </div>

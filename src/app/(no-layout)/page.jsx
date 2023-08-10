@@ -74,7 +74,7 @@ export default function Home() {
           const objectStore = transaction.objectStore('preciojusto')
           const request = objectStore.add({ uid: 'video-mp4', play: true })
           setIntroVideo(true)
-          setSound(true)
+          // setSound(true)
         }
       }
     }
