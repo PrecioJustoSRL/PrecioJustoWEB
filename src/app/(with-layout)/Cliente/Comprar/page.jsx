@@ -80,10 +80,45 @@ function Comprar({ theme, styled, click, children }) {
 
       </div>
     </form>
-    <h3 className='text-center text-[16px] pb-3'>MIS COMPRAS</h3>
+    <h3 className='text-center text-[16px] px-5 py-2 bg-blue-300' >MIS COMPRAS</h3>
 
     <div className='relative overflow-x-auto items-center justify-between w-full max-w-screen bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >
+        
+    <table class="w-screen lg:min-w-[800px] lg:w-full lg:min-w-auto text-[12px] text-left text-gray-500">
+            {Object.values(cart).length > 0 && <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+
+                    <th scope="col-3" class="w-1/2 px-3 py-3">
+                        Producto
+                    </th>
+                    <th scope="col" class="px-3 py-3">
+                        Cantidad
+                    </th>
+                    <th scope="col" class="px-3 py-3">
+                        Costo total
+                    </th>
+
+                </tr>
+            </thead>}
+        
         {Object.values(cart).length > 0 ? Object.values(cart).map((i, index) => <MiniCard i={i} />) : <span className='block text-[16px] text-center'>No tienes productos <br /> selecciona alguno <br /> </span>}
+
+        {Object.values(cart).length > 0 && <tbody>
+                <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td class="px-3 py-4  flex text-[16px] text-gray-700 font-extrabold text-gray-900 dark:text-white">
+                        TOTAL:
+                    </td>
+                    <td></td>
+                    <td class="px-3 py-4 font-extrabold  text-[16px] text-gray-700 dark:text-white">
+                        {Object.values(cart).reduce((acc, i, index) => {
+                            const sum = i['costo'] * i['cantidad']
+                            return sum + acc
+                        }, 0)}  Bs.
+                    </td>
+                </tr>
+                </tbody>}
+           
+           </table>
     </div>
     <br />
     {user.rol == 'Clinica' && userDB && userDB.access == 'verificador'  
