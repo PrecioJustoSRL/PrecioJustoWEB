@@ -43,13 +43,13 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     return (
         <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] border border-gray-200 rounded-[20px] shadow mt-5 overflow-hidden" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px', gridAutoFlow: 'dense' }}>
             <div class=" font-bold text-[16px] bg-[#2A52BE] text-gray-950 col-span-2 p-5">
-                <div class=" font-bold text-[16px] mb-2 text-white">
+                <div class=" font-bold text-[18px] mb-2 text-white">
                     {i['nombre de producto 1']}
                 </div>
-                {i['nombre de producto 2'] && <div class=" font-regular text-[14px] mb-2 text-white">
+                {i['nombre de producto 2'] && <div class=" font-regular text-[16px] mb-2 text-white">
                     {i['nombre de producto 2']}
                 </div>}
-                {i['nombre de producto 2'] && <div class=" font-regular text-[14px] mb-2 text-white">
+                {i['nombre de producto 2'] && <div class=" font-regular text-[16px] mb-2 text-white">
                     {i['nombre de producto 3']}
                 </div>}
             </div>
@@ -68,8 +68,8 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                     {recetado === true && <span className='absolute text-[16px] font-bold right-10 top-10 text-green-600 transform rotate-[-45deg]'>Recetado <br /> por tu doctor</span>}
                 </div>
                 <div className='flex py-4 pr-4'>
-                    <span className={`block text-center w-full text-14 p-2 rounded-[5px] text-[16px] leanding-[0px]`}>
-                        Entrega en 24 hrs
+                    <span className={`block text-center w-full text-14 p-2 rounded-[5px] text-[12px] leanding-[0px]`}>
+                        Entrega {i.disponibilidad.toLowerCase()}
                     </span>
                 </div>
             </div>

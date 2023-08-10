@@ -12,7 +12,7 @@ import { writeUserData, readUserData, updateUserData, deleteUserData } from '@/s
 import { uploadStorage } from '@/supabase/storage'
 import Input from '@/components/Input'
 import {generateUUID} from '@/utils/UIDgenerator'
-import {disponibilidad} from '@/constants'
+import {disponibilidad as dispo} from '@/constants'
 
 function Home() {
     const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
@@ -20,7 +20,7 @@ function Home() {
     const [state, setState] = useState({})
     const [postImage, setPostImage] = useState({})
     const [urlPostImage, setUrlPostImage] = useState({})
-    // const [disponibilidad, setDisponibilidad] = useState('')
+    const [disponibilidad, setDisponibilidad] = useState('')
     const [categoria, setCategoria] = useState('')
     const [sistema, setSistema] = useState('')
     const [id, setId] = useState('')
@@ -215,7 +215,7 @@ function Home() {
                                 {/* {i['costo']} */}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={disponibilidad} name='disponibilidad' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerAvailability} />
+                                <Select arr={dispo} name='disponibilidad' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerAvailability} />
                             </td>
                             <td class="w-32 p-4">
                                 <label htmlFor={`img${index}`}>
