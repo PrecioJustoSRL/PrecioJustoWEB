@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react'
 import { writeUserData, readUserData, updateUserData, deleteUserData } from '@/supabase/utils'
 import { uploadStorage } from '@/supabase/storage'
 import LoaderBlack from '@/components/LoaderBlack'
-import { disponibilidad } from '@/constants'
+import { disponibilidad as dispo} from '@/constants'
 
 
 function Home() {
@@ -26,7 +26,7 @@ function Home() {
     const [state, setState] = useState({})
     const [postImage, setPostImage] = useState({})
     const [urlPostImage, setUrlPostImage] = useState({})
-    // const [disponibilidad, setDisponibilidad] = useState('')
+    const [disponibilidad, setDisponibilidad] = useState('')
     const [categoria, setCategoria] = useState('')
     const [sistema, setSistema] = useState('')
 
@@ -226,7 +226,7 @@ function Home() {
                                 {/* {i['costo']} */}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={disponibilidad} name='disponibilidad' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerAvailability} />
+                                <Select arr={dispo} name='disponibilidad' defaultValue={i.disponibilidad} uuid={i.uuid} click={onClickHandlerAvailability} />
                             </td>
                             <td class="w-32 p-4">
                                 <label htmlFor={`img${index}`}>
