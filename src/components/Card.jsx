@@ -69,7 +69,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                 </div>
                 <div className='flex py-4 pr-4'>
                     <span className={`block text-center w-full text-14 p-2 rounded-[5px] text-[16px] leanding-[0px]`}>
-                        Entrega {i.disponibilidad}
+                        Entrega en 24 hrs
                     </span>
                 </div>
             </div>
