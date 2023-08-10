@@ -36,7 +36,7 @@ function Comprar({ theme, styled, click, children }) {
     router.push('/Cliente/Comprar/Detalle')
   }
   console.log(cart)
-  return (<div className='w-full relative p-5'>
+  return (<div className='w-full relative p-5 pb-[50px]'>
     <div className='fixed top-0 right-[15px] w-1/2 max-w-[250px] py-4 z-[50] '>
       <Button theme='Primary'>Imprimir Proforma</Button>
     </div>
@@ -84,7 +84,7 @@ function Comprar({ theme, styled, click, children }) {
 
     <div className='relative overflow-x-auto items-center justify-between w-full max-w-screen bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >
         
-    <table class="w-full lg:min-w-[800px] lg:w-full lg:min-w-auto text-[12px] text-left text-gray-500">
+    <table class="w-full lg:min-w-[800px] border-[1px] border-gray-200 lg:w-full lg:min-w-auto text-[12px] text-left text-gray-500">
             {Object.values(cart).length > 0 && <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
 
