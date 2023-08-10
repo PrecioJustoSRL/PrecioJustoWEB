@@ -47,7 +47,7 @@ function Home() {
 
 
 
-    console.log(modal)
+    console.log(cart)
 
     useEffect(() => {
         readUserAllData('Producto', productDB, setUserProduct)

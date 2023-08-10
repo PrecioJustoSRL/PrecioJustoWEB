@@ -35,7 +35,7 @@ function Comprar({ theme, styled, click, children }) {
     })
     router.push('/Cliente/Comprar/Detalle')
   }
-  console.log(check)
+  console.log(cart)
   return (<div className='w-full relative p-5'>
     <div className='fixed top-0 right-[15px] w-1/2 max-w-[250px] py-4 z-[50] '>
       <Button theme='Primary'>Imprimir Proforma</Button>
