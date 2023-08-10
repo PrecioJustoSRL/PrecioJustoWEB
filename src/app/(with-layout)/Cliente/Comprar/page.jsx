@@ -84,7 +84,7 @@ function Comprar({ theme, styled, click, children }) {
 
     <div className='relative overflow-x-auto items-center justify-between w-full max-w-screen bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >
         
-    <table class="w-screen lg:min-w-[800px] lg:w-full lg:min-w-auto text-[12px] text-left text-gray-500">
+    <table class="w-full lg:min-w-[800px] lg:w-full lg:min-w-auto text-[12px] text-left text-gray-500">
             {Object.values(cart).length > 0 && <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
 
@@ -121,6 +121,8 @@ function Comprar({ theme, styled, click, children }) {
            </table>
     </div>
     <br />
+      <br />
+
     {user.rol == 'Clinica' && userDB && userDB.access == 'verificador'  
       ? Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
         <Button theme="SuccessReceta" click={handlerPay}> Mandar a Revisión la solicitud de compra</Button>

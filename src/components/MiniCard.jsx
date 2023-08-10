@@ -45,8 +45,8 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                         {i['nombre de producto 1']} 
                         
                         <div class="flex w-full justify-center text-gray-900">
-                            <span class="text-[16px]  text-gray-700 font-extrabold tracking-tight">{i.costo}{'  '}</span>
-                            <span class="text-[16px]  text-gray-700  font-extrabold">   Bs.</span>
+                            <span class="text-[16px]  text-gray-700 font-extrabold tracking-tight">{i.costo} Bs.</span>
+                            {/* <span class="text-[16px]  text-gray-700  font-extrabold">   Bs.</span> */}
                         </div>
                     </td>
                     <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
@@ -63,8 +63,8 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                     </td>
                     <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                         <div class="flex items-baseline text-gray-900">
-                            <span class="text-[16px]  text-gray-700 font-extrabold tracking-tight">{ cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined ? cart[i.uuid].cantidad * i.costo : i.costo }{'  '}</span>
-                            <span class="text-[16px]  text-gray-700  font-extrabold">   Bs.</span>
+                            <span class="text-[16px]  text-gray-700 font-extrabold tracking-tight">{ cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined ? cart[i.uuid].cantidad * i.costo : i.costo } Bs.</span>
+                            {/* <span class="text-[16px]  text-gray-700  font-extrabold">   Bs.</span> */}
                         </div>
                     </td>
                 </tr>

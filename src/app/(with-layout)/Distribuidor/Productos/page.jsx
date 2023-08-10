@@ -12,6 +12,7 @@ import { writeUserData, readUserData, updateUserData, deleteUserData } from '@/s
 import { uploadStorage } from '@/supabase/storage'
 import Input from '@/components/Input'
 import {generateUUID} from '@/utils/UIDgenerator'
+import {disponibilidad} from '@/constants'
 
 function Home() {
     const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
@@ -19,7 +20,7 @@ function Home() {
     const [state, setState] = useState({})
     const [postImage, setPostImage] = useState({})
     const [urlPostImage, setUrlPostImage] = useState({})
-    const [disponibilidad, setDisponibilidad] = useState('')
+    // const [disponibilidad, setDisponibilidad] = useState('')
     const [categoria, setCategoria] = useState('')
     const [sistema, setSistema] = useState('')
     const [id, setId] = useState('')
