@@ -51,7 +51,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                     </td>
                     <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                         {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0
-                            ? <div className='flex w-[130px] items-center justify-center flex-col lg:flex-row justify-between'>
+                            ? <div className='flex w-[130px] items-center justify-center flex-col flex-col-reverse lg:flex-row justify-between'>
                                 <Button theme='MiniPrimary' click={(e) => addLessCart(e, i)}>-</Button>
                                 <span className='px-4'>
                                     {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='block text-[16px] text-center '>{cart[i.uuid].cantidad}</span>}
