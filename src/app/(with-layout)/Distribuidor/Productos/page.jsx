@@ -127,7 +127,9 @@ function Home() {
     }, [])
 
     return (
-        <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
+        <div className='bg-red-400 h-full'> 
+
+        <div class="relative overflow-x-auto h-full  overflow-y-auto shadow-md p-5 bg-white min-h-[80vh]">
                         {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de eliminar el siguiente item:  {item['nombre de producto 1']}</Modal>}
 
             {modal === 'No Data' && <Modal funcion={() => ''}>El identificador no contiene datos o no existe</Modal>}
@@ -288,7 +290,7 @@ function Home() {
                     }
                 </tbody>
             </table>
-            <div className='lg:flex hidden lg:fixed top-[100px] right-[50px] '>
+            <div className='lg:flex hidden lg:fixed top-[100px] right-[65px] '>
                 <div className='flex justify-center items-center h-[50px] text-white text-[14px] font-normal font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-10 cursor-pointer mr-2' onClick={redirect}>Agregar Producto</div>
                 <div className='flex justify-center items-center bg-[#0064FA] h-[50px] w-[50px]  rounded-full text-white cursor-pointer' onClick={redirect}> <span className='text-white text-[30px]'>+</span> </div>
             </div>
@@ -296,6 +298,7 @@ function Home() {
             {success == 'Actualizando' && <LoaderBlack />}
 
         </div>
+         </div>
     )
 }
 

@@ -45,22 +45,22 @@ function Home({ children }) {
     setUserProfile(null)
     setUserCart({})
     setUserProduct(undefined),
-    setRecetaDB(undefined),
-    setUserDistributorPDB(undefined)
+      setRecetaDB(undefined),
+      setUserDistributorPDB(undefined)
     setUserData(null)
     setModal('')
-   return  router.push('/')
-}
+    return router.push('/')
+  }
   console.log(user)
   console.log(userDB)
 
   return (
     // <div className="pt-[65px] pb-[65px] min-h-screen bg-gray-white"  style={{ backgroundImage: `url(bg.png)`, backgroundAttachment: 'fixed', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom' }}>
-    <div className="min-h-screen bg-gray-white">
+    <div className="h-screen bg-gray-white">
       {modal == 'SignOut' && <Modal funcion={signOutConfirm}>
-        Estas seguro de salir...? <br /> {Object.keys(cart).length > 0 && 'Tus compras no han sido efectuadas' }
+        Estas seguro de salir...? <br /> {Object.keys(cart).length > 0 && 'Tus compras no han sido efectuadas'}
       </Modal>}
-      {modal == 'Verifica' && <Modal funcion={()=>{router.push(`/${user.rol}`); setModal('')}}>
+      {modal == 'Verifica' && <Modal funcion={() => { router.push(`/${user.rol}`); setModal('') }}>
         Completa tu perfil para hacer tu primera compra
       </Modal>}
       <div className={`fixed top-0 w-[220px] lg:w-[280px]   h-screen bg-[#2A52BE] h-screen transition-all	z-40  ${nav ? 'left-0  ' : 'left-[-220px] lg:left-[-280px] '} z-50`} >
@@ -71,8 +71,9 @@ function Home({ children }) {
 
       {nav && <div className='fixed top-0 left-0 w-screen h-screen bg-[#000000C2] z-40' onClick={() => setNav(false)}></div>}
 
-      <main className={`relative min-w-screen pt-[85px] pb-[65px] lg:pb-0  lg:min-w-auto my-[0px]  lg:bg-blue-50 lg:min-h-screen md:pt-[85px] ${nav ? 'w-screen pl-[220px] lg:pl-[280px] ' : '  lg:px-[0px]'}`} onClick={() => setNav(false)} style={{ transition: 'all 0.5' }}>
+      <main className={`relative min-w-screen  lg:pb-0  lg:min-w-auto my-[0px]  lg:bg-blue-50 lg:min-h-screen  ${nav ? 'w-screen pl-[220px] lg:pl-[280px] ' : '  lg:px-[0px]'}`} onClick={() => setNav(false)} style={{ transition: 'all 0.5' }}>
         {/* <img src="/bg.png" className='fixed bottom-[60px] lg:bottom-0 right-[20px] w-[60vw] lg:w-[40vw]' alt="" /> */}
+
         <nav className="w-screen fixed top-0 border-b border-gray-200 shadow-sm flex items-center justify-between bg-[#2A52BE]  p-4 h-[70px] z-30" onClick={() => setNav(false)}>
           {pathname !== '/Cliente' && <div className='flex  hidden lg:block'>
             <div className='flex '>
@@ -99,7 +100,7 @@ function Home({ children }) {
             </button>}
 
           {pathname === '/Cliente' && <div className="relative lg:min-w-[500px]">
-            <div className="absolute inset-y-0 right-[5px] flex items-center py-3 ">
+            <div className="absolute inset-y-0 right-[5px] flex items-center py-3 z-50 ">
               <svg className="w-8 h-8 text-white " aria-hidden="true" fill="text-gray-100" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#2A52BE" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
               <span className="sr-only">Search icon</span>
             </div>
@@ -109,8 +110,12 @@ function Home({ children }) {
           {user && user !== undefined && user.rol !== 'Distribuidor' && pathname === '/Cliente' && <Cart />}
         </nav>
 
+        <div className="lg:px-[50px] pt-[85px] pb-[65px] md:pt-[85px] md:pb-5 h-screen">
 
-        <div className="lg:px-[50px]">
+
+
+
+
 
           {children}
 

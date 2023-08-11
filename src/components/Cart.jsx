@@ -17,7 +17,7 @@ export default function Button({ theme, styled, click, children }) {
         ? router.push('/Cliente/Comprar')
         : success !== 'noProduct' && setUserSuccess('noProduct')
 
-        setTimeout(() => { setUserSuccess(null) }, 6000)
+        setTimeout(() => { setUserSuccess(null) }, 3000)
 
     }
 

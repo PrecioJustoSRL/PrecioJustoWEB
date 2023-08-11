@@ -24,8 +24,8 @@
   .error {
     position: fixed;
     width: 80%;
-    height: 85px;
-    top: 65px;
+    padding: 10px;
+    top: 70px;
     right: 10px;
     border-radius: 50px 0 50px 50px;
     /* background-color: red; */
@@ -38,11 +38,10 @@
     align-items: center;
   
     animation-name: animationRed;
-    animation-duration: 6s;
+    animation-duration: 3s;
     animation-delay: 0;
     animation-iteration-count: infinite;
     z-index: 100000000;
-    padding: 1px 0;
   }
   
   @keyframes animationRed {
@@ -53,14 +52,14 @@
   
     20% {
       background-color: #ffffff;
-      border: 1px solid red;
-      color: #2A52BE
+      border: 1px solid #2A52BE;
+      color: #636363
     }
   
     80% {
       background-color: #ffffff;
-      border: 1px solid red;
-      color: #2A52BE
+      border: 1px solid #2A52BE;
+      color: #636363
     }
   
     100% {
@@ -101,7 +100,7 @@
   
     .success,
     .error {
-      height: 65px
+      /* height: 65px */
     }
   
   
