@@ -98,8 +98,8 @@ function Home() {
     }, [success])
 
     return (
-
-        <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
+        <div className='h-full'> 
+        <div class="relative h-full overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
             {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de eliminar el siguiente item:  {item['nombre de producto 1']}</Modal>}
 
             <h3 className='font-medium text-[16px]'>Lista De Productos</h3>
@@ -256,6 +256,8 @@ function Home() {
 
             {success == 'Cargando' && <LoaderBlack />}
 
+        </div>
+        
         </div>
 
     )
