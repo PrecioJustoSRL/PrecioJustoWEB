@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/Button'
+
 import { useUser } from '@/context/Context.js'
 import { useRouter } from 'next/navigation';
 
@@ -41,15 +42,15 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     }
     console.log(item)
     return (
-        <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] border border-gray-200 rounded-[20px] shadow mt-5 overflow-hidden" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px', gridAutoFlow: 'dense' }}>
-            <div class=" font-bold text-[16px] bg-[#2A52BE] text-gray-950 col-span-2 p-5">
-                <div class=" font-bold text-[18px] mb-2 text-white">
+        <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] rounded-[20px] shadow-sm shadow-[#2A52BE] mt-5 overflow-hidden" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px', gridAutoFlow: 'dense' }}>
+            <div class=" font-bold text-[16px] bg-[#2A52BE] flex flex-col w-full justify-between items-between text-gray-950 col-span-2 p-5">
+                <div class=" font-bold text-[18px]  text-white">
                     {i['nombre de producto 1']}
                 </div>
-                {i['nombre de producto 2'] && <div class=" font-regular text-[16px] mb-2 text-white">
+                {i['nombre de producto 2'] && <div class=" font-regular text-[16px]  text-white">
                     {i['nombre de producto 2']}
                 </div>}
-                {i['nombre de producto 2'] && <div class=" font-regular text-[16px] mb-2 text-white">
+                {i['nombre de producto 2'] && <div class=" font-regular text-[16px] text-white">
                     {i['nombre de producto 3']}
                 </div>}
             </div>
@@ -94,6 +95,10 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                 <Button theme='MiniPrimaryInfo' onClick={(e) => seeMore(e, i)}>Info</Button>
             </div>
             }
+
+
+
+            
         </div>
     )
 }

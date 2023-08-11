@@ -2,17 +2,23 @@
 import { useState } from 'react'
 import { useUser } from '@/context/Context.js'
 import { useRouter } from 'next/navigation';
+import Msg from '@/components/Msg'
 
 export default function Button({ theme, styled, click, children }) {
 
-    const { user, cart, tienda, productDB, setUserProduct, setUserItem } = useUser()
+    const { user, cart, tienda, productDB, setUserProduct, setUserItem, setUserSuccess, success } = useUser()
     const router = useRouter()
 
     const [add, setAdd] = useState(false)
     const [showCart, setShowCart] = useState(false)
 
     function HandlerCheckOut() {
-        router.push('/Cliente/Comprar')
+        Object.keys(cart).length > 0 
+        ? router.push('/Cliente/Comprar')
+        : setUserSuccess('noProduct')
+
+        setTimeout(() => { setUserSuccess(null) }, 6000)
+
     }
 
 
@@ -49,6 +55,10 @@ export default function Button({ theme, styled, click, children }) {
                 </li>
             </ul>
         </div> */}
+        <div className='absolute w-screen left-0 top-0'>
+{                     success === 'noProduct' &&          <Msg>Añade algunos productos a tu carrito</Msg>}
+        </div>
+
     </div>)
 }
 
