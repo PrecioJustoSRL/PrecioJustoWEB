@@ -67,7 +67,7 @@ function Home() {
         delete obj[i.uuid]
         setState(obj)
         setUserSuccess('')
-        state[i.uuid]['nombre de producto 1'] !== undefined && setUserDistributorPDB(undefined)
+        // state[i.uuid]['nombre de producto 1'] !== undefined && setUserDistributorPDB(undefined)
         return  readUserData('Producto', 'Precio-Justo-SRL-Data', setUserDistributorPDB, 'distribuidor')
     }
 
