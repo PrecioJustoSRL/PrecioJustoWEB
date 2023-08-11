@@ -15,7 +15,7 @@ export default function Button({ theme, styled, click, children }) {
     function HandlerCheckOut() {
         Object.keys(cart).length > 0 
         ? router.push('/Cliente/Comprar')
-        : setUserSuccess('noProduct')
+        : success !== 'noProduct' && setUserSuccess('noProduct')
 
         setTimeout(() => { setUserSuccess(null) }, 6000)
 
