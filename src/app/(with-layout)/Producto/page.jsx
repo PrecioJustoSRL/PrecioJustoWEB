@@ -88,24 +88,24 @@ function Home() {
                 <br />
                 <Subtitle>Cantidad</Subtitle>
                 <div className='relative flex w-full justify-between items-center pr-4'>
-                    {cart && cart[item.uuid] && cart[item.uuid].cantidad !== undefined && cart[item.uuid].cantidad !== 0 && <span className='text-[16px] text-right px-5'>Cantidad: {cart[item.uuid].cantidad} </span>}
 
                     {cart && cart[item.uuid] && cart[item.uuid].cantidad !== undefined && cart[item.uuid].cantidad !== 0
                         ? <div className='flex w-[150px]'>
-                            <Button theme='MiniSecondary' click={(e) => addPlussCart(e, item)}>+</Button>
                             <Button theme='MiniPrimary' click={(e) => addLessCart(e, item)}>-</Button>
+                            {cart && cart[item.uuid] && cart[item.uuid].cantidad !== undefined && cart[item.uuid].cantidad !== 0   && <span className='flex justify-center items-center text-[16px] text-right px-5 w-[40px] font-bold'> {cart[item.uuid].cantidad} </span>}
+                            <Button theme='MiniSecondary' click={(e) => addPlussCart(e, item)}>+</Button>
                         </div>
-                        : <Button theme='MiniPrimary' click={(e) => addCart(e, item)}>Comprar</Button>
+                        : <Button theme='MiniPrimaryComprar' click={(e) => addCart(e, item)}>Comprar</Button>
                     }
                 </div>
                 <br />
-              
+
             </div>
             {Object.entries(cart).length !== 0 && <div className="fixed w-screen px-5 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
-                    {tienda === 'Recetar'
-                        ? <Button theme="SuccessReceta" click={HandlerRecetar}>Completar Receta</Button>
-                        : <Button theme="SuccessBuy" click={HandlerCheckOut}>Ir a pagar</Button>}
-                </div>}
+                {tienda === 'Recetar'
+                    ? <Button theme="SuccessReceta" click={HandlerRecetar}>Completar Receta</Button>
+                    : <Button theme="SuccessBuy" click={HandlerCheckOut}>Ir a pagar</Button>}
+            </div>}
         </main> : <div ></div>
     )
 }
