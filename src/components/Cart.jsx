@@ -55,7 +55,7 @@ export default function Button({ theme, styled, click, children }) {
                 </li>
             </ul>
         </div> */}
-        <div className='absolute w-screen left-0 top-0'>
+        <div className='absolute w-screen left-0 top-[70px]'>
 {                     success === 'noProduct' &&          <Msg>Añade algunos productos a tu carrito</Msg>}
         </div>
 

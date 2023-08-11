@@ -40,8 +40,8 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     return (
         
             <tbody>
-                <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" >
-                    <td class="px-3 py-4  flex flex-col text-[16px] font-extrabold text-gray-700 dark:text-white">
+                <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 " >
+                    <td class="px-3 py-4  flex flex-col text-[16px] font-extrabold text-gray-700">
                         {i['nombre de producto 1']} 
                         
                         <div class="flex w-full justify-center text-gray-900">
@@ -51,7 +51,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                     </td>
                     <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                         {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0
-                            ? <div className='flex w-[130px] items-center justify-center flex-col flex-col-reverse lg:flex-row justify-between'>
+                            ? <div className='flex w-[80px] items-center justify-center flex-col flex-col-reverse lg:flex-row justify-between'>
                                 <Button theme='MiniPrimary' click={(e) => addLessCart(e, i)}>-</Button>
                                 <span className='px-4'>
                                     {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='block text-[16px] text-center '>{cart[i.uuid].cantidad}</span>}
@@ -61,7 +61,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                             : <Button theme='MiniPrimary' click={(e) => addCart(e, i)}>Comprar</Button>
                         }
                     </td>
-                    <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                    <td class="px-3 py-4 font-semibold text-gray-900">
                         <div class="flex items-baseline text-gray-900">
                             <span class="text-[16px]  text-gray-700 font-extrabold tracking-tight">{ cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined ? cart[i.uuid].cantidad * i.costo : i.costo } Bs.</span>
                             {/* <span class="text-[16px]  text-gray-700  font-extrabold">   Bs.</span> */}

@@ -64,7 +64,7 @@ function Comprar({ theme, styled, click, children }) {
             <div className="flex items-center h-5 mr-5">
               <input id="remember" type="radio" value="" checked={check == false ? true: false} onClick={() => setCheck(false)} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
             </div>
-            <Label htmlFor="remember" className="ml-2 text-[14px] font-medium " >Para la ciudad</Label>
+            <Label htmlFor="remember" className="ml-2 text-[14px] font-medium " onClick={() => setCheck(false)}>Para la ciudad</Label>
           </div>
         </div>
 
@@ -73,7 +73,7 @@ function Comprar({ theme, styled, click, children }) {
             <div className="flex items-center h-5 mr-5">
               <input id="remember" type="radio" value=""  checked={check == true? true: false} onClick={() => setCheck(true)} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
             </div>
-            <Label htmlFor="remember" className="ml-2 text-[14px] font-medium ">Para provincia (+350bs)</Label>
+            <Label htmlFor="remember" className="ml-2 text-[14px] font-medium " onClick={() => setCheck(true)} >Para provincia (+350bs)</Label>
           </div>
         </div>
         </div>
@@ -85,31 +85,29 @@ function Comprar({ theme, styled, click, children }) {
     <div className='relative overflow-x-auto items-center justify-between w-full max-w-screen bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >
         
     <table class="w-full lg:min-w-[800px] border-[1px] border-gray-200 lg:w-full lg:min-w-auto text-[12px] text-left text-gray-500">
-            {Object.values(cart).length > 0 && <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            {Object.values(cart).length > 0 && <thead class="text-[12px] text-gray-700 uppercase bg-gray-50">
                 <tr>
-
-                    <th scope="col-3" class="w-1/2 px-3 py-3">
+                    <th scope="col-3" class="w-1/2 px-2 py-3">
                         Producto
                     </th>
-                    <th scope="col" class="px-0 py-3">
+                    <th scope="col" class="px-0 py-3 text-center">
                         Cantidad
                     </th>
-                    <th scope="col" class="px-3 py-3">
+                    <th scope="col" class="px-2 w-[200px] py-3">
                         Costo total
                     </th>
-
                 </tr>
             </thead>}
         
         {Object.values(cart).length > 0 ? Object.values(cart).map((i, index) => <MiniCard i={i} />) : <span className='block text-[16px] text-center'>No tienes productos <br /> selecciona alguno <br /> </span>}
 
         {Object.values(cart).length > 0 && <tbody>
-                <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="px-3 py-4  flex text-[16px] text-gray-700 font-extrabold text-gray-900 dark:text-white">
+                <tr class="bg-white text-[12px] border-b">
+                    <td class="px-2 py-4  flex text-[16px] text-gray-700 font-extrabold text-gray-900">
                         TOTAL:
                     </td>
                     <td>{check && '+350 Bs *Para provincia'}</td>
-                    <td class="px-3 py-4 font-extrabold  text-[16px] text-gray-700 dark:text-white">
+                    <td class="px-2 py-4 font-extrabold  text-[16px] text-gray-700">
                         {Object.values(cart).reduce((acc, i, index) => {
                             const sum = i['costo'] * i['cantidad']
                             return sum + acc
