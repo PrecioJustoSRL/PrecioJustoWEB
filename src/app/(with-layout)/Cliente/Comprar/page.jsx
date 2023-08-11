@@ -73,7 +73,7 @@ function Comprar({ theme, styled, click, children }) {
             <div className="flex items-center h-5 mr-5">
               <input id="remember" type="radio" value=""  checked={check == true? true: false} onClick={() => setCheck(true)} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
             </div>
-            <Label htmlFor="remember" className="ml-2 text-[14px] font-medium ">Para el campo (+350bs)</Label>
+            <Label htmlFor="remember" className="ml-2 text-[14px] font-medium ">Para provincia (+350bs)</Label>
           </div>
         </div>
         </div>
@@ -91,7 +91,7 @@ function Comprar({ theme, styled, click, children }) {
                     <th scope="col-3" class="w-1/2 px-3 py-3">
                         Producto
                     </th>
-                    <th scope="col" class="px-3 py-3">
+                    <th scope="col" class="px-0 py-3">
                         Cantidad
                     </th>
                     <th scope="col" class="px-3 py-3">
@@ -108,12 +108,12 @@ function Comprar({ theme, styled, click, children }) {
                     <td class="px-3 py-4  flex text-[16px] text-gray-700 font-extrabold text-gray-900 dark:text-white">
                         TOTAL:
                     </td>
-                    <td></td>
+                    <td>{check && '+350 Bs *Para provincia'}</td>
                     <td class="px-3 py-4 font-extrabold  text-[16px] text-gray-700 dark:text-white">
                         {Object.values(cart).reduce((acc, i, index) => {
                             const sum = i['costo'] * i['cantidad']
                             return sum + acc
-                        }, 0)}  Bs.
+                        }, 0)    + check ? 350 : 0}  Bs. 
                     </td>
                 </tr>
                 </tbody>}
