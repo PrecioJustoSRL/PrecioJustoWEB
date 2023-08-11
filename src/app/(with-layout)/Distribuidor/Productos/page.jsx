@@ -11,11 +11,14 @@ import { useEffect, useState } from 'react'
 import { writeUserData, readUserData, updateUserData, deleteUserData } from '@/supabase/utils'
 import { uploadStorage } from '@/supabase/storage'
 import Input from '@/components/Input'
-import {generateUUID} from '@/utils/UIDgenerator'
-import {disponibilidad as dispo} from '@/constants'
+import { generateUUID } from '@/utils/UIDgenerator'
+import LoaderBlack from '@/components/LoaderBlack'
+import { disponibilidad as dispo } from '@/constants'
+import Modal from '@/components/Modal'
 
 function Home() {
-    const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, } = useUser()
+    const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, setUserData, setUserSuccess, modal, setModal, success, item,  } = useUser()
+
     const router = useRouter()
     const [state, setState] = useState({})
     const [postImage, setPostImage] = useState({})
@@ -30,15 +33,48 @@ function Home() {
     const onClickHandlerCategory = (name, value, uuid) => {
         setState({ ...state, [uuid]: { ...state[uuid], uuid, ['categoria']: value } })
     }
-    const importacionHandler = async (e) => {
-      
-        const data = await readUserData('Producto', e ? 'Precio-Justo-SRL-Data' : id , setUserDistributorPDB, 'distribuidor')
-        data.map(async i=>{
-        const obj = {...i}
-        delete obj.id
-        return await writeUserData('Producto', {...obj, uuid: generateUUID(), distribuidor: user.uuid} , user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
+
+
+
+    console.log(distributorPDB)
+
+
+
+
+
+    const importacionConfirm = async (e) => {
+        setModal('')
+
+        setUserSuccess('Actualizando')
+        const queryUuid = e === 'Importar PrecioJustoSRL' ? 'Precio-Justo-SRL-Data' : id
+
+        const data = await readUserData('Producto', queryUuid, null, 'distribuidor')
+        await deleteUserData('Producto', user.uuid, 'distribuidor')
+        data.map(async i => {
+            const obj = { ...i }
+            delete obj.id
+            return await writeUserData('Producto', { ...obj, uuid: generateUUID(), distribuidor: user.uuid }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
         })
+        setUserDistributorPDB(undefined)
+        await readUserData('Producto', user.uuid, setUserDistributorPDB, 'distribuidor')
+        return setUserSuccess('')
     }
+
+    const importacionHandler = async (e) => {
+        const queryUuid = e === 'Importar PrecioJustoSRL' ? 'Precio-Justo-SRL-Data' : id
+
+        const data = await readUserData('Producto', queryUuid, null, 'distribuidor')
+
+        if (data.length === 0) {
+        setModal('No Data')
+            return
+        }
+
+        if (distributorPDB !== null && distributorPDB !== undefined) {
+            setModal(e)
+        }
+    }
+
     const onChangeId = (e) => {
         setId(e.target.value)
     }
@@ -65,9 +101,17 @@ function Home() {
         setState(obj)
         readUserData('Producto', user.uuid, setUserDistributorPDB, 'distribuidor')
     }
-    async function delet(i) {
-        await deleteUserData('Producto', i.uuid)
-        readUserData('Producto', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'distribuidor', true)
+    async function deletConfirm() {
+        await deleteUserData('Producto', item.uuid)
+        // setUserDistributorPDB(undefined)
+        await readUserData('Producto', user.uuid, setUserDistributorPDB, 'distribuidor')
+        setModal('')
+       return 
+    }
+    function delet(i) {
+        setUserItem(i)
+        setModal('Delete')
+        console.log(item)
     }
     function redirect() {
         router.push('/Distribuidor/Agregar')
@@ -77,20 +121,28 @@ function Home() {
         if (x['nombre de producto 1'].toLowerCase() > y['nombre de producto 1'].toLowerCase()) { return 1 }
         return 0
     }
-
+    console.log(distributorPDB)
     useEffect(() => {
         readUserData('Producto', user.uuid, setUserDistributorPDB, 'distribuidor')
     }, [])
 
     return (
         <div class="relative overflow-x-auto shadow-md p-5 bg-white min-h-[80vh]">
+                        {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de eliminar el siguiente item:  {item['nombre de producto 1']}</Modal>}
+
+            {modal === 'No Data' && <Modal funcion={() => ''}>El identificador no contiene datos o no existe</Modal>}
+            {modal === 'Importar ID' && <Modal funcion={() => importacionConfirm('Importar ID')}>Esta seguro de volver a importar los datos, <br /> se perderan los que ya tiene.</Modal>}
+            {modal === 'Importar PrecioJustoSRL' && <Modal funcion={() => importacionConfirm('Importar PrecioJustoSRL')}>Esta seguro de reimportar los datos, <br /> se perderan los que ya tienes.</Modal>}
             <h3 className='font-medium text-[16px]'>Lista De Productos</h3>
             <br />
             <div className='grid grid-cols-3 w-[1000px]'>
                 <input type="text" onChange={onChangeId} className='border-b border-gray-300 gap-4 text-center focus:outline-none  w-[300px]' placeholder='Ingresa el ID' />
-                <Button theme='Primary' click={()=>importacionHandler(false)}>Importar Datos Mediante ID</Button>
-                <Button theme='Primary' click={()=>importacionHandler(true)}>Importar Datos De Precio Justo</Button>
-           </div>
+                <Button theme='Primary' click={() => importacionHandler('Importar ID')}>Importar Datos Mediante ID</Button>
+                {distributorPDB !== null && distributorPDB !== undefined
+                    ? <Button theme='Primary' click={() => importacionHandler('Importar PrecioJustoSRL')}>Reimportar Datos De Precio Justo</Button>
+                    : <Button theme='Primary' click={() => importacionConfirm('Importar PrecioJustoSRL')}>Importar Datos De Precio Justo</Button>
+                }
+            </div>
             <div className='grid grid-cols-3 w-[1000px]'>
                 <Input type="text" valu={user.uuid} />
                 <span className='flex items-center text-[14px] pl-5'>*ID para compartir productos</span>
@@ -179,9 +231,11 @@ function Home() {
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
                                 <span className='h-full flex py-2'>{index + 1}</span>
                             </td>
-                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} cols="6" name='nombre de producto 1' defaultValue={i['nombre de producto 1']} class="block p-1.5  w-full h-full text-[14px] font-normal text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Escribe aquí..."></textarea>
-                                {/* {i['nombre de producto 1']} */}
+                            <td class="w-[200px] px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                                {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} cols="6" name='nombre de producto 1' defaultValue={i['nombre de producto 1']} class="block p-1.5  w-full h-full text-[14px] font-normal text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Escribe aquí..."></textarea> */}
+                                <span className='block p-1.5  w-full h-full text-[14px] font-normal text-gray-900 rounded-lg '>
+                                    {i['nombre de producto 1']}
+                                </span>
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} cols="6" name='nombre de producto 2' defaultValue={i['nombre de producto 2']} class="block p-1.5  w-full h-full text-[14px] font-normal text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Escribe aquí..."></textarea>
@@ -238,6 +292,9 @@ function Home() {
                 <div className='flex justify-center items-center h-[50px] text-white text-[14px] font-normal font-medium bg-[#32CD32] border border-gray-200 rounded-[10px] px-10 cursor-pointer mr-2' onClick={redirect}>Agregar Producto</div>
                 <div className='flex justify-center items-center bg-[#0064FA] h-[50px] w-[50px]  rounded-full text-white cursor-pointer' onClick={redirect}> <span className='text-white text-[30px]'>+</span> </div>
             </div>
+
+            {success == 'Actualizando' && <LoaderBlack />}
+
         </div>
     )
 }

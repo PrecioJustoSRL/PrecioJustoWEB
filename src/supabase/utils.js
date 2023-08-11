@@ -2,19 +2,19 @@ import { supabase } from './config'
 
 //--------------------------Authentications----------------------------------
 
-const onAuth =  (setUserProfile) => {
+const onAuth = (setUserProfile) => {
     supabase.auth.onAuthStateChange(async (event, session) => {
         console.log(session)
-        if(session ) {
-            const {data} = await supabase
-            .from('Users')
-            .select()
-            .eq('uuid', session.user.id)
-        // console.log(data[0])
-        data !== null && data.length 
-        ? setUserProfile(data[0])
-        : setUserProfile(session.user)
-        } else {setUserProfile(null)}
+        if (session) {
+            const { data } = await supabase
+                .from('Users')
+                .select()
+                .eq('uuid', session.user.id)
+            // console.log(data[0])
+            data !== null && data.length
+                ? setUserProfile(data[0])
+                : setUserProfile(session.user)
+        } else { setUserProfile(null) }
     })
 }
 
@@ -53,22 +53,26 @@ const writeUserData = async (rute, object, uuid, context, updateContext, setUser
 }
 // ('Users', session.user.id, {}, setUserProfile, null, { uuid: session.user.id, rol: undefined })
 
-const readUserData = async (rute, uuid, updateContext, eq, ) => {
+const readUserData = async (rute, uuid, updateContext, eq,) => {
     const result = await supabase
         .from(rute)
         .select()
         .eq(eq ? eq : 'uuid', uuid)
-        console.log(result)
-    result.data !== null && result.data.length !== 0 
-    ? ( result.data.lenght > 1 ? updateContext(result.data[0]):  updateContext(result.data) )
-    : updateContext(null)  
-    return    result.data 
-    // result.data !== null && result.data.length !== 0 
-    // ? ( result.data.lenght > 1 ? result.data[0] :  result.data )
-    // : null
+        
+    console.log(result)
+
+    if (updateContext) {
+        result.data !== null && result.data.length !== 0
+            ? (result.data.lenght > 1 ? updateContext(result.data[0]) : updateContext(result.data))
+            : updateContext(null)
+    }
+
+    return result.data
 }
 
-
+// result.data !== null && result.data.length !== 0 
+// ? ( result.data.lenght > 1 ? result.data[0] :  result.data )
+// : null
 const readUserAllData = async (rute, context, updateContext) => {
 
     const result = await supabase
@@ -85,19 +89,20 @@ const updateUserData = async (rute, object, uuid, eq) => {
         .from(rute)
         .update(object)
         .eq(eq ? eq : 'uuid', uuid)
-        // if (result.data !== null && result.data.length !== 0) {
-        //     console.log('act')
-        //     key ? updateContext({ ...context, [key]: result.data[0] }) : updateContext(arr == true ? result.data : result.data[0])
-        // } 
+    // if (result.data !== null && result.data.length !== 0) {
+    //     console.log('act')
+    //     key ? updateContext({ ...context, [key]: result.data[0] }) : updateContext(arr == true ? result.data : result.data[0])
+    // } 
     console.log(result)
 }
 
 
-const deleteUserData = async (rute, uuid, ) => {
+const deleteUserData = async (rute, uuid, eq) => {
     const { error } = await supabase
         .from(rute)
         .delete()
-        .eq('uuid', uuid)
+        .eq(eq ? eq : 'uuid', uuid)
+
 
 }
 

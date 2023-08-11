@@ -59,6 +59,7 @@ function Home() {
     }
 
     async function save(i) {
+        console.log(state[i.uuid]['nombre de producto 1'])
         setUserSuccess('Cargando')
         await updateUserData('Producto', state[i.uuid], i.uuid)
         postImage[i.uuid] && await uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
@@ -66,7 +67,7 @@ function Home() {
         delete obj[i.uuid]
         setState(obj)
         setUserSuccess('')
-        setUserDistributorPDB(undefined)
+        state[i.uuid]['nombre de producto 1'] !== undefined && setUserDistributorPDB(undefined)
         return  readUserData('Producto', 'Precio-Justo-SRL-Data', setUserDistributorPDB, 'distribuidor')
     }
 
