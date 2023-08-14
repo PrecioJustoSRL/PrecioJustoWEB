@@ -22,8 +22,8 @@ function Home({ children }) {
     console.log(user)
     return (
         <main >
-            {children}
-            {/* {(user === null || (user && user.role && user.role === 'authenticated')) ? children : <LoaderWithLogo></LoaderWithLogo>} */}
+            {/* {children} */}
+            {(user === null || (user && user.role && user.role === 'authenticated')) ? children : <LoaderWithLogo></LoaderWithLogo>}
         </main>
     )
 }

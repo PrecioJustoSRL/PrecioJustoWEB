@@ -156,6 +156,9 @@ function Home() {
                             Acceso
                         </th>
                         <th scope="col" class="px-3 py-3">
+                            Autorización
+                        </th>
+                        <th scope="col" class="px-3 py-3">
                             Boqueado
                         </th>
                         <th scope="col" class="px-3 py-3">
@@ -191,10 +194,12 @@ function Home() {
                                 {i['whatsapp']}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                {/* <textarea id="message" rows="6" onChange={(e) => onChangeHandler(e, i)} name='costo' cols="4" defaultValue={i['costo']} class="block p-1.5 h-full text-sm text-gray-900 bg-white rounded-lg  focus:ring-gray-100 focus:border-gray-100 focus:outline-none resize-x-none" placeholder="Write your thoughts here..."></textarea> */}
-                                {i.access == true
-                                    ? <Button theme={"Success"} click={() => delet(i, 'Access')}>Verificador</Button>
-                                    : <Button theme={"Secondary"} click={() => delet(i, 'Access')}>Solicitador</Button>
+                            {i['access']}
+                            </td>
+                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                                {i.autorizacion == true
+                                    ? <Button theme={"Success"} click={() => delet(i, 'Access')}>No autorizar</Button>
+                                    : <Button theme={"Secondary"} click={() => delet(i, 'Access')}>autorizar</Button>
                                 }
                             </td>
                             <td class="px-3 py-4">

@@ -9,6 +9,7 @@ import Input from '../../../components/Input'
 import Select from '../../../components/Select'
 import Label from '@/components/Label'
 import Checkbox from '@/components/Checkbox'
+import { departamentos } from '@/constants'
 
 
 import Button from '../../../components/Button'
@@ -26,7 +27,7 @@ function Home() {
     const [postImage, setPostImage] = useState(null)
     const [urlPostImage, setUrlPostImage] = useState(null)
 
-    const [account, setAccount] = useState('dependiente')
+    const [account, setAccount] = useState('Solicitadora')
 
 
 
@@ -62,32 +63,40 @@ function Home() {
 
     function save(e) {
         e.preventDefault()
-        writeUserData('Clinica', { ...state, uuid: user.uuid }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
+        writeUserData('Clinica', { ...state, uuid: user.uuid, access: account }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
         uploadStorage('Clinica', postImage, user.uuid, updateUserData)
         router.push('/Clinica/Perfil')
     }
     return (
-        <form className='p-5'>
+        <form className='p-5 pb-[80px]'>
             <h3 className='text-center pb-3'>Agregar Perfil</h3>
+            <br />
+
             <br />
             <div className='flex w-full justify-around mb-12'>
                 <div className='w-1/2 flex justify-center'>
-                    <span className={`text-center p-5 ${account == 'dependiente' ? 'border-b-[2px] border-b-gray-500' : ''}`} onClick={() => setAccount('dependiente')}>Cuenta dependiente</span>
-
+                    <span className={`text-center p-5 ${account == 'Solicitadora' ? 'border-b-[2px] border-b-gray-500' : ''}`} onClick={() => setAccount('Solicitadora')}>Cuenta Solicitadora</span>
                 </div>
-                <div className='w-1/2 flex justify-center border-r-[2px] border-gray-500'>
-                    <span className={`p-5 text-center ${account == 'independiente' ? 'border-b-[2px] border-b-gray-500' : ''}`} onClick={() => setAccount('independiente')}>Cuenta independiente</span>
-
+                <div className='w-1/2 flex justify-center border-l-[2px] border-gray-500'>
+                    <span className={`p-5 text-center ${account == 'Verificadora' ? 'border-b-[2px] border-b-gray-500' : ''}`} onClick={() => setAccount('Verificadora')}>Cuenta Verificadora</span>
                 </div>
             </div>
 
             <br />
 
-            <div className="w-full flex justify-center">
+            <div className="w-full flex flex-col justify-center items-center">
                 <label htmlFor="file" className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" >
                     {urlPostImage ? <img className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" style={{ objectPosition: 'center' }} src={urlPostImage} alt="" />
                         : 'Subir Imagen'}
                 </label>
+                <br />
+                <br />
+                <div className='relative h-[40px] left-0 w-full text-center'>
+                {account == 'Verificadora' && 
+                    user.uuid
+                }</div>
+                <br />
+                <br />
                 <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" required />
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
@@ -97,18 +106,19 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Ciudad</Label>
-                    <Select arr={['La Paz', 'Cochabamba', 'Santa Cruz']} name='ciudad' click={onClickHandler} />
+                    <Select arr={departamentos} name='ciudad' click={onClickHandler} />
                 </div>
 
                 <div>
                     <Label htmlFor="">Dirección</Label>
                     <Input type="text" name="direccion" onChange={onChangeHandler} />
                 </div>
-                <div>
-                    <Label htmlFor="">Numero de tarjeta</Label>
-                    <Input type="text" reference={inputRefCard} name="numero de tarjeta" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
-                </div>
-                <div>
+                {account == 'independiente' &&
+                    <div>
+                        <Label htmlFor="">Numero de tarjeta</Label>
+                        <Input type="text" reference={inputRefCard} name="numero de tarjeta" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
+                    </div>}
+                {account == 'independiente' && <div>
                     <div className='w-full flex justify-between'>
                         <div className='w-5/12'>
                             <Label htmlFor="">Fecha</Label>
@@ -120,6 +130,7 @@ function Home() {
                         </div>
                     </div>
                 </div>
+                }
                 <div>
                     <Label htmlFor="">Teléfono</Label>
                     <Input type="text" name="telefono" reference={inputRefPhone} onChange={onChangeHandler} />
@@ -130,7 +141,7 @@ function Home() {
                 </div>
             </div>
             <div className='flex w-full justify-around'>
-                <Button theme='Primary' click={save}>Guardar</Button>
+                <Button theme='Primary' click={save}>Mandar solicitud</Button>
             </div>
         </form>
     )

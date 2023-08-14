@@ -31,6 +31,7 @@ function Home() {
             <div className="flex justify-center">
                 <img className='h-[100px] w-[100px] rounded-full' src={userDB.url} alt="" />
             </div>
+{userDB.access == 'Verificadora' && <div>{user.uuid}</div>}
             <br />
             <h3 className='w-full font-base  font-normal text-center '>{userDB['nombre']}</h3>
             <h3 className='text-sm text-center text-emerald-400'>Abierto</h3>
