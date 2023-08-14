@@ -102,7 +102,7 @@ function Home() {
         readUserData('Producto', user.uuid, setUserDistributorPDB, 'distribuidor')
     }
     async function deletConfirm() {
-        await updateUserData('Producto', {...state[item.uuid], archivado: true}, item.uuid)
+        await updateUserData('Producto', {...state[item.uuid], archivado: false}, item.uuid)
         // postImage[item.uuid] && await uploadStorage('Producto', postImage[item.uuid], item.uuid, updateUserData, true)
         const obj = { ...state }
         delete obj[item.uuid]
@@ -133,7 +133,7 @@ function Home() {
         <div className='h-full'> 
 
         <div class="relative overflow-x-auto h-full  overflow-y-auto shadow-md p-5 bg-white min-h-[80vh]">
-                        {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de archivar el siguiente item:  {item['nombre de producto 1']}</Modal>}
+                        {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de desarchivar el siguiente item:  {item['nombre de producto 1']}</Modal>}
 
             {modal === 'No Data' && <Modal funcion={() => ''}>El identificador no contiene datos o no existe</Modal>}
             {modal === 'Importar ID' && <Modal funcion={() => importacionConfirm('Importar ID')}>Esta seguro de volver a importar los datos, <br /> se perderan los que ya tiene.</Modal>}
@@ -232,7 +232,7 @@ function Home() {
                 </thead>
                 <tbody>
                     {distributorPDB && distributorPDB !== undefined && distributorPDB.sort(sortArray).map((i, index) => {
-                        return i.archivado === false && i.disponibilidad.includes(disponibilidad) && i.categoria.includes(categoria) && i.sistema.includes(sistema) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
+                        return i.archivado === true && i.disponibilidad.includes(disponibilidad) && i.categoria.includes(categoria) && i.sistema.includes(sistema) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
                                 <span className='h-full flex py-2'>{index + 1}</span>
                             </td>
@@ -285,7 +285,7 @@ function Home() {
                             <td class="px-3 py-4">
                                 {state[i.uuid]
                                     ? <Button theme={"Primary"} click={() => save(i)}>Guardar</Button>
-                                    : <Button theme={"Danger"} click={() => delet(i)}>Archivar</Button>
+                                    : <Button theme={"Danger"} click={() => delet(i)}>Desarchivar</Button>
                                 }
                             </td>
                         </tr>

@@ -30,7 +30,7 @@ export default function Select({arr, name, click, defaultValue, uuid}) {
             // className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
             // dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} 
             onClick={handlerSelect}>
-                <div className={`p-3 ${state == 'No disponible' &&  'bg-red-400'} ${state == 'Inmediatamente' &&  'bg-green-400'} ${state == 'En 24 hrs' &&  'bg-yellow-300'}`}>
+                <div className={`p-3 ${state == 'No disponible' &&  'bg-red-400'} ${state == 'Inmediato' &&  'bg-green-400'} ${state == 'En 24 hrs' &&  'bg-yellow-300'}`}>
                      {state} <span className={select ? 'absolute right-5 rotate-[270deg]' :'absolute right-5 rotate-90'}>{'>'}</span>
             
                 </div>
