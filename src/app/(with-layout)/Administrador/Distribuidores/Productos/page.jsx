@@ -117,7 +117,7 @@ function Home() {
             <div className='min-w-[1900px] flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Disponibilidad</h3>
                 <div className="grid grid-cols-3 gap-4 w-[500px] ">
-                    <Tag theme={disponibilidad == 'Disponible' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'Disponible' ? '' : 'Disponible')}>Disponible</Tag>
+                    <Tag theme={disponibilidad == 'En 24 hrs' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'En 24 hrs' ? '' : 'En 24 hrs')}>En 24 hrs</Tag>
                     <Tag theme={disponibilidad == 'Disponibilidad inmediata' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'Disponibilidad inmediata' ? '' : 'Disponibilidad inmediata')}>Inmediato</Tag>
                     <Tag theme={disponibilidad == 'No disponible' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'No disponible' ? '' : 'No disponible')}>No disponible</Tag>
                 </div>
