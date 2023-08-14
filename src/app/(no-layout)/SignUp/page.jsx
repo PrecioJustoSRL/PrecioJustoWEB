@@ -31,8 +31,8 @@ export default function Home() {
   }
 
   useEffect(() => {
-    user == undefined && onAuth(setUserProfile)
-    user && router.push('/Register')
+    // user == undefined && onAuth(setUserProfile)
+    // user && router.push('/Register')
   }, [user, success]);
 
   return (

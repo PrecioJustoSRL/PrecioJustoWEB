@@ -38,11 +38,11 @@ function Home() {
 
 
     useEffect(() => {
-        console.log(user)
-        if (user && user.rol) router.push('/Cliente')
-        if (user == null || user == undefined || user.role !== 'authenticated') router.push('/SignUp')
-        if (user && user.rol) readUserData('Users', user.uuid, setUserData)
-        if (user && user.rol) router.push('/Cliente')
+        // console.log(user)
+        // if (user && user.rol) router.push('/Cliente')
+        // if (user == null || user == undefined || user.role !== 'authenticated') router.push('/SignUp')
+        // if (user && user.rol) readUserData('Users', user.uuid, setUserData)
+        // if (user && user.rol) router.push('/Cliente')
     }, [user]);
 
     return (
