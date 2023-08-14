@@ -28,10 +28,12 @@ function Home() {
     const onClickHandlerCity = (name, value) => {
         setCiudad(value)
     }
-    const registerHandler = (e) => {
+    const registerHandler = async (e) => {
         e.preventDefault()
         let nombre = e.target[0].value
-        writeUserData('Users', { uuid: user.id, nombre, rol, ciudad }, user.id, user, setUserProfile, setUserSuccess)
+        await writeUserData('Users', { uuid: user.id, nombre, rol, ciudad }, user.id, user, setUserProfile, setUserSuccess)
+         router.push('/Cliente')
+
     }
 
 

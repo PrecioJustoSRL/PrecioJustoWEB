@@ -45,7 +45,9 @@ function Home() {
         setModal('')
     }
 
-
+    window.onbeforeunload = function () {
+        return alert('desea refrescar la pagina')
+    }
 
     console.log(cart)
 

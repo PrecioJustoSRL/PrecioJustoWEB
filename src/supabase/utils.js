@@ -24,6 +24,8 @@ const signUpWithEmailAndPassword = async (email, password, setUserProfile) => {
         password,
     })
     setUserProfile(data)
+
+    return data
 }
 
 const signInWithEmailAndPassword = async (email, password, setUserSuccess) => {

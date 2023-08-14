@@ -20,11 +20,13 @@ export default function Home() {
   const router = useRouter()
 
 
-  const signUpHandler = (e) => {
+  const signUpHandler = async (e) => {
     e.preventDefault()
     let email = e.target[0].value
     let password = e.target[1].value
-    signUpWithEmailAndPassword(email, password, setUserProfile)
+    const data = await signUpWithEmailAndPassword(email, password, setUserProfile)
+
+    data ? router.push('/Register') : ''
     
   }
 
