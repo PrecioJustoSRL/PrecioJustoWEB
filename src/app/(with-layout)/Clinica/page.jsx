@@ -61,11 +61,11 @@ function Home() {
     }
 
 
-    function save(e) {
+    async function save(e) {
         e.preventDefault()
-        writeUserData('Clinica', { ...state, uuid: user.uuid, access: account }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
-        uploadStorage('Clinica', postImage, user.uuid, updateUserData)
-        router.push('/Clinica/Perfil')
+       await writeUserData('Clinica', { ...state, uuid: user.uuid, access: account }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
+      await  uploadStorage('Clinica', postImage, user.uuid, updateUserData)
+      return  router.push('/Clinica/Perfil')
     }
     return (
         <form className='p-5 pb-[80px]'>
@@ -113,12 +113,12 @@ function Home() {
                     <Label htmlFor="">Dirección</Label>
                     <Input type="text" name="direccion" onChange={onChangeHandler} />
                 </div>
-                {account == 'independiente' &&
+                {account == 'Verificadora' &&
                     <div>
                         <Label htmlFor="">Numero de tarjeta</Label>
                         <Input type="text" reference={inputRefCard} name="numero de tarjeta" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
                     </div>}
-                {account == 'independiente' && <div>
+                {account == 'Verificadora' && <div>
                     <div className='w-full flex justify-between'>
                         <div className='w-5/12'>
                             <Label htmlFor="">Fecha</Label>

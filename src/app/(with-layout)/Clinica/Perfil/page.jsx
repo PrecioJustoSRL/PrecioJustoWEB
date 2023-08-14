@@ -29,18 +29,18 @@ function Home() {
         userDB !== undefined && userDB !== null ? <div className="min-h-[92vh] bg-white p-5">
             <br />
             <div className="flex justify-center">
-                <img className='h-[100px] w-[100px] rounded-full' src={userDB.url} alt="" />
+                <img className='h-[100px] w-[100px] rounded-full' src={userDB[0].url} alt="" />
             </div>
-{userDB.access == 'Verificadora' && <div>{user.uuid}</div>}
+{userDB[0].access == 'Verificadora' && <div>{user.uuid}</div>}
             <br />
-            <h3 className='w-full font-base  font-normal text-center '>{userDB['nombre']}</h3>
+            <h3 className='w-full font-base  font-normal text-center '>{userDB[0]['nombre']}</h3>
             <h3 className='text-sm text-center text-emerald-400'>Abierto</h3>
             <br />
 
             <Subtitle>Contactos</Subtitle>
             <div className=''>
-                <Paragraph> <img className="inline pr-5" src="/telefono.svg" alt="" />{userDB['telefono']}</Paragraph>
-                <Paragraph> <img className="inline pr-5" src="/ubicacion.svg" alt="" />{userDB['direccion']}</Paragraph>
+                <Paragraph> <img className="inline pr-5" src="/telefono.svg" alt="" />{userDB[0]['telefono']}</Paragraph>
+                <Paragraph> <img className="inline pr-5" src="/ubicacion.svg" alt="" />{userDB[0]['direccion']}</Paragraph>
             </div>
             <br />
             <Button theme="Success" click={() => redirectHandler('Distribuidor/Producto')}>Edita tu Perfil</Button>
