@@ -31,8 +31,8 @@ function Home() {
     const registerHandler = async (e) => {
         e.preventDefault()
         let nombre = e.target[0].value
-        await writeUserData('Users', { uuid: user.id, nombre, rol, ciudad }, user.id, user, setUserProfile, setUserSuccess)
-         router.push('/Cliente')
+       const data =  await writeUserData('Users', { uuid: user.id, nombre, rol, ciudad }, user.id, user, setUserProfile, setUserSuccess)
+       return data == 'push' ? router.push('/Cliente') : ''
 
     }
 

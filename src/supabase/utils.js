@@ -51,7 +51,7 @@ const writeUserData = async (rute, object, uuid, context, updateContext, setUser
     setUserSuccess ? setUserSuccess(msg) : ''
     result.status == 201 ? readUserData(rute, uuid, updateContext) : (setUserSuccess ? setUserSuccess(msg) : '')
     console.log(result)
-
+return result.status == 201 ? 'push' : ''
 }
 // ('Users', session.user.id, {}, setUserProfile, null, { uuid: session.user.id, rol: undefined })
 
