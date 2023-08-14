@@ -155,12 +155,12 @@ function Home() {
             <div className='min-w-[1900px] flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Disponibilidad</h3>
                 <div className="grid grid-cols-3 gap-4 w-[500px] ">
-                    <Tag theme={disponibilidad == 'En un día' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'En un día' ? '' : 'En un día')}>En un día</Tag>
+                    <Tag theme={disponibilidad == 'En 24 hrs' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'En 24 hrs' ? '' : 'En 24 hrs ')}>En 24 hrs</Tag>
                     <Tag theme={disponibilidad == 'Inmediatamente' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'Inmediatamente' ? '' : 'Inmediatamente')}>Inmediatamente</Tag>
                     <Tag theme={disponibilidad == 'No disponible' ? 'Primary' : 'Secondary'} click={() => setDisponibilidad(disponibilidad == 'No disponible' ? '' : 'No disponible')}>No disponible</Tag>
                 </div>
             </div>
-            <div className='min-w-[1900px] flex justify-start items-center my-5  '>
+            <div className='min-w-[1900px] flex justify-start items-center my-5  '>      
                 <h3 className="flex pr-12 text-[14px]">Categorias</h3>
                 <div className="grid grid-cols-3 gap-4 w-[500px] " >
                     <Tag theme={categoria == 'Titanio' ? 'Primary' : 'Secondary'} click={() => setCategoria(categoria == 'Titanio' ? '' : 'Titanio')}>Titanio</Tag>

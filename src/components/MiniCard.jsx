@@ -40,7 +40,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     return (
         
             <tbody>
-                <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 " >
+                <tr class="bg-white text-[12px] border-b hover:bg-gray-50 " >
                     <td class="px-3 py-4  flex flex-col text-[16px] font-extrabold text-gray-700">
                         {i['nombre de producto 1']} 
                         
@@ -49,7 +49,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                             {/* <span class="text-[16px]  text-gray-700  font-extrabold">   Bs.</span> */}
                         </div>
                     </td>
-                    <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                    <td class="px-3 py-4 font-semibold text-gray-900">
                         {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0
                             ? <div className='flex w-[80px] items-center justify-center flex-col flex-col-reverse lg:flex-row justify-between'>
                                 <Button theme='MiniPrimary' click={(e) => addLessCart(e, i)}>-</Button>

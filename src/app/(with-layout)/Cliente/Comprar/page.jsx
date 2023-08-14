@@ -60,7 +60,7 @@ function Comprar({ theme, styled, click, children }) {
         <div className="">
         <Label htmlFor="">REFERENCIA DEL LUGAR</Label>
 
-          <div className="flex items-start">
+          <div className="flex items-start" onClick={() => setCheck(false)}>
             <div className="flex items-center h-5 mr-5">
               <input id="remember" type="radio" value="" checked={check == false ? true: false} onClick={() => setCheck(false)} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
             </div>
@@ -69,7 +69,7 @@ function Comprar({ theme, styled, click, children }) {
         </div>
 
         <div className="flex items-start">
-          <div className="flex items-start">
+          <div className="flex items-start" onClick={() => setCheck(true)}>
             <div className="flex items-center h-5 mr-5">
               <input id="remember" type="radio" value=""  checked={check == true? true: false} onClick={() => setCheck(true)} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
             </div>
@@ -111,7 +111,7 @@ function Comprar({ theme, styled, click, children }) {
                         {Object.values(cart).reduce((acc, i, index) => {
                             const sum = i['costo'] * i['cantidad']
                             return sum + acc
-                        }, 0)    + check ? 350 : 0}  Bs. 
+                        }, 0)    + (check ? 350 : 0)}  Bs. 
                     </td>
                 </tr>
                 </tbody>}

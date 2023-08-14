@@ -44,13 +44,13 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     return (
         <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] rounded-[20px] rounded-bl-[10px] shadow-sm shadow-[#2A52BE] mt-5 overflow-hidden" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px', gridAutoFlow: 'dense' }}>
             <div class=" font-bold text-[16px] bg-[#2A52BE] flex flex-col w-full justify-between items-between text-gray-950 col-span-2 p-5">
-                <div class=" font-bold text-[18px]  text-white">
+                <div class=" font-bold text-[16px]  text-white">
                     {i['nombre de producto 1']}
                 </div>
-                {i['nombre de producto 2'] && <div class=" font-regular text-[16px]  text-white">
+                {i['nombre de producto 2'] && <div class=" font-regular text-[14px]  text-white">
                     {i['nombre de producto 2']}
                 </div>}
-                {i['nombre de producto 2'] && <div class=" font-regular text-[16px] text-white">
+                {i['nombre de producto 2'] && <div class=" font-regular text-[14çpx] text-white">
                     {i['nombre de producto 3']}
                 </div>}
             </div>

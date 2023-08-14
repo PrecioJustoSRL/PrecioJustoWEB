@@ -53,7 +53,7 @@ function Home() {
                 backgroundSize: 'cover'
             }}>
             <Video />
-            <div className='w-screen h-screen  flex flex-col justify-center items-center'>
+            <div className='w-screen h-screen  flex flex-col justify-center items-center p-5'>
 
                 <form className={`space-y-6 lg:space-y-3 bg-[#00000090] rounded-[30px] w-[100%] max-w-[350px] p-5 ${introVideo == true ? 'h-0 overflow-hidden' : 'h-auto px-5 py-10 lg:p-10'}`} onSubmit={registerHandler} >
                     <div className='w-full text-center flex justify-center'>
