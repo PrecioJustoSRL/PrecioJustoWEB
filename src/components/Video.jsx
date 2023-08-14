@@ -48,7 +48,7 @@ export default function Button({ theme, click, children }) {
         </span>
       </div>
       <div className={`video-player absolute w-screen lg:w-[300px] rounded-[20px]  flex items-center h-screen my-auto ${introVideo === true ? 'left-0 right-0 mx-auto' : 'left-[-200vw]'}`} >
-        <video ref={videoRef} className='rounded-[20px]' autoPlay muted onClick={handlerSound}>
+        <video ref={videoRef} className='rounded-[20px]' autoPlay muted>
           <source src="/intro.mp4" type="video/mp4" />
         </video>
       </div>
