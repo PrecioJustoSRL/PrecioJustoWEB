@@ -71,7 +71,10 @@ function Home() {
 
 
 
-
+    function delet(i, data) {
+        setUserItem(i)
+        setModal(data)
+    }
 
     function autorizar(i, data) {
         setUserItem(i)
@@ -127,7 +130,7 @@ function Home() {
              {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de ELIMINAR al siguiente usuario: {item.nombre}</Modal>}
             {modal === 'Block' && <Modal funcion={blockConfirm}>Estas seguro de {item.bloqueado ? 'DESBLOQUEAR' :'BLOQUEAR'} al siguiente usuario {item.nombre}</Modal>}
             {modal === 'Access' && <Modal funcion={accessConfirm}>Estas seguro de {item.access ? 'DESIGNAR como SOLICITADOR' :'DESIGNAR como VERIFICADOR'} al siguiente usuario {item.nombre}</Modal>}
-            {modal === 'autorizar' && <Modal funcion={autorizarConfirm}>Estas seguro de AUTORIZAR al siguiente usuario: {item.nombre}</Modal>}
+            {modal === 'autorizar' && <Modal funcion={autorizarConfirm}>Estas seguro de {item.autorizacion ? 'AUTORIZAR' :'DESAUTORIZAR'} al siguiente usuario: {item.nombre}</Modal>}
 
             <h3 className='font-medium text-[16px]'>Clinicas</h3>
             <br />
