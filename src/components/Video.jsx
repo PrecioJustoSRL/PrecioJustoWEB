@@ -10,10 +10,10 @@ export default function Button({ theme, click, children }) {
 
 
   const handlerPlay = () => {
-    if (play) {
+    if (introVideo == false) {
       videoRef.current.play()
       setIntroVideo(!introVideo)
-      setPlay(false)
+      // setPlay(false)
       setSound(true)
     } else {
       videoRef.current.pause()
@@ -25,7 +25,7 @@ export default function Button({ theme, click, children }) {
 
   const handlerSound = () => {
     videoRef.current.play()
-    setPlay(true)
+    // setPlay(true)
     setSound(true)
     videoRef.current.muted = false
   };

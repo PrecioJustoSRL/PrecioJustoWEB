@@ -1,5 +1,5 @@
 'use client'
-import { writeUserData, readUserData } from '@/supabase/utils'
+import { writeUserData, readUserData, onAuth } from '@/supabase/utils'
 import { useUser } from '@/context/Context'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -31,19 +31,23 @@ function Home() {
     const registerHandler = async (e) => {
         e.preventDefault()
         let nombre = e.target[0].value
-       const data =  await writeUserData('Users', { uuid: user.id, nombre, rol, ciudad }, user.id, user, setUserProfile, setUserSuccess)
-       return data == 'push' ? router.push('/Cliente') : ''
-
+        const data = await writeUserData('Users', { uuid: user.id, nombre, rol, ciudad }, user.id, user, setUserProfile, setUserSuccess)
+        console.log(data[0])
+        setUserProfile(data[0])
+        return data && data[0] !== undefined ? router.push('/Cliente') : ''
     }
 
-
+    console.log(user)
     useEffect(() => {
         // console.log(user)
         // if (user && user.rol) router.push('/Cliente')
         // if (user == null || user == undefined || user.role !== 'authenticated') router.push('/SignUp')
         // if (user && user.rol) readUserData('Users', user.uuid, setUserData)
-        // if (user && user.rol) router.push('/Cliente')
+        user === undefined && onAuth(setUserProfile)
+        if (user && user.rol) router.push('/Cliente')
+        // if (user !== undefined && user !== null) router.replace('/Cliente')
     }, [user]);
+
 
     return (
         <div className="min-h-full "

@@ -8,22 +8,21 @@ import { onAuth } from '@/supabase/utils'
 function Home({ children }) {
     const { user, userDB, setUserProfile, setUserData } = useUser()
 
-    const router = useRouter()
-    useEffect(() => {
-        if (user === undefined) onAuth(setUserProfile)
-        if (user === null) {router.push('/')}
-        if (user && user.role === 'authenticated') { router.push('/Register') }
-        if (user && user.rol) {router.push('/Cliente')}
-        if (user !== undefined && user !== null && user.rol && userDB === undefined) {
-            console.log('ejecu')
-            readUserData(user.rol, user.uuid, setUserData,)
-        }
-    }, [user, userDB])
-    console.log(user)
+    // const router = useRouter()
+    // useEffect(() => {
+    //     if (user === undefined) onAuth(setUserProfile)
+    //     if (user === null) {router.push('/')}
+    //     if (user && user.role === 'authenticated') { router.push('/Register') }
+    //     if (user && user.rol) {router.push('/Cliente')}
+    //     if (user !== undefined && user !== null && user.rol && userDB === undefined) {
+    //         console.log('ejecu')
+    //         readUserData(user.rol, user.uuid, setUserData,)
+    //     }
+    // }, [user, userDB])
+    // console.log(user)
     return (
         <main >
-            {/* {children} */}
-            {(user === null || (user && user.role && user.role === 'authenticated')) ? children : <LoaderWithLogo></LoaderWithLogo>}
+            {children}
         </main>
     )
 }

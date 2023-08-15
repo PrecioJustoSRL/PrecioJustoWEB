@@ -54,6 +54,7 @@ function Home() {
     const onClickHandlerSystem = (name, value, uuid) => {
         setState({ ...state, [uuid]: { ...state[uuid], uuid, ['sistema']: value } })
     }
+    
     function onChangeHandler(e, i) {
         setState({ ...state, [i.uuid]: { ...state[i.uuid], uuid: i.uuid, [e.target.name]: e.target.value } })
     }

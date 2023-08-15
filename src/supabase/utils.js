@@ -23,7 +23,7 @@ const signUpWithEmailAndPassword = async (email, password, setUserProfile) => {
         email,
         password,
     })
-    setUserProfile(data)
+    setUserProfile(data.user)
 
     return data
 }
@@ -50,8 +50,8 @@ const writeUserData = async (rute, object, uuid, context, updateContext, setUser
         .insert(object)
     setUserSuccess ? setUserSuccess(msg) : ''
     result.status == 201 ? readUserData(rute, uuid, updateContext) : (setUserSuccess ? setUserSuccess(msg) : '')
-    console.log(result)
-return result.status == 201 ? 'push' : ''
+    // console.log(result)
+return result
 }
 // ('Users', session.user.id, {}, setUserProfile, null, { uuid: session.user.id, rol: undefined })
 

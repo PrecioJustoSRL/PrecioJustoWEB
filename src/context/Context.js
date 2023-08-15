@@ -31,7 +31,7 @@ export function UserProvider({ children }) {
 	const videoRef = useRef();
 	const [play, setPlay] = useState(true)
 	const [sound, setSound] = useState(false)
-	const [introVideo, setIntroVideo] = useState(null)
+	const [introVideo, setIntroVideo] = useState(undefined)
 
 
 

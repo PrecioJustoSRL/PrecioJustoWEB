@@ -25,9 +25,9 @@ export default function Home() {
     let email = e.target[0].value
     let password = e.target[1].value
     const data = await signUpWithEmailAndPassword(email, password, setUserProfile)
-
+    console.log(data.user)
+    setUserProfile(data.user)
     data ? router.push('/Register') : ''
-    
   }
 
   useEffect(() => {

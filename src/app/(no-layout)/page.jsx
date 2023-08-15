@@ -80,11 +80,6 @@ export default function Home() {
     }
   }
 
-
-
-
-
-
   console.log(introVideo)
 
   const signInHandler = (e) => {
@@ -97,12 +92,12 @@ export default function Home() {
 
 
   useEffect(() => {
-    // createIndexedDB()
     introVideo == undefined ? readIndexedDB() : ''
     user === undefined && onAuth(setUserProfile)
     if (user !== undefined && user !== null) router.replace('/Cliente')
   }, [user])
 
+  
   return (
     <div className="h-full"
       style={{
