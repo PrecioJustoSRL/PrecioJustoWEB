@@ -13,7 +13,6 @@ import Input from '@/components/Input'
 import { useRouter } from 'next/navigation';
 
 
-
 export default function Home() {
 
   const { user, introVideo, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG } = useUser()

@@ -4,12 +4,13 @@ import Button from '@/components/Button'
 
 import { useUser } from '@/context/Context.js'
 import { useRouter } from 'next/navigation';
+import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 
 export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, descripcion, i, recetado }) {
 
     const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, cart, setUserCart, modal, setModal } = useUser()
     const router = useRouter()
-
+console.log(userDB)
     function seeMore(e) {
         setUserItem(i)
         router.push('/Producto')
@@ -18,9 +19,14 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     const addCart = (e) => {
         e.preventDefault()
         e.stopPropagation()
+        if(user.rol == 'Clinica' && userDB && userDB.autorizacion == false) {
+            setModal('Auth')
+return
+        }
         user && user.rol !== 'Cliente' && (userDB == null || userDB == undefined)
             ? setModal('Verifica')
             : setUserCart({ ...cart, [i.uuid]: { ...i, cantidad: 1 } })
+
 
     }
 

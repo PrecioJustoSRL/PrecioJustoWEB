@@ -9,6 +9,7 @@ import Input from '@/components/Input'
 import Select from '@/components/Select'
 import { WithAuth } from '@/HOCs/WithAuth'
 import Video from '@/components/Video'
+import { departamentos } from '@/constants'
 
 
 import { useRouter } from 'next/navigation';
@@ -77,7 +78,7 @@ function Home() {
                     </div>
                     <div>
                         <label htmlFor="password" className="block mb-2 text-[16px] text-left  font-medium text-white">Ciudad</label>
-                        <Select arr={['La Paz', 'Cochabamba', 'Santa Cruz']} name='Ciudad' click={onClickHandlerCity} />
+                        <Select arr={departamentos} name='Ciudad' click={onClickHandlerCity} />
                     </div>
                     <div className="flex items-start">
                         <div className="flex items-start">

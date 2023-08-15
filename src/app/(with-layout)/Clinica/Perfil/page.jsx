@@ -42,7 +42,7 @@ function Home() {
                 <Paragraph> <img className="inline pr-5" src="/ubicacion.svg" alt="" />{userDB[0]['direccion']}</Paragraph>
             </div>
             <br />
-            <Button theme="Success" click={() => redirectHandler('Distribuidor/Producto')}>Edita tu Perfil</Button>
+            <Button theme="Success" click={() => redirectHandler('/Clinica')}>Edita tu Perfil</Button>
             <img className="fixed bottom-5 right-5" src="/whatsapp.svg" alt="" />
         </div> :
             <div className="flex flex-col items-center justify-center p-5 h-[80vh]">
