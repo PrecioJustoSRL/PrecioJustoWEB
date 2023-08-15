@@ -11,13 +11,17 @@ import Label from '@/components/Label'
 import MiniCard from '@/components/MiniCard'
 import Input from '@/components/Input'
 import { useRouter } from 'next/navigation';
+import dynamic from "next/dynamic";
+
+const InvoicePDF = dynamic(() => import("@/components/ProformaPDF"), {
+  ssr: false,
+});
 
 function Comprar({ theme, styled, click, children }) {
 
-  const { user, userDB, cart, productDB, setUserProduct, setUserItem, setUserData, setUserSuccess } = useUser()
+  const { user, userDB, cart, productDB, setUserProduct, setUserItem, setUserData, setUserSuccess, state, setState } = useUser()
   const [add, setAdd] = useState(false)
   const [showCart, setShowCart] = useState(false)
-  const [state, setState] = useState({})
   const [check, setCheck] = useState(false)
 
   const router = useRouter()
@@ -26,7 +30,6 @@ function Comprar({ theme, styled, click, children }) {
     setState({ ...state, [e.target.name]: e.target.value })
   }
   function handlerPay() {
-
     Object.values(cart).map((i) => {
       const data = { ...i }
       delete data['created_at']
@@ -35,11 +38,17 @@ function Comprar({ theme, styled, click, children }) {
     })
     router.push('/Cliente/Comprar/Detalle')
   }
-  console.log(cart)
+ function handlerCheck (data) {
+    setCheck(data)
+    setState({ ...state,  check: data  })
+
+ }
+
+
+  console.log(userDB)
   return (<div className='w-full relative p-5 pb-[50px]'>
-    <div className='fixed top-0 right-[15px] w-1/2 max-w-[250px] py-4 z-[50] '>
-      <Button theme='Primary'>Imprimir Proforma</Button>
-    </div>
+   
+    <InvoicePDF  />
     <form >
       <h3 className='text-center text-[16px] pb-3'>DATOS DEL PACIENTE</h3>
       <div className="grid gap-6 mb-6 md:grid-cols-2">
@@ -57,25 +66,25 @@ function Comprar({ theme, styled, click, children }) {
         </div>
         <div>
 
-        <div className="">
-        <Label htmlFor="">REFERENCIA DEL LUGAR</Label>
+          <div className="">
+            <Label htmlFor="">REFERENCIA DEL LUGAR</Label>
 
-          <div className="flex items-start" onClick={() => setCheck(false)}>
-            <div className="flex items-center h-5 mr-5">
-              <input id="remember" type="radio" value="" checked={check == false ? true: false} onClick={() => setCheck(false)} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+            <div className="flex items-start" onClick={() => handlerCheck(false)}>
+              <div className="flex items-center h-5 mr-5">
+                <input id="remember" type="radio" value="" checked={check == false ? true : false} onClick={() => handlerCheck(false)} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+              </div>
+              <Label htmlFor="remember" className="ml-2 text-[14px] font-medium " onClick={() => handlerCheck(false)}>Para la ciudad</Label>
             </div>
-            <Label htmlFor="remember" className="ml-2 text-[14px] font-medium " onClick={() => setCheck(false)}>Para la ciudad</Label>
           </div>
-        </div>
 
-        <div className="flex items-start">
-          <div className="flex items-start" onClick={() => setCheck(true)}>
-            <div className="flex items-center h-5 mr-5">
-              <input id="remember" type="radio" value=""  checked={check == true? true: false} onClick={() => setCheck(true)} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+          <div className="flex items-start">
+            <div className="flex items-start" onClick={() => handlerCheck(true)}>
+              <div className="flex items-center h-5 mr-5">
+                <input id="remember" type="radio" value="" checked={check == true ? true : false} onClick={() => handlerCheck(true)} className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+              </div>
+              <Label htmlFor="remember" className="ml-2 text-[14px] font-medium " onClick={() => handlerCheck(true)} >Para provincia (+350bs)</Label>
             </div>
-            <Label htmlFor="remember" className="ml-2 text-[14px] font-medium " onClick={() => setCheck(true)} >Para provincia (+350bs)</Label>
           </div>
-        </div>
         </div>
 
       </div>
@@ -83,52 +92,56 @@ function Comprar({ theme, styled, click, children }) {
     <h3 className='text-center text-[16px] px-5 py-2 bg-[#2A52BE] text-white' >MIS COMPRAS</h3>
 
     <div className='relative overflow-x-auto items-center justify-between w-full max-w-screen bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >
-        
-    <table class="w-full lg:min-w-[800px] border-[1px] border-gray-200 lg:w-full lg:min-w-auto text-[12px] text-left text-gray-500">
-            {Object.values(cart).length > 0 && <thead class="text-[12px] text-gray-700 uppercase bg-gray-50">
-                <tr>
-                    <th scope="col-3" class="w-1/2 px-2 py-3">
-                        Producto
-                    </th>
-                    <th scope="col" class="px-0 py-3 text-center">
-                        Cantidad
-                    </th>
-                    <th scope="col" class="px-2 w-[200px] py-3">
-                        Costo total
-                    </th>
-                </tr>
-            </thead>}
-        
+
+      <table class="w-full lg:min-w-[800px] border-[1px] border-gray-200 lg:w-full lg:min-w-auto text-[12px] text-left text-gray-500">
+        {Object.values(cart).length > 0 && <thead class="text-[12px] text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col-3" class="w-1/2 px-2 py-3">
+              Producto
+            </th>
+            <th scope="col" class="px-0 py-3 text-center">
+              Cantidad
+            </th>
+            <th scope="col" class="px-2 w-[200px] py-3">
+              Costo total
+            </th>
+          </tr>
+        </thead>}
+
         {Object.values(cart).length > 0 ? Object.values(cart).map((i, index) => <MiniCard i={i} />) : <span className='block text-[16px] text-center'>No tienes productos <br /> selecciona alguno <br /> </span>}
 
         {Object.values(cart).length > 0 && <tbody>
-                <tr class="bg-white text-[12px] border-b">
-                    <td class="px-2 py-4  flex text-[16px] text-gray-700 font-extrabold text-gray-900">
-                        TOTAL:
-                    </td>
-                    <td>{check && '+350 Bs *Para provincia'}</td>
-                    <td class="px-2 py-4 font-extrabold  text-[16px] text-gray-700">
-                        {Object.values(cart).reduce((acc, i, index) => {
-                            const sum = i['costo'] * i['cantidad']
-                            return sum + acc
-                        }, 0)    + (check ? 350 : 0)}  Bs. 
-                    </td>
-                </tr>
-                </tbody>}
-           
-           </table>
+          <tr class="bg-white text-[12px] border-b">
+            <td class="px-2 py-4  flex text-[16px] text-gray-700 font-extrabold text-gray-900">
+              TOTAL:
+            </td>
+            <td>{check && '+350 Bs *Para provincia'}</td>
+            <td class="px-2 py-4 font-extrabold  text-[16px] text-gray-700">
+              {Object.values(cart).reduce((acc, i, index) => {
+                const sum = i['costo'] * i['cantidad']
+                return sum + acc
+              }, 0) + (check ? 350 : 0)}  Bs.
+            </td>
+          </tr>
+        </tbody>}
+
+      </table>
     </div>
     <br />
-      <br />
+    <br />
 
-    {user.rol == 'Clinica' && userDB && userDB.access == 'verificador'  
+    {user.rol == 'Clinica' && userDB && userDB[0].access == 'Solicitadora'
       ? Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
-        <Button theme="SuccessReceta" click={handlerPay}> Mandar a Revisión la solicitud de compra</Button>
+        <Button theme="SuccessBuy" click={handlerPay}> Solicitar</Button>
       </div>
       : Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0  bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
         <Button theme="SuccessBuy" click={handlerPay}> Pagar por QR</Button>
       </div>
     }
+
+
+
+
   </div>)
 }
 
@@ -157,7 +170,7 @@ export default WithAuth(Comprar)
 // }
 
 // export default Home
- {/* <li className='flex justify-between text-gray-700 text-[16px] '>
+{/* <li className='flex justify-between text-gray-700 text-[16px] '>
           <span className='font-bold '>TOTAL: </span>
           <span className='font-bold '>
             {Object.values(cart).reduce((acc, i, index) => {

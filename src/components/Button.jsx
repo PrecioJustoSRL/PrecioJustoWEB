@@ -25,6 +25,20 @@ export default function Button({ theme, styled, click, children }) {
                 {children}
             </button>
             break
+        case 'PrimaryPrint':
+            return <button
+                type="submit"
+                className="text-white bg-blue-600 border border-gray-100 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[16px] w-full px-2 py-3 text-center z-20"
+                // className="text-white bg-violet-700 hover:bg-violet-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center 
+                // dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                onClick={click}
+            >
+                <svg className='inline mr-3 h-[18px] w-[18px]' viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 4H4V1C4 0.71667 4.096 0.479003 4.288 0.287003C4.48 0.0950034 4.71734 -0.000663206 5 3.46021e-06H15C15.2833 3.46021e-06 15.521 0.0960036 15.713 0.288004C15.905 0.480004 16.0007 0.717337 16 1V4ZM16 9.5C16.2833 9.5 16.521 9.404 16.713 9.212C16.905 9.02 17.0007 8.78267 17 8.5C17 8.21667 16.904 7.979 16.712 7.787C16.52 7.595 16.2827 7.49934 16 7.5C15.7167 7.5 15.479 7.596 15.287 7.788C15.095 7.98 14.9993 8.21734 15 8.5C15 8.78334 15.096 9.021 15.288 9.213C15.48 9.405 15.7173 9.50067 16 9.5ZM6 16H14V12H6V16ZM6 18C5.45 18 4.979 17.804 4.587 17.412C4.195 17.02 3.99934 16.5493 4 16V14H1C0.71667 14 0.479003 13.904 0.287003 13.712C0.0950034 13.52 -0.000663206 13.2827 3.46021e-06 13V8C3.46021e-06 7.15 0.29167 6.43734 0.875003 5.862C1.45834 5.28667 2.16667 4.99934 3 5H17C17.85 5 18.5627 5.28767 19.138 5.863C19.7133 6.43834 20.0007 7.15067 20 8V13C20 13.2833 19.904 13.521 19.712 13.713C19.52 13.905 19.2827 14.0007 19 14H16V16C16 16.55 15.804 17.021 15.412 17.413C15.02 17.805 14.5493 18.0007 14 18H6Z" fill="white" />
+                </svg>
+                {children}
+            </button>
+            break
         case 'Secondary':
             return <button
                 type="submit"

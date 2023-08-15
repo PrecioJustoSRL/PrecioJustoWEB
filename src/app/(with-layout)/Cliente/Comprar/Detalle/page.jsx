@@ -52,8 +52,8 @@ function Comprar({ theme, styled, click, children }) {
 
     <br />
 
-    <div className='relative items-center justify-between w-full max-w-[500px] bg-transparent md:flex md:w-auto  transition-all	z-0' >
-      <ul className="flex flex-col bg-gray-100 p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
+    <div className='relative items-center justify-between w-full max-w-[500px] bg-transparent md:flex  transition-all	z-0' >
+      <ul className="flex flex-col bg-gray-100 p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg   ">
         <h3 className='text-center text-[16px] pb-3'>DETALLES DE LA COMPRA</h3>
         <li>{Object.values(cart).length > 0 ? Object.values(cart).map((i, index) => {
           return <div class="relative w-full max-w-[500px] py-4" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 80px' }}>

@@ -26,15 +26,17 @@ function Home() {
         if (user && user.rol !== undefined) readUserData(user.rol, user.uuid, setUserData,)
     }, []);
     return (
-        userDB !== undefined && userDB !== null ? <div className="min-h-[92vh] bg-white p-5">
+        userDB !== undefined && userDB !== null 
+        ? <div className="min-h-[92vh] bg-white p-5">
             <br />
             <div className="flex justify-center">
                 <img className='h-[100px] w-[100px] rounded-full' src={userDB[0].url} alt="" />
             </div>
-{userDB[0].access == 'Verificadora' && <div>{user.uuid}</div>}
             <br />
             <h3 className='w-full font-base  font-normal text-center '>{userDB[0]['nombre']}</h3>
             <br />
+            {userDB[0].access == 'Solicitadora' && <div className="w-full text-center">{user.uuid}</div>}
+           
 
             <Subtitle>Contactos</Subtitle>
             <div className=''>
@@ -43,9 +45,11 @@ function Home() {
             </div>
             <br />
             <Button theme="Success" click={() => redirectHandler('/Clinica')}>Edita tu Perfil</Button>
-            <img className="fixed bottom-5 right-5" src="/whatsapp.svg" alt="" />
-        </div> :
-            <div className="flex flex-col items-center justify-center p-5 h-[80vh]">
+            {/* <img className="fixed bottom-5 right-5" src="/whatsapp.svg" alt="" /> */}
+
+
+        </div> 
+        : <div className="flex flex-col items-center justify-center p-5 h-[80vh]">
                 <img src="/business.svg" alt="" />
                 <br />
                 <Button theme="Success" click={() => redirectHandler(`/${user.rol}`)}>Completa tu Perfil</Button>

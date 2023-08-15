@@ -65,7 +65,7 @@ function Home() {
     }  
 console.log(state)
     useEffect(() => {
-        readUserData('Pedido', user.uuid, pedidos, setUserPedidos, null, null, 'distribuidor', true)
+        readUserData('Pedido', user.uuid, setUserPedidos, 'distribuidor')
     }, [])
 
     return (

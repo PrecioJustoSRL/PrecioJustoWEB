@@ -9,6 +9,7 @@ import Input from '@/components/Input'
 import Msg from '@/components/Msg'
 import Video from '@/components/Video'
 import { useRouter } from 'next/navigation';
+import LoaderWithLogo from '@/components/LoaderWithLogo'
 
 
 export default function Home() {
@@ -102,7 +103,7 @@ export default function Home() {
     user === undefined && onAuth(setUserProfile)
     if (user !== undefined && user !== null) router.replace('/Cliente')
   }, [user])
-
+console.log(user)
   
   return (
     <div className="h-full"
@@ -113,8 +114,7 @@ export default function Home() {
         backgroundAttachment: 'fixed',
         backgroundSize: 'cover'
       }}>
-
-
+{ user === undefined && <LoaderWithLogo></LoaderWithLogo>}
       <Video />
       <div className='w-screen h-screen  flex flex-col justify-center items-center p-5'>
         <form className={`space-y-6 lg:space-y-3 w-[100%] bg-[#00000090] rounded-[30px] lg:max-w-[350px]  ${introVideo === true || introVideo === null ? 'h-0 overflow-hidden p-0 lg:p-0' : 'h-auto px-5 py-10 lg:p-10'}`} onSubmit={signInHandler} >

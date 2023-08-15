@@ -69,37 +69,45 @@ function Home() {
     }
     return (
         <form className='p-5 pb-[80px]'>
-            <h3 className='text-center pb-3'>Agregar Perfil</h3>
-            <br />
+
 
             <br />
-            <div className='flex w-full justify-around mb-12'>
-                <div className='w-1/2 flex justify-center'>
-                    <span className={`text-center p-5 ${account == 'Solicitadora' ? 'border-b-[2px] border-b-gray-500' : ''}`} onClick={() => setAccount('Solicitadora')}>Cuenta Solicitadora</span>
+            <div className='flex w-full  justify-around mb-12'>
+                <div className={`w-1/2 flex justify-center ${account == 'Solicitadora' ? 'bg-[#2a52BE]' : 'bg-white'}`} onClick={() => setAccount('Solicitadora')}>
+                    <span className={`text-center text-[14px] p-5 ${account == 'Solicitadora' ? 'text-white' : ''}`} >Cuenta Solicitadora</span>
                 </div>
-                <div className='w-1/2 flex justify-center border-l-[2px] border-gray-500'>
-                    <span className={`p-5 text-center ${account == 'Verificadora' ? 'border-b-[2px] border-b-gray-500' : ''}`} onClick={() => setAccount('Verificadora')}>Cuenta Verificadora</span>
+                <div className={`w-1/2 flex justify-center border-l-[2px] border-gray-500 ${account == 'Verificadora' ? 'bg-[#2a52BE]' : 'bg-white'}`} onClick={() => setAccount('Verificadora')}>
+                    <span className={`p-5 text-center text-[14px] ${account == 'Verificadora' ? 'text-white' : ''}`}>Cuenta Verificadora</span>
                 </div>
             </div>
 
             <br />
+            <h3 className='text-center pb-3 text-[14px] '>Agregar Perfil</h3>
+
+            <br />
 
             <div className="w-full flex flex-col justify-center items-center">
-                <label htmlFor="file" className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" >
-                    {urlPostImage ? <img className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" style={{ objectPosition: 'center' }} src={urlPostImage} alt="" />
+                <label htmlFor="file" className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" >
+                    {urlPostImage ? <img className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-[12px]  focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" style={{ objectPosition: 'center' }} src={urlPostImage} alt="" />
                         : 'Subir Imagen'}
                 </label>
                 <br />
                 <br />
-                <div className='relative h-[40px] left-0 w-full text-center'>
-                    {account == 'Verificadora' &&
-                        user.uuid
-                    }</div>
+                {account == 'Solicitadora' && <div className='relative h-[40px] left-0 w-full text-center text-[12px]'>
+                    {user.uuid}
+                    < br />
+                    ID de solicitador
+                </div>}
                 <br />
                 <br />
                 <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" required />
             </div>
             <div class="grid gap-6 mb-6 md:grid-cols-2">
+                {account == 'Verificadora' &&
+                    <div>
+                        <Label htmlFor="">ID de solicitador</Label>
+                        <Input type="text" name="ID Verificador" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
+                    </div>}
                 <div>
                     <Label htmlFor="">Nombre de la clínica</Label>
                     <Input type="text" name="nombre" onChange={onChangeHandler} />
@@ -108,34 +116,10 @@ function Home() {
                     <Label htmlFor="">Ciudad</Label>
                     <Select arr={departamentos} name='ciudad' click={onClickHandler} />
                 </div>
-
                 <div>
                     <Label htmlFor="">Dirección</Label>
                     <Input type="text" name="direccion" onChange={onChangeHandler} />
                 </div>
-                {account == 'Verificadora' &&
-                    <div>
-                        <Label htmlFor="">Numero de tarjeta</Label>
-                        <Input type="text" reference={inputRefCard} name="numero de tarjeta" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
-                    </div>}
-                {account == 'Solicitadora' &&
-                    <div>
-                        <Label htmlFor="">ID de verificador</Label>
-                        <Input type="text" name="ID Verificador" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
-                    </div>}
-                {account == 'Verificadora' && <div>
-                    <div className='w-full flex justify-between'>
-                        <div className='w-5/12'>
-                            <Label htmlFor="">Fecha</Label>
-                            <Input reference={inputRefDate} name="fecha de tarjeta" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
-                        </div>
-                        <div className='w-5/12'>
-                            <Label htmlFor="">CVC</Label>
-                            <Input reference={inputRefCVC} name="cvc" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
-                        </div>
-                    </div>
-                </div>
-                }
                 <div>
                     <Label htmlFor="">Teléfono</Label>
                     <Input type="text" name="telefono" reference={inputRefPhone} onChange={onChangeHandler} />
