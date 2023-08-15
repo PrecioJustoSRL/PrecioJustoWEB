@@ -1,5 +1,5 @@
 'use client'
-import { writeUserData, readUserData, onAuth } from '@/supabase/utils'
+import { writeUserData, readUserData, onAuth, signOut } from '@/supabase/utils'
 import { useUser } from '@/context/Context'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -37,6 +37,12 @@ function Home() {
         setUserProfile(data[0])
         return data && dada[0] && dada[0].rol ? router.push('/Cliente') : ''
     }
+
+   const redirectLogin = () => {
+    setUserProfile(null)
+    signOut()
+    router.push('/')
+}
 
     console.log(user)
     useEffect(() => {
@@ -81,16 +87,16 @@ function Home() {
                         <Select arr={departamentos} name='Ciudad' click={onClickHandlerCity} />
                     </div>
                     <div className="flex items-start">
-                        <div className="flex items-start">
+                        <div className="flex items-center">
                             <div className="flex items-center h-5">
-                                <input id="remember" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+                                <input id="remember" type="checkbox" value="" className="w-[16px] h-[16px] border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 " required />
                             </div>
                             <Link href="/Politicas" className="ml-2 text-[14px] font-medium text-gray-100 ">Políticas de Servicio</Link>
                         </div>
                     </div>
                     <Button type="submit" theme="Transparent">Continuar</Button>
                     <br />
-                    <div className="text-[14px] text-center font-medium text-white dark:text-gray-300">Ya tienes una cuenta? <Link href="/" className="text-gray-100 hover:underline">Inicia Sessión</Link >
+                    <div className="text-[14px] text-center font-medium text-white dark:text-gray-300">Ya tienes una cuenta? <span onClick={redirectLogin} className="text-gray-100 hover:underline">Inicia Sessión</span >
                     </div>
                 </form>
             </div>

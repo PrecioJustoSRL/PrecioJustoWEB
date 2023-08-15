@@ -24,15 +24,15 @@ export default function Home() {
     let email = e.target[0].value
     let password = e.target[1].value
 
-   if ( email.length !== 0 && password.length !== 0 ){
+   if ( email.length == 0 && password.length == 0 ){
     setUserSuccess('Complete')
     return
    }
-   
+
     const data = await signUpWithEmailAndPassword(email, password, setUserProfile)
-    console.log(data.user)
-    // setUserProfile(data.user)
-    // data ? router.push('/Register') : ''
+    console.log(data)
+    setUserProfile(data.user)
+    data.user == null ?  setUserSuccess('CuentaExiste') : router.push('/Register')
   }
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function Home() {
           </div>
         </form>
       </div>
-      {success == 'AccountNonExist' && <Msg>Cuenta inexistente</Msg>}
+      {success == 'CuentaExiste' && <Msg>Cuenta ya registrada</Msg>}
       {success == 'Complete' && <Msg>Complete el formulario</Msg>}
     </div>
   )
