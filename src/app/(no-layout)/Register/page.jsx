@@ -93,7 +93,7 @@ function Home() {
                             </div>
                             <Link href="/Politicas" className="ml-2 text-[14px] font-medium text-gray-100 ">Políticas de Servicio</Link>
                         </div>
-                    </div>                    
+                    </div>                            
                     <Button type="submit" theme="Transparent">Continuar</Button>
                     <br />
                     <div className="text-[14px] text-center font-medium text-white dark:text-gray-300">Ya tienes una cuenta? <span onClick={redirectLogin} className="text-gray-100 hover:underline">Inicia Sessión</span >
