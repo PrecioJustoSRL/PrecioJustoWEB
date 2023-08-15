@@ -68,10 +68,28 @@ function Home() {
 
     }
     
-    function delet(i, data) {
+
+
+
+
+
+    function autorizar(i, data) {
         setUserItem(i)
-        setModal(data)
+        setModal('autorizar')
     }
+    async function autorizarConfirm() {
+        console.log(item) 
+        await updateUserData('Clinica', {autorizacion: !item.autorizacion}, item.uuid, null)
+        await readUserAllData('Clinica', null, setTemporal)
+        setModal('')
+    }
+
+
+
+
+
+
+
     async function accessConfirm() {
         console.log(item) 
         await updateUserData('Clinica', {access: !item.access}, item.uuid, null)
@@ -109,6 +127,7 @@ function Home() {
              {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de ELIMINAR al siguiente usuario: {item.nombre}</Modal>}
             {modal === 'Block' && <Modal funcion={blockConfirm}>Estas seguro de {item.bloqueado ? 'DESBLOQUEAR' :'BLOQUEAR'} al siguiente usuario {item.nombre}</Modal>}
             {modal === 'Access' && <Modal funcion={accessConfirm}>Estas seguro de {item.access ? 'DESIGNAR como SOLICITADOR' :'DESIGNAR como VERIFICADOR'} al siguiente usuario {item.nombre}</Modal>}
+            {modal === 'autorizar' && <Modal funcion={autorizarConfirm}>Estas seguro de AUTORIZAR al siguiente usuario: {item.nombre}</Modal>}
 
             <h3 className='font-medium text-[16px]'>Clinicas</h3>
             <br />
@@ -198,8 +217,8 @@ function Home() {
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 {i.autorizacion == true
-                                    ? <Button theme={"Success"} click={() => delet(i, 'Access')}>No autorizar</Button>
-                                    : <Button theme={"Secondary"} click={() => delet(i, 'Access')}>autorizar</Button>
+                                    ? <Button theme={"Success"} click={() => autorizar(i, 'Access')}>No autorizar</Button>
+                                    : <Button theme={"Secondary"} click={() => autorizar(i, 'Access')}>autorizar</Button>
                                 }
                             </td>
                             <td class="px-3 py-4">

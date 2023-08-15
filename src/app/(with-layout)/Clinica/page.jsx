@@ -63,9 +63,9 @@ function Home() {
 
     async function save(e) {
         e.preventDefault()
-       await writeUserData('Clinica', { ...state, uuid: user.uuid, access: account }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
-      await  uploadStorage('Clinica', postImage, user.uuid, updateUserData)
-      return  router.push('/Clinica/Perfil')
+        await writeUserData('Clinica', { ...state, uuid: user.uuid, access: account }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
+        await uploadStorage('Clinica', postImage, user.uuid, updateUserData)
+        return router.push('/Clinica/Perfil')
     }
     return (
         <form className='p-5 pb-[80px]'>
@@ -92,9 +92,9 @@ function Home() {
                 <br />
                 <br />
                 <div className='relative h-[40px] left-0 w-full text-center'>
-                {account == 'Verificadora' && 
-                    user.uuid
-                }</div>
+                    {account == 'Verificadora' &&
+                        user.uuid
+                    }</div>
                 <br />
                 <br />
                 <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" required />
@@ -117,6 +117,11 @@ function Home() {
                     <div>
                         <Label htmlFor="">Numero de tarjeta</Label>
                         <Input type="text" reference={inputRefCard} name="numero de tarjeta" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
+                    </div>}
+                {account == 'Solicitadora' &&
+                    <div>
+                        <Label htmlFor="">ID de verificador</Label>
+                        <Input type="text" name="ID Verificador" styled={{ textAlign: 'center' }} onChange={onChangeHandler} />
                     </div>}
                 {account == 'Verificadora' && <div>
                     <div className='w-full flex justify-between'>
