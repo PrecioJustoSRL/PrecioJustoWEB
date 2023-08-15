@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
-import Error from '@/components/Error'
+import Msg from '@/components/Msg'
 import Video from '@/components/Video'
 import { useRouter } from 'next/navigation';
 
@@ -33,7 +33,7 @@ export default function Home() {
   //         keyPath: 'uid'
   //       })
   //     }
-  //     request.onerror = (err) => {
+  //     request.onMsg = (err) => {
   //       console.log(err)
   //     }
   //     const addData = () => {
@@ -86,7 +86,13 @@ export default function Home() {
     e.preventDefault()
     let email = e.target[0].value
     let password = e.target[1].value
-    email.length !== 0 && password.length !== 0 ? signInWithEmailAndPassword(email, password, setUserSuccess) : setUserSuccess('Complete')
+
+    if ( email.length == 0 || password.length == 0 ){
+      setUserSuccess('Complete')
+      return
+     }
+    
+    signInWithEmailAndPassword(email, password, setUserSuccess)
   }
 
 
@@ -133,8 +139,8 @@ export default function Home() {
           <div className="text-[14px] text-center font-medium text-white">No tienes una cuenta? <Link href="/SignUp" className="text-gray-100 hover:underline">Registrate</Link ></div>
         </form>
       </div>
-      {success == 'AccountNonExist' && <Error>Cuenta inexistente</Error>}
-      {success == 'Complete' && <Error>Complete el formulario</Error>}
+      {success == 'AccountNonExist' && <Msg>Cuenta inexistente</Msg>}
+      {success == 'Complete' && <Msg>Complete el formulario</Msg>}
     </div>
   )
 }

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import style from '@/app/page.module.css'
 import Button from '@/components/Button'
-import Error from '@/components/Error'
+import Msg from '@/components/Msg'
 import Video from '@/components/Video'
 
 import Input from '@/components/Input'
@@ -23,10 +23,16 @@ export default function Home() {
     e.preventDefault()
     let email = e.target[0].value
     let password = e.target[1].value
+
+   if ( email.length !== 0 && password.length !== 0 ){
+    setUserSuccess('Complete')
+    return
+   }
+   
     const data = await signUpWithEmailAndPassword(email, password, setUserProfile)
     console.log(data.user)
-    setUserProfile(data.user)
-    data ? router.push('/Register') : ''
+    // setUserProfile(data.user)
+    // data ? router.push('/Register') : ''
   }
 
   useEffect(() => {
@@ -68,7 +74,8 @@ export default function Home() {
           </div>
         </form>
       </div>
-
+      {success == 'AccountNonExist' && <Msg>Cuenta inexistente</Msg>}
+      {success == 'Complete' && <Msg>Complete el formulario</Msg>}
     </div>
   )
 }
