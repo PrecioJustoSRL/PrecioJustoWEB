@@ -92,7 +92,7 @@ function Home() {
                                 <input id="remember" type="checkbox" value="" className="w-[16px] h-[16px] border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 " required />
                             </div>
                             <Link href="/Politicas" className="ml-2 text-[14px] font-medium text-gray-100 ">Políticas de Servicio</Link>
-                        </div>
+                        </div>        
                     </div>                            
                     <Button type="submit" theme="Transparent">Continuar</Button>
                     <br />
