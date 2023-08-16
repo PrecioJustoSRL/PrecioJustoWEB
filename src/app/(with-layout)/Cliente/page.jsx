@@ -52,8 +52,12 @@ function Home() {
     console.log(userDB)
 
     function videoHandler() {
-        setIntroClientVideo(true)
-        updateUserData('Users', {video: true}, user.uuid)
+        setTimeout(() => {
+            setIntroClientVideo(true)
+            updateUserData('Users', { video: true }, user.uuid)
+        }, 3000)
+
+
 
     }
 
@@ -63,7 +67,7 @@ function Home() {
 
         user && user.rol == 'Medico' && tienda == '' ? setTienda('Recetar') : setTienda('Comprar')
         user && user.rol === 'Cliente' && user.video === false && videoHandler()
-        
+
     }, [user]);
 
     return (
