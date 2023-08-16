@@ -63,7 +63,7 @@ function Home() {
 
     async function save(e) {
         e.preventDefault()
-        await writeUserData('Clinica', { ...state, uuid: user.uuid, access: account }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
+        await writeUserData('Clinica', { ...state, uuid: user.uuid, access: account, ciudad: user.ciudad }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
         await uploadStorage('Clinica', postImage, user.uuid, updateUserData)
         return router.push('/Clinica/Perfil')
     }
@@ -112,14 +112,14 @@ function Home() {
                     <Label htmlFor="">Nombre de la clínica</Label>
                     <Input type="text" name="nombre" onChange={onChangeHandler} />
                 </div>
-                <div>
+                {/* <div>
                     <Label htmlFor="">Ciudad</Label>
                     <Select arr={departamentos} name='ciudad' click={onClickHandler} />
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                     <Label htmlFor="">Dirección</Label>
                     <Input type="text" name="direccion" onChange={onChangeHandler} />
-                </div>
+                </div> */}
                 <div>
                     <Label htmlFor="">Teléfono</Label>
                     <Input type="text" name="telefono" reference={inputRefPhone} onChange={onChangeHandler} />
