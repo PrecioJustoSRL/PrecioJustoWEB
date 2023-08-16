@@ -27,6 +27,8 @@ function Home() {
     const [disponibilidad, setDisponibilidad] = useState('')
     const [categoria, setCategoria] = useState('')
     const [ciudad, setCiudad] = useState('')
+    const [access, setAccess] = useState('Verificadora')
+
     const [filter, setFilter] = useState('')
 
 
@@ -119,7 +121,7 @@ function Home() {
         if(x['nombre'].toLowerCase() > y['nombre'].toLowerCase()) {return 1}
         return 0  
     }
-    console.log(item)
+    console.log(userDB)
     useEffect(() => {
         readUserAllData('Clinica', null, setTemporal)
     }, [])
@@ -138,7 +140,13 @@ function Home() {
                 <input type="text" className='border-b border-gray-300 gap-4 text-center focus:outline-none  w-[300px]' onChange={onChangeHandler} placeholder='Filtrar por nombre' />
             </div>
 
-
+            <div className='min-w-[1000px] flex justify-start items-center my-5 '>
+                <h3 className="flex pr-12 text-[14px]" htmlFor="">Roles</h3>
+                <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(9, 110px)' }}>
+                    <Tag theme={access == 'Verificadora' ? 'Primary' : 'Secondary'} click={() => setAccess(access == 'Verificadora' ? '' : 'Verificadora')}>Verificadores</Tag>
+                    <Tag theme={access == 'Solicitadora' ? 'Primary' : 'Secondary'} click={() => setAccess(access == 'Solicitadora' ? '' : 'Solicitadora')}>Solicitadores</Tag>
+               </div>
+            </div>
             <div className='min-w-[1000px] flex justify-start items-center my-5 '>
                 <h3 className="flex pr-12 text-[14px]" htmlFor="">Ciudad</h3>
                 <div className="gap-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(9, 110px)' }}>
@@ -178,6 +186,9 @@ function Home() {
                             Acceso
                         </th>
                         <th scope="col" class="px-3 py-3">
+                            ID Solicitadora
+                        </th>
+                        <th scope="col" class="px-3 py-3">
                             Autorización
                         </th>
                         <th scope="col" class="px-3 py-3">
@@ -191,7 +202,7 @@ function Home() {
                 <tbody>
                     {temporal && temporal !== undefined && temporal.sort(sortArray).map((i, index) => {
 
-                        return i.access == 'Verificadora' &&  i.ciudad.includes(ciudad) &&  i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
+                        return i.access == access &&  i.ciudad.includes(ciudad) &&  i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
                                 <span className='h-full flex py-2'>{index + 1}</span>
                             </td>
@@ -217,6 +228,9 @@ function Home() {
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                             {i['access']}
+                            </td>
+                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                           {access === 'Verificadora' ? i['ID Verificador'] : i.uuid}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 {i.autorizacion == true
