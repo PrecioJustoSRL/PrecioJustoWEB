@@ -27,7 +27,7 @@ export default function VideoClient({ theme, click, children }) {
     videoClientRef.current.muted = false
   };
   return (
-    <div className='fixed top-0 w-full z-40'>
+    <div className='fixed top-0 w-full z-40 bg-red-800 left-0 right-0 mx-auto'>
       <div className='z-30 absolute top-0 p-5 h-[50px] w-full'>
         {introClientVideo && <div className='flex'>
           <span className='relative flex  items-center justify-center z-50 bg-gray-800 w-[50px] text-[white] border-[2px] border-gray-50  text-center text-[16px] py-3 rounded-full' onClick={handlerSound}>
@@ -44,7 +44,8 @@ export default function VideoClient({ theme, click, children }) {
           <span className='pl-5 text-medium'>{introClientVideo ? 'Cerrar' : 'Ver video'}</span>
         </span>
       </div>
-      <div className={`video-player absolute w-screen lg:w-[300px] rounded-[20px]  flex items-center h-screen my-auto ${introClientVideo === true ? 'left-0 right-0 mx-auto' : 'left-[-200vw]'}`} >
+
+      <div className={`video-player absolute left-0 right-0 flex justify-center mx-auto bg-[#2A52BE] lg:bg-transparent w-screen lg:w-[300px] rounded-[20px]  flex items-center h-screen my-auto ${introClientVideo === true ? 'left-0 right-0 mx-auto' : 'left-[-200vw]'}`} >
         <video ref={videoClientRef} className='rounded-[20px]' autoPlay muted>
           <source src="/introClient.mp4" type="video/mp4" />
         </video>
