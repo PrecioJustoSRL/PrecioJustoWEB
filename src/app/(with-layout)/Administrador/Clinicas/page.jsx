@@ -27,7 +27,7 @@ function Home() {
     const [disponibilidad, setDisponibilidad] = useState('')
     const [categoria, setCategoria] = useState('')
     const [ciudad, setCiudad] = useState('')
-    const [access, setAccess] = useState('Verificadora')
+    const [access, setAccess] = useState('')
 
     const [filter, setFilter] = useState('')
 
@@ -202,7 +202,7 @@ function Home() {
                 <tbody>
                     {temporal && temporal !== undefined && temporal.sort(sortArray).map((i, index) => {
 
-                        return i.access == access &&  i.ciudad.includes(ciudad) &&  i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
+                        return i.access.includes(access) &&  i.ciudad.includes(ciudad) &&  i.nombre.toLowerCase().includes(filter) && <tr class="bg-white text-[12px] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
                             <td class="px-3 py-4  flex font-semibold text-gray-900 dark:text-white">
                                 <span className='h-full flex py-2'>{index + 1}</span>
                             </td>
