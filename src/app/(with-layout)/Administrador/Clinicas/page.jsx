@@ -232,12 +232,18 @@ function Home() {
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                            {access === 'Verificadora' ? i['ID Verificador'] : i.uuid}
                             </td>
-                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                            {i.access === 'Verificadora' 
+                            ? <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 {i.autorizacion == true
                                     ? <Button theme={"Success"} click={() => autorizar(i, 'Access')}>No autorizar</Button>
-                                    : <Button theme={"Secondary"} click={() => autorizar(i, 'Access')}>autorizar</Button>
+                                    : <Button theme={"Secondary"} click={() => autorizar(i, 'Access')}>Autorizar</Button>
                                 }
                             </td>
+                            : <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                            {i.autorizacion == true? 'autorizardo': 'No autorizado'}
+                               
+                        </td>
+                            }
                             <td class="px-3 py-4">
                                 {i.bloqueado == true
                                     ? <Button theme={"Success"} click={() => delet(i, 'Block')}>Desbloquear</Button>
@@ -252,9 +258,6 @@ function Home() {
                     }
                 </tbody>
             </table>
-
-
-         
         </div>
 
     )

@@ -36,7 +36,6 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
             ? setUserCart(obj)
             : setUserCart({ ...cart, [i.uuid]: { ...i, cantidad: cart[i.uuid].cantidad - 1 } })
     }
-    console.log(item)
     return (
         <div class="relative w-full bg-gray-100 min-h-[180px] max-w-[500px] rounded-[15px] border border-gray-200 rounded-[20px] shadow my-[10px]" onClick={(e) => seeMore(e, i)} style={{ display: 'grid', gridTemplateColumns: 'auto 150px' }}>
             <div class=" font-bold text-[16px] mb-2 text-gray-950 col-span-2 p-5 pb-0">

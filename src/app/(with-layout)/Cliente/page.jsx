@@ -49,11 +49,13 @@ function Home() {
         return alert('desea refrescar la pagina')
     }
 
-    console.log(cart)
+    console.log(userDB)
 
     useEffect(() => {
         readUserAllData('Producto', productDB, setUserProduct)
         readUserAllData('Receta', recetaDBP, setRecetaDBP)
+
+        user && user.rol == 'Medico'&& storeHandler('Recetar')
     }, []);
 
     return (

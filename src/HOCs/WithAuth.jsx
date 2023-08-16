@@ -18,7 +18,7 @@ export function WithAuth(Component) {
             if(user && user.role === 'authenticated') {router.push('/Register')}
             if(user !== undefined && user !== null && user.rol && userDB === undefined) {
                 console.log('ejecu')
-                readUserData(user.rol, user.uuid, setUserData, )} 
+                readUserData(user.rol, user.uuid, setUserData)} 
         }, [user, userDB])
         
         return (

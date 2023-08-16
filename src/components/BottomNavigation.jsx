@@ -17,7 +17,7 @@ function Button({ click, children, name }) {
 
 
 export default function BottomNavigation({ rol }) {
-    const { user, userDB, setUserProfile, filter, setFilter, nav, setNav } = useUser()
+    const { user, userDB, setUserProfile, filter, setFilter, nav, setNav, setIntroClientVideo, introClientVideo } = useUser()
 
     const router = useRouter()
 
@@ -31,10 +31,10 @@ export default function BottomNavigation({ rol }) {
     }
 
 
-    console.log(userDB)
+    console.log(introClientVideo)
     switch (rol) {
         case 'Cliente':
-            return <div className={`grid h-full max-w-lg grid-cols-3 mx-auto font-medium `}>
+            return <div className={`grid h-full max-w-lg grid-cols-4 mx-auto font-medium `}>
                 <Button click={() => redirectHandler(`/Cliente/Pedidos`)} name={'Pedidos'}>
                     <svg className="w-11 h-11 mb-1 text-white rounded-full  p-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
@@ -56,6 +56,14 @@ export default function BottomNavigation({ rol }) {
                         </svg>
                     </span>
                     <span className="text-[12px] text-white   ">Soporte</span>
+                </Button>
+                <Button click={() => setIntroClientVideo(!introClientVideo)}>
+                    <span className="w-11 h-11 mb-1 text-white rounded-full  p-1">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.4531 2.72656L12.7266 0H10.4531L13.1797 2.72656H15.4531ZM0.910156 0H0V2.72656H3.63672L0.910156 0ZM9.54687 2.72656L6.81641 0H4.54297L7.26953 2.72656H9.54687ZM16.3633 6.36328H12.7266L15.4531 3.63672H13.1797L10.4531 6.36328H6.81641L9.54297 3.63672H7.26953L4.54297 6.36328H0.910156L3.63672 3.63672H0V18.1836C0 19.1836 0.816406 20 1.81641 20H18.1797C19.1836 20 19.9961 19.1836 19.9961 18.1836V3.63672H19.0859L16.3633 6.36328ZM7.27344 17.2734V9.08984L14.5469 13.1797L7.27344 17.2734ZM16.3633 0L19.0898 2.72656H20V0H16.3633Z" fill="white" />
+                        </svg>
+                    </span>
+                    <span className="text-[12px] text-white   ">Video</span>
                 </Button>
             </div>
             break

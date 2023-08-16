@@ -33,6 +33,12 @@ export function UserProvider({ children }) {
 	const [sound, setSound] = useState(false)
 	const [introVideo, setIntroVideo] = useState(undefined)
 
+	const videoClientRef = useRef();
+	const [soundClient, setSoundClient] = useState(false)
+	const [introClientVideo, setIntroClientVideo] = useState(undefined)
+
+
+
 	const [state, setState] = useState({})
 
 
@@ -90,6 +96,11 @@ export function UserProvider({ children }) {
 			sound,
 			videoRef, 
 			state,
+			videoClientRef,
+			soundClient,
+			introClientVideo, 
+			setIntroClientVideo,
+			 setSoundClient,
 			 setState,
 			setSound, 
 			setPlay, 
@@ -116,7 +127,9 @@ export function UserProvider({ children }) {
 			setUserSuccess,
 			setUserItem
 		})
-	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, QRurl, recetaDB, filter, filterQR, recetaDBP, nav, temporal, userUuid, modal, msg, tienda, introVideo, play, sound, state,])
+	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, QRurl, recetaDB, filter, filterQR, recetaDBP, nav, temporal, userUuid, modal, msg, tienda, introVideo, play, sound, state, videoClientRef,
+		soundClient,
+		introClientVideo,])
 
 	return (
 		<UserContext.Provider value={value} >

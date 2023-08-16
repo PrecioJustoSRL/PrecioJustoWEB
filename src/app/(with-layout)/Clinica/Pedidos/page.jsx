@@ -9,13 +9,13 @@ import { useRouter } from 'next/navigation';
 
 import { WithAuth } from '@/HOCs/WithAuth'
 import { useEffect, useState } from 'react'
-import { writeUserData, readUserData, updateUserData , deleteUserData, readUserAllData} from '@/supabase/utils'
+import { writeUserData, readUserData, updateUserData, deleteUserData, readUserAllData } from '@/supabase/utils'
 import { uploadStorage } from '@/supabase/storage'
 import { getDayMonthYear } from '@/utils/DateFormat'
 
 
 function Home() {
-    const { user, userDB, distributorPDB, setUserDistributorPDB, pedidos, setUserPedidos,  setUserItem, setUserData, setUserSuccess, } = useUser()
+    const { user, userDB, distributorPDB, setUserDistributorPDB, pedidos, setUserPedidos, setUserItem, setUserData, setUserSuccess, } = useUser()
 
     const router = useRouter()
 
@@ -30,49 +30,50 @@ function Home() {
         setState({ ...state, [uuid]: { ...state[uuid], uuid, ['estado']: value } })
     }
 
-    const onClickHandlerCity = (name, value, uuid) => {
-        setState({ ...state, [uuid]: { ...state[uuid], uuid, ['ciudad']: value } })
+
+
+    async function save(i) {
+        setUserItem(i)
+        setModal('Guardar')
+        console.log(item)
     }
 
-    function manageInputIMG(e, uuid) {
-        const file = e.target.files[0]
-        setPostImage({ ...postImage, [uuid]: file })
-        setUrlPostImage({ ...urlPostImage, [uuid]: URL.createObjectURL(file) })
-        setState({ ...state, [uuid]: { ...state[uuid], uuid } })
-    }
-
-    const onClickHandlerAvailability = (name, value, uuid) => {
-        setState({ ...state, [uuid]: { ...state[uuid], uuid, ['disponibilidad']: value } })
-    }
-
-    function onChangeHandler(e, i) {
-        setState({ ...state, [i.uuid]: { ...state[i.uuid], uuid: i.uuid, [e.target.name]: e.target.value } })
-    }
-
-    function save(i) {
-        updateUserData('Pedido', state[i.uuid], i.uuid)
+    function saveConfirm() {
+        updateUserData('Pedido', state[item.uuid], item.uuid)
         const obj = { ...state }
-        delete obj[i.uuid]
+        delete obj[item.uuid]
         setState(obj)
+        setModal('')
+
+    }
+    function delet(i) {
+        setUserItem(i)
+        setModal('Delete')
+        console.log(item)
     }
 
-    function delet (i) {
-        deleteUserData('Pedido', i.uuid)
+    function deletConfirm() {
+        deleteUserData('Pedido', item.uuid)
+        setModal('')
+
         // postImage[i.uuid] && uploadStorage('Producto', postImage[i.uuid], i.uuid, updateUserData, true)
         // const obj = { ...state }
         // delete obj[i.uuid]
         // setState(obj)
-    }  
-console.log(state)
+    }
+    console.log(state)
     useEffect(() => {
-        userDB && userDB[0].access === 'Verificadora' && userDB[0]['ID Verificador'] 
-        ? readUserData('Pedido', userDB[0]['ID Verificador'], setUserPedidos, 'cliente')
-        : readUserData('Pedido', user.uuid, setUserPedidos, 'cliente')
+        userDB && userDB[0].access === 'Verificadora' && userDB[0]['ID Verificador']
+            ? readUserData('Pedido', userDB[0]['ID Verificador'], setUserPedidos, 'cliente')
+            : readUserData('Pedido', user.uuid, setUserPedidos, 'cliente')
     }, [])
 
     return (
 
         <div class="relative overflow-x-auto shadow-md">
+            {modal === 'Guardar' && <Modal funcion={saveConfirm}>Estas seguro de autorizar la compra de:  {item['nombre de producto 1']}</Modal>}
+            {modal === 'Delete' && <Modal funcion={deletConfirm}>Estas seguro de eliminar el siguiente item:  {item['nombre de producto 1']}</Modal>}
+
             <table class=" min-w-[1200px] lg:w-full lg:min-w-[1000px] text-[12px] text-left text-gray-500">
                 <thead class="text-[12px] text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -125,16 +126,16 @@ console.log(state)
                                 {/* {i['costo']} */}
                             </td>}
                             {userDB && userDB[0].access == 'Solicitadora' && <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                            {i.estado}                            </td>}
+                                {i.estado}                            </td>}
                             <td class="px-3 py-4 h-full font-semibold text-gray-900 dark:text-white">
                                 {getDayMonthYear(i['created_at'])}
                             </td>
 
                             <td class="px-3 py-4">
-                                {state[i.uuid] 
-                                ? <Button theme={"Primary"} click={() => save(i)}>Guardar</Button>
-                                : <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
-                            }
+                                {state[i.uuid]
+                                    ? <Button theme={"Primary"} click={() => save(i)}>Guardar</Button>
+                                    : <Button theme={"Danger"} click={() => delet(i)}>Eliminar</Button>
+                                }
                             </td>
                         </tr>
                     })
@@ -151,3 +152,26 @@ console.log(state)
 
 export default WithAuth(Home)
 
+
+
+
+
+
+    // const onClickHandlerCity = (name, value, uuid) => {
+    //     setState({ ...state, [uuid]: { ...state[uuid], uuid, ['ciudad']: value } })
+    // }
+
+    // function manageInputIMG(e, uuid) {
+    //     const file = e.target.files[0]
+    //     setPostImage({ ...postImage, [uuid]: file })
+    //     setUrlPostImage({ ...urlPostImage, [uuid]: URL.createObjectURL(file) })
+    //     setState({ ...state, [uuid]: { ...state[uuid], uuid } })
+    // }
+
+    // const onClickHandlerAvailability = (name, value, uuid) => {
+    //     setState({ ...state, [uuid]: { ...state[uuid], uuid, ['disponibilidad']: value } })
+    // }
+
+    // function onChangeHandler(e, i) {
+    //     setState({ ...state, [i.uuid]: { ...state[i.uuid], uuid: i.uuid, [e.target.name]: e.target.value } })
+    // }
