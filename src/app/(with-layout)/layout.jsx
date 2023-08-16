@@ -22,7 +22,7 @@ function Home({ children }) {
 
   console.log(pathname)
 
-
+       
 
   const redirectHandler = (ref) => {
     router.push(ref)
