@@ -4,7 +4,7 @@ import { useUser } from '@/context/Context.js'
 // import { useEffect, useState, useRef } from 'react'
 
 
-export default function Button({ theme, click, children }) {
+export default function VideoClient({ theme, click, children }) {
 
   const { videoClientRef, introClientVideo, setIntroClientVideo, soundClient, setSoundClient } = useUser()
 
