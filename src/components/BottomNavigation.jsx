@@ -11,7 +11,7 @@ function Button({ click, children, name }) {
     return <button type="button" className={`relative inline-flex flex-col items-center justify-center px-5 group text-white `} onClick={click}>
         <>
             {children}
-            <span className={`${name == query && introClientVideo == false &&  'bg-gray-50 absolute w-full h-[5px] bottom-0'} ${name == 'video' && introClientVideo &&  'bg-gray-50 absolute w-full h-[5px] bottom-0'}`}></span>
+            <span className={`${name == query && introClientVideo == false && 'bg-gray-50 absolute w-full h-[5px] bottom-0'} ${name == 'video' && introClientVideo && 'bg-gray-50 absolute w-full h-[5px] bottom-0'}`}></span>
         </>
     </button>
 }
@@ -23,8 +23,8 @@ export default function BottomNavigation({ rol }) {
 
     const router = useRouter()
 
-    const redirectHandler = (ref) => {
-
+    const redirectHandler = (ref, name) => {
+        name && setIntroClientVideo(false)
         router.push(ref)
     }
 
@@ -37,13 +37,13 @@ export default function BottomNavigation({ rol }) {
     switch (rol) {
         case 'Cliente':
             return <div className={`grid h-full max-w-lg grid-cols-4 mx-auto font-medium `}>
-                <Button click={() => redirectHandler(`/Cliente/Pedidos`)} name={'Pedidos'}>
+                <Button click={() => redirectHandler(`/Cliente/Pedidos`, 'Pedidos')} name={'Pedidos'}>
                     <svg className="w-11 h-11 mb-1 text-white rounded-full  p-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
                     </svg>
                     <span className="text-[12px] text-white   ">Pedidos</span>
                 </Button>
-                <Button click={() => redirectHandler(`/Cliente`)} name={'Cliente'}>
+                <Button click={() => redirectHandler(`/Cliente`, 'Cliente')} name={'Cliente'}>
                     <svg className="w-11 h-11 mb-1 text-white rounded-full  p-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
                     </svg>
@@ -51,12 +51,12 @@ export default function BottomNavigation({ rol }) {
                 </Button>
 
                 <Button click={() => setIntroClientVideo(!introClientVideo)} name={'video'}>
-                <svg className="w-11 h-11 mb-1 text-white  p-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M15.4531 2.72656L12.7266 0H10.4531L13.1797 2.72656H15.4531ZM0.910156 0H0V2.72656H3.63672L0.910156 0ZM9.54687 2.72656L6.81641 0H4.54297L7.26953 2.72656H9.54687ZM16.3633 6.36328H12.7266L15.4531 3.63672H13.1797L10.4531 6.36328H6.81641L9.54297 3.63672H7.26953L4.54297 6.36328H0.910156L3.63672 3.63672H0V18.1836C0 19.1836 0.816406 20 1.81641 20H18.1797C19.1836 20 19.9961 19.1836 19.9961 18.1836V3.63672H19.0859L16.3633 6.36328ZM7.27344 17.2734V9.08984L14.5469 13.1797L7.27344 17.2734ZM16.3633 0L19.0898 2.72656H20V0H16.3633Z" fill="white" />
-                        </svg>
+                    <svg className="w-11 h-11 mb-1 text-white  p-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M15.4531 2.72656L12.7266 0H10.4531L13.1797 2.72656H15.4531ZM0.910156 0H0V2.72656H3.63672L0.910156 0ZM9.54687 2.72656L6.81641 0H4.54297L7.26953 2.72656H9.54687ZM16.3633 6.36328H12.7266L15.4531 3.63672H13.1797L10.4531 6.36328H6.81641L9.54297 3.63672H7.26953L4.54297 6.36328H0.910156L3.63672 3.63672H0V18.1836C0 19.1836 0.816406 20 1.81641 20H18.1797C19.1836 20 19.9961 19.1836 19.9961 18.1836V3.63672H19.0859L16.3633 6.36328ZM7.27344 17.2734V9.08984L14.5469 13.1797L7.27344 17.2734ZM16.3633 0L19.0898 2.72656H20V0H16.3633Z" fill="white" />
+                    </svg>
                     <span className="text-[12px] text-white   ">Video</span>
                 </Button>
-                <Button click={() => redirectHandlerWindow(`https://api.whatsapp.com/send?phone=+59169941749&text=hola%20mundo`)}>
+                <Button click={() => redirectHandlerWindow(`https://api.whatsapp.com/send?phone=+59169941749&text=hola%20mundo`, 'whatsapp')}>
                     <span className="w-11 h-11 mb-1 text-white rounded-full  p-1">
                         <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.853564 19.7608C0.852627 23.1216 1.73763 26.4031 3.42044 29.2955L0.692627 39.178L10.8851 36.5262C13.7042 38.0491 16.8628 38.847 20.0726 38.8472H20.0811C30.6772 38.8472 39.3026 30.2917 39.3072 19.7759C39.3092 14.6802 37.3111 9.88857 33.6808 6.28361C30.0511 2.67896 25.2237 0.692755 20.0803 0.69043C9.48294 0.69043 0.858096 9.24547 0.853721 19.7608" fill="transparent" />
@@ -66,7 +66,7 @@ export default function BottomNavigation({ rol }) {
                     </span>
                     <span className="text-[12px] text-white   ">Soporte</span>
                 </Button>
-                
+
             </div>
             break
         case 'Medico':

@@ -27,7 +27,7 @@ export default function VideoClient({ theme, click, children }) {
     videoClientRef.current.muted = false
   };
   return (
-    <div className='fixed top-0 w-full z-50'>
+    <div className='fixed top-0 w-full z-40'>
       <div className='z-30 absolute top-0 p-5 h-[50px] w-full'>
         {introClientVideo && <div className='flex'>
           <span className='relative flex  items-center justify-center z-50 bg-gray-800 w-[50px] text-[white] border-[2px] border-gray-50  text-center text-[16px] py-3 rounded-full' onClick={handlerSound}>
