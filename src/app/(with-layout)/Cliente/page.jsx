@@ -21,7 +21,7 @@ import { QRreaderUtils } from '@/utils/QRreader'
 import { useState } from 'react'
 
 function Home() {
-    const { user, userDB, cart, modal, setModal, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda } = useUser()
+    const { user, userDB, cart, modal, setModal, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda, setIntroClientVideo } = useUser()
     const [disponibilidad, setDisponibilidad] = useState('Todas')
     const [categoria, setCategoria] = useState('Todas')
     const router = useRouter()
@@ -38,7 +38,7 @@ function Home() {
     }
 
     function storeHandler(db) {
-      tienda !== db &&  setModal(db)
+        tienda !== db && setModal(db)
     }
     function storeConfirm() {
         setTienda(modal)
@@ -51,18 +51,26 @@ function Home() {
 
     console.log(userDB)
 
+    function videoHandler() {
+        setIntroClientVideo(true)
+        updateUserData('Users', {video: true}, user.uuid)
+
+    }
+
     useEffect(() => {
         readUserAllData('Producto', productDB, setUserProduct)
         readUserAllData('Receta', recetaDBP, setRecetaDBP)
 
-        user && user.rol == 'Medico'&& storeHandler('Recetar')
-    }, []);
+        user && user.rol == 'Medico' && storeHandler('Recetar')
+        user && user.rol === 'Cliente' && user.video === false && videoHandler()
+        
+    }, [user]);
 
     return (
 
         <main className="">
-            {(modal == 'Recetar' || modal == 'Comprar') && <Modal funcion={storeConfirm}>Estas seguro de cambiar a {modal}. <br /> {Object.keys(cart).length > 0 && 'Tus datos se borraran' }</Modal>}
-            {modal == 'Auth' && <Modal funcion={()=>setModal('')}>Tu perfil esta en espera de ser autorizado</Modal>}
+            {(modal == 'Recetar' || modal == 'Comprar') && <Modal funcion={storeConfirm}>Estas seguro de cambiar a {modal}. <br /> {Object.keys(cart).length > 0 && 'Tus datos se borraran'}</Modal>}
+            {modal == 'Auth' && <Modal funcion={() => setModal('')}>Tu perfil esta en espera de ser autorizado</Modal>}
 
             {(user.rol == 'Medico' || user.rol == 'Administrador') && <div className='relative flex justify-between left-0 right-0 m-auto  w-[90vw] max-w-[600px] mb-5'>
                 <Button theme="MiniSuccessRecetar" click={() => storeHandler('Recetar')}>Recetar</Button>
@@ -121,7 +129,7 @@ function Home() {
                         recetaDBP.map((i, index) =>
                             tienda === 'Recetar'
                                 ? i.qr.includes(filterQR) && i.disponibilidad !== 'No disponible' && <CardM i={i} key={index} />
-                                : i.qr.includes(filterQR) && i.disponibilidad !== 'No disponible' &&  <Card i={i} recetado={true} key={index} />
+                                : i.qr.includes(filterQR) && i.disponibilidad !== 'No disponible' && <Card i={i} recetado={true} key={index} />
                         )}
                     {filter.length == 0 && filterQR.length == 0 &&
                         productDB !== null && productDB !== undefined &&
@@ -135,9 +143,9 @@ function Home() {
                         productDB.map((i, index) => {
                             if (i.distribuidor !== 'Precio-Justo-SRL-Data') return tienda === 'Recetar' && i.distribuidor !== 'Precio-Justo-SRL-Data'
                                 ? (i.disponibilidad !== 'No disponible' && <CardM i={i} key={index} />)
-                                : (`${i['nombre de producto 1']} ${i['nombre de producto 2'] !== undefined && i['nombre de producto 2'] !== null && i['nombre de producto 2'] } ${i['nombre de producto 3'] !== undefined && i['nombre de producto 3'] !== null && i['nombre de producto 3']}`).toLowerCase().split(' ').some(e=>  filter.split(' ').includes(e))
-                                && i.disponibilidad !== 'No disponible' &&  <Card i={i} key={index} />
-                        }  
+                                : (`${i['nombre de producto 1']} ${i['nombre de producto 2'] !== undefined && i['nombre de producto 2'] !== null && i['nombre de producto 2']} ${i['nombre de producto 3'] !== undefined && i['nombre de producto 3'] !== null && i['nombre de producto 3']}`).toLowerCase().split(' ').some(e => filter.split(' ').includes(e))
+                                && i.disponibilidad !== 'No disponible' && <Card i={i} key={index} />
+                        }
                         )}
                 </div>
 
@@ -150,13 +158,13 @@ function Home() {
                 {tienda === 'Recetar'
                     ? <Button theme="SuccessReceta" click={HandlerRecetar}>Completar Receta</Button>
                     : (user.rol == 'Clinica' && userDB && userDB[0].access == 'Solicitadora'
-                    ? Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
-                      <Button theme="SuccessBuy" click={HandlerCheckOut}> Solicitar</Button>
-                    </div>
-                    : Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0  bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
-                      <Button theme="SuccessBuy" click={HandlerCheckOut}> Pagar por QR</Button>
-                    </div>)
-                    }
+                        ? Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0 bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
+                            <Button theme="SuccessBuy" click={HandlerCheckOut}> Solicitar</Button>
+                        </div>
+                        : Object.values(cart).length > 0 && <div className="fixed w-screen px-5 left-0  bottom-[70px] lg:w-[250px] lg:bottom-auto lg:top-[75px] lg:left-auto lg:right-5  z-20">
+                            <Button theme="SuccessBuy" click={HandlerCheckOut}> Pagar por QR</Button>
+                        </div>)
+                }
             </div>}
         </main>
     )
