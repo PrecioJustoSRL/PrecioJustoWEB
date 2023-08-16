@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation'
 import BottomNavigation from '@/components/BottomNavigation'
 import Navbar from '@/components/Navbar'
 import Modal from '@/components/Modal'
-import VideoClient from '@/components/VideoClient'
+import VideoClient from '@/components/Vide'
 
 function Home({ children }) {
   const router = useRouter()
