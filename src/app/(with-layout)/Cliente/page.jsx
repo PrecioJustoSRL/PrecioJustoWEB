@@ -61,7 +61,7 @@ function Home() {
         readUserAllData('Producto', productDB, setUserProduct)
         readUserAllData('Receta', recetaDBP, setRecetaDBP)
 
-        user && user.rol == 'Medico' && storeHandler('Recetar')
+        user && user.rol == 'Medico' && tienda == '' ? setTienda('Recetar') : setTienda('Comprar')
         user && user.rol === 'Cliente' && user.video === false && videoHandler()
         
     }, [user]);

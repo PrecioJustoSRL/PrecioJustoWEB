@@ -119,7 +119,8 @@ function Home({ children }) {
 
         <div className="lg:px-[50px] pt-[85px] pb-[65px] md:pt-[85px] md:pb-5 h-screen overflow-y-auto">
 
-        {   introClientVideo ? <VideoClient /> : children}
+        {   introClientVideo && <VideoClient /> }
+        {children}
         
 
         </div>
