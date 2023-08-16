@@ -65,7 +65,7 @@ function Home() {
     }  
 console.log(state)
     useEffect(() => {
-        readUserData('Pedido', user.uuid, setUserPedidos, 'distribuidor')
+        readUserData('Pedido', user.uuid, setUserPedidos, 'cliente')
     }, [])
 
     return (
@@ -116,7 +116,7 @@ console.log(state)
                                 {i['cantidad']}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                {i['envio'] == true ? 'Yes' : 'Non'}
+                                {i['check'] == true ? 'Provincia' : 'Ciudad'}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
                                 <Select arr={['Nuevo', 'Atendido', 'Felicitaciones']} name='estado' defaultValue={i.estado} uuid={i.uuid} click={onClickHandlerCategory} />

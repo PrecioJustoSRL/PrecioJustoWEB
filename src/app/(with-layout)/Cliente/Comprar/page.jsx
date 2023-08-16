@@ -34,7 +34,7 @@ function Comprar({ theme, styled, click, children }) {
       const data = { ...i }
       delete data['created_at']
       delete data['id']
-      writeUserData('Pedido', { ...data, envio: check, ...state, estado: 'nuevo' }, i.uuid, userDB, setUserData, setUserSuccess, 'existos', null)
+      writeUserData('Pedido', { ...data, envio: check, ...state, estado: 'nuevo', cliente: user.uuid }, i.uuid, userDB, setUserData, setUserSuccess, 'existos', null)
     })
     router.push('/Cliente/Comprar/Detalle')
   }

@@ -48,6 +48,7 @@ const writeUserData = async (rute, object, uuid, context, updateContext, setUser
     const result = await supabase
         .from(rute)
         .insert(object)
+        console.log(result)
     setUserSuccess ? setUserSuccess(msg) : ''
     result.status == 201 ? readUserData(rute, uuid, updateContext) : (setUserSuccess ? setUserSuccess(msg) : '')
     // console.log(result)

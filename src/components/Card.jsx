@@ -95,7 +95,9 @@ return
                         {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='flex justify-center items-center text-[16px] text-right px-5 w-[40px] font-bold'> {cart[i.uuid].cantidad} </span>}
                         <Button theme='MiniSecondary' click={(e) => addPlussCart(e, i)}>+</Button>
                     </div>
-                    : <Button theme='MiniPrimaryComprar' click={(e) => addCart(e, i)}>Comprar</Button>}
+                    : (user.rol === 'Clinica' && userDB && userDB[0].access == 'Verificadora' 
+                    ? <Button theme='MiniPrimaryInfo' onClick={(e) => seeMore(e, i)}>Info</Button>
+                    :<Button theme='MiniPrimaryComprar' click={(e) => addCart(e, i)}>Comprar</Button>)}
             </div>}
             {user.rol == 'Distribuidor' && <div className='flex py-4 pr-4'>
                 <Button theme='MiniPrimaryInfo' onClick={(e) => seeMore(e, i)}>Info</Button>

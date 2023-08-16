@@ -65,7 +65,9 @@ function Home() {
     }  
 console.log(state)
     useEffect(() => {
-        readUserData('Pedido', user.uuid, setUserPedidos, 'distribuidor')
+        userDB && userDB[0].access === 'Verificadora' && userDB[0]['ID Verificador'] 
+        ? readUserData('Pedido', userDB[0]['ID Verificador'], setUserPedidos, 'cliente')
+        : readUserData('Pedido', user.uuid, setUserPedidos, 'cliente')
     }, [])
 
     return (
@@ -89,7 +91,7 @@ console.log(state)
                         <th scope="col" class="px-3 py-3">
                             Envio
                         </th>
-                        <th scope="col" class="px-3 py-3">
+                        <th scope="col" class="px-8 py-3">
                             Estado
                         </th>
                         <th scope="col" class="px-3 py-3">
@@ -116,12 +118,14 @@ console.log(state)
                                 {i['cantidad']}
                             </td>
                             <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                {i['envio'] == true ? 'Yes' : 'Non'}
+                                {i['check'] == true ? 'Provincia' : 'Ciudad'}
                             </td>
-                            <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
-                                <Select arr={['Nuevo', 'Atendido', 'Felicitaciones']} name='estado' defaultValue={i.estado} uuid={i.uuid} click={onClickHandlerCategory} />
+                            {userDB && userDB[0].access == 'Verificadora' && <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                                <Select arr={['-----', 'Autorizado', 'No autorizado']} name='estado' defaultValue={i.estado} uuid={i.uuid} click={onClickHandlerCategory} />
                                 {/* {i['costo']} */}
-                            </td>
+                            </td>}
+                            {userDB && userDB[0].access == 'Solicitadora' && <td class="px-3 py-4 font-semibold text-gray-900 dark:text-white">
+                            {i.estado}                            </td>}
                             <td class="px-3 py-4 h-full font-semibold text-gray-900 dark:text-white">
                                 {getDayMonthYear(i['created_at'])}
                             </td>
