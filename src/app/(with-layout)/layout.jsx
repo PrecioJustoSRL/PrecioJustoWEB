@@ -1,5 +1,6 @@
 'use client'
 import { useUser } from '@/context/Context'
+import { readUserAllData, updateUserData } from '@/supabase/utils'
 
 import { useState, useEffect } from 'react'
 import style from './Medico.module.css'
@@ -17,10 +18,9 @@ import { Turret_Road } from 'next/font/google'
 
 function Home({ children }) {
   const router = useRouter()
-  const { user, userDB, setUserProfile, setUserCart, setUserProduct, setRecetaDB, setUserDistributorPDB, setUserData, filter, setFilter, nav, setNav, modal, setModal, cart, introClientVideo, setIntroClientVideo, recetaDBP, setRecetaDBP, productDB} = useUser()
+  const { user, userDB, setUserProfile, setUserCart, setUserProduct, setRecetaDB, setUserDistributorPDB, setUserData, filter, setFilter, nav, setNav, modal, setModal, cart, introClientVideo, setIntroClientVideo, recetaDBP, setRecetaDBP, productDB, search, setSearch} = useUser()
   const pathname = usePathname()
 
-  const [search, setSearch] = useState(false)
 
   console.log(pathname)
 

@@ -21,7 +21,7 @@ import { QRreaderUtils } from '@/utils/QRreader'
 import { useState } from 'react'
 
 function Home() {
-    const { user, userDB, cart, modal, setModal, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda, setIntroClientVideo,  } = useUser()
+    const { user, userDB, cart, modal, setModal, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda, setIntroClientVideo, search, setSearch } = useUser()
     const [disponibilidad, setDisponibilidad] = useState('Todas')
     const [categoria, setCategoria] = useState('Todas')
     const router = useRouter()
@@ -60,6 +60,21 @@ function Home() {
 
 
     }
+
+
+
+    function sortArray(x, y) {
+        if (x['nombre de producto 1'].toLowerCase() < y['nombre de producto 1'].toLowerCase()) { return -1 }
+        if (x['nombre de producto 1'].toLowerCase() > y['nombre de producto 1'].toLowerCase()) { return 1 }
+        return 0
+    }
+    function handlerSearchFilter(data) {
+      
+        setFilter(data)
+        setSearch(false)
+    }
+
+
 
 
 
@@ -110,6 +125,53 @@ function Home() {
             </div>}
 
 
+
+
+
+
+
+
+
+
+            {/* <div className='w-[100vw] fixed top-[75px] z-30 bg-white'>
+                {search && filter.length > 0 && productDB !== null && productDB !== undefined &&
+                    productDB.sort(sortArray).map((i, index) => {
+                        if (i.distribuidor !== 'Precio-Justo-SRL-Data' && i.disponibilidad !== 'No disponible') {
+                            // return (`${i['nombre de producto 1']} ${i['nombre de producto 2'] !== undefined && i['nombre de producto 2'] !== null && i['nombre de producto 2']} ${i['nombre de producto 3'] !== undefined && i['nombre de producto 3'] !== null && i['nombre de producto 3']}`).toLowerCase().includes(filter)
+
+                            if (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase())) {
+                                return <div className='w-full flex justify-between text-[12px] px-5 py-2' onClick={()=>handlerSearchFilter(i['nombre de producto 1'])}>
+                                   <div className='w-[80%]'>{i['nombre de producto 1']}</div> 
+                                    <svg className="w-8 h-8 text-white " aria-hidden="true" fill="text-gray-100" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#2A52BE" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
+                                </div>
+                            }
+                            if (i['nombre de producto 2'] && i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase())) {
+                                return <div className='w-full flex justify-between text-[12px] px-5 py-2' onClick={()=>handlerSearchFilter(i['nombre de producto 2'])}>
+                                     <div className='w-[80%]'>{i['nombre de producto 2'] && i['nombre de producto 2']}</div>
+                                    <svg className="w-8 h-8 text-white " aria-hidden="true" fill="text-gray-100" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#2A52BE" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
+                                </div>
+                            }
+                            if (i['nombre de producto 3'] && i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) {
+                                return <div className='w-full flex justify-between text-[12px] px-5 py-2' onClick={()=>handlerSearchFilter(i['nombre de producto 3'])}> 
+                                <div className='w-[80%]'>{i['nombre de producto 3'] && i['nombre de producto 3']}</div> 
+                                    <svg className="w-8 h-8 text-white " aria-hidden="true" fill="text-gray-100" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#2A52BE" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
+                                </div>
+                            }
+                        }
+                    }
+                    )}
+            </div> */}
+
+
+
+
+
+
+
+
+
+
+
             <div className="w-screen lg:w-auto relative z-10">
 
 
@@ -137,21 +199,21 @@ function Home() {
                    
                    
                 {filterQR.length > 0 && recetaDBP !== null && recetaDBP !== undefined &&
-                        recetaDBP.map((i, index) =>
+                        recetaDBP.sort(sortArray).map((i, index) =>
                             tienda === 'Recetar'
                                 ? i.qr.includes(filterQR) && <CardM i={i} key={index} />
                                 : i.qr.includes(filterQR) && <Card i={i} recetado={true} key={index} />
                         )}
                     {filter.length == 0 && filterQR.length == 0 &&
                         productDB !== null && productDB !== undefined &&
-                        productDB.map((i, index) => {
+                        productDB.sort(sortArray).map((i, index) => {
                             if (i.distribuidor !== 'Precio-Justo-SRL-Data') return tienda === 'Recetar'
                                 ? <CardM i={i} key={index} />
                                 : <Card i={i} key={index} />
                         }
                         )}
                     {filter.length > 0 && productDB !== null && productDB !== undefined &&
-                        productDB.map((i, index) => {
+                        productDB.sort(sortArray).map((i, index) => {
                             if (i.distribuidor !== 'Precio-Justo-SRL-Data') return tienda === 'Recetar' && i.distribuidor !== 'Precio-Justo-SRL-Data'
                                 ? (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase()) ||
                                     (i['nombre de producto 2'] && i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase())) ||
