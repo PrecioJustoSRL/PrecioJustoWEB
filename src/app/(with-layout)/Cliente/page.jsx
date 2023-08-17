@@ -104,7 +104,7 @@ function Home() {
                         <path d="M95.7799 215.33H55.3799C52.1973 215.33 49.145 216.594 46.8946 218.845C44.6442 221.095 43.3799 224.147 43.3799 227.33V267.73C43.3799 270.913 44.6442 273.965 46.8946 276.215C49.145 278.466 52.1973 279.73 55.3799 279.73H95.7799C98.9625 279.73 102.015 278.466 104.265 276.215C106.516 273.965 107.78 270.913 107.78 267.73V227.33C107.78 224.147 106.516 221.095 104.265 218.845C102.015 216.594 98.9625 215.33 95.7799 215.33Z" fill="black" />
                         <path d="M138.71 172.4H12.4399C9.25734 172.4 6.20509 173.664 3.95465 175.915C1.70421 178.165 0.439941 181.217 0.439941 184.4V310.67C0.439941 313.852 1.70421 316.905 3.95465 319.155C6.20509 321.406 9.25734 322.67 12.4399 322.67H138.71C141.893 322.67 144.945 321.406 147.195 319.155C149.446 316.905 150.71 313.852 150.71 310.67V184.4C150.71 181.217 149.446 178.165 147.195 175.915C144.945 173.664 141.893 172.4 138.71 172.4ZM129.24 215.33V301.2H21.9099V193.87H129.24V215.33Z" fill="black" />
                     </svg>
-                    <span className='block w-full h-[28px] absolute left-0 top-0 bottom-0 my-auto text-center pl-[50px] text-[18px]'>{user.rol == 'Cliente' ? 'Ya tengo una RECETA QR...' : 'Ver recetas QR...'}</span>
+                    <span className='block w-full h-[28px] absolute left-0 top-0 bottom-0 my-auto text-center pl-[50px] text-[18px] font-extrabold'>{user.rol == 'Cliente' ? 'Ya tengo una RECETA QR...' : 'Ver recetas QR...'}</span>
                 </label>
                 <input id="qr" type="file" className='hidden' onChange={HandlerOnChange} accept="image/* " />
             </div>}
