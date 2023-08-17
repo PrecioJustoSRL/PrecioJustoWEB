@@ -21,7 +21,7 @@ import { QRreaderUtils } from '@/utils/QRreader'
 import { useState } from 'react'
 
 function Home() {
-    const { user, userDB, cart, modal, setModal, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda, setIntroClientVideo } = useUser()
+    const { user, userDB, cart, modal, setModal, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda, setIntroClientVideo,  } = useUser()
     const [disponibilidad, setDisponibilidad] = useState('Todas')
     const [categoria, setCategoria] = useState('Todas')
     const router = useRouter()
@@ -61,6 +61,9 @@ function Home() {
 
     }
 
+
+
+
     useEffect(() => {
         readUserAllData('Producto', productDB, setUserProduct)
         readUserAllData('Receta', recetaDBP, setRecetaDBP)
@@ -76,28 +79,7 @@ function Home() {
             {(modal == 'Recetar' || modal == 'Comprar') && <Modal funcion={storeConfirm}>Estas seguro de cambiar a {modal}. <br /> {Object.keys(cart).length > 0 && 'Tus datos se borraran'}</Modal>}
             {modal == 'Auth' && <Modal funcion={() => setModal('')}>Tu perfil esta en espera de ser autorizado</Modal>}
 
-            <div className='w-[80vw]'>
-                {filter.length > 0 && productDB !== null && productDB !== undefined &&
-                    productDB.map((i, index) => {
-                        if (i.distribuidor !== 'Precio-Justo-SRL-Data' && i.disponibilidad !== 'No disponible') {
-                            // return (`${i['nombre de producto 1']} ${i['nombre de producto 2'] !== undefined && i['nombre de producto 2'] !== null && i['nombre de producto 2']} ${i['nombre de producto 3'] !== undefined && i['nombre de producto 3'] !== null && i['nombre de producto 3']}`).toLowerCase().includes(filter)
-
-                            if (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase())) {
-                                return i['nombre de producto 1']
-                            }
-                            if (i['nombre de producto 2'] && i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase())) {
-                                return i['nombre de producto 2']
-                            }
-                            if (i['nombre de producto 2'] &&  i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) {
-                                return i['nombre de producto 3']
-                            }
-                        }
-                    }
-                    )}
-            </div>
-
-
-
+          
 
             {(user.rol == 'Medico' || user.rol == 'Administrador') && <div className='relative flex justify-between left-0 right-0 m-auto  w-[90vw] max-w-[600px] mb-5'>
                 <Button theme="MiniSuccessRecetar" click={() => storeHandler('Recetar')}>Recetar</Button>
