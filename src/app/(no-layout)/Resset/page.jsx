@@ -1,6 +1,6 @@
 'use client';
 import { useUser } from '@/context/Context'
-import { onAuth, signUpWithEmailAndPassword } from '@/supabase/utils'
+import { onAuth, signUpWithEmailAndPassword, passwordResset } from '@/supabase/utils'
 import { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -32,9 +32,10 @@ export default function Home() {
             setUserSuccess('NoIdenticos')
             return
         }
-        await supabase.auth.resetPasswordForEmail('hello@example.com', {
-            redirectTo: 'http://localhost:3000/Resset',
-        })
+        await passwordResset(password1)
+        setUserSuccess('Inicia Session')
+        return router.push('/')
+
     }
 
     useEffect(() => {
@@ -45,7 +46,7 @@ export default function Home() {
     return (
         <div className="min-h-full"
             style={{
-                backgroundImage: 'url(/bg-signup.jpg)',
+                backgroundImage: 'url(/bg-login.avif)',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: '50% 50%',
                 backgroundAttachment: 'fixed',
@@ -68,12 +69,10 @@ export default function Home() {
                         <label htmlFor="password" className="block mb-2 text-[16px] text-left  font-medium text-white">Contraseña</label>
                         <Input type="password" name="password2" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-100 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                     </div>
-                    {/* <div className="flex items-start">
-            <a href="#" className="ml-auto text-[14px] text-gray-100 hover:underline">Olvidaste tu contraseña?</a>
-          </div> */}
+                 
                     <Button type="submit" theme="Transparent">Continuar</Button>
-                    {/* <div className="text-[14px] text-center font-medium text-white">Ya tienes una cuenta? <Link href="/" className="text-gray-100 hover:underline">Inicia Sessión</Link >
-          </div> */}
+                    <div className="text-[14px] text-center font-medium text-white">Ya tienes una cuenta? <Link href="/" className="text-gray-100 hover:underline">Inicia Sessión</Link >
+          </div>
                 </form>
             </div>
              {success == 'NoIdenticos' && <Msg>Los datos no coinciden</Msg>}

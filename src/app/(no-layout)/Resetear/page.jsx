@@ -19,7 +19,7 @@ export default function Home() {
 
 
     
-    function handlerResset(e) {
+    async function handlerResset(e) {
         e.preventDefault()
         let email = e.target[0].value
         let read = e.target[1].value
@@ -35,7 +35,9 @@ export default function Home() {
             setUserSuccess('CompleteREAD')
             return
         }
-        passwordRedirect(email)
+      await  passwordRedirect(email)
+
+      setUserSuccess('RevisaTuGmail')
     }
 
 
@@ -54,7 +56,7 @@ export default function Home() {
             ? <LoaderWithLogo></LoaderWithLogo>
             : <div className="h-full"
                 style={{
-                    backgroundImage: 'url(/bg-login.jpg)',
+                    backgroundImage: 'url(/bg-login.avif)',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backgroundAttachment: 'fixed',
@@ -86,6 +88,8 @@ export default function Home() {
                 {success == 'CompleteREAD' && <Msg>Escriba RESETEAR-CONTRASEÑA</Msg>}
 
                 {success == 'Complete' && <Msg>Complete el formulario</Msg>}
+                {success == 'RevisaTuGmail' && <Msg>Un link fue enviado a tu correo</Msg>}
+
             </div>
     )
 }
