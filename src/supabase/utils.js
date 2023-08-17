@@ -48,9 +48,10 @@ const passwordResset = async (new_password) => {
 
 
 const passwordRedirect = async (email) => {
-    await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'http://localhost:3000/Resset',
+   const data = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://tienda.preciojusto.pro/Resset',
     })
+    console.log(data)
 }
 
 

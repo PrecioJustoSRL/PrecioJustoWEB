@@ -67,10 +67,10 @@ export default function Home() {
             <Input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-100 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
           </div>
           <div className="flex items-start">
-            <a href="#" className="ml-auto text-[14px] text-gray-100 hover:underline">Olvidaste tu contraseña?</a>
+            <a href="#" className="ml-auto text-[14px] text-gray-100 underline">Olvidaste tu contraseña?</a>
           </div>
           <Button type="submit" theme="Transparent">Continuar</Button>
-          <div className="text-[14px] text-center font-medium text-white">Ya tienes una cuenta? <Link href="/" className="text-gray-100 hover:underline">Inicia Sessión</Link >
+          <div className="text-[14px] text-center font-medium text-white">Ya tienes una cuenta? <Link href="/" className="text-gray-100 underline">Inicia Sessión</Link >
           </div>
         </form>
       </div>

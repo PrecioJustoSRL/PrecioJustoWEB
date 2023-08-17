@@ -1,6 +1,6 @@
 'use client'
 import { useUser } from '@/context/Context'
-import { onAuth, signInWithEmailAndPassword } from '@/supabase/utils'
+import { onAuth, signInWithEmailAndPassword, passwordRedirect } from '@/supabase/utils'
 import { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -81,6 +81,9 @@ export default function Home() {
     }
   }
 
+
+
+
   console.log(introVideo)
 
   const signInHandler = (e) => {
@@ -135,13 +138,15 @@ export default function Home() {
               <Input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
             </div>
             <div className="flex items-start">
-              <a href="#" className="ml-auto text-white text-[14px] text-gray-100 hover:underline">Olvidaste tu contraseña?</a>
+              <Link href='/Resetear' className="ml-auto text-white text-[14px] text-gray-100 underline">Olvidaste tu contraseña?</Link>
             </div>
             <Button type="submit" theme="Transparent">Iniciar Sesión</Button>
-            <div className="text-[14px] text-center font-medium text-white">No tienes una cuenta? <Link href="/SignUp" className="text-gray-100 hover:underline">Registrate</Link ></div>
+            <div className="text-[14px] text-center font-medium text-white">No tienes una cuenta? <Link href="/SignUp" className="text-gray-100 underline">Registrate</Link ></div>
           </form>
         </div>
         {success == 'AccountNonExist' && <Msg>Cuenta inexistente</Msg>}
+                {success == 'CompleteEmail' && <Msg>Introduce tu email</Msg>}
+
         {success == 'Complete' && <Msg>Complete el formulario</Msg>}
       </div>
   )
