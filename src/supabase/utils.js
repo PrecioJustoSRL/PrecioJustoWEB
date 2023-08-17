@@ -51,7 +51,6 @@ const passwordRedirect = async (email) => {
    const data = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: 'https://tienda.preciojusto.pro/Resset',
     })
-    console.log(data)
 }
 
 

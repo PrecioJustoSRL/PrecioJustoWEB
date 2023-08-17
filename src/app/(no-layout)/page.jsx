@@ -14,36 +14,11 @@ import LoaderWithLogo from '@/components/LoaderWithLogo'
 
 export default function Home() {
   const { user, introVideo, setSound, setIntroVideo, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG } = useUser()
-
+  const [isDisable, setIsDisable] = useState(false)
   const router = useRouter()
 
 
-  // function createIndexedDB() {
-  //   setIntroVideo(true)
-  //   const indexedDB = window.indexedDB
-  //   if (indexedDB) {
-  //     let swoouDB
-  //     const request = indexedDB.open('preciojusto', 1)
-  //     request.onsuccess = (e) => {
-  //       swoouDB = e.target.result
-  //       addData()
-  //     }
-  //     request.onupgradeneeded = (e) => {
-  //       swoouDB = e.target.result
-  //       const objectStoreUserDB = swoouDB.createObjectStore('preciojusto', {
-  //         keyPath: 'uid'
-  //       })
-  //     }
-  //     request.onMsg = (err) => {
-  //       console.log(err)
-  //     }
-  //     const addData = () => {
-  //       const transaction = swoouDB.transaction(['preciojusto'], 'readwrite')
-  //       const objectStore = transaction.objectStore('preciojusto')
-  //       const request = objectStore.add({ uid: 'video-mp4', play: true })
-  //     }
-  //   }
-  // }
+
   function readIndexedDB() {
     if (indexedDB) {
       let swoouDB
@@ -86,17 +61,19 @@ export default function Home() {
 
   console.log(introVideo)
 
-  const signInHandler = (e) => {
+  const signInHandler = async (e) => {
     e.preventDefault()
+    setIsDisable(true)
+
     let email = e.target[0].value
     let password = e.target[1].value
-
     if (email.length == 0 || password.length == 0) {
       setUserSuccess('Complete')
-      return
+      return setTimeout(() => { setIsDisable(false) }, 6000)
     }
+   await signInWithEmailAndPassword(email, password, setUserSuccess)
 
-    signInWithEmailAndPassword(email, password, setUserSuccess)
+   return setIsDisable(false)
   }
 
 
@@ -122,7 +99,7 @@ export default function Home() {
 
         <Video />
         <div className='w-screen h-screen  flex flex-col justify-center items-center p-5'>
-          <form className={`space-y-6 lg:space-y-3 w-[100%] bg-[#00000090] rounded-[30px] lg:max-w-[350px]  ${introVideo === true || introVideo === null ? 'h-0 overflow-hidden p-0 lg:p-0' : 'h-auto px-5 py-10 lg:p-10'}`} onSubmit={signInHandler} >
+          <form className={`space-y-6 lg:space-y-3 w-[100%] bg-[#00000090] rounded-[30px] lg:max-w-[350px]  ${introVideo === true || introVideo === null ? 'h-0 overflow-hidden p-0 lg:p-0' : 'h-auto px-5 py-10 lg:p-10'}`} onSubmit={!isDisable ? signInHandler : (e)=>e.preventDefault()} >
             <div className='w-full text-center flex justify-center'>
               <Image src="/logo-main.svg" width="150" height="150" alt="User" />
             </div>
@@ -145,7 +122,7 @@ export default function Home() {
           </form>
         </div>
         {success == 'AccountNonExist' && <Msg>Cuenta inexistente</Msg>}
-                {success == 'CompleteEmail' && <Msg>Introduce tu email</Msg>}
+        {success == 'CompleteEmail' && <Msg>Introduce tu email</Msg>}
 
         {success == 'Complete' && <Msg>Complete el formulario</Msg>}
       </div>
@@ -153,6 +130,31 @@ export default function Home() {
 }
 
 
-
+  // function createIndexedDB() {
+  //   setIntroVideo(true)
+  //   const indexedDB = window.indexedDB
+  //   if (indexedDB) {
+  //     let swoouDB
+  //     const request = indexedDB.open('preciojusto', 1)
+  //     request.onsuccess = (e) => {
+  //       swoouDB = e.target.result
+  //       addData()
+  //     }
+  //     request.onupgradeneeded = (e) => {
+  //       swoouDB = e.target.result
+  //       const objectStoreUserDB = swoouDB.createObjectStore('preciojusto', {
+  //         keyPath: 'uid'
+  //       })
+  //     }
+  //     request.onMsg = (err) => {
+  //       console.log(err)
+  //     }
+  //     const addData = () => {
+  //       const transaction = swoouDB.transaction(['preciojusto'], 'readwrite')
+  //       const objectStore = transaction.objectStore('preciojusto')
+  //       const request = objectStore.add({ uid: 'video-mp4', play: true })
+  //     }
+  //   }
+  // }
 
 

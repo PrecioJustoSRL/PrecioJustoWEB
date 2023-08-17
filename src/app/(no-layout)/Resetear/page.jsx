@@ -14,35 +14,35 @@ import LoaderWithLogo from '@/components/LoaderWithLogo'
 
 export default function Home() {
     const { user, introVideo, setSound, setIntroVideo, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG } = useUser()
-
+    const [isDisable, setIsDisable] = useState(false)
     const router = useRouter()
 
 
     
     async function handlerResset(e) {
         e.preventDefault()
+        setIsDisable(true)
+
         let email = e.target[0].value
         let read = e.target[1].value
 
 
         if (email.length == 0 || read.length == 0) {
             setUserSuccess('Complete')
-            return
+            return setTimeout(() => { setIsDisable(false) }, 6000)
         }
 
         
         if (read !== 'RESETEAR-CONTRASEÑA') {
             setUserSuccess('CompleteREAD')
-            return
+            return 	setTimeout(() => { setIsDisable(false) }, 6000)
+
         }
       await  passwordRedirect(email)
 
       setUserSuccess('RevisaTuGmail')
+      return setIsDisable(false)
     }
-
-
-
-
 
 
 
@@ -65,7 +65,7 @@ export default function Home() {
 
                 <Video />
                 <div className='w-screen h-screen  flex flex-col justify-center items-center p-5'>
-                    <form className={`space-y-6 lg:space-y-3 w-[100%] bg-[#00000090] rounded-[30px] lg:max-w-[350px]  ${introVideo === true || introVideo === null ? 'h-0 overflow-hidden p-0 lg:p-0' : 'h-auto px-5 py-10 lg:p-10'}`} onSubmit={handlerResset} >
+                    <form className={`space-y-6 lg:space-y-3 w-[100%] bg-[#00000090] rounded-[30px] lg:max-w-[350px]  ${introVideo === true || introVideo === null ? 'h-0 overflow-hidden p-0 lg:p-0' : 'h-auto px-5 py-10 lg:p-10'}`} onSubmit={!isDisable ? handlerResset : (e)=>e.preventDefault()} >
                         <div className='w-full text-center flex justify-center'>
                             <Image src="/logo-main.svg" width="150" height="150" alt="User" />
                         </div>
@@ -77,8 +77,8 @@ export default function Home() {
                             <Input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                         </div>
                         <div>
-                            <label htmlFor="email" className="block mb-2 text-[16px] text-left font-medium text-white">Escribe RESETEAR-CONTRASEÑA</label>
-                            <Input type="text" name="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Escribe RESETEAR-CONTRASEÑA" required />
+                            <label htmlFor="email" className="block mb-2 text-[16px] text-left font-medium text-white">Escribe: RESETEAR-CONTRASEÑA</label>
+                            <Input type="text" name="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="RESETEAR-CONTRASEÑA" required />
                         </div>
                         <br />
                         <br />

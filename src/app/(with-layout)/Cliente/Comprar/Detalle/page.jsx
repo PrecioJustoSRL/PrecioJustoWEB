@@ -11,6 +11,7 @@ import Label from '@/components/Label'
 import MiniCard from '@/components/MiniCard'
 import Input from '@/components/Input'
 import { useRouter } from 'next/navigation';
+import Confeti from '@/components/Confeti';
 
 function Comprar({ theme, styled, click, children }) {
 
@@ -36,6 +37,7 @@ function Comprar({ theme, styled, click, children }) {
 
   console.log(cart)
   return (<div className='w-screen p-5'>
+    <Confeti />
     <div className='w-1/2 py-4'>
       <Button theme='Primary'>Imprimir</Button>
     </div>

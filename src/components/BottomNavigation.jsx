@@ -30,10 +30,10 @@ export default function BottomNavigation({ rol }) {
             router.push(ref)
             return
         }
-        if (name == 'video' && introClientVideo === true) {
+        // if (name == 'video' && introClientVideo === true) {
        
-            return
-        }
+        //     return
+        // }
 
         if (introClientVideo === true) {
             videoClientRef.current.pause()

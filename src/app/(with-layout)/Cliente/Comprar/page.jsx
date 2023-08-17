@@ -12,7 +12,6 @@ import MiniCard from '@/components/MiniCard'
 import Input from '@/components/Input'
 import { useRouter } from 'next/navigation';
 import dynamic from "next/dynamic";
-
 const InvoicePDF = dynamic(() => import("@/components/ProformaPDF"), {
   ssr: false,
 });
