@@ -26,7 +26,7 @@ export function UserProvider({ children }) {
 	const [userUuid, setUserUuid] = useState(undefined)
     const [modal, setModal] = useState('')
     const [msg, setMsg] = useState('')
-    const [tienda, setTienda] = useState('')
+    const [tienda, setTienda] = useState(null)
 
 	const videoRef = useRef();
 	const [play, setPlay] = useState(true)

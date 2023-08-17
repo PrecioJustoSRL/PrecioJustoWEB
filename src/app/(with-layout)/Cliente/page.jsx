@@ -49,7 +49,7 @@ function Home() {
         return alert('desea refrescar la pagina')
     }
 
-    console.log(userDB)
+    console.log(user)
 
     function videoHandler() {
         setTimeout(() => {
@@ -64,8 +64,8 @@ function Home() {
     useEffect(() => {
         readUserAllData('Producto', productDB, setUserProduct)
         readUserAllData('Receta', recetaDBP, setRecetaDBP)
-
-        user && user.rol == 'Medico' && tienda == '' ? setTienda('Recetar') : setTienda('Comprar')
+        console.log(tienda)
+        user && user.rol !== 'Medico' ? setTienda('Comprar') : setTienda('Recetar')
         user && user.rol === 'Cliente' && user.video === false && videoHandler()
 
     }, [user]);
@@ -152,7 +152,6 @@ function Home() {
                         }
                         )}
                 </div>
-
             </div>
 
             <img src="/bg.png" className='fixed lg:w-[600px] bottom-[70px] lg:bottom-0 lg:right-0 ' alt="" />
