@@ -59,14 +59,16 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                 </div>
             </div>
             <div>
-                <div class="relative h-[150px] w-[150px] rounded-t text-center" style={{ backgroundImage: `url(${i.url})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }}>
+                <div class="relative w-[150px] rounded-t text-center" >
+                    <img src={i.url} className='w-150px' alt="" />
                     {recetado === true && <span className='absolute text-[16px] font-bold right-10 top-10 text-green-600 transform rotate-[-45deg]'>Recetado <br /> por tu doctor</span>}
                 </div>
                 <div className='flex py-4 pr-4'>
-                    <span className={`block text-center w-full text-14 p-2 rounded-full text-[16px] ${i.disponibilidad == 'No disponible' && 'bg-red-400'} ${i.disponibilidad == 'Inmediatamente' && 'bg-green-400'} ${i.disponibilidad == 'En un día' && 'bg-yellow-300'}`}>{i.disponibilidad}</span>
+                    <span className={`block text-center w-full text-14 p-2 rounded-[5px] text-[12px] leanding-[0px]`}>
+                        Entrega {i.disponibilidad.toLowerCase()}
+                    </span>
                 </div>
             </div>
-
             <div className='w-full flex justify-between  items-center p-4'>
                 <div class="flex items-baseline text-gray-900">
                     <span class="text-[14px] text-gray-600 font-semibold">BOB</span>
@@ -78,7 +80,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
                     ? <div className='flex w-full'>
                         <Button theme='MiniPrimary' click={(e) => addLessCart(e, i)}>-</Button>
                         {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='flex justify-center items-center text-[16px] text-right px-5 w-[40px] font-bold'> {cart[i.uuid].cantidad} </span>}
-                        <Button theme='MiniSecondary' click={(e) => addPlussCart(e, i)}>+</Button>
+                        <Button theme='MiniSuccess' click={(e) => addPlussCart(e, i)}>+</Button>
                     </div>
                     : <Button theme='MiniSuccessRecetar' click={(e) => addCart(e, i)}>Recetar</Button>
                 }
