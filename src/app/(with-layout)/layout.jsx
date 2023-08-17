@@ -1,7 +1,7 @@
 'use client'
 import { useUser } from '@/context/Context'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import style from './Medico.module.css'
 import { signOut } from '@/supabase/utils'
 import { useRouter } from 'next/navigation';
@@ -17,7 +17,7 @@ import { Turret_Road } from 'next/font/google'
 
 function Home({ children }) {
   const router = useRouter()
-  const { user, userDB, setUserProfile, setUserCart, setUserProduct, setRecetaDB, setUserDistributorPDB, setUserData, filter, setFilter, nav, setNav, modal, setModal, cart, introClientVideo, setIntroClientVideo} = useUser()
+  const { user, userDB, setUserProfile, setUserCart, setUserProduct, setRecetaDB, setUserDistributorPDB, setUserData, filter, setFilter, nav, setNav, modal, setModal, cart, introClientVideo, setIntroClientVideo, recetaDBP, setRecetaDBP, productDB} = useUser()
   const pathname = usePathname()
 
   const [search, setSearch] = useState(false)
@@ -67,6 +67,16 @@ function handlerSearchFilter(data) {
     setFilter(data)
     setSearch(false)
 }
+
+
+useEffect(() => {
+  readUserAllData('Producto', productDB, setUserProduct)
+  readUserAllData('Receta', recetaDBP, setRecetaDBP)
+
+
+}, [user]);
+
+
   return (
     // <div className="pt-[65px] pb-[65px] min-h-screen bg-gray-white"  style={{ backgroundImage: `url(bg.png)`, backgroundAttachment: 'fixed', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom' }}>
     <div className="h-screen bg-gray-white">
