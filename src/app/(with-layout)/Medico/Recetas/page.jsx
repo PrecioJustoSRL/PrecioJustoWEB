@@ -53,7 +53,7 @@ function Home() {
     }  
 
     useEffect(() => {
-        readUserData('Receta', user.uuid, distributorPDB, setUserDistributorPDB, null, null, 'medico', true)
+        readUserData('Receta', user.uuid, setUserDistributorPDB, 'medico')
     }, [])
 
     return (

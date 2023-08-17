@@ -78,20 +78,11 @@ function Home() {
 
                 <div>
                     <Label htmlFor="">Nombre</Label>
-                    <Input type="text" name="nombre" onChange={onChangeHandler} />
+                    <Input type="text" name="nombre" onChange={onChangeHandler} require/>
                 </div>
                 <div>
                     <Label htmlFor="">Especialidad</Label>
                     <Select arr={['traumatólogo', 'Neurocirujano', 'Cirujano Plástico', 'Cirujano Maxilofacial', 'Cirujano Toráxico', 'Otros']} name='especialidad' click={onClickHandler} />
-                </div>
-                <div>
-                    <Label htmlFor="">Ciudad</Label>
-                    <Select arr={['La Paz', 'Cochabamba', 'Santa Cruz']} name='ciudad' click={onClickHandler} />
-                </div>
-
-                <div>
-                    <Label htmlFor="">Dirección</Label>
-                    <Input type="text" name="direccion" onChange={onChangeHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Teléfono</Label>
@@ -99,7 +90,7 @@ function Home() {
                 </div>
                 <div>
                     <Label htmlFor="">Whatsapp</Label>
-                    <Input type="text" name="whatsapp" onChange={onChangeHandler} reference={inputRefWhatsApp} />
+                    <Input type="text" name="whatsapp" onChange={onChangeHandler} reference={inputRefWhatsApp} require/>
                 </div>
             </div>
             <div className='flex w-full justify-around'>
