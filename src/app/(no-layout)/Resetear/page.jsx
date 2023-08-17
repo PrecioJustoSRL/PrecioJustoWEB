@@ -81,6 +81,7 @@ export default function Home() {
                             <Input type="text" name="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Escribe RESETEAR-CONTRASEÑA" required />
                         </div>
                         <br />
+                        <br />
                         <Button type="submit" theme="Transparent">Resetear</Button>
                         <div className="text-[14px] text-center font-medium text-white">Ya tienes una cuenta? <Link href="/" className="text-gray-100 underline">Inicia Sesión</Link ></div>
                     </form>
