@@ -40,6 +40,20 @@ const signOut = async (email, password) => {
     const { error } = await supabase.auth.signOut()
 }
 
+
+const passwordResset = async (new_password) => {
+    await supabase.auth.updateUser({ password: new_password })
+}
+
+
+
+const passwordRedirect = async (email) => {
+    await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'http://localhost:3000/Resset',
+    })
+}
+
+
 //--------------------------CRUD----------------------------------
 
 const writeUserData = async (rute, object, uuid, context, updateContext, setUserSuccess, msg, key) => {
@@ -48,11 +62,11 @@ const writeUserData = async (rute, object, uuid, context, updateContext, setUser
     const result = await supabase
         .from(rute)
         .insert(object)
-        console.log(result)
+    console.log(result)
     setUserSuccess ? setUserSuccess(msg) : ''
     result.status == 201 ? readUserData(rute, uuid, updateContext) : (setUserSuccess ? setUserSuccess(msg) : '')
     // console.log(result)
-return result
+    return result
 }
 // ('Users', session.user.id, {}, setUserProfile, null, { uuid: session.user.id, rol: undefined })
 
@@ -61,7 +75,7 @@ const readUserData = async (rute, uuid, updateContext, eq,) => {
         .from(rute)
         .select()
         .eq(eq ? eq : 'uuid', uuid)
-        
+
     console.log(result)
 
     if (updateContext) {
@@ -114,5 +128,5 @@ const deleteUserData = async (rute, uuid, eq) => {
 
 
 
-export { onAuth, signUpWithEmailAndPassword, signInWithEmailAndPassword, signOut, writeUserData, readUserData, deleteUserData, updateUserData, readUserAllData }
+export { onAuth, signUpWithEmailAndPassword, signInWithEmailAndPassword, signOut, passwordResset, passwordRedirect, writeUserData, readUserData, deleteUserData, updateUserData, readUserAllData }
 
