@@ -13,6 +13,7 @@ import BottomNavigation from '@/components/BottomNavigation'
 import Navbar from '@/components/Navbar'
 import Modal from '@/components/Modal'
 import VideoClient from '@/components/Vide'
+import { Turret_Road } from 'next/font/google'
 
 function Home({ children }) {
   const router = useRouter()
@@ -31,6 +32,7 @@ function Home({ children }) {
 
   const handlerFilter = (e) => {
     const data = e.target.value
+    setSearch(true)
     setFilter(data)
   }
   const back = () => {
@@ -61,7 +63,9 @@ function Home({ children }) {
     return 0
 }
 function handlerSearchFilter(data) {
+  
     setFilter(data)
+    setSearch(false)
 }
   return (
     // <div className="pt-[65px] pb-[65px] min-h-screen bg-gray-white"  style={{ backgroundImage: `url(bg.png)`, backgroundAttachment: 'fixed', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom' }}>
