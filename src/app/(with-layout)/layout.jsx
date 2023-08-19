@@ -152,7 +152,10 @@ function Home({ children }) {
 
         <div className='w-[100vw] fixed top-[75px] z-30 bg-white border-[1px] border-[#2A52BE]'>
           {search && filter.length > 0 && productDB !== null && productDB !== undefined &&
-            productDB.sort(sortArray).map((i, index) => {
+            productDB.filter((item,index)=> productDB.indexOf(item) === index)
+            .filter(i=>i.disponibilidad !== 'No disponible')
+            .filter(i=>i.distribuidor !== 'Precio-Justo-SRL-Data')
+            .sort(sortArray).map((i, index) => {
               if (i.distribuidor !== 'Precio-Justo-SRL-Data' && i.disponibilidad !== 'No disponible') {
                 // return (`${i['nombre de producto 1']} ${i['nombre de producto 2'] !== undefined && i['nombre de producto 2'] !== null && i['nombre de producto 2']} ${i['nombre de producto 3'] !== undefined && i['nombre de producto 3'] !== null && i['nombre de producto 3']}`).toLowerCase().includes(filter)
 
