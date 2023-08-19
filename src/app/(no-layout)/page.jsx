@@ -10,10 +10,11 @@ import Msg from '@/components/Msg'
 import Video from '@/components/Video'
 import { useRouter } from 'next/navigation';
 import LoaderWithLogo from '@/components/LoaderWithLogo'
+import Particles from '@/components/Particles'
 
 
 export default function Home() {
-  const { user, introVideo, setSound, setIntroVideo, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG } = useUser()
+  const { user, introVideo, setSound, setIntroVideo, userDB, setUserProfile, setUserSuccess, success, setUserData, postsIMG, setUserPostsIMG, sound1, sound2, setSound1, setSound2, } = useUser()
   const [isDisable, setIsDisable] = useState(false)
   const router = useRouter()
 
@@ -125,6 +126,7 @@ export default function Home() {
         {success == 'CompleteEmail' && <Msg>Introduce tu email</Msg>}
 
         {success == 'Complete' && <Msg>Complete el formulario</Msg>}
+        <Particles />
       </div>
   )
 }

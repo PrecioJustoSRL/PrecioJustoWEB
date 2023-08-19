@@ -36,6 +36,9 @@ function Comprar({ theme, styled, click, children }) {
       writeUserData('Pedido', { ...data, envio: check, ...state, estado: 'nuevo', cliente: user.uuid }, i.uuid, userDB, setUserData, setUserSuccess, 'existos', null)
     })
     router.push('/Cliente/Comprar/Detalle')
+
+
+    window.navigator.vibrate([1000])
   }
  function handlerCheck (data) {
     setCheck(data)
