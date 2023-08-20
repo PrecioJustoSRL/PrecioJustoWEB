@@ -15,6 +15,7 @@ import Navbar from '@/components/Navbar'
 import Modal from '@/components/Modal'
 import VideoClient from '@/components/Vide'
 import { Turret_Road } from 'next/font/google'
+import Whatsapp from '@/components/Whatsapp'
 
 function Home({ children }) {
   const router = useRouter()
@@ -184,14 +185,6 @@ function Home({ children }) {
             )}
         </div>
 
-
-
-
-
-
-
-
-
         <div className="lg:px-[50px] pt-[85px] pb-[65px] md:pt-[85px] md:pb-5 h-screen overflow-y-auto">
 
           <VideoClient />
@@ -206,7 +199,7 @@ function Home({ children }) {
           <BottomNavigation rol={user.rol} />
         </div>} */}
       </main>
-
+      <Whatsapp />
 
     </div>
   )

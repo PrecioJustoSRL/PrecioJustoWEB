@@ -12,6 +12,7 @@ import Tag from '../../../components/Tag'
 import Cart from '../../../components/Cart'
 import Modal from '@/components/Modal'
 
+
 import { useRouter } from 'next/navigation';
 
 import { WithAuth } from '@/HOCs/WithAuth'
@@ -262,6 +263,7 @@ function Home() {
                         </div>)
                 }
             </div>}
+            {/* Whatsapp */}
         </main>
     )
 }

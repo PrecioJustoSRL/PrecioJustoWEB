@@ -39,6 +39,8 @@ export function UserProvider({ children }) {
 	const [search, setSearch] = useState(false)
 	const [sound1, setSound1] = useState(false)
 	const [sound2, setSound2] = useState(false)
+	const [whatsapp, setWhatsapp] = useState(false)
+	const [whatsappMSG, setWhatsappMSG] = useState('')
 
 
 
@@ -104,6 +106,9 @@ export function UserProvider({ children }) {
 			introClientVideo, search, 
 			sound1, 
 			sound2, 
+			whatsapp,
+			whatsappMSG, setWhatsappMSG,
+			 setWhatsapp,
 			setSound2,
 			setSound1,
 			setSearch,
@@ -140,7 +145,7 @@ export function UserProvider({ children }) {
 		introClientVideo,
 		search, 
 		sound1, 
-		sound2, ])
+		sound2, whatsapp])
 
 	return (
 		<UserContext.Provider value={value} >

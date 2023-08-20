@@ -49,7 +49,6 @@ function Comprar({ theme, styled, click, children }) {
 
   console.log(userDB)
   return (<div className='w-full relative p-5 pb-[50px]'>
-   
     <InvoicePDF  />
     <form >
       <h3 className='text-center text-[16px] pb-3'>DATOS DEL PACIENTE</h3>
@@ -91,6 +90,9 @@ function Comprar({ theme, styled, click, children }) {
 
       </div>
     </form>
+
+    <audio src="/sound.mpeg" autoPlay></audio>
+
     <h3 className='text-center text-[16px] px-5 py-2 bg-[#2A52BE] text-white' >MIS COMPRAS</h3>
 
     <div className='relative overflow-x-auto items-center justify-between w-full max-w-screen bg-transparent md:w-auto lg:max-w-auto transition-all	z-0' >

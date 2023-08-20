@@ -19,7 +19,7 @@ function Button({ click, children, name }) {
 
 
 export default function BottomNavigation({ rol }) {
-    const { user, userDB, setUserProfile, filter, setFilter, nav, setNav, setIntroClientVideo, introClientVideo, videoClientRef, setSoundClient } = useUser()
+    const { user, userDB, setUserProfile, filter, setFilter, nav, setNav, setIntroClientVideo, introClientVideo, videoClientRef, setSoundClient, whatsapp, setWhatsapp } = useUser()
 
     const router = useRouter()
 
@@ -31,27 +31,33 @@ export default function BottomNavigation({ rol }) {
             return
         }
         // if (name == 'video' && introClientVideo === true) {
-       
+
         //     return
         // }
 
         if (introClientVideo === true) {
             videoClientRef.current.pause()
-             setIntroClientVideo(false) 
-           } else {
-             setIntroClientVideo(true)
-             videoClientRef.current.play()
-       
-             setSoundClient(true)
-       
-           }
-           videoClientRef.current.muted = false
+            setIntroClientVideo(false)
+        } else {
+            setIntroClientVideo(true)
+            videoClientRef.current.play()
+
+            setSoundClient(true)
+
+        }
+        videoClientRef.current.muted = false
 
     }
 
     const redirectHandlerWindow = (ref) => {
-        window.open(ref, '_blank')
+        // window.open(ref, '_blank')
+        setWhatsapp(!whatsapp)
     }
+
+
+    // const  handlerSoport = () => {
+
+    // }
 
 
     console.log(introClientVideo)
