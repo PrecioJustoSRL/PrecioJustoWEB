@@ -1,36 +1,29 @@
 'use client'
 
-
 import { writeUserData, readUserData, updateUserData } from '@/supabase/utils'
 import { uploadStorage } from '@/supabase/storage'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useUser } from '../../../context/Context.js'
 import Input from '../../../components/Input'
 import Select from '../../../components/Select'
 import Label from '@/components/Label'
-import Checkbox from '@/components/Checkbox'
+import LoaderBlack from '@/components/LoaderBlack'
 
 
 import Button from '../../../components/Button'
 import { useMask } from '@react-input/mask';
 import { useRouter } from 'next/navigation';
 import { WithAuth } from '@/HOCs/WithAuth'
-import { departamentos } from '@/constants'
 
 
 function Home() {
     const router = useRouter()
 
-    const { user, userDB, setUserData, setUserSuccess } = useUser()
+    const { user, userDB, setUserData, success, setUserSuccess } = useUser()
     const [state, setState] = useState({})
 
     const [postImage, setPostImage] = useState(null)
     const [urlPostImage, setUrlPostImage] = useState(null)
-
-    const [account, setAccount] = useState('dependiente')
-
-
-
 
 
     const inputRefCard = useMask({ mask: '____ ____ ____ ____', replacement: { _: /\d/ } });
@@ -38,7 +31,6 @@ function Home() {
     const inputRefCVC = useMask({ mask: '___', replacement: { _: /\d/ } });
     const inputRefPhone = useMask({ mask: '+ 591 _ ___ ___', replacement: { _: /\d/ } });
     const inputRefWhatsApp = useMask({ mask: '+ 591 __ ___ ___', replacement: { _: /\d/ } });
-
 
     function manageInputIMG(e) {
         // const fileName = `${e.target.name}`
@@ -48,53 +40,75 @@ function Home() {
         setUrlPostImage(URL.createObjectURL(file))
 
     }
-
-
     function onChangeHandler(e) {
         setState({ ...state, [e.target.name]: e.target.value })
     }
     function onChangeHandlerCheck(e) {
-        setState({ ...state, [e.target.name]: e.target.checked })
+        setState({ ...state, ['dias de atencion']: { ...state['dias de atencion'], [e.target.name]: e.target.checked } })
     }
     function onClickHandler(name, value) {
         setState({ ...state, [name]: value })
     }
 
+    console.log(userDB)
 
-    function save(e) {
+    async function save(e) {
         e.preventDefault()
-        writeUserData('Clinica', { ...state, uuid: user.uuid }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente', 'Perfil')
-        uploadStorage('Clinica', postImage, user.uuid, updateUserData)
-        router.push('/Clinica/Perfil')
+        if (userDB && userDB[0]['nombre']) {
+            setUserSuccess('Cargando')
+            await updateUserData('Administrador', { ...state }, user.uuid)
+            postImage && uploadStorage('Administrador', postImage, user.uuid, updateUserData)
+            router.push('/Administrador/Perfil')
+            setUserSuccess('')
+        } else {
+            setUserSuccess('Cargando')
+            await writeUserData('Administrador', { ...state, uuid: user.uuid }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente',)
+            await uploadStorage('Administrador', postImage, user.uuid, updateUserData)
+            router.push('/Administrador/Perfil')
+         setUserSuccess('')
+
+        }
     }
+
+    useEffect(() => {
+        if (user && user.rol !== undefined) readUserData(user.rol, user.uuid, setUserData,)
+    }, [user]);
+
     return (
-        <form className='p-5'>
-            <h3 className='text-center pb-3'>Perfil empresarial</h3>
+        <form className='p-5' onSubmit={save} >
+            {success === "Cargando" && <LoaderBlack></LoaderBlack>}
+            <h3 className='text-center text-[14px] pb-3'>Agregar Perfil</h3>
+            <div className="w-full flex justify-center">
+                <label htmlFor="file" className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" >
+                    {urlPostImage || (userDB && userDB[0].url) ? <img className="block flex justify-center items-center w-[100px] h-[100px] bg-white border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 rounded-[100px]" style={{ objectPosition: 'center' }} src={urlPostImage ? urlPostImage : userDB[0].url} alt="" />
+                        : 'Subir Imagen'}
+                </label>
+                <input className="hidden" onChange={manageInputIMG} accept=".jpg, .jpeg, .png, .mp4, webm" id='file' type="file" require={userDB && userDB[0]['nombre'] ? true : false}/>
+            </div>
+            <br />
             <br />
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <Label htmlFor="">Nombre de la Empresa</Label>
-                    <Input type="text" name="nombre" onChange={onChangeHandler} require/>
+                    <Label htmlFor="">Nombre</Label>
+                    <Input type="text" name="nombre" onChange={onChangeHandler} defValue={userDB && userDB[0]['nombre']} require />
                 </div>
                 <div>
-                    <Label htmlFor="">Ciudad</Label>
-                    <Select arr={departamentos} name='ciudad' click={onClickHandler} />
-                </div>
-                <div>
-                    <Label htmlFor="">Dirección</Label>
-                    <Input type="text" name="direccion" onChange={onChangeHandler} require/>
+                    <Label htmlFor="">Especialidad</Label>
+                    <Select arr={['traumatólogo', 'Neurocirujano', 'Cirujano Plástico', 'Cirujano Maxilofacial', 'Cirujano Toráxico', 'Otros']} name='especialidad' click={onClickHandler} />
                 </div>
                 <div>
                     <Label htmlFor="">Teléfono</Label>
-                    <Input type="text" name="telefono" reference={inputRefPhone} onChange={onChangeHandler} require/>
+                    <Input type="text" name="telefono" reference={inputRefPhone} onChange={onChangeHandler} defValue={userDB && userDB[0]['telefono']} />
                 </div>
                 <div>
                     <Label htmlFor="">Whatsapp</Label>
-                    <Input type="text" name="whatsapp" onChange={onChangeHandler} reference={inputRefWhatsApp} require/>
+                    <Input type="text" name="whatsapp" onChange={onChangeHandler} reference={inputRefWhatsApp} defValue={userDB && userDB[0]['whatsapp']} require />
                 </div>
             </div>
+            <br />
+            <br />
             <div className='flex w-full justify-around'>
-                <Button theme='Primary' click={save}>Guardar</Button>
+                <Button theme='Primary'>Guardar</Button>
             </div>
         </form>
     )

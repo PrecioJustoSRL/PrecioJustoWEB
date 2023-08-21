@@ -57,7 +57,7 @@ function Home() {
         if (userDB && userDB[0]['nombre']) {
             setUserSuccess('Cargando')
             await updateUserData('Administrador', { ...state }, user.uuid)
-            postImage && await console.log('image')
+            postImage && uploadStorage('Administrador', postImage, user.uuid, updateUserData)
             router.push('/Administrador/Perfil')
             setUserSuccess('')
         } else {
@@ -75,7 +75,7 @@ function Home() {
     }, [user]);
 
     return (
-        <form className='p-5' >
+        <form className='p-5' onSubmit={save} >
             {success === "Cargando" && <LoaderBlack></LoaderBlack>}
             <h3 className='text-center text-[14px] pb-3'>Agregar Perfil</h3>
             <div className="w-full flex justify-center">
@@ -108,7 +108,7 @@ function Home() {
             <br />
             <br />
             <div className='flex w-full justify-around'>
-                <Button theme='Primary' click={save}>Guardar</Button>
+                <Button theme='Primary'>Guardar</Button>
             </div>
         </form>
     )
