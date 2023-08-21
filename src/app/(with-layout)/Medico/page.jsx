@@ -57,7 +57,7 @@ function Home() {
         if (userDB && userDB[0]['nombre']) {
             setUserSuccess('Cargando')
             await updateUserData('Medico', { ...state }, user.uuid)
-            postImage && await uploadStorage('Medico', postImage, user.uuid, updateUserData)
+            postImage && await console.log('image')
             router.push('/Medico/Perfil')
             setUserSuccess('')
         } else {
