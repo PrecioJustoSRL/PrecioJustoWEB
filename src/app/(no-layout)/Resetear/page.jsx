@@ -56,7 +56,7 @@ export default function Home() {
             ? <LoaderWithLogo></LoaderWithLogo>
             : <div className="h-full"
                 style={{
-                    backgroundImage: 'url(/bg-login.avif)',
+                    backgroundImage: 'url(/bg-signup.avif)',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backgroundAttachment: 'fixed',
@@ -70,24 +70,24 @@ export default function Home() {
                             <Image src="/logo-main.svg" width="150" height="150" alt="User" />
                         </div>
                         <br />
-                        <h5 className="text-[18px] text-center text-white">Resetear Contrasña</h5>
+                        <h5 className="text-[18px] text-center text-white">Recuperar Contraseña</h5>
                         <br />
                         <div>
                             <label htmlFor="email" className="block mb-2 text-[16px] text-left font-medium text-white">Email</label>
                             <Input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                         </div>
                         <div>
-                            <label htmlFor="email" className="block mb-2 text-[16px] text-left font-medium text-white">Escribe: RESETEAR-CONTRASEÑA</label>
-                            <Input type="text" name="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="RESETEAR-CONTRASEÑA" required />
+                            <label htmlFor="email" className="block mb-2 text-[16px] text-left font-medium text-white">Escribe: RECUPERAR-CONTRASEÑA</label>
+                            <Input type="text" name="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-[16px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white uppercase" placeholder="RECUPERAR-CONTRASEÑA" required />
                         </div>
                         <br />
                         <br />
-                        <Button type="submit" theme="Transparent">Resetear</Button>
+                        <Button type="submit" theme="Transparent">Recuperar</Button>
                         <div className="text-[14px] text-center font-medium text-white">Ya tienes una cuenta? <Link href="/" className="text-gray-100 underline">Inicia Sesión</Link ></div>
                     </form>
                 </div>
                 {success == 'AccountNonExist' && <Msg>Cuenta inexistente</Msg>}
-                {success == 'CompleteREAD' && <Msg>Escriba RESETEAR-CONTRASEÑA</Msg>}
+                {success == 'CompleteREAD' && <Msg>Escriba RECUPERAR-CONTRASEÑA</Msg>}
 
                 {success == 'Complete' && <Msg>Complete el formulario</Msg>}
                 {success == 'RevisaTuGmail' && <Msg>Un link fue enviado a tu correo</Msg>}

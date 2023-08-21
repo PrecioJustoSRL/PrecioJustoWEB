@@ -46,7 +46,7 @@ export default function Home() {
     return (
         <div className="min-h-full"
             style={{
-                backgroundImage: 'url(/bg-login.avif)',
+                backgroundImage: 'url(/bg-signup.avif)',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: '50% 50%',
                 backgroundAttachment: 'fixed',
