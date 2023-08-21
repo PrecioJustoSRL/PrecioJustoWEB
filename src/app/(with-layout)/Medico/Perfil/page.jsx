@@ -41,8 +41,8 @@ function Home() {
                 <img className="fixed bottom-5 right-5" src="/whatsapp.svg" alt="" />
             </div>
             :
-            <div className="flex flex-col items-center justify-center h-[80vh]">
-                <img src="/business.svg" alt="" />
+            <div className="flex flex-col items-center justify-center h-[80vh] p-5">
+                <img src="/logo-circle.png"  className='w-[150px] h-[150px]' alt="" />
                 <br />
                 <Button theme="Success" click={() => redirectHandler(`/${user.rol}`)}>Completa tu Perfil</Button>
             </div>

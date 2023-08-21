@@ -56,15 +56,15 @@ function Home() {
         e.preventDefault()
         if (userDB && userDB[0]['nombre']) {
             setUserSuccess('Cargando')
-            await updateUserData('Medico', { ...state }, user.uuid)
+            await updateUserData('Administrador', { ...state }, user.uuid)
             postImage && await console.log('image')
-            router.push('/Medico/Perfil')
+            router.push('/Administrador/Perfil')
             setUserSuccess('')
         } else {
             setUserSuccess('Cargando')
-            await writeUserData('Medico', { ...state, uuid: user.uuid }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente',)
-            await uploadStorage('Medico', postImage, user.uuid, updateUserData)
-            router.push('/Medico/Perfil')
+            await writeUserData('Administrador', { ...state, uuid: user.uuid }, user.uuid, userDB, setUserData, setUserSuccess, 'Se ha guardado correctamente',)
+            await uploadStorage('Administrador', postImage, user.uuid, updateUserData)
+            router.push('/Administrador/Perfil')
          setUserSuccess('')
 
         }
