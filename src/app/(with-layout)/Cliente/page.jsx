@@ -1,5 +1,5 @@
 'use client'
-import { readUserAllData, updateUserData } from '@/supabase/utils'
+import { readUserAllData, updateUserData, readUserData } from '@/supabase/utils'
 import { useUser } from '@/context/Context.js'
 
 import style from './Cliente.module.css'
@@ -22,7 +22,7 @@ import { QRreaderUtils } from '@/utils/QRreader'
 import { useState } from 'react'
 
 function Home() {
-    const { user, userDB, cart, modal, setModal, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda, setIntroClientVideo, search, setSearch } = useUser()
+    const { user, userDB, cart, modal, setModal, productDB, setUserProduct, setUserItem, item, filter, setFilter, filterQR, setTienda, setFilterQR, recetaDBP, setRecetaDBP, tienda, setIntroClientVideo, search, setSearch, distributorPDB, setUserDistributorPDB, } = useUser()
     const [disponibilidad, setDisponibilidad] = useState('Todas')
     const [categoria, setCategoria] = useState('Todas')
     const router = useRouter()
@@ -127,16 +127,25 @@ function Home() {
 
 
 
-
-
+            {/* {
+ distributorPDB !== null && distributorPDB !== undefined && console.log(distributorPDB.map(i=>i['nombre de producto 1']))
+}
+{
+ distributorPDB !== null && distributorPDB !== undefined && console.log(distributorPDB.filter((obj, index) => index === distributorPDB.findIndex(o => obj['nombre de producto 1'] === o['nombre de producto 1'])).map(i=>i['nombre de producto 1']))
+} */}
 
 
 
 
 
             {/* <div className='w-[100vw] fixed top-[75px] z-30 bg-white'>
-                {search && filter.length > 0 && productDB !== null && productDB !== undefined &&
-                    productDB.sort(sortArray).map((i, index) => {
+                {search 
+                && filter.length > 0 
+                && distributorPDB !== null 
+                && distributorPDB !== undefined 
+                && distributorPDB.filter((obj, index) => index === distributorPDB.findIndex(o => obj['nombre de producto 1'] === o['nombre de producto 1'])).sort(sortArray).map((i, index) => {
+
+                    // i['nombre de producto 1']
                         if (i.distribuidor !== 'Precio-Justo-SRL-Data' && i.disponibilidad !== 'No disponible') {
                             // return (`${i['nombre de producto 1']} ${i['nombre de producto 2'] !== undefined && i['nombre de producto 2'] !== null && i['nombre de producto 2']} ${i['nombre de producto 3'] !== undefined && i['nombre de producto 3'] !== null && i['nombre de producto 3']}`).toLowerCase().includes(filter)
 

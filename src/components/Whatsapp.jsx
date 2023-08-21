@@ -17,8 +17,9 @@ function App() {
         const whats = whatsappMSG.replaceAll(' ', '%20')
         window.open(`https://api.whatsapp.com/send?phone=${'+59169941749'}&text=${whats}`, '_blank')
     }
+    console.log(whatsapp)
     return (
-        <div className={`fixed bottom-[80px] w-[90%] max-w-[400px] h-[250px] bg-red-500 right-[20px] pt-14 pb-[50px] px-2 flex flex-grow flex-col justify-end rounded-[10px] border-gray-200 shadow bg-[#F1E6E0] z-20 transition-all ${whatsapp ? 'bottom-[80px]' : 'bottom-[-100vw]'}`} >
+        <div className={`fixed w-[90%] max-w-[400px] h-[250px] right-[20px] pt-14 pb-[50px] px-2 flex flex-grow flex-col justify-end rounded-[10px] border-gray-200 shadow bg-[#F1E6E0] z-20 transition-all ${whatsapp ? 'bottom-[80px]' : 'bottom-[-100vw]'}`} >
             <div className='absolute top-0 left-0  w-full h-[50px] bg-[#00826A] rounded-t-[10px]'>
                 <img src="/logo-circle.png" className='absolute h-[35px] w-[35px] left-[5px] top-[7.5px]  rounded-[35px]' alt="" />
                 <div className='absolute flex flex-col left-[50px] top-[12px] text-white text-[12px]'>

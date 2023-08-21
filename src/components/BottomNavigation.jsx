@@ -25,6 +25,7 @@ export default function BottomNavigation({ rol }) {
 
     const redirectHandler = (ref, name) => {
         if (name !== 'video') {
+            videoClientRef.current.currentTime = 0
             videoClientRef.current.pause()
             setIntroClientVideo(false)
             router.push(ref)
@@ -37,9 +38,13 @@ export default function BottomNavigation({ rol }) {
 
         if (introClientVideo === true) {
             videoClientRef.current.pause()
+            videoClientRef.current.currentTime = 0
+
             setIntroClientVideo(false)
         } else {
             setIntroClientVideo(true)
+            videoClientRef.current.currentTime = 0
+
             videoClientRef.current.play()
 
             setSoundClient(true)
@@ -60,7 +65,6 @@ export default function BottomNavigation({ rol }) {
     // }
 
 
-    console.log(introClientVideo)
     switch (rol) {
         case 'Cliente':
             return <div className={`grid h-full max-w-lg grid-cols-4 mx-auto font-medium `}>

@@ -1,6 +1,6 @@
 'use client'
 import { useUser } from '@/context/Context'
-import { readUserAllData, updateUserData } from '@/supabase/utils'
+import { readUserAllData, updateUserData, readUserData } from '@/supabase/utils'
 
 import { useState, useEffect } from 'react'
 import style from './Medico.module.css'
@@ -19,7 +19,7 @@ import Whatsapp from '@/components/Whatsapp'
 
 function Home({ children }) {
   const router = useRouter()
-  const { user, userDB, setUserProfile, setUserCart, setUserProduct, setRecetaDB, setUserDistributorPDB, setUserData, filter, setFilter, nav, setNav, modal, setModal, cart, introClientVideo, setIntroClientVideo, recetaDBP, setRecetaDBP, productDB, search, setSearch, videoClientRef } = useUser()
+  const { user, userDB, setUserProfile, setUserCart, setUserProduct, setRecetaDB, distributorPDB, setUserDistributorPDB, whatsapp, setWhatsapp, setUserData, filter, setFilter, nav, setNav, modal, setModal, cart, introClientVideo, setIntroClientVideo, recetaDBP, setRecetaDBP, productDB, search, setSearch, videoClientRef } = useUser()
   const pathname = usePathname()
 
 
@@ -56,8 +56,7 @@ function Home({ children }) {
     setModal('')
     return router.push('/')
   }
-  console.log(user)
-  console.log(userDB)
+ 
   function sortArray(x, y) {
     if (x['nombre de producto 1'].toLowerCase() < y['nombre de producto 1'].toLowerCase()) { return -1 }
     if (x['nombre de producto 1'].toLowerCase() > y['nombre de producto 1'].toLowerCase()) { return 1 }
@@ -72,8 +71,18 @@ function Home({ children }) {
 
     videoClientRef.current.pause()
     setIntroClientVideo(false)
+    setWhatsapp(false)  }
+
+  function handlerWhatsapp() {
+    videoClientRef.current.pause()
+    setIntroClientVideo(false)
+    setWhatsapp(false)
   }
+
+
   useEffect(() => {
+    readUserData('Producto', 'Precio-Justo-SRL-Data', setUserDistributorPDB, 'distribuidor')
+
     readUserAllData('Producto', productDB, setUserProduct)
     readUserAllData('Receta', recetaDBP, setRecetaDBP)
   }, [user]);
@@ -82,12 +91,6 @@ function Home({ children }) {
   return (
     // <div className="pt-[65px] pb-[65px] min-h-screen bg-gray-white"  style={{ backgroundImage: `url(bg.png)`, backgroundAttachment: 'fixed', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'bottom' }}>
     <div className="h-screen bg-gray-white">
-
-
-
-
-
-
 
       {modal == 'SignOut' && <Modal funcion={signOutConfirm}>
         Estas seguro de salir...? <br /> {Object.keys(cart).length > 0 && 'Tus compras no han sido efectuadas'}
@@ -103,6 +106,7 @@ function Home({ children }) {
 
       {nav && <div className='fixed top-0 left-0 w-screen h-screen bg-[#000000C2] z-40' onClick={() => setNav(false)}></div>}
       {introClientVideo && <div className='fixed top-0 left-0 w-screen h-screen bg-[#ffffff00] z-40' onClick={handlerClientVideo}></div>}
+      {whatsapp && <div className='fixed top-0 left-0 w-screen h-screen bg-[#ffffff00] z-40' onClick={handlerWhatsapp}></div>}
 
       <main className={`relative min-w-screen  lg:pb-0  lg:min-w-auto my-[0px]  lg:bg-blue-50 lg:min-h-screen  ${nav ? 'w-screen pl-[220px] lg:pl-[280px] ' : '  lg:px-[0px]'}`} onClick={() => setNav(false)} style={{ transition: 'all 0.5' }}>
         {/* <img src="/bg.png" className='fixed bottom-[60px] lg:bottom-0 right-[20px] w-[60vw] lg:w-[40vw]' alt="" /> */}
@@ -142,48 +146,41 @@ function Home({ children }) {
           {user && user !== undefined && user.rol !== 'Distribuidor' && pathname === '/Cliente' && <Cart />}
         </nav>
 
+            {search
+             && filter.length > 0 
+                && distributorPDB !== null 
+                && distributorPDB !== undefined  && <div className='w-[100vw] fixed top-[75px] max-h-[40vh] overflow-y-auto z-30 bg-white'>
+            {search 
+                && filter.length > 0 
+                && distributorPDB !== null 
+                && distributorPDB !== undefined 
+                && distributorPDB.filter((obj, index) => index === distributorPDB.findIndex(o => obj['nombre de producto 1'] === o['nombre de producto 1'])).sort(sortArray).map((i, index) => {
 
-
-
-
-
-
-
-
-
-        <div className='w-[100vw] fixed top-[75px] z-30 bg-white border-[1px] border-[#2A52BE]'>
-          {search && filter.length > 0 && productDB !== null && productDB !== undefined &&
-            productDB.filter((item,index)=> productDB.indexOf(item) === index)
-            .filter(i=>i.disponibilidad !== 'No disponible')
-            .filter(i=>i.distribuidor !== 'Precio-Justo-SRL-Data')
-            .sort(sortArray).map((i, index) => {
-              if (i.distribuidor !== 'Precio-Justo-SRL-Data' && i.disponibilidad !== 'No disponible') {
+             
                 // return (`${i['nombre de producto 1']} ${i['nombre de producto 2'] !== undefined && i['nombre de producto 2'] !== null && i['nombre de producto 2']} ${i['nombre de producto 3'] !== undefined && i['nombre de producto 3'] !== null && i['nombre de producto 3']}`).toLowerCase().includes(filter)
 
                 if (i['nombre de producto 1'].toLowerCase().includes(filter.toLowerCase())) {
-                  return <div className={`w-full flex justify-between text-[12px] px-5 py-2 ${(index+1)%2===0 ? 'bg-white' : 'bg-gray-100'}`} onClick={() => handlerSearchFilter(i['nombre de producto 1'])}>
+                  return <div className={`w-full text-[12px] px-5 py-2 ${(index+1)%2===0 ? 'bg-white' : 'bg-gray-100'}`} style={{ display: 'grid', gridTemplateColumns: '30px auto',}} onClick={() => handlerSearchFilter(i['nombre de producto 1'])}>
                     <svg className="w-8 h-8 text-white " aria-hidden="true" fill="text-gray-100" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#2A52BE" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
-
-                    <div className='w-[80%]'>{i['nombre de producto 1']}</div>
+                    <div className='pl-5'>{i['nombre de producto 1']}</div>
                   </div>
                 }
                 if (i['nombre de producto 2'] && i['nombre de producto 2'].toLowerCase().includes(filter.toLowerCase())) {
-                  return <div className={`w-full flex justify-between text-[12px] px-5 py-2 ${(index+1)%2===0 ? 'bg-white' : 'bg-gray-100'}`} onClick={() => handlerSearchFilter(i['nombre de producto 2'])}>
+                  return <div className={`w-full text-[12px] px-5 py-2 ${(index+1)%2===0 ? 'bg-white' : 'bg-gray-100'}`} style={{ display: 'grid', gridTemplateColumns: '30px auto',}} onClick={() => handlerSearchFilter(i['nombre de producto 2'])}>
                     <svg className="w-8 h-8 text-white " aria-hidden="true" fill="text-gray-100" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#2A52BE" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
-
-                    <div className='w-[80%]'>{i['nombre de producto 2'] && i['nombre de producto 2']}</div>
+                    <div className='pl-5'>{i['nombre de producto 2'] && i['nombre de producto 2']}</div>
                   </div>
                 }
                 if (i['nombre de producto 3'] && i['nombre de producto 3'].toLowerCase().includes(filter.toLowerCase())) {
-                  return <div className={`w-full flex justify-between text-[12px] px-5 py-2 ${(index+1)%2===0 ? 'bg-white' : 'bg-gray-100'}`} onClick={() => handlerSearchFilter(i['nombre de producto 3'])}>
+                  return <div className={`w-full text-[12px] px-5 py-2 ${(index+1)%2===0 ? 'bg-white' : 'bg-gray-100'}`} style={{ display: 'grid', gridTemplateColumns: '30px auto',}} onClick={() => handlerSearchFilter(i['nombre de producto 3'])}>
                     <svg className="w-8 h-8 text-white " aria-hidden="true" fill="text-gray-100" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill="#2A52BE" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path></svg>
-                    <div className='w-[80%]'>{i['nombre de producto 3'] && i['nombre de producto 3']}</div>
+                    <div className='pl-5'>{i['nombre de producto 3'] && i['nombre de producto 3']}</div>
                   </div>
                 }
-              }
+              
             }
             )}
-        </div>
+        </div>}
 
         <div className="lg:px-[50px] pt-[85px] pb-[65px] md:pt-[85px] md:pb-5 h-screen overflow-y-auto">
 
@@ -224,6 +221,31 @@ export default Home
 </button> */}
 
 
+{/* {
+   productDB.reduce( (acumulador, elemento) => {
+    if (acumulador.indexOf(elemento) === -1) {
+      acumulador.push(elemento);
+    }
+    return acumulador;
+  }, [])
+}
+
+{
+  productDB.filter((current) => {
+    var exists = !hash[current.id];
+    hash[current.id] = true;
+    return exists;
+  })
+} */}
+
+
+
+           {/* {
+ distributorPDB !== null && distributorPDB !== undefined && console.log(distributorPDB.map(i=>i['nombre de producto 1']))
+} */}
+{/* {
+ distributorPDB !== null && distributorPDB !== undefined && console.log(distributorPDB.filter((obj, index) => index === distributorPDB.findIndex(o => obj['nombre de producto 1'] === o['nombre de producto 1'])).sort(sortArray).map(i=>i['nombre de producto 1']))
+} */}
 
 
 

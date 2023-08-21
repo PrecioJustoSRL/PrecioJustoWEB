@@ -10,7 +10,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
 
     const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, cart, setUserCart, modal, setModal } = useUser()
     const router = useRouter()
-console.log(userDB)
+// console.log(userDB)
     function seeMore(e) {
         setUserItem(i)
         router.push('/Producto')

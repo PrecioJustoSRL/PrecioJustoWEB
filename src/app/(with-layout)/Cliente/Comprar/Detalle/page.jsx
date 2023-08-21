@@ -38,6 +38,8 @@ function Comprar({ theme, styled, click, children }) {
   console.log(cart)
   return (<div className='w-screen p-5'>
     <Confeti />
+    <audio src="/sound.mpeg" autoPlay></audio>
+
     <div className='w-1/2 py-4'>
       <Button theme='Primary'>Imprimir</Button>
     </div>

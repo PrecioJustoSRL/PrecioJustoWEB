@@ -24,26 +24,26 @@ export function UserProvider({ children }) {
 	const [nav, setNav] = useState(false)
 	const [temporal, setTemporal] = useState(undefined)
 	const [userUuid, setUserUuid] = useState(undefined)
-    const [modal, setModal] = useState('')
-    const [msg, setMsg] = useState('')
-    const [tienda, setTienda] = useState(null)
+	const [modal, setModal] = useState('')
+	const [msg, setMsg] = useState('')
+	const [tienda, setTienda] = useState(null)
+
+	const timer = useRef(null);
+
 
 	const videoRef = useRef();
 	const [play, setPlay] = useState(true)
 	const [sound, setSound] = useState(false)
-	const [introVideo, setIntroVideo] = useState(undefined)
+	const [introVideo, setUserIntroVideo] = useState(undefined)
 
 	const videoClientRef = useRef();
 	const [soundClient, setSoundClient] = useState(false)
-	const [introClientVideo, setIntroClientVideo] = useState(undefined)
+	const [introClientVideo, setUserIntroClientVideo] = useState(undefined)
 	const [search, setSearch] = useState(false)
 	const [sound1, setSound1] = useState(false)
 	const [sound2, setSound2] = useState(false)
 	const [whatsapp, setWhatsapp] = useState(false)
 	const [whatsappMSG, setWhatsappMSG] = useState('')
-
-
-
 	const [state, setState] = useState({})
 
 
@@ -72,7 +72,35 @@ export function UserProvider({ children }) {
 	const setUserSuccess = (data) => {
 		setSuccess(data)
 		setTimeout(() => { setUserSuccess(null) }, 6000)
+	}
 
+	const setIntroVideo = (data) => {
+		setUserIntroVideo(data)
+		// if (introVideo === undefined) {
+		// 	return
+		// }
+		const interval = setInterval(() => {
+			console.log('int')
+			if (videoRef.current.ended) {
+				setUserIntroVideo(false)
+				clearInterval(interval)
+			}
+		}, 1000)
+
+	}
+
+
+
+	const setIntroClientVideo = (data) => {
+		setUserIntroClientVideo(data)
+
+		const interval = setInterval(() => {
+			console.log('int')
+			if (videoClientRef.current.ended) {
+				setUserIntroClientVideo(false)
+				clearInterval(interval)
+			}
+		}, 1000)
 	}
 
 	const value = useMemo(() => {
@@ -92,31 +120,32 @@ export function UserProvider({ children }) {
 			filterQR,
 			recetaDBP,
 			nav,
-			userUuid, 
-			modal, 
-			msg, 
-			tienda, 
+			userUuid,
+			modal,
+			msg,
+			tienda,
 			introVideo,
 			play,
 			sound,
-			videoRef, 
+			videoRef,
 			state,
 			videoClientRef,
 			soundClient,
-			introClientVideo, search, 
-			sound1, 
-			sound2, 
+			introClientVideo, search,
+			sound1,
+			sound2,
 			whatsapp,
-			whatsappMSG, setWhatsappMSG,
-			 setWhatsapp,
+			whatsappMSG,
+			setWhatsappMSG,
+			setWhatsapp,
 			setSound2,
 			setSound1,
 			setSearch,
 			setIntroClientVideo,
-			 setSoundClient,
-			 setState,
-			setSound, 
-			setPlay, 
+			setSoundClient,
+			setState,
+			setSound,
+			setPlay,
 			setIntroVideo,
 			setTienda,
 			setMsg,
@@ -143,8 +172,8 @@ export function UserProvider({ children }) {
 	}, [user, userDB, distributorPDB, productDB, pedidos, item, cart, success, qr, QRurl, recetaDB, filter, filterQR, recetaDBP, nav, temporal, userUuid, modal, msg, tienda, introVideo, play, sound, state, videoClientRef,
 		soundClient,
 		introClientVideo,
-		search, 
-		sound1, 
+		search,
+		sound1,
 		sound2, whatsapp])
 
 	return (

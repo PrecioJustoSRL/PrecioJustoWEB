@@ -91,7 +91,6 @@ function Comprar({ theme, styled, click, children }) {
       </div>
     </form>
 
-    <audio src="/sound.mpeg" autoPlay></audio>
 
     <h3 className='text-center text-[16px] px-5 py-2 bg-[#2A52BE] text-white' >MIS COMPRAS</h3>
 

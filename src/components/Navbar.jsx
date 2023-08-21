@@ -26,7 +26,6 @@ export default function BottomNavigation({ rol }) {
         window.open(ref, '_blank')
     }
 
-    console.log(user)
     switch (rol) {
         case 'Cliente':
             return <ul class="space-y-3 text-[16px]  text-gray-600 font-medium">

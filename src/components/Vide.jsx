@@ -12,10 +12,13 @@ export default function VideoClient({ theme, click, children }) {
   const handlerPlay = () => {
     if (introClientVideo === true) {
       videoClientRef.current.pause()
+      videoClientRef.current.currentTime = 0
       setIntroClientVideo(false)
     } else {
       setIntroClientVideo(true)
+
       videoClientRef.current.play()
+      videoClientRef.current.currentTime = 0
 
       setSoundClient(true)
 
@@ -29,6 +32,7 @@ export default function VideoClient({ theme, click, children }) {
     videoClientRef.current.muted = false
   };
   const handlerRepeat = () => {
+    setIntroClientVideo(true)
     videoClientRef.current.currentTime = 0
     videoClientRef.current.play()
     // setPlay(true)
