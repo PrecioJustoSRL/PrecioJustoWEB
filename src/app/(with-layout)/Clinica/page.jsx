@@ -112,14 +112,7 @@ function Home() {
                     <Label htmlFor="">Nombre de la clínica</Label>
                     <Input type="text" name="nombre" onChange={onChangeHandler} />
                 </div>
-                {/* <div>
-                    <Label htmlFor="">Ciudad</Label>
-                    <Select arr={departamentos} name='ciudad' click={onClickHandler} />
-                </div> */}
-                {/* <div>
-                    <Label htmlFor="">Dirección</Label>
-                    <Input type="text" name="direccion" onChange={onChangeHandler} />
-                </div> */}
+
                 <div>
                     <Label htmlFor="">Teléfono</Label>
                     <Input type="text" name="telefono" reference={inputRefPhone} onChange={onChangeHandler} />
@@ -137,3 +130,18 @@ function Home() {
 }
 
 export default WithAuth(Home)
+
+
+
+
+{/* <div>
+                    <Label htmlFor="">Ciudad</Label>
+                    <Select arr={departamentos} name='ciudad' click={onClickHandler} />
+                </div> */}
+{/* <div>
+                    <Label htmlFor="">Dirección</Label>
+                    <Input type="text" name="direccion" onChange={onChangeHandler} />
+                </div> */}
+
+
+

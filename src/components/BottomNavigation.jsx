@@ -55,8 +55,8 @@ export default function BottomNavigation({ rol }) {
     }
 
     const redirectHandlerWindow = (ref) => {
-        // window.open(ref, '_blank')
-        setWhatsapp(!whatsapp)
+        window.open(ref, '_blank')
+        // setWhatsapp(!whatsapp)
     }
 
 
@@ -97,7 +97,6 @@ export default function BottomNavigation({ rol }) {
                     </span>
                     <span className="text-[12px] text-white   ">Soporte</span>
                 </Button>
-
             </div>
             break
         case 'Medico':

@@ -10,7 +10,7 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
 
     const { user, userDB, distributorPDB, setUserDistributorPDB, setUserItem, item, setUserData, setUserSuccess, cart, setUserCart, modal, setModal } = useUser()
     const router = useRouter()
-// console.log(userDB)
+    // console.log(userDB)
     function seeMore(e) {
         setUserItem(i)
         router.push('/Producto')
@@ -19,15 +19,13 @@ export default function Card({ nombre1, nombre2, nombre3, costo, url, empresa, d
     const addCart = (e) => {
         e.preventDefault()
         e.stopPropagation()
-        if(user.rol == 'Clinica' && userDB && userDB.autorizacion == false) {
+        if (user.rol == 'Clinica' && userDB && userDB.autorizacion == false) {
             setModal('Auth')
-return
+            return
         }
         user && user.rol !== 'Cliente' && (userDB == null || userDB == undefined)
             ? setModal('Verifica')
             : setUserCart({ ...cart, [i.uuid]: { ...i, cantidad: 1 } })
-
-
     }
 
     const addPlussCart = (e) => {
@@ -35,6 +33,7 @@ return
         e.stopPropagation()
         setUserCart({ ...cart, [i.uuid]: { ...i, cantidad: cart[i.uuid].cantidad + 1 } })
     }
+
     const addLessCart = (e) => {
         e.preventDefault()
         e.stopPropagation()
@@ -71,7 +70,7 @@ return
             <div>
                 <div class="relative w-[150px] rounded-t text-center" >
                     <img src={i.url} className='w-150px' alt="" />
-                    {recetado === true && <span className='absolute text-[16px] font-bold right-10 top-10 text-green-600 transform rotate-[-45deg]'>Recetado <br /> por tu doctor</span>}
+                    {recetado === true && <span className='absolute text-[16px] font-bold right-10 top-10 text-[#32CD32] border-4 border-[#32CD32] border-double  transform rotate-[-45deg]'>Recetado <br /> por tu doctor</span>}
                 </div>
                 <div className='flex py-4 pr-4'>
                     <span className={`block text-center w-full text-14 p-2 rounded-[5px] text-[12px] leanding-[0px]`}>
@@ -82,7 +81,7 @@ return
 
             <div className='w-full flex justify-between  items-center p-4'>
                 <div class="flex items-baseline text-gray-900 bg-white rounded-full px-5 py-2">
-                <span className='inline-block mr-3 h-[35px] w-[35px]  border-4 border-double rounded-full text-[20px] text-[#32CD32] font-bold text-center border-[#32CD32]'>$</span>
+                    <span className='inline-block mr-3 h-[35px] w-[35px]  border-4 border-double rounded-full text-[20px] text-[#32CD32] font-bold text-center border-[#32CD32]'>$</span>
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight">{i.costo}</span>
                     <span class="text-[18px]  text-gray-600 font-extrabold tracking-tight"> BS</span>
                 </div>
@@ -94,18 +93,14 @@ return
                         {cart && cart[i.uuid] && cart[i.uuid].cantidad !== undefined && cart[i.uuid].cantidad !== 0 && <span className='flex justify-center items-center text-[16px] text-right px-5 w-[40px] font-bold'> {cart[i.uuid].cantidad} </span>}
                         <Button theme='MiniSecondary' click={(e) => addPlussCart(e, i)}>+</Button>
                     </div>
-                    : (user.rol === 'Clinica' && userDB && userDB[0].access == 'Verificadora' 
-                    ? <Button theme='MiniPrimaryInfo' onClick={(e) => seeMore(e, i)}>Info</Button>
-                    :<Button theme='MiniPrimaryComprar' click={(e) => addCart(e, i)}>Comprar</Button>)}
+                    : (user.rol === 'Clinica' && userDB && userDB[0].access == 'Verificadora'
+                        ? <Button theme='MiniPrimaryInfo' onClick={(e) => seeMore(e, i)}>Info</Button>
+                        : <Button theme='MiniPrimaryComprar' click={(e) => addCart(e, i)}>Comprar</Button>)}
             </div>}
             {user.rol == 'Distribuidor' && <div className='flex py-4 pr-4'>
                 <Button theme='MiniPrimaryInfo' onClick={(e) => seeMore(e, i)}>Info</Button>
             </div>
             }
-
-
-
-            
         </div>
     )
 }
