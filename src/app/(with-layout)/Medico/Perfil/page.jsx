@@ -48,5 +48,5 @@ function Home() {
             </div>
     )
 }
-
+        
 export default WithAuth(Home)
