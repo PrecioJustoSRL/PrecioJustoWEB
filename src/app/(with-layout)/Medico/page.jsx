@@ -69,7 +69,7 @@ function Home() {
 
         }
     }
-
+        
     useEffect(() => {
         if (user && user.rol !== undefined) readUserData(user.rol, user.uuid, setUserData,)
     }, [user]);
