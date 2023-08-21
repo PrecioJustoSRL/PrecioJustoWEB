@@ -6,7 +6,7 @@ import { useUser } from '../../../../context/Context.js'
 import Button from '../../../../components/Button'
 import Subtitle from '@/components/Subtitle'
 import Paragraph from '@/components/Paragraph'
-import addProfile from '@/components/AddProfile.jsx'
+import addProfile from '@/components/addProfile'
 
 import { WithAuth } from '@/HOCs/WithAuth'
 

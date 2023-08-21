@@ -20,7 +20,7 @@ function Home() {
     console.log(userDB)
     useEffect(() => {
         if (user && user.rol !== undefined) readUserData(user.rol, user.uuid, setUserData,)
-    }, []);
+    }, [user]);
     return (
         userDB !== undefined && userDB !== null
             ? <div className=" bg-white p-5">
