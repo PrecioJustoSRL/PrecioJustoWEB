@@ -21,9 +21,11 @@ export default function BottomNavigation({ rol }) {
     const signOutHandler = () => {
         setModal('SignOut')
     }
-
-    const redirectHandlerWindow = (ref) => {
-        window.open(ref, '_blank')
+    
+    const redirectHandlerWindow = () => {
+        window.open("https://api.whatsapp.com/send?phone=+59169941749&text=hola%20mundo", '_blank')
+        setNav(false)
+        // setWhatsapp(!whatsapp)
     }
 
     switch (rol) {
@@ -56,7 +58,7 @@ export default function BottomNavigation({ rol }) {
                     </Link>
                 </li>
                 <li className="px-5">
-                    <Link href="https://api.whatsapp.com/send?phone=+59169941749&text=hola%20mundo" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
+                    <button onClick={redirectHandlerWindow} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
                         <span className="w-8 h-8 mb-1 text-gray-600 group-hover:text-blue-600 p-1">
                             <svg width="15" height="15" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.853564 19.7608C0.852627 23.1216 1.73763 26.4031 3.42044 29.2955L0.692627 39.178L10.8851 36.5262C13.7042 38.0491 16.8628 38.847 20.0726 38.8472H20.0811C30.6772 38.8472 39.3026 30.2917 39.3072 19.7759C39.3092 14.6802 37.3111 9.88857 33.6808 6.28361C30.0511 2.67896 25.2237 0.692755 20.0803 0.69043C9.48294 0.69043 0.858096 9.24547 0.853721 19.7608" fill="transparent" />
@@ -65,7 +67,7 @@ export default function BottomNavigation({ rol }) {
                             </svg>
                         </span>
                         <span class="flex-1 ml-3 whitespace-nowrap text-white  hover:font-medium">Soporte</span>
-                    </Link>
+                    </button>
                 </li>
                 <li className="px-5" onClick={signOutHandler}>
                     <button onClick={() => setNav(false)} class="w-full flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
@@ -104,7 +106,7 @@ export default function BottomNavigation({ rol }) {
                     </Link>
                 </li>
                 <li className="px-5">
-                    <Link href="https://api.whatsapp.com/send?phone=+59169941749&text=hola%20mundo" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
+                    <button onClick={redirectHandlerWindow} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
                         <span className="w-8 h-8 mb-1 text-gray-600 group-hover:text-blue-600 p-1">
                             <svg width="15" height="15" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.853564 19.7608C0.852627 23.1216 1.73763 26.4031 3.42044 29.2955L0.692627 39.178L10.8851 36.5262C13.7042 38.0491 16.8628 38.847 20.0726 38.8472H20.0811C30.6772 38.8472 39.3026 30.2917 39.3072 19.7759C39.3092 14.6802 37.3111 9.88857 33.6808 6.28361C30.0511 2.67896 25.2237 0.692755 20.0803 0.69043C9.48294 0.69043 0.858096 9.24547 0.853721 19.7608" fill="transparent" />
@@ -113,7 +115,7 @@ export default function BottomNavigation({ rol }) {
                             </svg>
                         </span>
                         <span class="flex-1 ml-3 whitespace-nowrap text-white  hover:font-medium">Soporte</span>
-                    </Link>
+                    </button>
                 </li>
                 <li className="px-5" onClick={signOutHandler}>
                     <button onClick={() => setNav(false)} class="w-full flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
@@ -159,7 +161,7 @@ export default function BottomNavigation({ rol }) {
                     </Link>
                 </li>}
                 <li className="px-5">
-                    <Link href="https://api.whatsapp.com/send?phone=+59169941749&text=hola%20mundo" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
+                    <button onClick={redirectHandlerWindow} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
                         <span className="w-8 h-8 mb-1 text-gray-600 group-hover:text-blue-600 p-1">
                             <svg width="15" height="15" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.853564 19.7608C0.852627 23.1216 1.73763 26.4031 3.42044 29.2955L0.692627 39.178L10.8851 36.5262C13.7042 38.0491 16.8628 38.847 20.0726 38.8472H20.0811C30.6772 38.8472 39.3026 30.2917 39.3072 19.7759C39.3092 14.6802 37.3111 9.88857 33.6808 6.28361C30.0511 2.67896 25.2237 0.692755 20.0803 0.69043C9.48294 0.69043 0.858096 9.24547 0.853721 19.7608" fill="transparent" />
@@ -168,7 +170,7 @@ export default function BottomNavigation({ rol }) {
                             </svg>
                         </span>
                         <span class="flex-1 ml-3 whitespace-nowrap text-white  hover:font-medium">Soporte</span>
-                    </Link>
+                    </button>
                 </li>
                 <li className="px-5" onClick={signOutHandler}>
                     <button onClick={() => setNav(false)} class="w-full flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
@@ -219,7 +221,7 @@ export default function BottomNavigation({ rol }) {
                     </Link>
                 </li>
                 <li className="px-5">
-                    <Link href="https://api.whatsapp.com/send?phone=+59169941749&text=hola%20mundo" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
+                    <button onClick={redirectHandlerWindow} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
                         <span className="w-8 h-8 mb-1 text-gray-600 group-hover:text-blue-600 p-1">
                             <svg width="15" height="15" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.853564 19.7608C0.852627 23.1216 1.73763 26.4031 3.42044 29.2955L0.692627 39.178L10.8851 36.5262C13.7042 38.0491 16.8628 38.847 20.0726 38.8472H20.0811C30.6772 38.8472 39.3026 30.2917 39.3072 19.7759C39.3092 14.6802 37.3111 9.88857 33.6808 6.28361C30.0511 2.67896 25.2237 0.692755 20.0803 0.69043C9.48294 0.69043 0.858096 9.24547 0.853721 19.7608" fill="transparent" />
@@ -228,7 +230,7 @@ export default function BottomNavigation({ rol }) {
                             </svg>
                         </span>
                         <span class="flex-1 ml-3 whitespace-nowrap text-white  hover:font-medium">Soporte</span>
-                    </Link>
+                    </button>
                 </li>
                 <li className="px-5" onClick={signOutHandler}>
                     <button onClick={() => setNav(false)} class="w-full flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
@@ -306,7 +308,7 @@ export default function BottomNavigation({ rol }) {
                     </Link>
                 </li>
                 <li className="px-5">
-                    <Link href="https://api.whatsapp.com/send?phone=+59169941749&text=hola%20mundo" onClick={() => setNav(false)} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
+                    <button onClick={redirectHandlerWindow} class="flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
                         <span className="w-8 h-8 mb-1 text-gray-600 group-hover:text-blue-600 p-1">
                             <svg width="15" height="15" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.853564 19.7608C0.852627 23.1216 1.73763 26.4031 3.42044 29.2955L0.692627 39.178L10.8851 36.5262C13.7042 38.0491 16.8628 38.847 20.0726 38.8472H20.0811C30.6772 38.8472 39.3026 30.2917 39.3072 19.7759C39.3092 14.6802 37.3111 9.88857 33.6808 6.28361C30.0511 2.67896 25.2237 0.692755 20.0803 0.69043C9.48294 0.69043 0.858096 9.24547 0.853721 19.7608" fill="transparent" />
@@ -315,7 +317,7 @@ export default function BottomNavigation({ rol }) {
                             </svg>
                         </span>
                         <span class="flex-1 ml-3 whitespace-nowrap text-white  hover:font-medium">Soporte</span>
-                    </Link>
+                    </button>
                 </li>
                 <li className="px-5" onClick={signOutHandler}>
                     <button onClick={() => setNav(false)} class="w-full flex items-center p-2 rounded-lg dark:text-white   hover:bg-[#00000030] dark:hover:bg-gray-700">
