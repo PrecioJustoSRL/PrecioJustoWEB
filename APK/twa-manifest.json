@@ -1,0 +1,43 @@
+{
+  "packageId": "pro.preciojusto.tienda.twa",
+  "host": "tienda.preciojusto.pro",
+  "name": "Precio Justo",
+  "launcherName": "Precio Justo",
+  "display": "standalone",
+  "themeColor": "#2A52BE",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#2A52BE",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "https://tienda.preciojusto.pro/transparent.png",
+  "maskableIconUrl": "https://tienda.preciojusto.pro/logo.png",
+  "monochromeIconUrl": "https://tienda.preciojusto.pro/logo.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "C:\\Users\\User\\Desktop\\Swoou projects\\APK\\android.keystore",
+    "alias": "123456789"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://tienda.preciojusto.pro/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://tienda.preciojusto.pro/",
+  "minSdkVersion": 19,
+  "orientation": "portrait",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "appVersion": "1"
+}
